@@ -3,9 +3,6 @@ package com.chuanqing.youngstar.tools;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * Created by Administrator on 2016/11/17.
- */
 public class TimeUtil {
     public static String getTime() {
 
