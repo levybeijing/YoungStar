@@ -12,14 +12,15 @@
         android:background="@color/mainColor"
         >
         <TextView
-            android:layout_width="34dp"
-            android:layout_height="17dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="星芽"
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="14dp"
+            android:layout_marginBottom="10dp"
             android:textColor="#fff"
             android:gravity="center"
+            style="@style/main_fontsize"
              />
         <ImageView
             android:layout_width="wrap_content"
@@ -29,45 +30,9 @@
             android:layout_alignParentRight="true"
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="14dp"
+            android:layout_marginBottom="10dp"
             android:src="@mipmap/search_main"
             />
     </RelativeLayout>
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
-            <android.support.v4.view.ViewPager
-                android:id="@+id/banner_main"
-                android:layout_width="match_parent"
-                android:layout_height="211dp"/>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="93dp">
-                <android.support.design.widget.TabLayout
-                    android:id="@+id/tab_main"
-                    android:layout_width="192dp"
-                    android:layout_height="41dp"
-                    android:layout_centerInParent="true"
-                    />
-            </RelativeLayout>
-            <android.support.v4.view.ViewPager
-                android:id="@+id/vp_person_main"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_activity_main"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_perform_main"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
-    </ScrollView>
 
 </LinearLayout>
