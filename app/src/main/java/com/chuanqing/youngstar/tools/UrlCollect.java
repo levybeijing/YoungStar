@@ -1,0 +1,1 @@
+package com.chuanqing.youngstar.tools;public class UrlCollect {    public static final String HOST = "http://mobile.supai.com/";    //Log是否打印    public static final boolean isLog = true;    //逾期//    public static final String YU_QI = HOST + "PaymentOperationAction.action?confirm4yanqi";}
