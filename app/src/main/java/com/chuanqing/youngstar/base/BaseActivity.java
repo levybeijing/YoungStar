@@ -1,136 +1,47 @@
 package com.chuanqing.youngstar.base;
 
-import android.content.Intent;
-import android.content.IntentFilter;
+import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentActivity;
+import android.view.Window;
+import android.view.WindowManager;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import com.chuanqing.youngstar.tools.ScreenUtils;
 
-/**
- * Created by wh on 2017/7/10.
- */
 
-public abstract class BaseActivity extends AppCompatActivity {
-    /**
-     * 记录处于前台的Activity
-     */
-    private static BaseActivity mForegroundActivity = null;
-    /**
-     * 记录所有活动的Activity
-     */
-    public static final List<BaseActivity> mActivities = new LinkedList<>();
-//    private LoginReceiver receiver;
-
+public class BaseActivity extends FragmentActivity {
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addActivity(this);
-        // 1. 实例化BroadcastReceiver子类 &  IntentFilter
-//        receiver = new LoginReceiver();
-//        IntentFilter intentFilter = new IntentFilter();
-//        // 2. 设置接收广播的类型
-//        intentFilter.addAction("action.LOGIN.OTHER");
-//        registerReceiver(receiver, intentFilter);
-    }
+//取消标题
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-    /**
-     * onCreate()时添加
-     * @param activity
-     */
-    public static void addActivity(BaseActivity activity){
-        //判断集合中是否已经添加，添加过的则不再添加
-        if (!mActivities.contains(activity)){
-            mActivities.add(activity);
-        }
-    }
-    @Override
-    protected void onResume() {
-        mForegroundActivity = this;
-        super.onResume();
-    }
+        final int sdk = Build.VERSION.SDK_INT;
+        Window window = this.getWindow();
+        WindowManager.LayoutParams params = window.getAttributes();
 
-    @Override
-    protected void onPause() {
-        mForegroundActivity = null;
-        super.onPause();
-    }
-    /**
-     * 关闭所有Activity
-     */
-    public static void finishAll() {
-        List<BaseActivity> copy;
-        synchronized (mActivities) {
-            copy = new ArrayList<>(mActivities);
-        }
-        for (BaseActivity activity : copy) {
-            activity.finish();
-        }
-    }
+//        if (sdk >= Build.VERSION_CODES.KITKAT) {
+//            int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+//            // 设置透明状态栏
+//            if ((params.flags & bits) == 0) {
+//                params.flags |= bits;
+//                window.setAttributes(params);
+//            }
+//        }
 
-    /**
-     * 关闭所有Activity，除了参数传递的Activity
-     */
-    public static void finishOther() {
-        List<BaseActivity> copy;
-        synchronized (mActivities) {
-            copy = new ArrayList<>(mActivities);
-        }
-        for (BaseActivity activity : copy) {
-//            if (activity instanceof LoginCodeActivity){
-////                continue;
-////            }
-            activity.finish();
-        }
+//        ScreenUtils.adaptScreen(this, 392,true);//在绘图之前执行该方法  392是设计图的dp值 可根据实际
+        ScreenUtils.adaptScreen(this, 375,true);//在绘图之前执行该方法  392是设计图的dp值 可根据实际
+//        //取消标题
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        //取消状态栏
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+//                WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
-
-    /**
-     * 是否有启动的Activity
-     */
-    public static boolean hasActivity() {
-        return mActivities.size() > 0;
-    }
-
-    /**
-     * 获取当前处于前台的activity
-     */
-    public static BaseActivity getForegroundActivity() {
-        return mForegroundActivity;
-    }
-
-    /**
-     * 获取当前处于栈顶的activity，无论其是否处于前台
-     */
-    public static BaseActivity getCurrentActivity() {
-        List<BaseActivity> copy;
-        synchronized (mActivities) {
-            copy = new ArrayList<>(mActivities);
-        }
-        if (copy.size() > 0) {
-            return copy.get(copy.size() - 1);
-        }
-        return null;
-    }
-    /**
-     * 退出应用
-     */
-    public void exitApp() {
-        finishAll();
-        android.os.Process.killProcess(android.os.Process.myPid());
-    }
-
-//    public void stopMusic(){
-//        startService(new Intent(BaseActivity.this,MusicService.class));
-//    }
-
     @Override
     protected void onDestroy() {
+        ScreenUtils.cancelAdaptScreen(this);
         super.onDestroy();
-//        if (!hasActivity()){
-//            stopMusic();
-//        }
-//        unregisterReceiver(receiver);
     }
 }
