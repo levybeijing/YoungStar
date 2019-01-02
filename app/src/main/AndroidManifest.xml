@@ -11,15 +11,26 @@
         android:supportsRtl="true"
         android:theme="@style/TranslucentTheme">
         <activity android:name=".MainActivity">
+
+        </activity>
+        <activity android:name=".SpleashActivity"></activity>
+        <!--login-->
+        <activity android:name=".login.login.LoginActivity"></activity>
+        <activity android:name=".login.forget.ForgetPWDActivity"></activity>
+        <activity android:name=".login.privacy.PrivacyProtectActivity"></activity>
+        <activity android:name=".login.protocol.UserProtocolActivity"></activity>
+        <activity android:name=".login.login.RegisterActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SpleashActivity">
-
-        </activity>
+        <activity android:name=".login.imageauthen.ImageAuthenActivity"></activity>
+        <activity android:name=".login.authentication.AuthenActivity"></activity>
+        <activity android:name=".login.identitychoose.ChooseActivity"></activity>
+        <activity android:name=".login.lable.LableActivity"></activity>
+        <activity android:name=".login.phonebind.PhoneBindActivity"></activity>
     </application>
 
 </manifest>

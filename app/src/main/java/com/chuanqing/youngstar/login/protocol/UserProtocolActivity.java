@@ -1,4 +1,4 @@
-package com.chuanqing.youngstar.login;
+package com.chuanqing.youngstar.login.protocol;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
