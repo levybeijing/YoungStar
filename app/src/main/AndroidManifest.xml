@@ -3,9 +3,8 @@
     package="com.chuanqing.youngstar">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <!--//读取外置存储卡-->
+    <!-- //读取外置存储卡 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
 
     <application
         android:name=".MyApplication"
@@ -22,9 +21,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SpleashActivity">
-
-        </activity>
+        <activity android:name=".SpleashActivity" />
+        <activity android:name="._home.WebViewActivity" />
+        <activity android:name="._home.search.StudentShowActivity"></activity>
     </application>
 
 </manifest>
