@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="124dp"
+        android:layout_height="124dp">
+        <ImageView
+            android:id="@+id/starshow_img"
+            android:layout_width="124dp"
+            android:layout_height="124dp"
+            android:src="@mipmap/my11"
+            android:scaleType="fitXY"/>
+        <ImageView
+            android:id="@+id/starshow_img_video"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@mipmap/square_video"
+            android:layout_centerInParent="true"/>
+        <LinearLayout
+            android:id="@+id/starshow_img_img"
+            android:layout_width="30dp"
+            android:layout_height="15dp"
+            android:background="@mipmap/square_img_bg"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="7dp"
+            android:layout_marginBottom="4dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="9dp"
+                android:layout_height="8dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="5dp"
+                android:src="@mipmap/square_img_bg_img"/>
+            <TextView
+                android:id="@+id/starshow_img_img_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:text="8"
+                android:textColor="@color/home_gray"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>
