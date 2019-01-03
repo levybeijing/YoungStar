@@ -7,17 +7,29 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.chuanqing.youngstar.R;
+import com.chuanqing.youngstar._home.search.StudentShowActivity;
+import com.chuanqing.youngstar.myadapter.HomeActivityAdapter;
+import com.chuanqing.youngstar.mybean.HomeActivityBean;
+import com.chuanqing.youngstar.mybean.HomeLunboBean;
+import com.chuanqing.youngstar.tools.Api;
+import com.chuanqing.youngstar.tools.ToastUtils;
+import com.google.gson.Gson;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.Response;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -28,6 +40,8 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.Call;
+import okio.GzipSource;
 
 /**
  * 首页
@@ -55,7 +69,47 @@ public class HomeFragment extends Fragment implements OnBannerListener {
         super.onViewCreated(view, savedInstanceState);
         setTtitle();
         initView();
+        showactivity();
     }
+
+    /**
+     * 展示活动信息
+     */
+    @BindView(R.id.home_activity_1_list)
+    ListView listView;
+    ArrayList<HomeActivityBean> arrayList = new ArrayList<>();
+    HomeActivityAdapter adapter ;
+    private void showactivity() {
+        adapter = new HomeActivityAdapter(context,arrayList);
+        listView.setAdapter(adapter);
+        OkGo.post(Api.home_activity)
+                .tag(this)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, okhttp3.Response response, Exception e) {
+                        super.onError(call, response, e);
+                        ToastUtils.shortToast(e+"");
+                    }
+
+                    @Override
+                    public void onSuccess(String s, Call call, okhttp3.Response response) {
+                        Log.e("首页活动",s);
+                        arrayList.clear();
+                        Gson gson = new Gson();
+                        HomeActivityBean activityBean = gson.fromJson(s,HomeActivityBean.class);
+                        if (activityBean.getState()==1){
+                            if (activityBean.getData()!=null){
+                                for (int i = 0; i <activityBean.getData().size() ; i++) {
+                                    arrayList.add(activityBean);
+                                }
+                            }
+                        }else {
+                            ToastUtils.shortToast(activityBean.getMessage());
+                        }
+                    }
+                });
+    }
+
     /**
      * 写入title名字
      */
@@ -69,6 +123,13 @@ public class HomeFragment extends Fragment implements OnBannerListener {
         tv_title.setText("首页");
         left_img.setVisibility(View.GONE);
         right_img.setVisibility(View.VISIBLE);
+        right_img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,StudentShowActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     /**
@@ -78,20 +139,42 @@ public class HomeFragment extends Fragment implements OnBannerListener {
     Banner banner;
     private ArrayList<String> list_path;
     private ArrayList<String> list_title;
+    String[] img_url ;
     private void initView() {
         //放图片地址的集合
         list_path = new ArrayList<>();
+        OkGo.post(Api.home_lunbo)
+                .tag(this)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, okhttp3.Response response, Exception e) {
+                        super.onError(call, response, e);
+                        ToastUtils.shortToast(e+"");
+                    }
+
+                    @Override
+                    public void onSuccess(String s, Call call, okhttp3.Response response) {
+//                        Log.e("首页轮播",s);
+                        Gson gson = new Gson();
+                        HomeLunboBean homeLunboBean = gson.fromJson(s,HomeLunboBean.class);
+                        if (homeLunboBean.getState()==1){
+                            if (homeLunboBean.getData()!=null){
+                                img_url = new String[ homeLunboBean.getData().size()];
+                                for (int i = 0; i < homeLunboBean.getData().size(); i++) {
+                                    list_path.add(Api.ossurl+homeLunboBean.getData().get(i).getImg());
+                                    img_url[i] = homeLunboBean.getData().get(i).getImg();
+                                }
+                                onshow();
+                            }
+                        }
+                    }
+                });
+
+
+    }
+    private void onshow(){
         //放标题的集合
         list_title = new ArrayList<>();
-
-        list_path.add("http://ww4.sinaimg.cn/large/006uZZy8jw1faic21363tj30ci08ct96.jpg");
-        list_path.add("http://ww4.sinaimg.cn/large/006uZZy8jw1faic259ohaj30ci08c74r.jpg");
-        list_path.add("http://ww4.sinaimg.cn/large/006uZZy8jw1faic2b16zuj30ci08cwf4.jpg");
-        list_path.add("http://ww4.sinaimg.cn/large/006uZZy8jw1faic2e7vsaj30ci08cglz.jpg");
-//        list_title.add("标题");
-//        list_title.add("标题");
-//        list_title.add("标题");
-//        list_title.add("标题");
         //设置内置样式，共有六种可以点入方法内逐一体验使用。
         banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
         //设置图片加载器，图片加载器在下方
@@ -112,13 +195,14 @@ public class HomeFragment extends Fragment implements OnBannerListener {
                 .setOnBannerListener(this)
                 //必须最后调用的方法，启动轮播图。
                 .start();
-
-
     }
     //轮播图的监听方法
     @Override
     public void OnBannerClick(int position) {
-        Log.i("tag", "你点了第"+position+"张轮播图");
+        Intent intent = new Intent(context,WebViewActivity.class);
+        intent.putExtra("detailUrl",img_url[position]);
+        startActivity(intent);
+//        ToastUtils.shortToast("你点了第"+position+"张轮播图");
     }
     //自定义的图片加载器
     private class MyLoader extends ImageLoader {
@@ -132,4 +216,5 @@ public class HomeFragment extends Fragment implements OnBannerListener {
                     .into(imageView);
         }
     }
+
 }
