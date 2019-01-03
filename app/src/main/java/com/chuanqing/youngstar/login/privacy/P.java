@@ -9,6 +9,8 @@ public class P {
     }
 
     public void setContent(){
-//        privacy.setContent();
+        M m = new M();
+        String getprivacy = m.getprivacy();
+        privacy.setContent(getprivacy);
     }
 }
