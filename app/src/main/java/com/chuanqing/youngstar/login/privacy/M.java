@@ -6,19 +6,22 @@ import com.lzy.okgo.callback.StringCallback;
 import okhttp3.Call;
 import okhttp3.Response;
 
-public class M {
+public class M{
 
-        public String getprivacy(){
-                OkGo.post("")//
-                      .tag(this)//
-                      .params("", "")
-                      .execute(new StringCallback() {
-                              @Override
-                              public void onSuccess(String s, Call call, Response response) {
+    private String content;
 
+    private ICallback callback;
 
-                              }
-                      });
-                return null;
-        }
+    public String getprivacy(){
+        OkGo.post("http://www.xiaoyaoji.cn/doc/19frqvRDBv")//
+              .tag(this)//
+              .execute(new StringCallback() {
+                      @Override
+                      public void onSuccess(String s, Call call, Response response) {
+                          callback.netData(s);
+                      }
+              });
+        return null;
+    }
+
 }

@@ -40,6 +40,15 @@
         <activity android:name=".login.identitychoose.ChooseActivity"></activity>
         <activity android:name=".login.lable.LableActivity"></activity>
         <activity android:name=".login.phonebind.PhoneBindActivity"></activity>
+        <!--company-->
+        <activity android:name=".login.companyauthen.ChooseActivity"></activity>
+        <activity android:name=".login.companyauthen.Authen1Activity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
