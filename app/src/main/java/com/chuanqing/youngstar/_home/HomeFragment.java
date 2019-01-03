@@ -75,13 +75,11 @@ public class HomeFragment extends Fragment implements OnBannerListener {
     /**
      * 展示活动信息
      */
-    @BindView(R.id.home_activity_1_list)
-    ListView listView;
+    @BindView(R.id.home_activity_1_body)
+    LinearLayout home_body;
     ArrayList<HomeActivityBean> arrayList = new ArrayList<>();
     HomeActivityAdapter adapter ;
     private void showactivity() {
-        adapter = new HomeActivityAdapter(context,arrayList);
-        listView.setAdapter(adapter);
         OkGo.post(Api.home_activity)
                 .tag(this)
                 .execute(new StringCallback() {
@@ -96,11 +94,36 @@ public class HomeFragment extends Fragment implements OnBannerListener {
                         Log.e("首页活动",s);
                         arrayList.clear();
                         Gson gson = new Gson();
-                        HomeActivityBean activityBean = gson.fromJson(s,HomeActivityBean.class);
+                        final HomeActivityBean activityBean = gson.fromJson(s,HomeActivityBean.class);
                         if (activityBean.getState()==1){
                             if (activityBean.getData()!=null){
                                 for (int i = 0; i <activityBean.getData().size() ; i++) {
-                                    arrayList.add(activityBean);
+                                    final View v_item=LayoutInflater.from(context).inflate(R.layout.home_activity_items,null);
+                                    ImageView img;
+                                    TextView tv_name;
+                                    TextView tv_time;
+                                    TextView tv_people;
+                                    img = v_item.findViewById(R.id.home_activity_1_img);
+                                    tv_name = v_item.findViewById(R.id.home_activity_1_name);
+                                    tv_time = v_item.findViewById(R.id.home_activity_1_time);
+                                    tv_people = v_item.findViewById(R.id.home_activity_1_people);
+                                    Glide.with(context)
+                                            .load(Api.ossurl+activityBean.getData().get(i).getList_img())
+                                            .placeholder(R.mipmap.my166)
+                                            .error(R.mipmap.my166)
+                                            .diskCacheStrategy(DiskCacheStrategy.NONE)
+                                            .into(img);
+                                    tv_name.setText(activityBean.getData().get(i).getActivity_name());
+                                    tv_people.setText(activityBean.getData().get(i).getAttendCount());
+                                    tv_time.setText(activityBean.getData().get(i).getCurrentTime());
+                                    home_body.addView(v_item);
+                                    final int finalI = i;
+                                    v_item.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            ToastUtils.shortToast("活动名字"+activityBean.getData().get(finalI).getActivity_code());
+                                        }
+                                    });
                                 }
                             }
                         }else {

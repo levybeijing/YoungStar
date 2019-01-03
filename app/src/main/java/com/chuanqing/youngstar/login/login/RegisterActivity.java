@@ -29,7 +29,7 @@ public class RegisterActivity  extends BaseActivity {
         EditText pwdagain = findViewById(R.id.et_pwdagain_register);
         EditText code = findViewById(R.id.et_code_register);
 
-        ImageView toregister = findViewById(R.id.iv_register_register);
+//        ImageView toregister = findViewById(R.id.iv_register_register);
 
         TextView getcode = findViewById(R.id.tv_getcode_register);
         TextView protocol = findViewById(R.id.tv_protocol_register);
