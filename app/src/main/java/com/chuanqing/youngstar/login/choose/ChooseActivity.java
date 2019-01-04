@@ -1,4 +1,4 @@
-package com.chuanqing.youngstar.login.identitychoose;
+package com.chuanqing.youngstar.login.choose;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

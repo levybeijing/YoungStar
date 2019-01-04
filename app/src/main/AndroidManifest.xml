@@ -4,8 +4,13 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <!--//读取外置存储卡-->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <!---->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
     <application
         android:name=".MyApplication"
@@ -24,23 +29,27 @@
         <activity android:name=".login.forget.ForgetPWDActivity"></activity>
         <activity android:name=".login.privacy.PrivacyProtectActivity"></activity>
         <activity android:name=".login.protocol.UserProtocolActivity"></activity>
-        <activity android:name=".login.login.RegisterActivity">
-
-        </activity>
-        <activity android:name=".login.imageauthen.ImageAuthenActivity"></activity>
-        <activity android:name=".login.authentication.AuthenActivity"></activity>
-        <activity android:name=".login.identitychoose.ChooseActivity"></activity>
-        <activity android:name=".login.lable.LableActivity"></activity>
+        <activity android:name=".login.login.RegisterActivity"></activity>
+        <activity android:name=".login._student.ImageAuthenActivity"></activity>
+        <activity android:name=".login._student.AuthenActivity"></activity>
+        <activity android:name=".login.choose.ChooseActivity"></activity>
+        <activity android:name=".login._student.LableActivity"></activity>
         <activity android:name=".login.phonebind.PhoneBindActivity"></activity>
         <!--company-->
-        <activity android:name=".login.companyauthen.ChooseActivity"></activity>
-        <activity android:name=".login.companyauthen.Authen1Activity">
+        <activity android:name=".login._company.ChooseActivity"></activity>
+        <activity android:name=".login._company.Authen1Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".login._company.Authen2Activity"></activity>
+        <activity android:name=".login._company.ComBindActivity"></activity>
+        <!--invest-->
+        <activity android:name=".login._invest.InvestAuthenActivity"></activity>
+        <activity android:name=".login._invest.InvestAuthen2Activity"></activity>
+
     </application>
 
 </manifest>

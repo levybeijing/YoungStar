@@ -1,4 +1,4 @@
-package com.chuanqing.youngstar.login.lable;
+package com.chuanqing.youngstar.login._student;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

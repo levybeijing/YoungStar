@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/ll_imgauthen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/rl_imgauthen"
+        android:gravity="center_horizontal"
+        >
+        <RelativeLayout
+            android:id="@+id/rl1_comauthen2"
+            android:layout_width="270dp"
+            android:layout_height="135dp"
+            android:background="@mipmap/img_uploads"
+            android:layout_margin="10dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="点击上传营业执照(副本)"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="100dp"
+                android:textColor="#CCCCCC"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl2_comauthen2"
+            android:layout_width="270dp"
+            android:layout_height="135dp"
+            android:background="@mipmap/img_uploads"
+            android:layout_margin="10dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="点击上传公司法人身份证人像面"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="100dp"
+                android:textColor="#CCCCCC"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl3_comauthen2"
+            android:layout_width="270dp"
+            android:layout_height="135dp"
+            android:background="@mipmap/img_uploads"
+            android:layout_margin="10dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="点击上传公司法人身份证国徽面"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="100dp"
+                android:textColor="#CCCCCC"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl4_comauthen2"
+            android:layout_width="270dp"
+            android:layout_height="135dp"
+            android:background="@mipmap/img_uploads"
+            android:layout_margin="10dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="补充材料"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="100dp"
+                android:textColor="#CCCCCC"
+                />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_ok_comauthen2"
+            android:layout_width="132dp"
+            android:layout_height="44dp"
+            android:background="@mipmap/bg_red"
+            android:text="完成"
+            android:gravity="center"
+            android:textColor="#fff"
+            android:layout_marginTop="10dp"
+            />
+    </LinearLayout>
+
+</RelativeLayout>
