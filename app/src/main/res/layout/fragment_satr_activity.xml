@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="._active.StarActivityFragment">
     <LinearLayout
         android:layout_width="match_parent"
@@ -11,6 +12,28 @@
         <include android:layout_width="match_parent"
             android:layout_height="wrap_content"
             layout="@layout/comm_onmodule_top"></include>
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tab_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:tabContentStart="135dp"
+                app:tabMaxWidth="200dp"
+                app:tabMinWidth="20dp"
+                app:tabPaddingStart="30dp"
+                app:tabPaddingEnd="30dp"
+                app:tabGravity="center"
+                app:tabMode="fixed"
+                app:tabSelectedTextColor="@color/mainColor"
+                app:tabIndicatorColor="@color/mainColor">
+
+            </android.support.design.widget.TabLayout>
+
+        </android.support.v4.view.ViewPager>
+
     </LinearLayout>
 
 </FrameLayout>
