@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/all_bg"
-    tools:context="._home.search.student.StudentShowActivity">
+    tools:context="._home.searchstudent.StudentShowActivity">
     <include android:layout_width="match_parent"
         android:layout_height="wrap_content"
         layout="@layout/comm_onmodule_top_search1"></include>

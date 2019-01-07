@@ -18,7 +18,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.chuanqing.youngstar.R;
-import com.chuanqing.youngstar._home.search.student.StudentShowActivity;
+import com.chuanqing.youngstar._home.searchstudent.StudentShowActivity;
 import com.chuanqing.youngstar.myadapter.HomeActivityAdapter;
 import com.chuanqing.youngstar.mybean.HomeActivityBean;
 import com.chuanqing.youngstar.mybean.HomeLunboBean;
