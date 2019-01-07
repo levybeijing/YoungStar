@@ -13,49 +13,49 @@
         android:layout_centerHorizontal="true"
         >
         <RadioGroup
-            android:id="@+id/rg1_comauthen1"
+            android:id="@+id/rg1_investauthen1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             >
             <RadioButton
-                android:id="@+id/rb1_comauthen1"
+                android:id="@+id/rb1_investauthen1"
                 android:background="@mipmap/company1"
                 style="@style/photo_company" />
             <RadioButton
-                android:id="@+id/rb2_comauthen1"
+                android:id="@+id/rb2_investauthen1"
                 android:background="@mipmap/company2"
                 style="@style/photo_company" />
             <RadioButton
-                android:id="@+id/rb3_comauthen1"
+                android:id="@+id/rb3_investauthen1"
                 android:background="@mipmap/company3"
                 style="@style/photo_company" />
             <RadioButton
-                android:id="@+id/rb4_comauthen1"
+                android:id="@+id/rb4_investauthen1"
                 android:background="@mipmap/company4"
                 style="@style/photo_company" />
         </RadioGroup>
 
         <RadioGroup
-            android:id="@+id/rg2_comauthen1"
+            android:id="@+id/rg2_investauthen1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             >
             <RadioButton
-                android:id="@+id/rb5_comauthen1"
+                android:id="@+id/rb5_investauthen1"
                 android:background="@mipmap/company5"
                 style="@style/photo_company" />
             <RadioButton
-                android:id="@+id/rb6_comauthen1"
+                android:id="@+id/rb6_investauthen1"
                 android:background="@mipmap/company6"
                 style="@style/photo_company" />
             <RadioButton
-                android:id="@+id/rb7_comauthen1"
+                android:id="@+id/rb7_investauthen1"
                 android:background="@mipmap/company7"
                 style="@style/photo_company" />
             <RadioButton
-                android:id="@+id/rb8_comauthen1"
+                android:id="@+id/rb8_investauthen1"
                 android:background="@mipmap/company8"
                 style="@style/photo_company" />
         </RadioGroup>
@@ -71,7 +71,7 @@
         android:textSize="15dp"
         />
 
-<!---->
+    <!---->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -80,24 +80,6 @@
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
         >
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            >
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="19dp"
-                android:background="@mipmap/company"
-                />
-            <EditText
-                android:id="@+id/et_cpyname_comauthen1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="请填写您的公司名称"
-                android:textSize="14dp"
-                />
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -110,7 +92,7 @@
                 android:background="@mipmap/user_login"
                 />
             <EditText
-                android:id="@+id/et_username_comauthen1"
+                android:id="@+id/et_username_investauthen1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="请填写公司联系人姓名"
@@ -129,7 +111,7 @@
                 android:background="@mipmap/phone_register"
                 />
             <EditText
-                android:id="@+id/et_phone_comauthen1"
+                android:id="@+id/et_phone_investauthen1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="请填写您的联系方式"
@@ -148,7 +130,7 @@
                 android:background="@mipmap/email_choose"
                 />
             <EditText
-                android:id="@+id/et_email_comauthen1"
+                android:id="@+id/et_email_investauthen1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="请填写您的邮箱"
@@ -166,7 +148,7 @@
                 android:background="@mipmap/intro"
                 />
             <EditText
-                android:id="@+id/et_intro_comauthen1"
+                android:id="@+id/et_intro_investauthen1"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:hint=" 请填写您的公司简介"
@@ -176,7 +158,9 @@
                 />
         </LinearLayout>
     </LinearLayout>
+
     <TextView
+        android:id="@+id/tv_next_investauthen1"
         android:layout_width="132dp"
         android:layout_height="44dp"
         android:background="@mipmap/bg_red"

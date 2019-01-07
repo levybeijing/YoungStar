@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="161dp"
+        android:orientation="vertical"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_weight="1"
+            >
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="23dp"
+                android:background="@mipmap/user_login"
+                />
+            <EditText
+                android:id="@+id/et_name_combind"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请填写您的真实姓名"
+                android:textSize="14dp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_weight="1"
+
+            >
+            <ImageView
+                android:layout_width="19dp"
+                android:layout_height="25dp"
+                android:background="@mipmap/phone_register"
+                />
+            <EditText
+                android:id="@+id/et_phone_combind"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请填写您的联系方式"
+                android:textSize="14dp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_weight="1"
+
+            >
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="19dp"
+                android:background="@mipmap/company"
+                />
+            <EditText
+                android:id="@+id/et_comId_combind"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请输入母账号的公司ID"
+                android:textSize="14dp"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_ok_combind"
+        android:layout_width="132dp"
+        android:layout_height="44dp"
+        android:textColor="#fff"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="25dp"
+        android:background="@mipmap/bg_red"
+        android:text="完成"
+        />
+</RelativeLayout>

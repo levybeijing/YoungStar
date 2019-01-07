@@ -1,4 +1,4 @@
-package com.chuanqing.youngstar.login.companyauthen;
+package com.chuanqing.youngstar.login._company;
 
 import android.os.Build;
 import android.os.Bundle;
