@@ -4,11 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="._square.follow.FollowFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <View
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
-
+        android:layout_height="1dp"
+        android:background="@color/whole_hx"
+        android:layout_marginBottom="15dp"></View>
+    <com.chuanqing.youngstar.view.XListView
+        android:id="@+id/xlistview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@null"
+        android:scrollbars="none"></com.chuanqing.youngstar.view.XListView>
 </FrameLayout>

@@ -2,13 +2,15 @@ package com.chuanqing.youngstar;
 
 public class Urls {
 
-    public static final String HOST = "http://39.107.70.80:8080";
+    public static final String HOST = "http://39.107.70.80:8080/";
     //    获取验证码
     public static final String getSms = HOST + "Star/user/getSms";
     //    验证验证码
     public static final String checkSms = HOST + "Star/user/checkSms";
     //    用户注册
     public static final String addUser = HOST + "Star/user/addUser";
+    //    密码登录
+    public static final String logen = HOST + "Star/user/logen";
     //    选择学生身份
     public static final String addStudent = HOST + "Star/user/addStudent";
     //    选择公司身份

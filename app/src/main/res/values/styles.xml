@@ -19,4 +19,11 @@
     <style name="main_fontsize">
         <item name="android:textSize">18sp</item>
     </style>
+<!--公司头像选择-->
+    <style name="photo_company">
+        <item name="android:layout_width">50dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:button">@null</item>
+        <item name="android:layout_margin">15dp</item>
+    </style>
 </resources>
