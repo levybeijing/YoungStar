@@ -10,6 +10,14 @@ public class Api {
     public static String home_lunbo = apiurl + "/Star/firstPage/getAD";
     //首页活动
     public static String home_activity = apiurl + "/Star/firstPage/getFirstPageActivity";
+    //首页招聘（演绎专区）
+    public static String home_zhaopin = apiurl+"/Star/firstPage/getFirstPageEmploy";
+    //搜索学生
+    public static String home_search_student = apiurl+"/Star/firstPage/getFirstPageSelectStudent";
+    //搜索活动
+    public static String home_search_activity = apiurl+"/Star/firstPage/getFirstPageSelectActivity";
+    //搜索职场
+    public static String home_search_zhichang = apiurl+"/Star/firstPage/getFirstPageSelectEmploy";
     /**
      * 广场
      */

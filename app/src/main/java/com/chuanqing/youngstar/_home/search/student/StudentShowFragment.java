@@ -1,4 +1,4 @@
-package com.chuanqing.youngstar._home.search;
+package com.chuanqing.youngstar._home.search.student;
 
 import android.content.Context;
 import android.net.Uri;

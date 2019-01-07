@@ -43,9 +43,9 @@ public class SquareFragment extends Fragment {
         this.context = context;
     }
 
-    @BindView(R.id.tab_layout)
+    @BindView(R.id.tab_layout1)
     TabLayout mTabLayout;
-    @BindView(R.id.viewpager)
+    @BindView(R.id.viewpager1)
     ViewPager mViewpager;
     private ArrayList<android.support.v4.app.Fragment> mFragments = new ArrayList<>();
     private ArrayList<String> list = new ArrayList<>();
@@ -77,7 +77,6 @@ public class SquareFragment extends Fragment {
         mTabLayout.setTabMode(TabLayout.MODE_FIXED);
         mTabLayout.setupWithViewPager(mViewpager);
         mViewpager.setAdapter(new TablayoutAdapter(getFragmentManager(),mFragments,list));
-
 
     }
 

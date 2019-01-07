@@ -6,12 +6,14 @@
     android:layout_margin="15dp"
     android:orientation="vertical">
     <LinearLayout
+        android:id="@+id/starleitai_layout"
         android:layout_width="match_parent"
         android:layout_height="194dp"
         android:orientation="vertical"
-        android:background="@color/colorAccent"
+        android:layout_marginTop="15dp"
         android:gravity="center_horizontal">
         <TextView
+            android:id="@+id/starleitai_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="文字"
@@ -23,23 +25,24 @@
                 android:layout_height="25dp"
                 android:background="@mipmap/square_img_bg"
                 android:orientation="horizontal"
+                android:gravity="center_vertical"
                 android:layout_marginTop="44dp">
                 <ImageView
                     android:layout_width="12dp"
                     android:layout_height="12dp"
                     android:src="@mipmap/home_people"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="7dp"/>
+                    android:layout_marginLeft="8dp"/>
                 <TextView
+                    android:id="@+id/starleitai_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
                     android:textSize="12sp"
-                    android:layout_marginTop="4dp"
                     android:layout_marginLeft="4dp"
                     android:text="100"/>
             </LinearLayout>
             <TextView
+                android:id="@+id/starleitai_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="截止时间："

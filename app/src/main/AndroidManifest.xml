@@ -26,7 +26,8 @@
 
         <activity android:name="._home.WebViewActivity"/>
 
-        <activity android:name="._home.search.StudentShowActivity"/>
+        <activity android:name="._home.search.student.StudentShowActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
         <!--login-->
         <activity android:name=".login.login.LoginActivity"></activity>
         <activity android:name=".login.forget.ForgetPWDActivity"></activity>
@@ -43,11 +44,6 @@
         <!--company-->
         <activity android:name=".login.companyauthen.ChooseActivity"></activity>
         <activity android:name=".login.companyauthen.Authen1Activity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
