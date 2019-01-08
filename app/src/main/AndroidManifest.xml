@@ -21,23 +21,13 @@
         android:supportsRtl="true"
         android:theme="@style/TranslucentTheme">
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
-        <activity android:name=".SpleashActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".SpleashActivity"/>
 
         <activity android:name="._home.WebViewActivity"/>
 
-        <activity android:name="._home.search.StudentShowActivity"/>
+        <activity android:name="._home.searchstudent.StudentShowActivity"/>
         <!--login-->
         <activity android:name=".login.login.LoginActivity">
             <intent-filter>
@@ -54,13 +44,13 @@
         <activity android:name=".login.choose.ChooseActivity"></activity>
         <activity android:name=".login._student.LableActivity"></activity>
         <activity android:name=".login.phonebind.PhoneBindActivity"></activity>
-        <!---->
+        <!--company-->
         <activity android:name=".login._company.ChoseActivity"></activity>
         <activity android:name=".login._company.Authen1Activity">
         </activity>
         <activity android:name=".login._company.Authen2Activity"></activity>
         <activity android:name=".login._company.ComBindActivity"></activity>
-        <!---->
+        <!--invest-->
         <activity android:name=".login._invest.InvestAuthenActivity"></activity>
         <activity android:name=".login._invest.InvestAuthen2Activity"></activity>
         <!--add-->

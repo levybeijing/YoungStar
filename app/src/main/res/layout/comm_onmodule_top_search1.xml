@@ -25,13 +25,13 @@
                 android:layout_height="15dp"
                 android:src="@mipmap/search_more_red"
                 android:layout_marginTop="4dp"
-                android:layout_marginLeft="3dp"/>
+                android:layout_marginLeft="10dp"/>
             <EditText
                 android:id="@+id/student_search_edt"
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:layout_marginLeft="3dp"
-                android:layout_marginRight="3dp"
+                android:layout_marginRight="10dp"
                 android:hint="请输入用户ID或职业"
                 android:textColor="@color/mainColor"
                 android:textColorHint="@color/mainColor"

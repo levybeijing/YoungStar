@@ -12,12 +12,87 @@
         <include android:layout_width="match_parent"
             android:layout_height="wrap_content"
             layout="@layout/comm_onmodule_top"></include>
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="44dp"-->
+            <!--android:background="@color/white"-->
+            <!--android:orientation="horizontal">-->
+            <!--<RelativeLayout-->
+                <!--android:id="@+id/student_search_relativelayout1"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_weight="1"-->
+                <!--android:gravity="center_horizontal"-->
+                <!--android:orientation="vertical">-->
+                <!--<TextView-->
+                    <!--android:layout_width="50dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textColor="@color/black"-->
+                    <!--android:gravity="center"-->
+                    <!--android:layout_marginTop="8dp"-->
+                    <!--android:text="星秀"-->
+                    <!--android:layout_alignParentTop="true"-->
+                    <!--android:textSize="15sp"/>-->
+                <!--<View-->
+                    <!--android:id="@+id/student_search_view1"-->
+                    <!--android:layout_width="50dp"-->
+                    <!--android:layout_height="2dp"-->
+                    <!--android:layout_alignParentBottom="true"-->
+                    <!--android:background="@color/mainColor"></View>-->
+            <!--</RelativeLayout>-->
+            <!--<RelativeLayout-->
+                <!--android:id="@+id/student_search_relativelayout2"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_weight="1"-->
+                <!--android:gravity="center_horizontal"-->
+                <!--android:orientation="vertical">-->
+                <!--<TextView-->
+                    <!--android:layout_width="50dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textColor="@color/black"-->
+                    <!--android:gravity="center"-->
+                    <!--android:layout_marginTop="8dp"-->
+                    <!--android:text="星活动"-->
+                    <!--android:layout_alignParentTop="true"-->
+                    <!--android:textSize="15sp"/>-->
+                <!--<View-->
+                    <!--android:id="@+id/student_search_view2"-->
+                    <!--android:layout_width="50dp"-->
+                    <!--android:layout_height="2dp"-->
+                    <!--android:layout_alignParentBottom="true"-->
+                    <!--android:background="@color/mainColor"></View>-->
+            <!--</RelativeLayout>-->
+            <!--<RelativeLayout-->
+                <!--android:id="@+id/student_search_relativelayout3"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_weight="1"-->
+                <!--android:gravity="center_horizontal"-->
+                <!--android:orientation="vertical">-->
+                <!--<TextView-->
+                    <!--android:layout_width="50dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textColor="@color/black"-->
+                    <!--android:gravity="center"-->
+                    <!--android:layout_marginTop="8dp"-->
+                    <!--android:text="星职场"-->
+                    <!--android:layout_alignParentTop="true"-->
+                    <!--android:textSize="15sp"/>-->
+                <!--<View-->
+                    <!--android:id="@+id/student_search_view3"-->
+                    <!--android:layout_width="50dp"-->
+                    <!--android:layout_height="2dp"-->
+                    <!--android:layout_alignParentBottom="true"-->
+                    <!--android:background="@color/mainColor"></View>-->
+            <!--</RelativeLayout>-->
+        <!--</LinearLayout>-->
         <android.support.v4.view.ViewPager
-            android:id="@+id/viewpager"
+            android:id="@+id/viewpager1"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <android.support.design.widget.TabLayout
-                android:id="@+id/tab_layout"
+                android:id="@+id/tab_layout1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:tabContentStart="135dp"
