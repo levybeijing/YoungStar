@@ -7,7 +7,7 @@ import android.view.View;
 import com.chuanqing.youngstar.R;
 import com.chuanqing.youngstar.base.BaseActivity;
 
-public class ChooseActivity extends BaseActivity implements View.OnClickListener {
+public class ChoseActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="345dp"
+    android:layout_height="182dp"
+    android:orientation="horizontal"
+    >
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="44dp"
+        android:layout_marginLeft="47dp"
+        >
+        <ImageView
+            android:id="@+id/iv_videoimg_student"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@mipmap/videoimg_student"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="视频/图片"
+            android:layout_marginTop="10dp"
+            android:singleLine="true"
+            android:gravity="center"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="44dp"
+        android:layout_centerHorizontal="true"
+        >
+        <ImageView
+            android:id="@+id/iv_works_student"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@mipmap/works_student"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="作品集"
+            android:layout_marginTop="10dp"
+            android:singleLine="true"
+            android:gravity="center"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="44dp"
+        android:layout_marginRight="47dp"
+        >
+        <ImageView
+            android:id="@+id/iv_record_student"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@mipmap/record_student"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="录音"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            />
+    </LinearLayout>
+</RelativeLayout>

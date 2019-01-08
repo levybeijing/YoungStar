@@ -36,4 +36,5 @@ public class AuthenActivity extends BaseActivity {
 //
         TextView next = findViewById(R.id.iv_next_authen);
     }
+
 }

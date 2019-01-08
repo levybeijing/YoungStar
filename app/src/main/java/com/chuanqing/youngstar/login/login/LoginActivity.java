@@ -200,6 +200,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                             headers.put("token",bean.getData().getToken());
                             OkGo.getInstance().addCommonHeaders(headers);
 
+                            SharedPFUtils.setParam(LoginActivity.this,"user_code",bean.getData().getToken());
+                            SharedPFUtils.setParam(LoginActivity.this,"password",bean.getData().getToken());
                         }
                     }
                 });
@@ -266,7 +268,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
         @Override
         public void onTick(long millisUntilFinished) {
-//            getcode.setBackgroundColor(Color.parseColor("#B6B6D8"));
             getcode.setClickable(false);
             getcode.setText(millisUntilFinished / 1000 +"秒后重新发送");
         }
@@ -275,7 +276,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         public void onFinish() {
             getcode.setText("重新获取验证码");
             getcode.setClickable(true);
-//            getcode.setBackgroundColor(Color.parseColor("#4EB84A"));
         }
     }
 }
