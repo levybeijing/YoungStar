@@ -170,21 +170,61 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="工作地点"
+                        android:text="工作经验"
                         android:layout_centerVertical="true"
                         />
                     <RadioGroup
-                        android:layout_width="200dp"
+                        android:layout_width="240dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_centerVertical="true"
                         android:layout_alignParentRight="true"
+                        android:orientation="horizontal"
                         >
-
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="无经验"
+                            android:layout_weight="1"
+                            />
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="有经验"
+                            android:layout_weight="1"
+                            />
                     </RadioGroup>
                 </RelativeLayout>
-
             </LinearLayout>
+            <!---->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="10dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="职位要求"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="15dp"
+                    />
+                <EditText
+                    android:id="@+id/et_need_recuit"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="对应聘者的具体要求"
+                    android:background="@drawable/bg_gray"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="23dp"
+                    android:layout_marginRight="23dp"
+                    android:gravity="left"
+                    android:padding="10dp"
+                    android:textSize="12dp"
+                    />
+            </RelativeLayout>
+            <!---->
+
         </LinearLayout>
     </ScrollView>
     <RelativeLayout
