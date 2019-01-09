@@ -1,6 +1,7 @@
 package com.chuanqing.youngstar.myadapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
@@ -17,8 +18,10 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.ViewTarget;
 import com.chuanqing.youngstar.R;
+import com.chuanqing.youngstar._active.starbang.StarbangMoreActivity;
 import com.chuanqing.youngstar.mybean.StarbangBean;
 import com.chuanqing.youngstar.tools.Api;
+import com.chuanqing.youngstar.tools.ToastUtils;
 
 import java.util.ArrayList;
 
@@ -45,14 +48,14 @@ public class StarbangAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View view, ViewGroup parent) {
+    public View getView(final int position, View view, ViewGroup parent) {
         ViewHolder viewHolder;
         if (view==null){
             view = LayoutInflater.from(context).inflate(R.layout.star_show_xingbang,parent,false);
             view.setTag(new ViewHolder(view));
         }
         viewHolder = (ViewHolder) view.getTag();
-        StarbangBean starbangBean = arrayList.get(position);
+        final StarbangBean starbangBean = arrayList.get(position);
 
         Glide.with(context).load(Api.ossurl+starbangBean.getData().getPageInfo().getList().get(position).getList_img())
                 .placeholder(R.mipmap.my166)
@@ -91,7 +94,6 @@ public class StarbangAdapter extends BaseAdapter {
             viewHolder.img3.setVisibility(View.GONE);
             Glide.with(context)
                     .load(Api.ossurl+starbangBean.getData().getPageInfo().getList().get(position).getStudent().get(0).getUser_img())
-                    .placeholder(R.mipmap.my11)
                     .error(R.mipmap.my11)
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .into(viewHolder.guanjun_img);
@@ -109,7 +111,6 @@ public class StarbangAdapter extends BaseAdapter {
             viewHolder.img3.setVisibility(View.GONE);
             Glide.with(context)
                     .load(Api.ossurl+starbangBean.getData().getPageInfo().getList().get(position).getStudent().get(1).getUser_img())
-                    .placeholder(R.mipmap.my11)
                     .error(R.mipmap.my11)
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .into(viewHolder.yajun_img);
@@ -127,12 +128,21 @@ public class StarbangAdapter extends BaseAdapter {
             viewHolder.img3.setVisibility(View.VISIBLE);
             Glide.with(context)
                     .load(Api.ossurl+starbangBean.getData().getPageInfo().getList().get(position).getStudent().get(2).getUser_img())
-                    .placeholder(R.mipmap.my11)
                     .error(R.mipmap.my11)
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .into(viewHolder.jijun_img);
             viewHolder.tv_jijun.setText("ID:"+starbangBean.getData().getPageInfo().getList().get(position).getStudent().get(2).getUser_code());
         }
+
+        viewHolder.layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,StarbangMoreActivity.class);
+                intent.putExtra("activityCode",starbangBean.getData().getPageInfo().getList().get(position).getActivity_code()+"");
+                context.startActivity(intent);
+            }
+        });
+
 
         return view;
     }

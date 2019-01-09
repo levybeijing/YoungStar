@@ -88,7 +88,7 @@ public class FollowFragment extends Fragment implements XListView.IXListViewList
                     public void onSuccess(String s, Call call, Response response) {
 
 //                        Log.e("关注",s);
-
+                        arrayList.clear();
                         Gson gson = new Gson();
                         SquareFollowBean squareFollowBean = gson.fromJson(s,SquareFollowBean.class);
                         if (pageSize>=squareFollowBean.getData().getPageInfo().getList().size()){
@@ -130,7 +130,7 @@ public class FollowFragment extends Fragment implements XListView.IXListViewList
                     public void onSuccess(String s, Call call, Response response) {
 
 //                        Log.e("关注",s);
-
+                        arrayList.clear();
                         Gson gson = new Gson();
                         SquareFollowBean squareFollowBean = gson.fromJson(s,SquareFollowBean.class);
                         if (pageSize>=squareFollowBean.getData().getPageInfo().getList().size()){

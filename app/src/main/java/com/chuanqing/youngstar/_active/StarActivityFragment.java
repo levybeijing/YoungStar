@@ -2,6 +2,7 @@ package com.chuanqing.youngstar._active;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chuanqing.youngstar.R;
+import com.chuanqing.youngstar._home.searchstudent.StudentShowActivity;
 import com.chuanqing.youngstar._square.follow.FollowFragment;
 import com.chuanqing.youngstar._square.starshow.StarShowFragment;
 import com.chuanqing.youngstar.myadapter.TablayoutAdapter;
@@ -63,10 +65,13 @@ public class StarActivityFragment extends Fragment {
     private void showinfo() {
         StarleitaiFragment starShowFragment = new StarleitaiFragment();
         StarbangFragment starbangFragment = new StarbangFragment();
+        ZhaopinFragment zhaopinFragment = new ZhaopinFragment();
         mFragments.add(starShowFragment);
         mFragments.add(starbangFragment);
+        mFragments.add(zhaopinFragment);
         list.add("星擂台");
         list.add("星榜");
+        list.add("星职场");
         mTabLayout.setTabMode(TabLayout.MODE_FIXED);
         mTabLayout.setupWithViewPager(mViewpager);
         mViewpager.setAdapter(new TablayoutAdapter(getFragmentManager(),mFragments,list));
@@ -87,5 +92,12 @@ public class StarActivityFragment extends Fragment {
         tv_title.setText("风云榜");
         left_img.setVisibility(View.GONE);
         right_img.setVisibility(View.VISIBLE);
+        right_img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,StudentShowActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

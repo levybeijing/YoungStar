@@ -3,7 +3,7 @@
     package="com.chuanqing.youngstar">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <!--读取外置存储卡-->
+    <!--//读取外置存储卡-->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <!---->
@@ -20,9 +20,7 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/TranslucentTheme">
-        <activity android:name=".MainActivity"
-            android:launchMode="singleTask"
-            >
+        <activity android:name=".MainActivity">
 
         </activity>
         <activity android:name=".SpleashActivity"
@@ -64,6 +62,9 @@
         <activity android:name="._add.student.WorksActivity"></activity>
         <!--mine-->
 
+        <activity android:name="._active.leitai.LeitaiMoreActivity" />
+        <activity android:name="._active.leitai.PartakeActivity" />
+        <activity android:name="._active.starbang.StarbangMoreActivity"></activity>
     </application>
 
 </manifest>

@@ -11,10 +11,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.chuanqing.youngstar.R;
-import com.chuanqing.youngstar.myadapter.StarLeitaiAdapter;
-import com.chuanqing.youngstar.mybean.StarLeitaiBean;
+import com.chuanqing.youngstar._active.leitai.LeitaiMoreActivity;
+import com.chuanqing.youngstar.myadapter.StarZhaopinAdapter;
+import com.chuanqing.youngstar.mybean.HomeYanyiBean;
+import com.chuanqing.youngstar.mybean.StarZhaopinBean;
 import com.chuanqing.youngstar.tools.Api;
 import com.chuanqing.youngstar.tools.ToastUtils;
 import com.chuanqing.youngstar.view.XListView;
@@ -32,11 +36,11 @@ import okhttp3.Call;
 import okhttp3.Response;
 
 /**
- * 星活动  擂台
+ * 星职场
  * A simple {@link Fragment} subclass.
  */
-public class StarleitaiFragment extends Fragment implements XListView.IXListViewListener{
-
+public class ZhaopinFragment extends Fragment implements XListView.IXListViewListener{
+    private static final String TAG = "ZhaopinFragment";
     Context context;
 
     @Override
@@ -48,20 +52,20 @@ public class StarleitaiFragment extends Fragment implements XListView.IXListView
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_starleitai, container, false);
+        View view = inflater.inflate(R.layout.fragment_zhaopin, container, false);
         ButterKnife.bind(this,view);
         return view;
     }
-
-    StarLeitaiAdapter adapter;
-    ArrayList<StarLeitaiBean> arrayList = new ArrayList<>();
+    StarZhaopinAdapter adapter;
+    ArrayList<StarZhaopinBean> arrayList = new ArrayList<>();
+    @BindView(R.id.zhaopin_null)
+    TextView tv_null;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mHandler = new Handler();
-        adapter = new StarLeitaiAdapter(context,arrayList);
-        mListView.setAdapter(adapter);
         showinfo();
+        adapter = new StarZhaopinAdapter(context,arrayList);
+        mListView.setAdapter(adapter);
     }
 
     /**
@@ -72,74 +76,65 @@ public class StarleitaiFragment extends Fragment implements XListView.IXListView
     private Handler mHandler;
     int page = 1, pageSize = 10;
     private void showinfo() {
-        OkGo.post(Api.star_leitai)
+        mHandler = new Handler();
+        OkGo.post(Api.star_zhaopin)
                 .tag(this)
                 .params("page",page)
                 .params("pageSize",pageSize)
+                .params("useType","1")
                 .execute(new StringCallback() {
                     @Override
-                    public void onError(Call call, Response response, Exception e) {
-                        super.onError(call, response, e);
-                        ToastUtils.shortToast(e+"");
-                    }
-
-                    @Override
                     public void onSuccess(String s, Call call, Response response) {
-//                        Log.e("星擂台",s);
+                        Log.e(TAG, "onSuccess: 招聘"+s );
                         arrayList.clear();
                         Gson gson = new Gson();
-                        StarLeitaiBean starLeitaiBean = gson.fromJson(s,StarLeitaiBean.class);
-                        if (pageSize>=starLeitaiBean.getData().getPageInfo().getList().size()){
-                            mListView.zhanshi(false);
-                        }else{
-                            mListView.zhanshi(true);
-                        }
-                        if (starLeitaiBean.getState()==1){
-                            if (starLeitaiBean.getData().getPageInfo().getList().size()>0){
-                                for (int i = 0; i < starLeitaiBean.getData().getPageInfo().getList().size(); i++) {
-                                    arrayList.add(starLeitaiBean);
+                        StarZhaopinBean zhaopinBean = gson.fromJson(s,StarZhaopinBean.class);
+                        if (zhaopinBean.getState()==1){
+                            if (zhaopinBean.getData().getPageInfo().getList().size()>0){
+                                tv_null.setVisibility(View.GONE);
+                                mListView.setVisibility(View.VISIBLE);
+                                for (int i = 0; i <zhaopinBean.getData().getPageInfo().getList().size(); i++) {
+                                    arrayList.add(zhaopinBean);
                                 }
+                                adapter.notifyDataSetChanged();
+                            }else {
+                                tv_null.setVisibility(View.VISIBLE);
+                                mListView.setVisibility(View.GONE);
                             }
                         }else {
-                            ToastUtils.shortToast(starLeitaiBean.getMessage());
+                            ToastUtils.shortToast(zhaopinBean.getMessage());
                         }
                     }
                 });
-        mListView.setPullLoadEnable(true);
-        mListView.setXListViewListener(this);
     }
     private void showinfo2(int page2,int pageSize2) {
-        OkGo.post(Api.star_leitai)
+        mHandler = new Handler();
+        OkGo.post(Api.star_zhaopin)
                 .tag(this)
                 .params("page",page2)
                 .params("pageSize",pageSize2)
+                .params("useType","1")
                 .execute(new StringCallback() {
                     @Override
-                    public void onError(Call call, Response response, Exception e) {
-                        super.onError(call, response, e);
-                        ToastUtils.shortToast(e+"");
-                    }
-
-                    @Override
                     public void onSuccess(String s, Call call, Response response) {
-
+//                        Log.e(TAG, "onSuccess: 招聘"+s );
                         arrayList.clear();
                         Gson gson = new Gson();
-                        StarLeitaiBean starLeitaiBean = gson.fromJson(s,StarLeitaiBean.class);
-                        if (pageSize>=starLeitaiBean.getData().getPageInfo().getList().size()){
-                            mListView.zhanshi(false);
-                        }else{
-                            mListView.zhanshi(true);
-                        }
-                        if (starLeitaiBean.getState()==1){
-                            if (starLeitaiBean.getData().getPageInfo().getList().size()>0){
-                                for (int i = 0; i < starLeitaiBean.getData().getPageInfo().getList().size(); i++) {
-                                    arrayList.add(starLeitaiBean);
+                        StarZhaopinBean zhaopinBean = gson.fromJson(s,StarZhaopinBean.class);
+                        if (zhaopinBean.getState()==1){
+                            if (zhaopinBean.getData().getPageInfo().getList().size()>0){
+                                tv_null.setVisibility(View.GONE);
+                                mListView.setVisibility(View.VISIBLE);
+                                for (int i = 0; i <zhaopinBean.getData().getPageInfo().getList().size(); i++) {
+                                    arrayList.add(zhaopinBean);
                                 }
                                 adapter.notifyDataSetChanged();
+                            }else {
+                                tv_null.setVisibility(View.VISIBLE);
+                                mListView.setVisibility(View.GONE);
                             }
                         }else {
-                            ToastUtils.shortToast(starLeitaiBean.getMessage());
+                            ToastUtils.shortToast(zhaopinBean.getMessage());
                         }
                     }
                 });
