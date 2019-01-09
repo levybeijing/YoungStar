@@ -26,4 +26,9 @@
         <item name="android:button">@null</item>
         <item name="android:layout_margin">15dp</item>
     </style>
+
+    <style name="identitychoose">
+        <item name="android:layout_width">345dp</item>
+        <item name="android:layout_height">136dp</item>
+    </style>
 </resources>

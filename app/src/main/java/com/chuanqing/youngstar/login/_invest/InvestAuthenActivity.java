@@ -19,7 +19,6 @@ public class InvestAuthenActivity extends BaseActivity {
 
     private void initView() {
 
-
         EditText name = findViewById(R.id.et_username_investauthen1);
         EditText phone = findViewById(R.id.et_phone_investauthen1);
         EditText email = findViewById(R.id.et_email_investauthen1);
