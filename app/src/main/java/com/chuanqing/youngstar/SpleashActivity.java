@@ -1,6 +1,7 @@
 package com.chuanqing.youngstar;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,11 +9,15 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 
 import com.chuanqing.youngstar.base.BaseActivity;
-public class SpleashActivity extends BaseActivity {
+import com.chuanqing.youngstar.login.choose.ChooseActivity;
+import com.chuanqing.youngstar.login.login.LoginActivity;
+import com.chuanqing.youngstar.tools.SharedPFUtils;
 
+public class SpleashActivity extends BaseActivity {
     //延迟3秒
 //    private static final long SPLASH_DELAY_MILLIS = 2000;
     private static final long ANIMATION_TIME = 1000;
+
     public SharedPreferences sp;
 
     @Override
@@ -59,20 +64,17 @@ public class SpleashActivity extends BaseActivity {
             }
             @Override
             public void onAnimationEnd(Animation animation) {
-                SharedPreferences userinfo = getSharedPreferences("userinfo", MODE_PRIVATE);
-                int sex = userinfo.getInt("sex", 0);
-                int userId = userinfo.getInt("userId", 0);
-                String wx = userinfo.getString("wx", "");
-                String phone = userinfo.getString("phone", "");
-
-                //两条线路 一个是先手机后微信 一个是先微信后手机
-//                if(userId==0||wx.equals("")||phone.equals("")){
-//                    startActivity(new Intent(SpleashActivity.this,LoginActivity.class));
-//                } else if (sex==0){
-//                    startActivity(new Intent(SpleashActivity.this,ChoseActivity.class));
-//                }else{
-//                    startActivity(new Intent(SpleashActivity.this,MainActivity.class));
-//                }
+                boolean islogin = (boolean) SharedPFUtils.getParam(SpleashActivity.this, "islogin", false);
+                int identity = (int) SharedPFUtils.getParam(SpleashActivity.this, "identity", -1);
+                if (islogin){
+                    if (identity>0){
+                        startActivity(new Intent(SpleashActivity.this,MainActivity.class));
+                    }else{
+                        startActivity(new Intent(SpleashActivity.this,ChooseActivity.class));
+                    }
+                }else{
+                    startActivity(new Intent(SpleashActivity.this,LoginActivity.class));
+                }
                 finish();
             }
         });

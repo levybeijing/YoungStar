@@ -14,12 +14,21 @@ public class SharedPFUtils {
     private static final String FILE_NAME = "userinfo";
 
     /**
-     * 保存数据的方法，我们需要拿到保存数据的具体类型，然后根据类型调用不同的保存方法
-     * @param context
-     * @param key
-     * @param object
+     * 身份标识 identity 1 student 2 company 3 invest 4 fans
+     * 用户编号 usercode
+     * 用户密码 password
+     * 登录状态 islogin  true or false
+     *
+     *
      */
-    public static void setParam(Context context , String key, Object object){
+        public static void init(Context context){
+            SharedPreferences sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sp.edit();
+        }
+
+
+
+        public static void setParam(Context context , String key, Object object){
 
         String type = object.getClass().getSimpleName();
         SharedPreferences sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);

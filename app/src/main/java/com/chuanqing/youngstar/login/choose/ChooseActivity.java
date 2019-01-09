@@ -11,6 +11,8 @@ import com.chuanqing.youngstar.base.BaseActivity;
 import com.chuanqing.youngstar.login._company.ChoseActivity;
 import com.chuanqing.youngstar.login._invest.InvestAuthenActivity;
 import com.chuanqing.youngstar.login._student.AuthenActivity;
+import com.chuanqing.youngstar.login.login.LoginActivity;
+import com.chuanqing.youngstar.tools.SharedPFUtils;
 
 public class ChooseActivity  extends BaseActivity implements View.OnClickListener {
     @Override
@@ -42,6 +44,8 @@ public class ChooseActivity  extends BaseActivity implements View.OnClickListene
                 break;
             case R.id.iv_visitor_choose:
                 startActivity(new Intent(ChooseActivity.this,MainActivity.class));
+                SharedPFUtils.setParam(ChooseActivity.this,"identity",4);
+                finish();
                 break;
         }
     }

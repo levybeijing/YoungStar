@@ -1,12 +1,8 @@
 package com.chuanqing.youngstar.login.login;
 
-import android.arch.lifecycle.LifecycleOwner;
 import android.content.Intent;
-import android.graphics.Color;
-import android.media.ResourceBusyException;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.text.Editable;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -16,18 +12,19 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.chuanqing.youngstar.MainActivity;
 import com.chuanqing.youngstar.R;
 import com.chuanqing.youngstar.Urls;
 import com.chuanqing.youngstar.base.BaseActivity;
 import com.chuanqing.youngstar.login.bean.LoginBean;
 import com.chuanqing.youngstar.login.bean.RegisterBean;
 import com.chuanqing.youngstar.login.bean.VeriCodeBean;
+import com.chuanqing.youngstar.login.choose.ChooseActivity;
 import com.chuanqing.youngstar.login.forget.ForgetPWDActivity;
 import com.chuanqing.youngstar.login.privacy.PrivacyProtectActivity;
 import com.chuanqing.youngstar.login.protocol.UserProtocolActivity;
 import com.chuanqing.youngstar.tools.SharedPFUtils;
 import com.chuanqing.youngstar.tools.StringUtil;
-import com.chuanqing.youngstar.tools.UrlCollect;
 import com.google.gson.Gson;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
@@ -193,15 +190,25 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         Log.e("===============", "tologin: "+s);
                         LoginBean bean = new Gson().fromJson(s, LoginBean.class);
                         if ("请求成功".equals(bean.getMessage())){
-//                            登录信息存储
-//                            设置全局请求头
+//                          设置全局请求头
                             SharedPFUtils.setParam(LoginActivity.this,"token",bean.getData().getToken());
                             HttpHeaders headers = new HttpHeaders();
                             headers.put("token",bean.getData().getToken());
                             OkGo.getInstance().addCommonHeaders(headers);
-
-                            SharedPFUtils.setParam(LoginActivity.this,"user_code",bean.getData().getToken());
-                            SharedPFUtils.setParam(LoginActivity.this,"password",bean.getData().getToken());
+//                          保存信息
+                            SharedPFUtils.setParam(LoginActivity.this,"usercode",bean.getData().getUser_code());
+                            SharedPFUtils.setParam(LoginActivity.this,"password",bean.getData().getPassword());
+                            SharedPFUtils.setParam(LoginActivity.this,"islogin",true);
+//
+                            int identity = (int) SharedPFUtils.getParam(LoginActivity.this, "identity", -1);
+                            if (identity>0){
+                                startActivity(new Intent(LoginActivity.this,MainActivity.class));
+                            }else{
+                                startActivity(new Intent(LoginActivity.this,ChooseActivity.class));
+                            }
+                            finish();
+                        }else{
+                            Toast.makeText(LoginActivity.this, bean.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
