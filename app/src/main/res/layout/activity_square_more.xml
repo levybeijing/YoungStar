@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="._active.leitai.LeitaiMoreActivity">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <include android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                layout="@layout/comm_onmodule_top_more"></include>
+            <LinearLayout
+                android:id="@+id/ll_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:orientation="vertical">
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/viewpager"
+                    android:layout_width="300dp"
+                    android:layout_height="210dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="30dp"
+                    android:clipChildren="false">
+
+                </android.support.v4.view.ViewPager>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/leitai_more_img"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/my169"
+                android:scaleType="fitXY"/>
+        </LinearLayout>
+    </ScrollView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="15dp"
+        android:gravity="center">
+        <Button
+            android:id="@+id/leitai_cansai"
+            android:layout_width="132dp"
+            android:layout_height="44dp"
+            android:background="@mipmap/leitai_cansai"
+            android:textSize="18sp"
+            android:layout_marginRight="30dp"
+            android:text="参赛者"
+            android:textColor="@color/white"/>
+        <Button
+            android:id="@+id/leitai_baoming"
+            android:layout_width="132dp"
+            android:layout_height="44dp"
+            android:background="@mipmap/leitai_baoming"
+            android:textSize="18sp"
+            android:text="我要报名"
+            android:textColor="@color/white"/>
+
+        <Button
+            android:id="@+id/leitai_jieshu"
+            android:layout_width="132dp"
+            android:layout_height="44dp"
+            android:background="@mipmap/leitai_jieshu"
+            android:textSize="18sp"
+            android:visibility="gone"
+            android:text="活动已结束"
+            android:textColor="@color/white"/>
+    </LinearLayout>
+
+
+
+</RelativeLayout>

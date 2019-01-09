@@ -181,7 +181,6 @@ public class HomeFragment extends Fragment implements OnBannerListener {
                                     Log.e("演绎图片",headimg);
                                     Glide.with(context)
                                             .load(headimg)
-                                            .placeholder(R.mipmap.my11)
                                             .error(R.mipmap.my11)
                                             .diskCacheStrategy(DiskCacheStrategy.NONE)
                                             .into(img_head);

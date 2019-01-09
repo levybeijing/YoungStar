@@ -3,11 +3,9 @@ package com.chuanqing.youngstar.myadapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -42,8 +40,8 @@ public class SquareStarShowAdaper extends RecyclerView.Adapter<SquareStarShowAda
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
-        SquareStarShowBean squareStarShowBean = arrayList.get(position);
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int position) {
+        final SquareStarShowBean squareStarShowBean = arrayList.get(position);
         String tuUrl = Api.ossurl+squareStarShowBean.getData().getPageInfo().getList().get(position).getBlog_img();
 //        Log.e("图片显示地址",tuUrl);
 
@@ -72,6 +70,7 @@ public class SquareStarShowAdaper extends RecyclerView.Adapter<SquareStarShowAda
             viewHolder.linearLayout_img.setVisibility(View.GONE);
             viewHolder.img.setImageDrawable(context.getResources().getDrawable(R.mipmap.square_yinpin));
         }
+
 
     }
 

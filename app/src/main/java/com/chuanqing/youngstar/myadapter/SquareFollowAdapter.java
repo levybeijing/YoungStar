@@ -52,15 +52,6 @@ public class SquareFollowAdapter extends BaseAdapter
         viewHolder = (ViewHolder) view.getTag();
         SquareFollowBean squareFollowBean = arrayList.get(position);
         String tuUrl = Api.ossurl + squareFollowBean.getData().getPageInfo().getList().get(position).getBlog_img();
-        /**
-         * 是不是在适配器里面不能写自定义的控件啊   不是  是你的适配器可能要重写  废了？
-         * 为啥其他的没事   你这个是多个条目的吧？嗯  回收的时候出问题了
-         * 新项目 刚写2-3个适配器   你百度一下多条目适配器吧   不是这么写的
-         *
-         * 你要是都写在一个里面  按道理说 也没事  但是怎么不行 我还不清楚
-         * 话说我这个就是一般的适配器好不
-         * 看到了吗，就是一般的适配器
-         */
         // 类型1（图片）2（视频）3（音频）
         if (squareFollowBean.getData().getPageInfo().getList().get(position).getMedia_type().equals("1")){
             viewHolder.linearLayout.setVisibility(View.VISIBLE);
@@ -98,7 +89,6 @@ public class SquareFollowAdapter extends BaseAdapter
         Log.e("头像地址",headimg);
         Glide.with(context)
                 .load(headimg)
-                .placeholder(R.mipmap.my11)
                 .error(R.mipmap.my11)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .into(viewHolder.circleImageView);

@@ -1,6 +1,7 @@
 package com.chuanqing.youngstar.myadapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.sax.TextElementListener;
 import android.support.annotation.RequiresApi;
@@ -17,6 +18,7 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.ViewTarget;
 import com.chuanqing.youngstar.R;
+import com.chuanqing.youngstar._active.leitai.LeitaiMoreActivity;
 import com.chuanqing.youngstar.mybean.StarLeitaiBean;
 import com.chuanqing.youngstar.tools.Api;
 
@@ -45,32 +47,56 @@ public class StarLeitaiAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View view, ViewGroup parent) {
+    public View getView(final int position, View view, ViewGroup parent) {
         ViewHolder viewHolder;
         if (view==null){
             view = LayoutInflater.from(context).inflate(R.layout.star_show_leitai,parent,false);
             view.setTag(new ViewHolder(view));
         }
         viewHolder = (ViewHolder) view.getTag();
-        StarLeitaiBean starLeitaiBean = arrayList.get(position);
+        final StarLeitaiBean starLeitaiBean = arrayList.get(position);
 
-
-        Glide.with(context).load(Api.ossurl+starLeitaiBean.getData().getPageInfo().getList().get(position).getList_img())
-                .placeholder(R.mipmap.my166)
-                .error(R.mipmap.my166)
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .into(new ViewTarget<View, GlideDrawable>(viewHolder.layout) {
-                    //括号里为需要加载的控件
-                    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-                    @Override
-                    public void onResourceReady(GlideDrawable resource,
-                                                GlideAnimation<? super GlideDrawable> glideAnimation) {
-                        this.view.setBackground(resource.getCurrent());
-                    }
-                });
+        if (starLeitaiBean.getData().getPageInfo().getList().get(position).getList_img().contains(",")){
+            Glide.with(context).load(Api.ossurl+starLeitaiBean.getData().getPageInfo().getList().get(position).getList_img().split(",")[0])
+                    .placeholder(R.mipmap.my166)
+                    .error(R.mipmap.my166)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .into(new ViewTarget<View, GlideDrawable>(viewHolder.layout) {
+                        //括号里为需要加载的控件
+                        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+                        @Override
+                        public void onResourceReady(GlideDrawable resource,
+                                                    GlideAnimation<? super GlideDrawable> glideAnimation) {
+                            this.view.setBackground(resource.getCurrent());
+                        }
+                    });
+        }else {
+            Glide.with(context).load(Api.ossurl+starLeitaiBean.getData().getPageInfo().getList().get(position).getList_img())
+                    .placeholder(R.mipmap.my166)
+                    .error(R.mipmap.my166)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .into(new ViewTarget<View, GlideDrawable>(viewHolder.layout) {
+                        //括号里为需要加载的控件
+                        @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+                        @Override
+                        public void onResourceReady(GlideDrawable resource,
+                                                    GlideAnimation<? super GlideDrawable> glideAnimation) {
+                            this.view.setBackground(resource.getCurrent());
+                        }
+                    });
+        }
         viewHolder.tv_name.setText(starLeitaiBean.getData().getPageInfo().getList().get(position).getActivity_name());
         viewHolder.tv_time.setText(starLeitaiBean.getData().getPageInfo().getList().get(position).getCurrentTime());
         viewHolder.tv_number.setText(starLeitaiBean.getData().getPageInfo().getList().get(position).getNum());
+        //点击事件
+        viewHolder.layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,LeitaiMoreActivity.class);
+                intent.putExtra("activitycode",starLeitaiBean.getData().getPageInfo().getList().get(position).getActivity_code()+"");
+                context.startActivity(intent);
+            }
+        });
         return view;
     }
 

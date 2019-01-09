@@ -3,14 +3,14 @@
     package="com.chuanqing.youngstar">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <!--//读取外置存储卡-->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <!---->
-    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <!-- //读取外置存储卡 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!--  -->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:name=".MyApplication"
@@ -27,33 +27,32 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SpleashActivity"/>
-
-        <activity android:name="._home.WebViewActivity"/>
-
-        <activity android:name="._home.searchstudent.StudentShowActivity"/>
-        <!--login-->
-        <activity android:name=".login.login.LoginActivity">
-
-        </activity>
-        <activity android:name=".login.forget.ForgetPWDActivity"></activity>
-        <activity android:name=".login.privacy.PrivacyProtectActivity"></activity>
-        <activity android:name=".login.protocol.UserProtocolActivity"></activity>
-        <activity android:name=".login._student.ImageAuthenActivity"></activity>
-        <activity android:name=".login._student.AuthenActivity"></activity>
-        <activity android:name=".login.choose.ChooseActivity"></activity>
-        <activity android:name=".login._student.LableActivity"></activity>
-        <activity android:name=".login.phonebind.PhoneBindActivity"></activity>
-        <!--company-->
-        <activity android:name=".login._company.ChooseActivity"></activity>
-        <activity android:name=".login._company.Authen1Activity">
-        </activity>
-        <activity android:name=".login._company.Authen2Activity"></activity>
-        <activity android:name=".login._company.ComBindActivity"></activity>
-        <!--invest-->
-        <activity android:name=".login._invest.InvestAuthenActivity"></activity>
-        <activity android:name=".login._invest.InvestAuthen2Activity"></activity>
-
+        <activity android:name=".SpleashActivity" />
+        <activity android:name="._home.WebViewActivity" />
+        <activity
+            android:name="._home.searchstudent.StudentShowActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan" />
+        <!-- login -->
+        <activity android:name=".login.login.LoginActivity" />
+        <activity android:name=".login.forget.ForgetPWDActivity" />
+        <activity android:name=".login.privacy.PrivacyProtectActivity" />
+        <activity android:name=".login.protocol.UserProtocolActivity" />
+        <activity android:name=".login._student.ImageAuthenActivity" />
+        <activity android:name=".login._student.AuthenActivity" />
+        <activity android:name=".login.choose.ChooseActivity" />
+        <activity android:name=".login._student.LableActivity" />
+        <activity android:name=".login.phonebind.PhoneBindActivity" />
+        <!-- company -->
+        <activity android:name=".login._company.ChooseActivity" />
+        <activity android:name=".login._company.Authen1Activity" />
+        <activity android:name=".login._company.Authen2Activity" />
+        <activity android:name=".login._company.ComBindActivity" />
+        <!-- invest -->
+        <activity android:name=".login._invest.InvestAuthenActivity" />
+        <activity android:name=".login._invest.InvestAuthen2Activity" />
+        <activity android:name="._active.leitai.LeitaiMoreActivity" />
+        <activity android:name="._active.leitai.PartakeActivity" />
+        <activity android:name="._active.starbang.StarbangMoreActivity"></activity>
     </application>
 
 </manifest>

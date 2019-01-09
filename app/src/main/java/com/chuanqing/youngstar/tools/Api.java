@@ -1,5 +1,7 @@
 package com.chuanqing.youngstar.tools;
 
+import java.security.SecureRandom;
+
 public class Api {
     public static String apiurl = "http://39.107.70.80:8080";
     public static String ossurl = "https://star-1.oss-cn-beijing.aliyuncs.com/";
@@ -32,4 +34,14 @@ public class Api {
     public static String star_leitai = apiurl+"/Star/square/getBattleActivity";
     //星榜
     public static String star_xingbang = apiurl+"/Star/square/getBattleActivityOver";
+    //星招聘
+    public static String star_zhaopin = apiurl+"/Star/square/getBattleEmploy";
+    //星榜详情
+    public static String bang_more = apiurl+"/Star/square/getOverActivityDetail";
+
+    //活动详情
+    public static String activity_more = apiurl+"/Star/firstPage/getActivityDetail";
+    //参与人列表
+    public static String canyu_people = apiurl+"/Star/firstPage/getActivityUser";
+
 }

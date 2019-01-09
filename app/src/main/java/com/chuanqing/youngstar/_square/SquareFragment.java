@@ -2,6 +2,7 @@ package com.chuanqing.youngstar._square;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -20,8 +21,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.chuanqing.youngstar.R;
+import com.chuanqing.youngstar._home.searchstudent.StudentShowActivity;
 import com.chuanqing.youngstar._square.follow.FollowFragment;
 import com.chuanqing.youngstar._square.starshow.StarShowFragment;
+import com.chuanqing.youngstar._square.zhichang.SquareZhichangFragment;
 import com.chuanqing.youngstar.myadapter.TablayoutAdapter;
 
 import java.lang.reflect.Field;
@@ -70,9 +73,15 @@ public class SquareFragment extends Fragment {
     private void showinfo() {
         StarShowFragment starShowFragment = new StarShowFragment();
         FollowFragment followFragment = new FollowFragment();
+        SquareZhichangFragment zhichangFragment = new SquareZhichangFragment();
         mFragments.add(starShowFragment);
+        //只有学生有这个职场
+        mFragments.add(zhichangFragment);
+
         mFragments.add(followFragment);
         list.add("星秀");
+        //学生职场
+        list.add("星职场");
         list.add("关注");
         mTabLayout.setTabMode(TabLayout.MODE_FIXED);
         mTabLayout.setupWithViewPager(mViewpager);
@@ -93,6 +102,13 @@ public class SquareFragment extends Fragment {
         tv_title.setText("广场");
         left_img.setVisibility(View.GONE);
         right_img.setVisibility(View.VISIBLE);
+        right_img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,StudentShowActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
