@@ -33,7 +33,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="招聘主题"
-
                         />
                     <EditText
                         android:id="@+id/et_theme_recuit"
@@ -43,6 +42,7 @@
                         android:layout_weight="1"
                         android:gravity="right"
                         android:background="@null"
+                        android:textSize="12dp"
                         />
                 </LinearLayout>
                 <!--2-->
@@ -66,10 +66,12 @@
                         android:layout_weight="1"
                         android:gravity="right"
                         android:background="@null"
+                        android:textSize="12dp"
                         />
                 </LinearLayout>
                 <!--3-->
                 <RelativeLayout
+                    android:id="@+id/rl_num_recuit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
@@ -93,6 +95,7 @@
                 </RelativeLayout>
                 <!--4-->
                 <RelativeLayout
+                    android:id="@+id/rl_money_recuit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
@@ -116,6 +119,7 @@
                 </RelativeLayout>
                 <!--5-->
                 <RelativeLayout
+                    android:id="@+id/rl_major_recuit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
@@ -139,6 +143,7 @@
                 </RelativeLayout>
             <!--6-->
                 <RelativeLayout
+                    android:id="@+id/rl_addre_recuit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
@@ -182,12 +187,14 @@
                         android:orientation="horizontal"
                         >
                         <RadioButton
+                            android:id="@+id/rb_no_recuit"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="无经验"
                             android:layout_weight="1"
                             />
                         <RadioButton
+                            android:id="@+id/rb_yes_recuit"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="有经验"
@@ -199,37 +206,172 @@
             <!---->
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_marginTop="10dp"
+                android:layout_height="170dp"
+                android:padding="10dp"
                 >
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="职位要求"
                     android:layout_marginTop="10dp"
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginLeft="5dp"
                     />
                 <EditText
-                    android:id="@+id/et_need_recuit"
+                    android:id="@+id/et_require_recuit"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="对应聘者的具体要求"
                     android:background="@drawable/bg_gray"
                     android:layout_marginTop="30dp"
-                    android:layout_marginLeft="23dp"
-                    android:layout_marginRight="23dp"
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginRight="13dp"
                     android:gravity="left"
                     android:padding="10dp"
                     android:textSize="12dp"
                     />
             </RelativeLayout>
             <!---->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="156dp"
+                android:orientation="vertical"
+                android:padding="15dp"
+                android:layout_marginTop="10dp"
+                >
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="福利待遇"
+                        android:textSize="14dp"
+                        android:textColor="#505050"
+                        />
+                    <TextView
+                        android:id="@+id/tv_lablenum_recuit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="(0/5)"
+                        android:textSize="12dp"
+                        android:textColor="#505050"
+                        />
+                </LinearLayout>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_lables_recuit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    />
+            </LinearLayout>
+            <!--照片-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="168dp"
+                android:layout_marginTop="10dp"
+                android:padding="15dp"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="上传公司/片场照片"
+                    android:textSize="14dp"
+                    android:textColor="#505050"
+                    />
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_imgs_recuit"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="20dp"
+                    />
+            </LinearLayout>
+            <!--联系方式-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="338dp"
+                android:orientation="vertical"
+                android:padding="15dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="联系方式"
+                    />
+                <EditText
+                    android:id="@+id/et_name_recuit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="联系人:"
+                    android:background="@drawable/bg_gray"
+                    android:layout_weight="1"
+                    android:layout_marginTop="10dp"
+                    android:textSize="12dp"
+                    android:paddingLeft="6dp"
 
+                    />
+                <EditText
+                    android:id="@+id/et_phone_recuit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="手机号码:"
+                    android:background="@drawable/bg_gray"
+                    android:layout_weight="1"
+                    android:layout_marginTop="10dp"
+                    android:textSize="12dp"
+                    android:paddingLeft="6dp"
+
+                    />
+                <EditText
+                    android:id="@+id/et_email_recuit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="联系邮箱:"
+                    android:background="@drawable/bg_gray"
+                    android:layout_weight="1"
+                    android:layout_marginTop="10dp"
+                    android:textSize="12dp"
+                    android:paddingLeft="6dp"
+
+                    />
+                <EditText
+                    android:id="@+id/et_address_recuit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="公司地址:"
+                    android:background="@drawable/bg_gray"
+                    android:layout_weight="1"
+                    android:layout_marginTop="10dp"
+                    android:textSize="12dp"
+                    android:paddingLeft="6dp"
+                    />
+                <EditText
+                    android:id="@+id/et_comname_recuit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="公司名称:"
+                    android:background="@drawable/bg_gray"
+                    android:layout_weight="1"
+                    android:layout_marginTop="10dp"
+                    android:textSize="12dp"
+                    android:paddingLeft="6dp"
+                    />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="101dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="*以上招聘信息只显示给艺人"
+            android:textColor="#F56250"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            />
         <TextView
             android:id="@+id/tv_release_recuit"
             android:layout_width="wrap_content"
