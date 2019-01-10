@@ -15,7 +15,6 @@ import com.chuanqing.youngstar.tools.SharedPFUtils;
 
 public class SpleashActivity extends BaseActivity {
     //延迟3秒
-//    private static final long SPLASH_DELAY_MILLIS = 2000;
     private static final long ANIMATION_TIME = 1000;
 
     public SharedPreferences sp;
@@ -28,7 +27,7 @@ public class SpleashActivity extends BaseActivity {
 //        动态权限
         String[] permession =new String[]{
                 Manifest.permission.READ_PHONE_STATE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
         };
         PermissionsUtils.getInstance().chekPermissions(this, permession, new PermissionsUtils.IPermissionsResult() {
             @Override

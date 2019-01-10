@@ -24,9 +24,9 @@ public class ChooseActivity  extends BaseActivity implements View.OnClickListene
     }
 
     private void initView() {
-        findViewById(R.id.iv_visitor_choose).setOnClickListener(this);
-        findViewById(R.id.iv_invest_choose).setOnClickListener(this);
+        findViewById(R.id.iv_student_choose).setOnClickListener(this);
         findViewById(R.id.iv_company_choose).setOnClickListener(this);
+        findViewById(R.id.iv_invest_choose).setOnClickListener(this);
         findViewById(R.id.iv_visitor_choose).setOnClickListener(this);
     }
 

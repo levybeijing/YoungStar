@@ -2,9 +2,11 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/rl_root_authen"
+    >
     <!---->
-    <ImageView
+    <com.chuanqing.youngstar.widget.CirImageView
         android:id="@+id/iv_logo_authen"
         android:layout_width="75dp"
         android:layout_height="75dp"
@@ -26,24 +28,35 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="203dp"
         >
-        <ImageView
-            android:id="@+id/iv_man_authen"
-            android:layout_width="wrap_content"
+        <RadioGroup
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@mipmap/man_chooose"
-            />
+            android:orientation="horizontal"
+            >
+            <RadioButton
+                android:id="@+id/rb_man_authen"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:background="@drawable/selector_sex_man"
+                android:button="@null"
+                />
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+            <RadioButton
+                android:id="@+id/rb_woman_authen"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:background="@drawable/selector_sex_woman"
+                android:button="@null"
+                />
+        </RadioGroup>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="男"
             android:layout_alignParentBottom="true"
-            />
-        <ImageView
-            android:id="@+id/iv_woman_authen"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@mipmap/woman_choose"
-            android:layout_alignParentRight="true"
             />
         <TextView
             android:layout_width="wrap_content"
@@ -57,11 +70,11 @@
     <LinearLayout
         android:id="@+id/ll_authen"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="324dp"
         android:layout_centerHorizontal="true"
         android:orientation="vertical"
         android:background="@drawable/bg_ll_login"
-        android:padding="30dp"
+        android:padding="25dp"
         android:layout_marginTop="268dp"
         >
         <!--1-->
@@ -69,6 +82,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
+            android:layout_weight="1"
+
             >
             <ImageView
                 android:layout_width="20dp"
@@ -87,6 +102,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+
             android:gravity="center_vertical"
             >
             <ImageView
@@ -107,6 +124,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
+            android:layout_weight="1"
+
             >
             <ImageView
                 android:layout_width="20dp"
@@ -126,6 +145,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
+            android:layout_weight="1"
+
             >
             <ImageView
                 android:layout_width="17dp"
@@ -145,6 +166,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
+            android:layout_weight="1"
+
             >
             <ImageView
                 android:layout_width="20dp"
@@ -164,6 +187,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
+            android:layout_weight="1"
             >
             <ImageView
                 android:layout_width="20dp"
@@ -178,11 +202,12 @@
                 android:textSize="14dp"
                 />
         </LinearLayout>
-        <!--7-->
+<!--7-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
+            android:layout_weight="1"
             >
             <ImageView
                 android:layout_width="19dp"
@@ -209,5 +234,6 @@
         android:gravity="center"
         android:textColor="#fff"
         android:layout_below="@id/ll_authen"
+        android:layout_marginTop="10dp"
         />
 </RelativeLayout>
