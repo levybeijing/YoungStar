@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import com.chuanqing.youngstar.R;
 import com.chuanqing.youngstar.base.BaseActivity;
+import com.chuanqing.youngstar.tools.StringUtil;
 import com.chuanqing.youngstar.widget.CirImageView;
 
 import java.io.File;
@@ -117,7 +118,14 @@ public class AuthenActivity extends BaseActivity implements View.OnClickListener
                 String trim5 = snumber.getText().toString().trim();
                 String trim6 = inumber.getText().toString().trim();
                 String trim7 = email.getText().toString().trim();
-
+//                if (imgpath==null||imgpath.length()==0){
+//                    Toast.makeText(this, "头像不能为空", Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
+                if (sex==null||sex.length()==0){
+                    Toast.makeText(this, "请选择性别", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if (trim1==null||trim1.length()==0){
                     Toast.makeText(this, "用户名不能为空", Toast.LENGTH_SHORT).show();
                     return;
@@ -225,7 +233,7 @@ public class AuthenActivity extends BaseActivity implements View.OnClickListener
         if (uri == null) {
             Log.i("tag", "The uri is not exist.");
         }
-//        tempUri = uri;
+
         Intent intent = new Intent("com.android.camera.action.CROP");
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
@@ -249,10 +257,9 @@ public class AuthenActivity extends BaseActivity implements View.OnClickListener
 
     //裁剪后的地址
     public  String getPath() {
-        //resize image to thumb
-        if (mFile == null) {
-            mFile = Environment.getExternalStorageDirectory() + "/" +"wode/"+ "outtemp.png";
-        }
+//        if (mFile == null) {
+        mFile = Environment.getExternalStorageDirectory() + "/" +"star/"+StringUtil.getRandomName(8) + ".png";
+//        }
         return mFile;
     }
 

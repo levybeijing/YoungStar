@@ -11,6 +11,7 @@ import com.chuanqing.youngstar.base.BaseActivity;
 import com.chuanqing.youngstar.login._company.ChoseActivity;
 import com.chuanqing.youngstar.login._invest.InvestAuthenActivity;
 import com.chuanqing.youngstar.login._student.AuthenActivity;
+import com.chuanqing.youngstar.login._student.ImageAuthenActivity;
 import com.chuanqing.youngstar.login.login.LoginActivity;
 import com.chuanqing.youngstar.tools.SharedPFUtils;
 
@@ -34,7 +35,8 @@ public class ChooseActivity  extends BaseActivity implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.iv_student_choose:
-                startActivity(new Intent(ChooseActivity.this,AuthenActivity.class));
+//                startActivity(new Intent(ChooseActivity.this,AuthenActivity.class));
+                startActivity(new Intent(ChooseActivity.this,ImageAuthenActivity.class));
                 break;
             case R.id.iv_invest_choose:
                 startActivity(new Intent(ChooseActivity.this,InvestAuthenActivity.class));
