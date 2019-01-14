@@ -12,4 +12,7 @@
     <color name="home_gray">#999999</color>
     <color name="whole_hx">#DCDCDC</color>
 
+<!--页面背景色-->
+    <color name="main_page">#F7F7F7</color>
+
 </resources>
