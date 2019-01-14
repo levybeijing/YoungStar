@@ -7,9 +7,11 @@
     android:layout_height="match_parent"
     tools:context="._active.starbang.StarbangMoreActivity">
     <ImageView
+        android:id="@+id/starbang_more_bgimg"
         android:layout_width="match_parent"
-        android:layout_height="220dp"
-        android:src="@mipmap/ceshi"
+        android:layout_marginTop="64dp"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/my169"
         android:scaleType="fitXY"
         android:layout_alignParentTop="true"/>
     <LinearLayout
@@ -18,18 +20,24 @@
         android:orientation="vertical">
         <include android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            layout="@layout/comm_onmodule_top_more"></include>
+            layout="@layout/common_top_more"></include>
 
         <LinearLayout
+            android:id="@+id/starbang_more_linearlayout"
             android:layout_width="match_parent"
-            android:layout_height="156dp"
+            android:layout_height="wrap_content"
             android:background="#50000000"
             android:orientation="horizontal"
-            android:padding="15dp">
+            android:paddingTop="15dp"
+            android:paddingBottom="25dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp">
 
-            <ImageView
+            <com.chuanqing.youngstar.tools.RoundImageView
+                android:id="@+id/starbang_more_headimg"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
+                app:radius="5dp"
                 android:src="@mipmap/my11" />
 
             <LinearLayout
@@ -40,6 +48,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/starbang_more_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="名字"
@@ -47,6 +56,7 @@
                     android:textSize="18sp" />
 
                 <TextView
+                    android:id="@+id/starbang_more_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -56,6 +66,7 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/starbang_more_info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:lineSpacingExtra="8dp"
@@ -64,6 +75,15 @@
                     android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>
+        <ListView
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@null"
+            android:scrollbars="none">
+
+        </ListView>
+
     </LinearLayout>
 
 </RelativeLayout>

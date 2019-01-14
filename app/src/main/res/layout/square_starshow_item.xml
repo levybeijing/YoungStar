@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
     <RelativeLayout
+        android:id="@+id/starshow_body"
         android:layout_width="124dp"
         android:layout_height="124dp">
         <ImageView

@@ -41,8 +41,7 @@ import okhttp3.Response;
  */
 public class LeitaiMoreActivity extends BaseActivity {
 
-    private ViewPager mViewPager ;
-//    private String[] mPics = new String[]{};
+    private ViewPager mViewPager;
     private LinearLayout ll_layout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +90,7 @@ public class LeitaiMoreActivity extends BaseActivity {
         OkGo.post(Api.activity_more)
                 .tag(this)
                 .params("activityCode",getIntent().getStringExtra("activitycode").toString())
+                .params("userCode","145495544327")//先写死
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Response response, Exception e) {

@@ -18,6 +18,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.chuanqing.youngstar.R;
+import com.chuanqing.youngstar._active.leitai.LeitaiMoreActivity;
+import com.chuanqing.youngstar._active.zhichang.ZhichangMoreActivity;
 import com.chuanqing.youngstar._home.searchstudent.StudentShowActivity;
 import com.chuanqing.youngstar.myadapter.HomeActivityAdapter;
 import com.chuanqing.youngstar.mybean.HomeActivityBean;
@@ -107,12 +109,22 @@ public class HomeFragment extends Fragment implements OnBannerListener {
                                     tv_name = v_item.findViewById(R.id.home_activity_1_name);
                                     tv_time = v_item.findViewById(R.id.home_activity_1_time);
                                     tv_people = v_item.findViewById(R.id.home_activity_1_people);
-                                    Glide.with(context)
-                                            .load(Api.ossurl+activityBean.getData().get(i).getList_img())
-                                            .placeholder(R.mipmap.my166)
-                                            .error(R.mipmap.my166)
-                                            .diskCacheStrategy(DiskCacheStrategy.NONE)
-                                            .into(img);
+                                    if (activityBean.getData().get(i).getList_img().contains(",")){
+                                        Glide.with(context)
+                                                .load(Api.ossurl+activityBean.getData().get(i).getList_img().split(",")[0])
+                                                .placeholder(R.mipmap.my166)
+                                                .error(R.mipmap.my166)
+                                                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                                                .into(img);
+                                    }else {
+                                        Glide.with(context)
+                                                .load(Api.ossurl+activityBean.getData().get(i).getList_img())
+                                                .placeholder(R.mipmap.my166)
+                                                .error(R.mipmap.my166)
+                                                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                                                .into(img);
+                                    }
+
                                     tv_name.setText(activityBean.getData().get(i).getActivity_name());
                                     tv_people.setText(activityBean.getData().get(i).getAttendCount());
                                     tv_time.setText(activityBean.getData().get(i).getCurrentTime());
@@ -121,7 +133,10 @@ public class HomeFragment extends Fragment implements OnBannerListener {
                                     v_item.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
-                                            ToastUtils.shortToast("活动名字"+activityBean.getData().get(finalI).getActivity_code());
+//                                            ToastUtils.shortToast("活动名字"+activityBean.getData().get(finalI).getActivity_code());
+                                            Intent intent = new Intent(context,LeitaiMoreActivity.class);
+                                            intent.putExtra("activitycode",activityBean.getData().get(finalI).getActivity_code());
+                                            startActivity(intent);
                                         }
                                     });
                                 }
@@ -192,7 +207,10 @@ public class HomeFragment extends Fragment implements OnBannerListener {
                                     v_item.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
-                                            ToastUtils.shortToast("演绎"+yanyiBean.getData().get(finalI).getAttendCount());
+//                                            ToastUtils.shortToast("演绎"+yanyiBean.getData().get(finalI).getAttendCount());
+                                            Intent intent = new Intent(context,ZhichangMoreActivity.class);
+                                            intent.putExtra("employCode",yanyiBean.getData().get(finalI).getEmploy_code());
+                                            startActivity(intent);
                                         }
                                     });
                                 }

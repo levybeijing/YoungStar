@@ -28,6 +28,9 @@ import butterknife.ButterKnife;
 import okhttp3.Call;
 import okhttp3.Response;
 
+/**
+ * 参与人
+ */
 public class PartakeActivity extends BaseActivity implements XListView.IXListViewListener{
     private static final String TAG = "PartakeActivity";
     @BindView(R.id.partake_listiview)
@@ -57,6 +60,7 @@ public class PartakeActivity extends BaseActivity implements XListView.IXListVie
                 .params("page",page)
                 .params("pageSize",pageSize)
                 .params("activityCode",getIntent().getStringExtra("activityCode"))
+                .params("code","145495544327")
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Response response, Exception e) {

@@ -12,4 +12,9 @@
         <attr name="border_outside_color" format="color"/>
         <attr name="round" format="dimension"/>
     </declare-styleable>
+
+    <declare-styleable name="RoundImageView">
+        <attr name="circle" format="boolean" />
+        <attr name="radius" format="dimension" />
+    </declare-styleable>
 </resources>

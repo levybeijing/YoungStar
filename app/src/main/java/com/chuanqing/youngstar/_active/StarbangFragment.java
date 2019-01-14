@@ -74,6 +74,7 @@ public class StarbangFragment extends Fragment  implements XListView.IXListViewL
     int page = 1, pageSize = 10;
 
     private void showimg() {
+        mHandler = new Handler();
         OkGo.post(Api.star_xingbang)
                 .tag(this)
                 .params("page",page)

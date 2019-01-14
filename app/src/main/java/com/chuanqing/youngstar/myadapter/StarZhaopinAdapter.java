@@ -1,17 +1,20 @@
 package com.chuanqing.youngstar.myadapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.chuanqing.youngstar.R;
+import com.chuanqing.youngstar._active.zhichang.ZhichangMoreActivity;
 import com.chuanqing.youngstar.mybean.HomeYanyiBean;
 import com.chuanqing.youngstar.mybean.StarZhaopinBean;
 import com.chuanqing.youngstar.tools.Api;
@@ -42,14 +45,14 @@ public class StarZhaopinAdapter extends BaseAdapter {
     }
     String yanyiimg;
     @Override
-    public View getView(int i, View view, ViewGroup parent) {
+    public View getView(final int i, View view, ViewGroup parent) {
         ViewHolder viewHolder;
         if (view==null){
             view = LayoutInflater.from(context).inflate(R.layout.home_yanyi_items,parent,false);
             view.setTag(new ViewHolder(view));
         }
         viewHolder = (ViewHolder) view.getTag();
-        StarZhaopinBean zhaopinBean = arrayList.get(i);
+        final StarZhaopinBean zhaopinBean = arrayList.get(i);
 
         if (zhaopinBean.getData().getPageInfo().getList().get(i).getImg().contains(",")){
             yanyiimg = Api.ossurl+zhaopinBean.getData().getPageInfo().getList().get(i).getImg().split(",")[0];
@@ -72,7 +75,14 @@ public class StarZhaopinAdapter extends BaseAdapter {
         viewHolder.tv_name.setText(zhaopinBean.getData().getPageInfo().getList().get(i).getTitle());
         viewHolder.tv_people.setText(zhaopinBean.getData().getPageInfo().getList().get(i).getAttend_num()+"");
         viewHolder.tv_time.setText(zhaopinBean.getData().getPageInfo().getList().get(i).getUser_code());
-
+        viewHolder.linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,ZhichangMoreActivity.class);
+                intent.putExtra("employCode",zhaopinBean.getData().getPageInfo().getList().get(i).getEmploy_code()+"");
+                context.startActivity(intent);
+            }
+        });
         return view;
     }
     private static class ViewHolder{
@@ -81,12 +91,14 @@ public class StarZhaopinAdapter extends BaseAdapter {
         TextView tv_time;
         TextView tv_people;
         ImageView img_head;
+        LinearLayout linearLayout;
         private ViewHolder(View v_item){
             img = v_item.findViewById(R.id.home_activity_1_img);
             tv_name = v_item.findViewById(R.id.home_activity_1_name);
             tv_time = v_item.findViewById(R.id.home_activity_1_time);
             tv_people = v_item.findViewById(R.id.home_activity_1_people);
             img_head = v_item.findViewById(R.id.yanyi_headimg);
+            linearLayout = v_item.findViewById(R.id.home_activity_1);
 
         }
     }

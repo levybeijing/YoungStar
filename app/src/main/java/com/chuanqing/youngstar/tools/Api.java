@@ -25,8 +25,12 @@ public class Api {
      */
     //广场星秀
     public static String square_starshow = apiurl+"/Star/user/getUserBlogs";
+    //星秀详情
+    public static String square_starshow_more = apiurl+"/Star/user/getUserBlogDetails";
     //关注
     public static String square_guanzhu = apiurl+"/Star/square/getFocusOnBlog";
+    //星职场
+    public static String square_zhichang = apiurl+"/Star/user/getUserBlogs";
     /**
      * 星活动
      */
@@ -34,6 +38,9 @@ public class Api {
     public static String star_leitai = apiurl+"/Star/square/getBattleActivity";
     //星榜
     public static String star_xingbang = apiurl+"/Star/square/getBattleActivityOver";
+    //星榜详情
+    public static String star_xingbang_more = apiurl+"/Star/square/getOverActivityDetail";
+
     //星招聘
     public static String star_zhaopin = apiurl+"/Star/square/getBattleEmploy";
     //星榜详情
@@ -43,5 +50,11 @@ public class Api {
     public static String activity_more = apiurl+"/Star/firstPage/getActivityDetail";
     //参与人列表
     public static String canyu_people = apiurl+"/Star/firstPage/getActivityUser";
+    //招聘详情
+    public static String zhaoping_more = apiurl+"/Star/firstPage/getEmployDetail";
+    //动态点赞
+    public static String dongtaizan = apiurl+"/Star/firstPage/addBlogRecommend";
+    //关注公司或者学生
+    public static String guanzhu = apiurl+"/Star/firstPage/addfocusOn";
 
 }
