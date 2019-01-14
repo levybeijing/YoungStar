@@ -9,7 +9,7 @@
     tools:context="._active.leitai.PartakeActivity">
     <include android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        layout="@layout/comm_onmodule_top_more"></include>
+        layout="@layout/common_top_more"></include>
     <com.chuanqing.youngstar.view.XListView
         android:id="@+id/partake_listiview"
         android:layout_width="match_parent"

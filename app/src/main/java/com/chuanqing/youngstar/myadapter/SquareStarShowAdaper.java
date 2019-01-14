@@ -1,6 +1,7 @@
 package com.chuanqing.youngstar.myadapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,13 +9,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.chuanqing.youngstar.R;
+import com.chuanqing.youngstar._square.starshow.StarShowMoreActivity;
 import com.chuanqing.youngstar.mybean.SquareStarShowBean;
 import com.chuanqing.youngstar.tools.Api;
+import com.chuanqing.youngstar.tools.ToastUtils;
 
 import java.util.ArrayList;
 
@@ -50,12 +54,22 @@ public class SquareStarShowAdaper extends RecyclerView.Adapter<SquareStarShowAda
         if (squareStarShowBean.getData().getPageInfo().getList().get(position).getMedia_type()==1){
             viewHolder.img_video.setVisibility(View.GONE);
             viewHolder.linearLayout_img.setVisibility(View.VISIBLE);
-            Glide.with(context)
-                    .load(tuUrl)
-                    .placeholder(R.mipmap.my11)
-                    .error(R.mipmap.my11)
-                    .diskCacheStrategy(DiskCacheStrategy.NONE)
-                    .into(viewHolder.img);
+            if (squareStarShowBean.getData().getPageInfo().getList().get(position).getBlog_img().contains(",")){
+                Glide.with(context)
+                        .load(Api.ossurl+squareStarShowBean.getData().getPageInfo().getList().get(position).getBlog_img().split(",")[0])
+                        .placeholder(R.mipmap.my11)
+                        .error(R.mipmap.my11)
+                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                        .into(viewHolder.img);
+            }else {
+                Glide.with(context)
+                        .load(Api.ossurl+squareStarShowBean.getData().getPageInfo().getList().get(position).getBlog_img())
+                        .placeholder(R.mipmap.my11)
+                        .error(R.mipmap.my11)
+                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                        .into(viewHolder.img);
+            }
+
         }else if (squareStarShowBean.getData().getPageInfo().getList().get(position).getMedia_type()==2){
             viewHolder.img_video.setVisibility(View.VISIBLE);
             viewHolder.linearLayout_img.setVisibility(View.GONE);
@@ -71,6 +85,17 @@ public class SquareStarShowAdaper extends RecyclerView.Adapter<SquareStarShowAda
             viewHolder.img.setImageDrawable(context.getResources().getDrawable(R.mipmap.square_yinpin));
         }
 
+        //点击跳转到详情
+        viewHolder.relativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,StarShowMoreActivity.class);
+                intent.putExtra("userBlogId",squareStarShowBean.getData().getPageInfo().getList().get(position).getId()+"");
+                intent.putExtra("type",squareStarShowBean.getData().getPageInfo().getList().get(position).getMedia_type()+"");
+                context.startActivity(intent);
+            }
+        });
+
 
     }
 
@@ -80,12 +105,14 @@ public class SquareStarShowAdaper extends RecyclerView.Adapter<SquareStarShowAda
         ImageView img_video;
         LinearLayout linearLayout_img;
         TextView tv_number;
+        RelativeLayout relativeLayout;
         public ViewHolder(View view) {
             super(view);
             img = view.findViewById(R.id.starshow_imgs);
             img_video = view.findViewById(R.id.starshow_img_video);
             linearLayout_img = view.findViewById(R.id.starshow_img_img);
             tv_number = view.findViewById(R.id.starshow_img_img_number);
+            relativeLayout = view.findViewById(R.id.starshow_body);
         }
     }
 

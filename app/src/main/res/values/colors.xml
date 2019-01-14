@@ -11,6 +11,7 @@
     <color name="all_bg">#F7F7F7</color>
     <color name="home_gray">#999999</color>
     <color name="whole_hx">#DCDCDC</color>
+    <color name="whole_info">#666666</color>
 
 <!--页面背景色-->
     <color name="main_page">#F7F7F7</color>

@@ -24,7 +24,7 @@ public class MyAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        if (mData.length==1){
+        if (mData.length<3){
             return mData.length;// 返回数据的个数
         }else {
             return mData.length*10;// 返回数据的个数

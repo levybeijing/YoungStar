@@ -10,6 +10,13 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    compileOptions {
+
+        sourceCompatibility JavaVersion.VERSION_1_8
+
+        targetCompatibility JavaVersion.VERSION_1_8
+
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -40,6 +47,9 @@ dependencies {
     //RxJava扩展支持，根据需要添加
     implementation 'com.lzy.net:okserver:1.1.0'
     implementation 'com.google.code.gson:gson:2.8.5'
+    //导入视频播放器包
+    implementation 'cn.jzvd:jiaozivideoplayer:6.4.1'
+
 //    阿里服务器
     implementation 'com.aliyun.dpa:oss-android-sdk:+'
 }

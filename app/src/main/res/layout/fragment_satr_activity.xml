@@ -11,7 +11,7 @@
         android:orientation="vertical">
         <include android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            layout="@layout/comm_onmodule_top"></include>
+            layout="@layout/common_top"></include>
         <android.support.v4.view.ViewPager
             android:id="@+id/viewpager"
             android:layout_width="match_parent"

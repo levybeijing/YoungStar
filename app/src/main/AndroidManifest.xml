@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.chuanqing.youngstar">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <!--//读取外置存储卡-->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <!---->
-    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <!-- //读取外置存储卡 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!--  -->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"
+        tools:ignore="ProtectedPermissions"></uses-permission>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+
+
 
     <application
         android:name=".MyApplication"
@@ -74,25 +80,16 @@
         <activity android:name="._mine.FeedbackActivity"></activity>
         <activity android:name="._mine.SystemSetActivity"></activity>
         <activity android:name="._mine.PlaySetActivity"></activity>
-        <activity android:name="._mine.CopyRightActivity"></activity>
-        <activity android:name="._mine.student.MatchActivity"></activity>
-        <activity android:name="._mine.student.InterestActivity"></activity>
-        <activity android:name="._mine.student.AddAudioActivity"></activity>
+
+
         <!--孟\/-->
         <activity android:name="._active.leitai.LeitaiMoreActivity" />
         <activity android:name="._active.leitai.PartakeActivity" />
-        <activity android:name="._active.starbang.StarbangMoreActivity"></activity>
-
-        <provider
-            android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.chuanqing.youngstar.provider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/photopath" />
-        </provider>
-
+        <activity android:name="._active.starbang.StarbangMoreActivity" />
+        <activity android:name="._active.zhichang.ZhichangMoreActivity" />
+        <activity android:name="._square.starshow.StarShowMoreActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait" ></activity>
     </application>
 
 </manifest>

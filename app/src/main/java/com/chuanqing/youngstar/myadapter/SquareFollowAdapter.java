@@ -1,6 +1,7 @@
 package com.chuanqing.youngstar.myadapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.chuanqing.youngstar.R;
+import com.chuanqing.youngstar._square.starshow.StarShowMoreActivity;
 import com.chuanqing.youngstar.mybean.SquareFollowBean;
 import com.chuanqing.youngstar.tools.Api;
 import com.chuanqing.youngstar.tools.CircleImageView;
@@ -93,8 +95,17 @@ public class SquareFollowAdapter extends BaseAdapter
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .into(viewHolder.circleImageView);
         viewHolder.tv_id.setText("SID："+squareFollowBean.getData().getPageInfo().getList().get(position).getId());
-        viewHolder.tv_type.setText(squareFollowBean.getData().getPageInfo().getList().get(position).getType()+"");
+        viewHolder.tv_type.setText(squareFollowBean.getData().getPageInfo().getList().get(position).getLabel()+"");
         viewHolder.tv_dianzan.setText(squareFollowBean.getData().getPageInfo().getList().get(position).getRecommend()+"");
+        viewHolder.linearLayout_body.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,StarShowMoreActivity.class);
+                intent.putExtra("userBlogId",squareFollowBean.getData().getPageInfo().getList().get(position).getId()+"");
+                intent.putExtra("type",squareFollowBean.getData().getPageInfo().getList().get(position).getMedia_type()+"");
+                context.startActivity(intent);
+            }
+        });
         return view;
     }
     private static class ViewHolder{
@@ -109,6 +120,7 @@ public class SquareFollowAdapter extends BaseAdapter
         TextView tv_id;
         TextView tv_type;
         TextView tv_dianzan;
+        LinearLayout linearLayout_body;
         public ViewHolder(View view){
             tv_name = view.findViewById(R.id.squarefollow_name);
             tv_time = view.findViewById(R.id.squarefollow_time);
@@ -121,6 +133,7 @@ public class SquareFollowAdapter extends BaseAdapter
             tv_id =view.findViewById(R.id.squarefollow_userid);
             tv_type = view.findViewById(R.id.squarefollow_type);
             tv_dianzan =view.findViewById(R.id.squarefollow_dianzannumber);
+            linearLayout_body = view.findViewById(R.id.linear_body);
         }
     }
 }

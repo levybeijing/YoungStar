@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+
 public class MyApplication extends Application {
     private static Context context;
     //单例模式中获取唯一的MyApplication实例
