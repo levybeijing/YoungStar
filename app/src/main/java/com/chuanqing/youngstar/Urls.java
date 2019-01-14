@@ -1,6 +1,8 @@
 package com.chuanqing.youngstar;
 
 public class Urls {
+//    OSS 阿里上传路径  图片命名规范:2483989924/20190107 1354459140.png
+    public static final String IMAGEURL = "https://star-1.oss-cn-beijing.aliyuncs.com";
 
     public static final String HOST = "http://39.107.70.80:8080/";
     //    获取验证码

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#F7F7F7"
+    tools:context="._mine.MineFragment"
+
+    >
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        >
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|enterAlways"
+            >
+            <include
+                layout="@layout/mine_student"
+                />
+            <!--<android.support.v7.widget.Toolbar-->
+                <!--android:id="@+id/bar_student"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:paddingTop="20dp"-->
+                <!--android:minHeight="50dp"-->
+                <!--&gt;-->
+            <!--</android.support.v7.widget.Toolbar>-->
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab_student"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_student"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:paddingTop="20dp"
+        >
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@mipmap/msg_mine"
+            android:layout_margin="10dp"
+            />
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            />
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@mipmap/phone_mine"
+            android:layout_margin="10dp"
+            />
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@mipmap/share_mine"
+            android:layout_margin="10dp"
+            />
+    </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

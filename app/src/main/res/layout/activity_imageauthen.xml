@@ -57,9 +57,15 @@
             android:id="@+id/rl1_imgauthen"
             android:layout_width="270dp"
             android:layout_height="135dp"
-            android:background="@mipmap/img_uploads"
             android:layout_margin="10dp"
+            android:background="#0fff"
             >
+            <ImageView
+                android:id="@+id/iv1_imgauthen"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@mipmap/img_uploads"
+                />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -11,6 +11,9 @@ import com.chuanqing.youngstar.base.BaseActivity;
 import com.chuanqing.youngstar.login._company.ChoseActivity;
 import com.chuanqing.youngstar.login._invest.InvestAuthenActivity;
 import com.chuanqing.youngstar.login._student.AuthenActivity;
+import com.chuanqing.youngstar.login._student.ImageAuthenActivity;
+import com.chuanqing.youngstar.login.login.LoginActivity;
+import com.chuanqing.youngstar.tools.SharedPFUtils;
 
 public class ChooseActivity  extends BaseActivity implements View.OnClickListener {
     @Override
@@ -22,9 +25,9 @@ public class ChooseActivity  extends BaseActivity implements View.OnClickListene
     }
 
     private void initView() {
-        findViewById(R.id.iv_visitor_choose).setOnClickListener(this);
-        findViewById(R.id.iv_invest_choose).setOnClickListener(this);
+        findViewById(R.id.iv_student_choose).setOnClickListener(this);
         findViewById(R.id.iv_company_choose).setOnClickListener(this);
+        findViewById(R.id.iv_invest_choose).setOnClickListener(this);
         findViewById(R.id.iv_visitor_choose).setOnClickListener(this);
     }
 
@@ -32,7 +35,8 @@ public class ChooseActivity  extends BaseActivity implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.iv_student_choose:
-                startActivity(new Intent(ChooseActivity.this,AuthenActivity.class));
+//                startActivity(new Intent(ChooseActivity.this,AuthenActivity.class));
+                startActivity(new Intent(ChooseActivity.this,ImageAuthenActivity.class));
                 break;
             case R.id.iv_invest_choose:
                 startActivity(new Intent(ChooseActivity.this,InvestAuthenActivity.class));
@@ -42,6 +46,8 @@ public class ChooseActivity  extends BaseActivity implements View.OnClickListene
                 break;
             case R.id.iv_visitor_choose:
                 startActivity(new Intent(ChooseActivity.this,MainActivity.class));
+                SharedPFUtils.setParam(ChooseActivity.this,"identity",4);
+                finish();
                 break;
         }
     }

@@ -13,4 +13,7 @@
     <color name="whole_hx">#DCDCDC</color>
     <color name="whole_info">#666666</color>
 
+<!--页面背景色-->
+    <color name="main_page">#F7F7F7</color>
+
 </resources>

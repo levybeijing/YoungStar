@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.chuanqing.youngstar"
-        minSdkVersion 16
+        minSdkVersion 15
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -50,4 +50,6 @@ dependencies {
     //导入视频播放器包
     implementation 'cn.jzvd:jiaozivideoplayer:6.4.1'
 
+//    阿里服务器
+    implementation 'com.aliyun.dpa:oss-android-sdk:+'
 }
