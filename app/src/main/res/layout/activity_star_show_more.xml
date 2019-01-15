@@ -25,12 +25,14 @@
             <android.support.v4.view.ViewPager
                 android:id="@+id/vp_starshowmore"
                 android:layout_width="match_parent"
+                android:visibility="gone"
                 android:layout_height="375dp"/>
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_starshowmore"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:layout_marginLeft="12dp"
+                android:visibility="gone"
                 />
 
             <cn.jzvd.JzvdStd

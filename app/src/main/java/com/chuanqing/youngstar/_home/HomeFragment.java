@@ -7,12 +7,15 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -22,12 +25,17 @@ import com.chuanqing.youngstar._active.leitai.LeitaiMoreActivity;
 import com.chuanqing.youngstar._active.zhichang.ZhichangMoreActivity;
 import com.chuanqing.youngstar._home.searchstudent.StudentShowActivity;
 import com.chuanqing.youngstar.myadapter.HomeActivityAdapter;
+import com.chuanqing.youngstar.myadapter.HomeViewpager1;
+import com.chuanqing.youngstar.myadapter.HomeViewpager2;
+import com.chuanqing.youngstar.myadapter.MyAdapter;
 import com.chuanqing.youngstar.mybean.HomeActivityBean;
+import com.chuanqing.youngstar.mybean.HomeFenleiVPBean;
 import com.chuanqing.youngstar.mybean.HomeLunboBean;
 import com.chuanqing.youngstar.mybean.HomeYanyiBean;
 import com.chuanqing.youngstar.tools.Api;
 import com.chuanqing.youngstar.tools.CircleImageView;
 import com.chuanqing.youngstar.tools.ToastUtils;
+import com.chuanqing.youngstar.tools.ZoomOutPageTransformer;
 import com.google.gson.Gson;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
@@ -65,6 +73,12 @@ public class HomeFragment extends Fragment implements OnBannerListener {
         return view;
     }
 
+    ViewPager mViewPager_title;
+    RelativeLayout ll_layout_title;
+
+    ViewPager mViewPager;
+    LinearLayout ll_layout;
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -72,6 +86,119 @@ public class HomeFragment extends Fragment implements OnBannerListener {
         initView();
         showactivity();
         showyanyi();
+        fenlei();
+        mViewPager_title = view.findViewById(R.id.home_viewpager_title);
+        ll_layout_title = view.findViewById(R.id.ll_layout_title);
+        mViewPager = view.findViewById(R.id.home_viewpager);
+        ll_layout = view.findViewById(R.id.ll_layout);
+    }
+    ArrayList<HomeFenleiVPBean> homearrlist = new ArrayList<>();
+    HomeViewpager1 homeViewpager1;
+    //分类展示
+    private void fenlei() {
+
+        OkGo.post(Api.home_fenlei)
+                .tag(this)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        ToastUtils.shortToast(e+"");
+                    }
+
+                    @Override
+                    public void onSuccess(String s, Call call, Response response) {
+//                        Log.e("分类",s);
+                        Gson gson = new Gson();
+                        HomeFenleiVPBean fenleiVPBean = gson.fromJson(s,HomeFenleiVPBean.class);
+                        if (fenleiVPBean.getState()==1){
+                            for (int i = 0; i < fenleiVPBean.getData().size(); i++) {
+                                homearrlist.add(fenleiVPBean);
+                            }
+                            setviewpagertitle();
+                            setviewpager();
+
+
+                        }else {
+                            ToastUtils.shortToast(fenleiVPBean.getMessage());
+                        }
+                    }
+                });
+    }
+
+    private void setviewpagertitle() {
+        //设置适配器
+        mViewPager_title.setAdapter(new HomeViewpager2(context, homearrlist));
+        mViewPager_title.setPageMargin(20);
+        mViewPager_title.setOffscreenPageLimit(arrayList.size());
+        mViewPager_title.setCurrentItem(arrayList.size()*1000);
+        mViewPager_title.setPageTransformer(true, new ZoomOutPageTransformer());//3D画廊模式
+        mViewPager_title.setOffscreenPageLimit(3); //缓存页面数
+        //左右都有图
+        mViewPager_title.setCurrentItem(1);
+
+        //viewPager左右两边滑动无效的处理
+        ll_layout_title.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return mViewPager_title.dispatchTouchEvent(motionEvent);
+            }
+        });
+
+        mViewPager_title.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
+
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+                mViewPager.setCurrentItem(i);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
+            }
+        });
+    }
+    private void setviewpager() {
+        //设置适配器
+        mViewPager.setAdapter(new HomeViewpager1(context, homearrlist));
+        mViewPager.setPageMargin(20);
+        mViewPager.setOffscreenPageLimit(arrayList.size());
+        mViewPager.setCurrentItem(arrayList.size()*1000);
+        mViewPager.setPageTransformer(true, new ZoomOutPageTransformer());//3D画廊模式
+        mViewPager.setOffscreenPageLimit(3); //缓存页面数
+        //左右都有图
+        mViewPager.setCurrentItem(1);
+
+        //viewPager左右两边滑动无效的处理
+        ll_layout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return mViewPager.dispatchTouchEvent(motionEvent);
+            }
+        });
+
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
+
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+                mViewPager_title.setCurrentItem(i);
+                mViewPager_title.setTag(i);
+                ToastUtils.shortToast("i的值");
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
+            }
+        });
     }
 
     /**

@@ -20,6 +20,8 @@ public class Api {
     public static String home_search_activity = apiurl+"/Star/firstPage/getFirstPageSelectActivity";
     //搜索职场
     public static String home_search_zhichang = apiurl+"/Star/firstPage/getFirstPageSelectEmploy";
+    //首页分诶
+    public static String home_fenlei = apiurl+"/Star/firstPage/getGroup";
     /**
      * 广场
      */

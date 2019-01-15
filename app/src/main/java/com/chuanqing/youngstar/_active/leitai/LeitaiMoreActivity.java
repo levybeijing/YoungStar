@@ -55,6 +55,9 @@ public class LeitaiMoreActivity extends BaseActivity {
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
         ll_layout = (LinearLayout) findViewById(R.id.ll_layout);
 
+        //左右都有图
+        mViewPager.setCurrentItem(1);
+
         //设置适配器
         mViewPager.setAdapter(new MyAdapter(this, jihe));
         mViewPager.setPageMargin(20);
@@ -62,8 +65,6 @@ public class LeitaiMoreActivity extends BaseActivity {
         mViewPager.setCurrentItem(jihe.length*1000);
         mViewPager.setPageTransformer(true, new ZoomOutPageTransformer());//3D画廊模式
 
-        //左右都有图
-        mViewPager.setCurrentItem(1);
 
         //viewPager左右两边滑动无效的处理
         ll_layout.setOnTouchListener(new View.OnTouchListener() {
