@@ -8,6 +8,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -41,6 +43,7 @@ import com.youth.banner.loader.ImageLoader;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -72,12 +75,16 @@ public class StarShowMoreActivity extends BaseActivity {
     JzvdStd player;
     @BindView(R.id.yinpinbofang)
     LinearLayout linearLayout;
-    @BindView(R.id.tupian)
-    Banner banner;
-    @BindView(R.id.progress_horizontal)
-    HorizontalScrollView horizontalScrollView;
-    @BindView(R.id.layout_img)
-    LinearLayout linearLayout_img;
+    @BindView(R.id.vp_starshowmore)
+    ViewPager vp;
+    @BindView(R.id.rv_starshowmore)
+    RecyclerView rv;
+//    @BindView(R.id.tupian)
+//    Banner banner;
+//    @BindView(R.id.progress_horizontal)
+//    HorizontalScrollView horizontalScrollView;
+//    @BindView(R.id.layout_img)
+//    LinearLayout linearLayout_img;
     private ArrayList<String> list_path;
     private ArrayList<String> list_title;
     //获取详情信息展示控件
@@ -123,79 +130,34 @@ public class StarShowMoreActivity extends BaseActivity {
                         if (starShowMoreBean.getState() == 1) {
                             String url = Api.ossurl + starShowMoreBean.getData().getMedia_url();
                             if (getIntent().getStringExtra("type").toString().equals("1")) {
-                                banner.setVisibility(View.VISIBLE);
-                                horizontalScrollView.setVisibility(View.VISIBLE);
                                 player.setVisibility(View.GONE);
                                 linearLayout.setVisibility(View.GONE);
-
-                                if (starShowMoreBean.getData().getMedia_url().contains(",")){
-
-                                    for (int i = 0; i <starShowMoreBean.getData().getMedia_url().split(",").length ; i++) {
-                                        //存入轮播图
-                                        list_path.add(Api.ossurl+starShowMoreBean.getData().getMedia_url().split(",")[i]);
-                                        //获取小图视图
-                                        final View view = LayoutInflater.from(StarShowMoreActivity.this).inflate(R.layout.starshow_img_more_items,null);
-                                        ImageView imageView1 = view.findViewById(R.id.showimg1);
-                                        ImageView imageView2 = view.findViewById(R.id.showimg2);
-                                        //展示大图下面的小图
-                                        Glide.with(StarShowMoreActivity.this)
-                                                .load(Api.ossurl+starShowMoreBean.getData().getMedia_url().split(",")[i])
-                                                .placeholder(R.mipmap.my166)
-                                                .error(R.mipmap.my166)
-                                                .diskCacheStrategy(DiskCacheStrategy.NONE)
-                                                .into(imageView1);
-                                        if (i==0){
-                                            imageView2.setVisibility(View.VISIBLE);
-                                        }else {
-                                            imageView2.setVisibility(View.GONE);
-                                        }
-                                        linearLayout_img.addView(view);
-                                    }
-                                }else {
-                                    list_path.add(Api.ossurl+starShowMoreBean.getData().getMedia_url());
-                                    //获取小图视图
-                                    final View view = LayoutInflater.from(StarShowMoreActivity.this).inflate(R.layout.starshow_img_more_items,null);
-                                    ImageView imageView1 = view.findViewById(R.id.showimg1);
-                                    ImageView imageView2 = view.findViewById(R.id.showimg2);
-                                    //展示大图下面的小图
-                                    Glide.with(StarShowMoreActivity.this)
-                                            .load(Api.ossurl+starShowMoreBean.getData().getMedia_url())
-                                            .placeholder(R.mipmap.my166)
-                                            .error(R.mipmap.my166)
-                                            .diskCacheStrategy(DiskCacheStrategy.NONE)
-                                            .into(imageView1);
-                                    imageView2.setVisibility(View.VISIBLE);
-                                    linearLayout_img.addView(view);
+//                                处理数据
+                                List<String> list=new ArrayList<>();
+                                String[] strings = starShowMoreBean.getData().getMedia_url().split(",");
+                                for (int i = 0; i < strings.length; i++) {
+                                    list.add(strings[i]);
                                 }
 
-                                //设置内置样式，共有六种可以点入方法内逐一体验使用。
-                                banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
-                                //设置图片加载器，图片加载器在下方
-                                banner.setImageLoader(new MyLoader());
-                                //设置图片网址或地址的集合
-                                banner.setImages(list_path);
-                                //设置轮播的动画效果，内含多种特效，可点入方法内查找后内逐一体验
-                                banner.setBannerAnimation(Transformer.Default);
-                                //设置轮播图的标题集合
-                                banner.setBannerTitles(list_title);
-                                //设置轮播间隔时间
-                                banner.setDelayTime(3000);
-                                //设置是否为自动轮播，默认是“是”。
-                                banner.isAutoPlay(false);
-                                //设置指示器的位置，小点点，左中右。
-                                banner.setIndicatorGravity(BannerConfig.CENTER)
-                                        //以上内容都可写成链式布局，这是轮播图的监听。比较重要。方法在下面。
-                                        //必须最后调用的方法，启动轮播图。
-                                        .start();
-                                banner.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//初始化两个控件
+                                LinearLayoutManager manager=new LinearLayoutManager(StarShowMoreActivity.this);
+                                manager.setOrientation(LinearLayoutManager.HORIZONTAL);
+                                rv.setLayoutManager(manager);
+                                AdapterStarShowMoreRV adapterRV=new AdapterStarShowMoreRV(StarShowMoreActivity.this);
+                                rv.setAdapter(adapterRV);
+                                AdapterStarShowMoreVP adapterVP=new AdapterStarShowMoreVP(StarShowMoreActivity.this,list);
+                                vp.setAdapter(adapterVP);
+                                adapterRV.setData(list);
+                                vp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
                                     @Override
                                     public void onPageScrolled(int i, float v, int i1) {
-//                                        ToastUtils.shortToast("第几张"+i);
+
                                     }
 
                                     @Override
                                     public void onPageSelected(int i) {
-                                        ToastUtils.shortToast("第几张"+i);
+                                        rv.smoothScrollToPosition(i);
+                                        adapterRV.setTag(i);
                                     }
 
                                     @Override
@@ -204,15 +166,22 @@ public class StarShowMoreActivity extends BaseActivity {
                                     }
                                 });
 
+                                adapterRV.setOnItemClickListener(new AdapterStarShowMoreRV.OnItemClickListenerPosition() {
+                                    @Override
+                                    public void onItemClick(int position) {
+                                        vp.setCurrentItem(position);
+                                    }
+                                });
+
                             } else if (getIntent().getStringExtra("type").toString().equals("2")) {
-                                banner.setVisibility(View.GONE);
-                                horizontalScrollView.setVisibility(View.GONE);
+//                                banner.setVisibility(View.GONE);
+//                                horizontalScrollView.setVisibility(View.GONE);
                                 player.setVisibility(View.VISIBLE);
                                 linearLayout.setVisibility(View.GONE);
                                 player.setUp(url, starShowMoreBean.getData().getTitle(), Jzvd.SCREEN_WINDOW_NORMAL);
                             } else if (getIntent().getStringExtra("type").toString().equals("3")) {
-                                banner.setVisibility(View.GONE);
-                                horizontalScrollView.setVisibility(View.GONE);
+//                                banner.setVisibility(View.GONE);
+//                                horizontalScrollView.setVisibility(View.GONE);
                                 player.setVisibility(View.GONE);
                                 linearLayout.setVisibility(View.VISIBLE);
                                 linearLayout.setOnClickListener(new View.OnClickListener() {

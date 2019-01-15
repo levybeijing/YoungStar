@@ -21,31 +21,17 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <com.youth.banner.Banner
-                android:id="@+id/tupian"
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/vp_starshowmore"
                 android:layout_width="match_parent"
-                android:layout_height="375dp"
-                android:visibility="gone"></com.youth.banner.Banner>
-
-            <HorizontalScrollView
-                android:id="@+id/progress_horizontal"
+                android:layout_height="375dp"/>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_starshowmore"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:scrollbars="none"
-                android:visibility="gone">
-
-                <LinearLayout
-                    android:id="@+id/layout_img"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="15dp"
-                    android:orientation="horizontal">
-
-
-                </LinearLayout>
-
-            </HorizontalScrollView>
+                android:layout_height="70dp"
+                android:layout_marginLeft="12dp"
+                />
 
             <cn.jzvd.JzvdStd
                 android:id="@+id/starshow_more_player"
