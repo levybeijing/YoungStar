@@ -79,12 +79,6 @@ public class StarShowMoreActivity extends BaseActivity {
     ViewPager vp;
     @BindView(R.id.rv_starshowmore)
     RecyclerView rv;
-//    @BindView(R.id.tupian)
-//    Banner banner;
-//    @BindView(R.id.progress_horizontal)
-//    HorizontalScrollView horizontalScrollView;
-//    @BindView(R.id.layout_img)
-//    LinearLayout linearLayout_img;
     private ArrayList<String> list_path;
     private ArrayList<String> list_title;
     //获取详情信息展示控件
@@ -132,22 +126,25 @@ public class StarShowMoreActivity extends BaseActivity {
                             if (getIntent().getStringExtra("type").toString().equals("1")) {
                                 player.setVisibility(View.GONE);
                                 linearLayout.setVisibility(View.GONE);
-//                                处理数据
+//处理数据
                                 List<String> list=new ArrayList<>();
                                 String[] strings = starShowMoreBean.getData().getMedia_url().split(",");
                                 for (int i = 0; i < strings.length; i++) {
                                     list.add(strings[i]);
                                 }
-
 //初始化两个控件
                                 LinearLayoutManager manager=new LinearLayoutManager(StarShowMoreActivity.this);
                                 manager.setOrientation(LinearLayoutManager.HORIZONTAL);
                                 rv.setLayoutManager(manager);
+
                                 AdapterStarShowMoreRV adapterRV=new AdapterStarShowMoreRV(StarShowMoreActivity.this);
                                 rv.setAdapter(adapterRV);
+
                                 AdapterStarShowMoreVP adapterVP=new AdapterStarShowMoreVP(StarShowMoreActivity.this,list);
                                 vp.setAdapter(adapterVP);
+
                                 adapterRV.setData(list);
+
                                 vp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
                                     @Override
                                     public void onPageScrolled(int i, float v, int i1) {
@@ -174,14 +171,10 @@ public class StarShowMoreActivity extends BaseActivity {
                                 });
 
                             } else if (getIntent().getStringExtra("type").toString().equals("2")) {
-//                                banner.setVisibility(View.GONE);
-//                                horizontalScrollView.setVisibility(View.GONE);
                                 player.setVisibility(View.VISIBLE);
                                 linearLayout.setVisibility(View.GONE);
                                 player.setUp(url, starShowMoreBean.getData().getTitle(), Jzvd.SCREEN_WINDOW_NORMAL);
                             } else if (getIntent().getStringExtra("type").toString().equals("3")) {
-//                                banner.setVisibility(View.GONE);
-//                                horizontalScrollView.setVisibility(View.GONE);
                                 player.setVisibility(View.GONE);
                                 linearLayout.setVisibility(View.VISIBLE);
                                 linearLayout.setOnClickListener(new View.OnClickListener() {

@@ -2,24 +2,20 @@ package com.chuanqing.youngstar._square.starshow;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-
 import com.bumptech.glide.Glide;
 import com.chuanqing.youngstar.R;
 import com.chuanqing.youngstar.tools.Api;
-import com.squareup.picasso.Picasso;
-import com.youth.banner.loader.ImageLoader;
-
 import java.util.List;
 
 public class AdapterStarShowMoreVP extends PagerAdapter {
+
     Context context;
     List<String> list;
+
     public AdapterStarShowMoreVP(Context context, List<String> list) {
         this.context=context;
         this.list=list;

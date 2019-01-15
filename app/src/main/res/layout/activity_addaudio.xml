@@ -2,6 +2,37 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <com.chuanqing.youngstar.widget.CircleBarView
+        android:id="@+id/progressbar"
+        android:layout_margin="60dp"
+        android:layout_width="match_parent"
+        android:layout_height="300dp" />
+    <com.chuanqing.youngstar.widget.WaveProgressView
+        android:id="@+id/wpv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/progressbar"
+        />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="524dp"
+        android:layout_centerHorizontal="true"
+        >
+        <ImageView
+            android:id="@+id/iv_start_addaudio"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            />
+        <ImageView
+            android:id="@+id/iv_pause_addaudio"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:visibility="invisible"
+            />
+    </RelativeLayout>
 
 </RelativeLayout>
