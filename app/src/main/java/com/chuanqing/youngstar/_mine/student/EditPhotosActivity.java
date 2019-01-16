@@ -1,4 +1,4 @@
-package com.chuanqing.youngstar._mine;
+package com.chuanqing.youngstar._mine.student;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import com.chuanqing.youngstar.R;
 import com.chuanqing.youngstar.base.BaseActivity;
 
-public class EditPhotoActivity extends BaseActivity {
+public class EditPhotosActivity extends BaseActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
