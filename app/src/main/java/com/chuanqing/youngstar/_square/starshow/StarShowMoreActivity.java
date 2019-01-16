@@ -79,8 +79,6 @@ public class StarShowMoreActivity extends BaseActivity {
     ViewPager vp;
     @BindView(R.id.rv_starshowmore)
     RecyclerView rv;
-    private ArrayList<String> list_path;
-    private ArrayList<String> list_title;
     //获取详情信息展示控件
     @BindView(R.id.search_student_headimg)
     ImageView img_head;
@@ -100,10 +98,6 @@ public class StarShowMoreActivity extends BaseActivity {
     TextView tv_info;
 
     private void setinfo() {
-        //放图片地址的集合
-        list_path = new ArrayList<>();
-        //放标题的集合
-        list_title = new ArrayList<>();
 
         OkGo.post(Api.square_starshow_more)
                 .tag(this)
@@ -124,27 +118,26 @@ public class StarShowMoreActivity extends BaseActivity {
                         if (starShowMoreBean.getState() == 1) {
                             String url = Api.ossurl + starShowMoreBean.getData().getMedia_url();
                             if (getIntent().getStringExtra("type").toString().equals("1")) {
+                                vp.setVisibility(View.VISIBLE);
+                                rv.setVisibility(View.VISIBLE);
                                 player.setVisibility(View.GONE);
                                 linearLayout.setVisibility(View.GONE);
-//处理数据
+//                                处理数据
                                 List<String> list=new ArrayList<>();
                                 String[] strings = starShowMoreBean.getData().getMedia_url().split(",");
                                 for (int i = 0; i < strings.length; i++) {
                                     list.add(strings[i]);
                                 }
+
 //初始化两个控件
                                 LinearLayoutManager manager=new LinearLayoutManager(StarShowMoreActivity.this);
                                 manager.setOrientation(LinearLayoutManager.HORIZONTAL);
                                 rv.setLayoutManager(manager);
-
                                 AdapterStarShowMoreRV adapterRV=new AdapterStarShowMoreRV(StarShowMoreActivity.this);
                                 rv.setAdapter(adapterRV);
-
                                 AdapterStarShowMoreVP adapterVP=new AdapterStarShowMoreVP(StarShowMoreActivity.this,list);
                                 vp.setAdapter(adapterVP);
-
                                 adapterRV.setData(list);
-
                                 vp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
                                     @Override
                                     public void onPageScrolled(int i, float v, int i1) {
@@ -171,10 +164,14 @@ public class StarShowMoreActivity extends BaseActivity {
                                 });
 
                             } else if (getIntent().getStringExtra("type").toString().equals("2")) {
+                                vp.setVisibility(View.GONE);
+                                rv.setVisibility(View.GONE);
                                 player.setVisibility(View.VISIBLE);
                                 linearLayout.setVisibility(View.GONE);
                                 player.setUp(url, starShowMoreBean.getData().getTitle(), Jzvd.SCREEN_WINDOW_NORMAL);
                             } else if (getIntent().getStringExtra("type").toString().equals("3")) {
+                                vp.setVisibility(View.GONE);
+                                rv.setVisibility(View.GONE);
                                 player.setVisibility(View.GONE);
                                 linearLayout.setVisibility(View.VISIBLE);
                                 linearLayout.setOnClickListener(new View.OnClickListener() {

@@ -81,7 +81,7 @@ public class StarShowFragment extends Fragment {
         showinfo();
     }
 
-    int page = 1, pageSize = 12;
+    int page = 1, pageSize = 40;
 
     //展示信息
     private void showinfo() {
@@ -90,6 +90,7 @@ public class StarShowFragment extends Fragment {
                 .params("page", page)
                 .params("pageSize", pageSize)
                 .params("type", 1)
+                .params("userCode", "8572451327") //先写死
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {

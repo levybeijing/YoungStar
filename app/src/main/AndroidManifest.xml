@@ -14,7 +14,8 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS"
         tools:ignore="ProtectedPermissions"></uses-permission>
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
+        tools:ignore="ProtectedPermissions" />
 
 
 
@@ -30,7 +31,11 @@
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".SpleashActivity"
             >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity android:name="._home.WebViewActivity"/>
@@ -61,13 +66,7 @@
         <activity android:name="._add.PublishActivity"></activity>
         <activity android:name="._add.company.RecuitActivity"></activity>
         <activity android:name="._add.student.WorksActivity"></activity>
-        <activity android:name="._mine.student.AddAudioActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name="._mine.student.AddAudioActivity"></activity>
 
         <!--mine-->
         <activity android:name="._mine.OfficalMsgActivity"></activity>
@@ -94,6 +93,17 @@
         <activity android:name="._square.starshow.StarShowMoreActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait" ></activity>
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.chuanqing.youngstar.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/photopath" />
+        </provider>
+
     </application>
 
 </manifest>
