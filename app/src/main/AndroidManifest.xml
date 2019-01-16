@@ -3,21 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.chuanqing.youngstar">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <!-- //读取外置存储卡 -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- //读取外置存储卡 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <!--  -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!--  -->
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS"
-        tools:ignore="ProtectedPermissions"></uses-permission>
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
+    <uses-permission
+        android:name="android.permission.WRITE_SETTINGS"
         tools:ignore="ProtectedPermissions" />
-
-
+    <uses-permission
+        android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
+        tools:ignore="ProtectedPermissions" />
 
     <application
         android:name=".MyApplication"
@@ -26,73 +24,60 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
-        android:theme="@style/TranslucentTheme"
-        >
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".SpleashActivity"
-            >
+        android:theme="@style/TranslucentTheme">
+        <activity android:name="._home.searchstudent.SearchStatusActivity"></activity>
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name="._home.WebViewActivity"/>
-
-        <activity android:name="._home.searchstudent.StudentShowActivity"/>
-        <!--login-->
-        <activity android:name=".login.login.LoginActivity">
+        <activity android:name=".SpleashActivity">
 
         </activity>
-        <activity android:name=".login.forget.ForgetPWDActivity"></activity>
-        <activity android:name=".login.privacy.PrivacyProtectActivity"></activity>
-        <activity android:name=".login.protocol.UserProtocolActivity"></activity>
-        <activity android:name=".login._student.ImageAuthenActivity"></activity>
-        <activity android:name=".login._student.AuthenActivity"></activity>
-        <activity android:name=".login.choose.ChooseActivity"></activity>
-        <activity android:name=".login._student.LableActivity"></activity>
-        <activity android:name=".login.phonebind.PhoneBindActivity"></activity>
-        <!--company-->
-        <activity android:name=".login._company.ChoseActivity"></activity>
-        <activity android:name=".login._company.Authen1Activity">
-        </activity>
-        <activity android:name=".login._company.Authen2Activity"></activity>
-        <activity android:name=".login._company.ComBindActivity"></activity>
-        <!--invest-->
-        <activity android:name=".login._invest.InvestAuthenActivity"></activity>
-        <activity android:name=".login._invest.InvestAuthen2Activity"></activity>
-        <!--add-->
-        <activity android:name="._add.PublishActivity"></activity>
-        <activity android:name="._add.company.RecuitActivity"></activity>
-        <activity android:name="._add.student.WorksActivity"></activity>
-        <activity android:name="._mine.student.AddAudioActivity"></activity>
-
-        <!--mine-->
-        <activity android:name="._mine.OfficalMsgActivity"></activity>
-        <activity android:name="._mine.EditUserDataActivity"></activity>
-        <activity android:name="._mine.WalletActivity"></activity>
-
-        <activity android:name="._mine.EditPhotoActivity"></activity>
-        <activity android:name="._mine.EditPhoneActivity"></activity>
-        <activity android:name="._mine.EditPWDActivity"></activity>
-        <activity android:name="._mine.EditEmailActivity"></activity>
-        <activity android:name="._mine.SettinsActivity"></activity>
-        <activity android:name="._mine.EditPWD2Activity"></activity>
-        <activity android:name="._mine.HelpActivity"></activity>
-        <activity android:name="._mine.FeedbackActivity"></activity>
-        <activity android:name="._mine.SystemSetActivity"></activity>
-        <activity android:name="._mine.PlaySetActivity"></activity>
-
-
-        <!--孟\/-->
+        <activity android:name="._home.WebViewActivity" />
+        <activity android:name="._home.searchstudent.StudentShowActivity" /> <!-- login -->
+        <activity android:name=".login.login.LoginActivity"></activity>
+        <activity android:name=".login.forget.ForgetPWDActivity" />
+        <activity android:name=".login.privacy.PrivacyProtectActivity" />
+        <activity android:name=".login.protocol.UserProtocolActivity" />
+        <activity android:name=".login._student.ImageAuthenActivity" />
+        <activity android:name=".login._student.AuthenActivity" />
+        <activity android:name=".login.choose.ChooseActivity" />
+        <activity android:name=".login._student.LableActivity" />
+        <activity android:name=".login.phonebind.PhoneBindActivity" /> <!-- company -->
+        <activity android:name=".login._company.ChoseActivity" />
+        <activity android:name=".login._company.Authen1Activity"></activity>
+        <activity android:name=".login._company.Authen2Activity" />
+        <activity android:name=".login._company.ComBindActivity" /> <!-- invest -->
+        <activity android:name=".login._invest.InvestAuthenActivity" />
+        <activity android:name=".login._invest.InvestAuthen2Activity" /> <!-- add -->
+        <activity android:name="._add.PublishActivity" />
+        <activity android:name="._add.company.RecuitActivity" />
+        <activity android:name="._add.student.WorksActivity" />
+        <activity android:name="._mine.student.AddAudioActivity" /> <!-- mine -->
+        <activity android:name="._mine.OfficalMsgActivity" />
+        <activity android:name="._mine.EditUserDataActivity" />
+        <activity android:name="._mine.WalletActivity" />
+        <activity android:name="._mine.EditPhotoActivity" />
+        <activity android:name="._mine.EditPhoneActivity" />
+        <activity android:name="._mine.EditPWDActivity" />
+        <activity android:name="._mine.EditEmailActivity" />
+        <activity android:name="._mine.SettinsActivity" />
+        <activity android:name="._mine.EditPWD2Activity" />
+        <activity android:name="._mine.HelpActivity" />
+        <activity android:name="._mine.FeedbackActivity" />
+        <activity android:name="._mine.SystemSetActivity" />
+        <activity android:name="._mine.PlaySetActivity" /> <!-- 孟\/ -->
         <activity android:name="._active.leitai.LeitaiMoreActivity" />
         <activity android:name="._active.leitai.PartakeActivity" />
         <activity android:name="._active.starbang.StarbangMoreActivity" />
         <activity android:name="._active.zhichang.ZhichangMoreActivity" />
-        <activity android:name="._square.starshow.StarShowMoreActivity"
+        <activity
+            android:name="._square.starshow.StarShowMoreActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:screenOrientation="portrait" ></activity>
+            android:screenOrientation="portrait" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -103,7 +88,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/photopath" />
         </provider>
-
     </application>
 
 </manifest>

@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/all_bg"
-    tools:context="._home.searchstudent.StudentShowActivity">
+    tools:context="._home.searchstudent.SearchStatusActivity">
     <include android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        layout="@layout/common_top_search1"></include>
+        layout="@layout/common_top_search2"></include>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="44dp"
@@ -29,7 +27,7 @@
                 android:textColor="@color/black"
                 android:gravity="center"
                 android:layout_marginTop="8dp"
-                android:text="星秀"
+                android:text="最热"
                 android:layout_alignParentTop="true"
                 android:textSize="15sp"/>
             <View
@@ -52,7 +50,7 @@
                 android:textColor="@color/black"
                 android:gravity="center"
                 android:layout_marginTop="8dp"
-                android:text="星活动"
+                android:text="最火"
                 android:layout_alignParentTop="true"
                 android:textSize="15sp"/>
             <View
@@ -75,7 +73,7 @@
                 android:textColor="@color/black"
                 android:gravity="center"
                 android:layout_marginTop="8dp"
-                android:text="星职场"
+                android:text="新人"
                 android:layout_alignParentTop="true"
                 android:textSize="15sp"/>
             <View
@@ -86,27 +84,37 @@
                 android:background="@color/mainColor"></View>
         </RelativeLayout>
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/whole_hx"></View>
     <com.chuanqing.youngstar.view.XListView
-        android:id="@+id/student_xlistview"
+        android:id="@+id/fenlie_xlistview1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="gone"
         android:divider="@null"
         android:scrollbars="none"></com.chuanqing.youngstar.view.XListView>
-    <LinearLayout
-        android:id="@+id/search_student_body"
+    <com.chuanqing.youngstar.view.XListView
+        android:id="@+id/fenlie_xlistview2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"></LinearLayout>
-    <LinearLayout
-        android:id="@+id/search_yanyi_body"
+        android:visibility="gone"
+        android:divider="@null"
+        android:scrollbars="none"></com.chuanqing.youngstar.view.XListView>
+    <com.chuanqing.youngstar.view.XListView
+        android:id="@+id/fenlie_xlistview3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"></LinearLayout>
+        android:visibility="gone"
+        android:divider="@null"
+        android:scrollbars="none"></com.chuanqing.youngstar.view.XListView>
     <TextView
         android:id="@+id/no_info"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textColor="@color/black"
+        android:gravity="center"
         android:visibility="gone"
         android:textSize="18sp"
         android:text="暂无信息"/>
