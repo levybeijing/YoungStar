@@ -10,12 +10,10 @@
         android:layout_margin="60dp"
         android:layout_width="match_parent"
         android:layout_height="300dp" />
-    <com.chuanqing.youngstar.widget.WaveProgressView
-        android:id="@+id/wpv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/progressbar"
-        />
+    <com.chuanqing.youngstar.widget.WaveBallProgress
+        android:id="@+id/wbp"
+        android:layout_width="100dp"
+        android:layout_height="100dp" />
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -26,12 +24,14 @@
             android:id="@+id/iv_start_addaudio"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:background="@mipmap/start_addaudio"
             />
         <ImageView
             android:id="@+id/iv_pause_addaudio"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:visibility="invisible"
+            android:background="@mipmap/pause_addaudio"
             />
     </RelativeLayout>
 
