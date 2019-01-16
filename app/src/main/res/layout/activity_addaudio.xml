@@ -5,17 +5,36 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     >
-    <com.chuanqing.youngstar.widget.CircleBarView
-        android:id="@+id/progressbar"
-        android:layout_margin="60dp"
-        android:layout_width="match_parent"
-        android:layout_height="300dp" />
-    <com.chuanqing.youngstar.widget.WaveProgressView
-        android:id="@+id/wpv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/progressbar"
-        />
+    <RelativeLayout
+        android:layout_width="87dp"
+        android:layout_height="43dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="197dp"
+        >
+
+        <TextView
+            android:id="@+id/tv_time_addaudio"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:text="0"
+            android:textColor="#F56250"
+            android:textSize="40dp"
+            android:gravity="center"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="s"
+            android:textColor="#F56250"
+            android:textSize="28dp"
+            android:gravity="bottom"
+            android:layout_toRightOf="@+id/tv_time_addaudio"
+            android:layout_alignBottom="@+id/tv_time_addaudio"
+            />
+    </RelativeLayout>
+
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -26,12 +45,14 @@
             android:id="@+id/iv_start_addaudio"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:background="@mipmap/start_addaudio"
             />
         <ImageView
             android:id="@+id/iv_pause_addaudio"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:visibility="invisible"
+            android:background="@mipmap/pause_addaudio"
             />
     </RelativeLayout>
 
