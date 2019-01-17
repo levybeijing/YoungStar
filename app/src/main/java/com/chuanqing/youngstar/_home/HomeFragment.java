@@ -57,7 +57,7 @@ import okhttp3.Response;
  * A simple {@link Fragment} subclass.
  */
 public class HomeFragment extends Fragment implements OnBannerListener {
-
+    public static int zhi = 1;
     private Context context;
     @Override
     public void onAttach(Context context) {
@@ -125,10 +125,11 @@ public class HomeFragment extends Fragment implements OnBannerListener {
                     }
                 });
     }
-
+    HomeViewpager2 homeViewpager2;
     private void setviewpagertitle() {
         //设置适配器
-        mViewPager_title.setAdapter(new HomeViewpager2(context, homearrlist));
+        homeViewpager2 = new HomeViewpager2(context, homearrlist);
+        mViewPager_title.setAdapter(homeViewpager2);
         mViewPager_title.setPageMargin(20);
         mViewPager_title.setOffscreenPageLimit(arrayList.size());
         mViewPager_title.setCurrentItem(arrayList.size()*1000);
@@ -190,8 +191,9 @@ public class HomeFragment extends Fragment implements OnBannerListener {
             @Override
             public void onPageSelected(int i) {
                 mViewPager_title.setCurrentItem(i);
-                mViewPager_title.setTag(i);
-                ToastUtils.shortToast("i的值");
+                zhi = i ;
+                homeViewpager2.notifyDataSetChanged();
+//                ToastUtils.shortToast("i的值"+i);
             }
 
             @Override

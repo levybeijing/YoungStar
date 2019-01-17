@@ -13,17 +13,19 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.chuanqing.youngstar.R;
 import com.chuanqing.youngstar.mybean.SearchStudentBean;
+import com.chuanqing.youngstar.mybean.StatusBean;
+import com.chuanqing.youngstar.mybean.StatusListBean;
 import com.chuanqing.youngstar.tools.Api;
 
 import java.util.ArrayList;
 
-public class SearchStudentAdapter extends BaseAdapter {
+public class StatusListAdapter extends BaseAdapter {
     Context context;
-    ArrayList<SearchStudentBean> arrayList;
-    public SearchStudentAdapter(Context context,ArrayList<SearchStudentBean> arrayList){
+    ArrayList<StatusListBean> arrayList;
+    public StatusListAdapter(Context context,ArrayList<StatusListBean> arrayList){
         this.context = context;
         this.arrayList = arrayList;
-    };
+    }
     @Override
     public int getCount() {
         return arrayList.size();
@@ -47,7 +49,7 @@ public class SearchStudentAdapter extends BaseAdapter {
             view.setTag(new ViewHolder(view));
         }
         viewHolder = (ViewHolder) view.getTag();
-        SearchStudentBean searchStudentBean = arrayList.get(position);
+        StatusListBean searchStudentBean = arrayList.get(position);
         String headimg= Api.ossurl+searchStudentBean.getData().getPageInfo().getList().get(position).getUser_img();
         Glide.with(context)
                 .load(headimg)
@@ -57,18 +59,9 @@ public class SearchStudentAdapter extends BaseAdapter {
         viewHolder.tv_id.setText("SID:"+searchStudentBean.getData().getPageInfo().getList().get(position).getUser_code());
         viewHolder.tv_type.setText(searchStudentBean.getData().getPageInfo().getList().get(position).getLabel());
         viewHolder.tv_redu.setText(searchStudentBean.getData().getPageInfo().getList().get(position).getRecommendTotal()+"");
-        if (searchStudentBean.getData().getPageInfo().getList().get(position).getFlag()==1){
-            viewHolder.btn_guanzhu.setBackground(context.getResources().getDrawable(R.mipmap.yiguanzhu));
-            viewHolder.btn_guanzhu.setText("已关注");
-            viewHolder.btn_guanzhu.setTextColor(context.getResources().getColor(R.color.home_gray));
-        }else {
-            viewHolder.btn_guanzhu.setBackground(context.getResources().getDrawable(R.mipmap.leitai_baoming));
-            viewHolder.btn_guanzhu.setText("关注");
-            viewHolder.btn_guanzhu.setTextColor(context.getResources().getColor(R.color.mainColor));
-        }
         return view;
     }
-    static class ViewHolder{
+    private static class ViewHolder{
         ImageView img_head;
         TextView tv_id;
         TextView tv_type;

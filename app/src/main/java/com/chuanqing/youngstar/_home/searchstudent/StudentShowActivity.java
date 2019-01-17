@@ -37,6 +37,9 @@ import butterknife.ButterKnife;
 import okhttp3.Call;
 import okhttp3.Response;
 
+/**
+ * 搜索页面
+ */
 public class StudentShowActivity extends AppCompatActivity  implements XListView.IXListViewListener{
     private static final String TAG = "StudentShowActivity";
     @Override
@@ -44,6 +47,7 @@ public class StudentShowActivity extends AppCompatActivity  implements XListView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_show);
         ButterKnife.bind(this);
+        mHandler = new Handler();
         adapter = new SearchStudentAdapter(StudentShowActivity.this,arrayList_student);
         mListView.setAdapter(adapter);
         searchinfo();
@@ -77,11 +81,15 @@ public class StudentShowActivity extends AppCompatActivity  implements XListView
     @BindView(R.id.search_yanyi_body)
     LinearLayout linearLayout_yanyi;
     String onclickzhi = "1";
+    @BindView(R.id.no_info)
+    TextView tv_noinfo;
     private void searchinfo(){
-        //让第一个横线显示，其他的隐藏
+        //第一个展示，其他的隐藏
         view1.setVisibility(View.VISIBLE);
         view2.setVisibility(View.GONE);
         view3.setVisibility(View.GONE);
+        //首先隐藏一下 加载更多控件
+        mListView.setVisibility(View.GONE);
 
         img_search.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,7 +172,7 @@ public class StudentShowActivity extends AppCompatActivity  implements XListView
     SearchStudentAdapter adapter;
     ArrayList<SearchStudentBean> arrayList_student = new ArrayList<>();
     private void searchstudent() {
-        mHandler = new Handler();
+
         OkGo.post(Api.home_search_student)
                 .tag(this)
                 .params("page",page)
@@ -191,12 +199,16 @@ public class StudentShowActivity extends AppCompatActivity  implements XListView
                         }
                         if (searchStudentBean.getState()==1){
                             if (searchStudentBean.getData().getPageInfo().getList().size()>0){
+                                tv_noinfo.setVisibility(View.GONE);
+                                mListView.setVisibility(View.VISIBLE);
                                 for (int i = 0; i <searchStudentBean.getData().getPageInfo().getList().size() ; i++) {
                                     arrayList_student.add(searchStudentBean);
                                 }
 
                             }else {
-                                ToastUtils.shortToast("暂无搜索信息");
+//                                ToastUtils.shortToast("暂无搜索信息");
+                                tv_noinfo.setVisibility(View.VISIBLE);
+                                mListView.setVisibility(View.GONE);
                             }
                         }else {
                             ToastUtils.shortToast(searchStudentBean.getMessage());
@@ -219,6 +231,13 @@ public class StudentShowActivity extends AppCompatActivity  implements XListView
                         final HomeYanyiBean yanyiBean = gson.fromJson(s,HomeYanyiBean.class);
                         if (yanyiBean.getState()==1){
                             if (yanyiBean.getData().size()>0){
+                                if (yanyiBean.getData().size()>0){
+                                    linearLayout_yanyi.setVisibility(View.VISIBLE);
+                                    tv_noinfo.setVisibility(View.GONE);
+                                }else {
+                                    linearLayout_yanyi.setVisibility(View.GONE);
+                                    tv_noinfo.setVisibility(View.VISIBLE);
+                                }
                                 for (int i = 0; i <yanyiBean.getData().size() ; i++) {
                                     final View v_item=LayoutInflater.from(StudentShowActivity.this).inflate(R.layout.home_yanyi_items,null);
                                     ImageView img;
@@ -282,6 +301,13 @@ public class StudentShowActivity extends AppCompatActivity  implements XListView
                         final HomeActivityBean activityBean = gson.fromJson(s,HomeActivityBean.class);
                         if (activityBean.getState()==1){
                             if (activityBean.getData()!=null){
+                                if (activityBean.getData().size()>0){
+                                    linearLayout_student.setVisibility(View.VISIBLE);
+                                    tv_noinfo.setVisibility(View.GONE);
+                                }else {
+                                    linearLayout_student.setVisibility(View.GONE);
+                                    tv_noinfo.setVisibility(View.VISIBLE);
+                                }
                                 for (int i = 0; i <activityBean.getData().size() ; i++) {
                                     final View v_item=LayoutInflater.from(StudentShowActivity.this).inflate(R.layout.home_activity_items,null);
                                     ImageView img;

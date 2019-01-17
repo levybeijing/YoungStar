@@ -1,6 +1,7 @@
 package com.chuanqing.youngstar.myadapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
@@ -19,6 +20,7 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.ViewTarget;
 import com.chuanqing.youngstar.R;
+import com.chuanqing.youngstar._home.searchstudent.SearchStatusActivity;
 import com.chuanqing.youngstar.login._student.LableActivity;
 import com.chuanqing.youngstar.mybean.HomeFenleiVPBean;
 import com.chuanqing.youngstar.tools.Api;
@@ -115,7 +117,13 @@ public class HomeViewpager1 extends PagerAdapter {
         tv_6.setText(arrayList.get(i).getData().get(i).getDeatil().get(5).getUser_code());
 
         container.addView(view); //添加到父控件
-
+        gridLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, SearchStatusActivity.class);
+                context.startActivity(intent);
+            }
+        });
         return  view;
     }
 
