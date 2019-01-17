@@ -25,6 +25,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chuanqing.youngstar.R;
+import com.chuanqing.youngstar.Urls;
 import com.chuanqing.youngstar.base.BaseActivity;
 import com.chuanqing.youngstar.tools.StringUtil;
 import com.squareup.picasso.Picasso;
@@ -76,6 +77,7 @@ public class ImageAuthenActivity extends BaseActivity implements View.OnClickLis
         rl3.setOnClickListener(this);
 
         TextView ok=findViewById(R.id.tv_ok_imgthen);
+        ok.setOnClickListener(this);
     }
 
     @Override
@@ -86,24 +88,7 @@ public class ImageAuthenActivity extends BaseActivity implements View.OnClickLis
                 startActivityForResult(intent,FORLABLE);
                 break;
             case R.id.rl1_imgauthen:
-                Intent intent2 = new Intent();
-//                intent2.setType("image/*");
-//                intent2.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-//                intent2.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-//                File out = new File(getPath());
-//                if (!out.getParentFile().exists()) {
-//                    out.getParentFile().mkdirs();
-//                }
-//                intent2.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(out));
-//
-                if (Build.VERSION.SDK_INT < 19) {
-                    intent2.setAction(Intent.ACTION_GET_CONTENT);
-                    intent2.setType("image/*");
-                } else {
-                    intent2 = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    intent2.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
-                }
-                startActivityForResult(intent2, 202);
+
                 break;
             case R.id.rl2_imgauthen:
                 Intent intent3 = new Intent(Intent.ACTION_PICK);
@@ -115,49 +100,32 @@ public class ImageAuthenActivity extends BaseActivity implements View.OnClickLis
                 intent4.setType("image/*");
                 startActivityForResult(intent4, 204);
                 break;
+            case R.id.tv_ok_imgthen:
+//              开始上传文件
+//                然后接口访问
+                break;
         }
     }
 
     private String mFile;
 
     public  String getPath() {
-        mFile = Environment.getExternalStorageDirectory() + "/" +"star/"+StringUtil.getRandomName(8) + ".png";
+        mFile = Urls.IMGPATH +StringUtil.getRandomName(8) + ".png";
         return mFile;
     }
-
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (data==null){
+            Log.e("========", " data=null");
             return;
         }
         if (resultCode==Activity.RESULT_OK){
             switch (requestCode){
                 case 202:
-                    rl1.removeAllViews();
-                    Uri uri = data.getData();
-                    if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT&& DocumentsContract.isDocumentUri(this, uri)) {//4.4及以上
-                        if ("com.android.externalstorage.documents".equals(uri.getAuthority())){
-                            String wholeID = DocumentsContract.getDocumentId(uri);
-                            String[] split = wholeID.split(":");
-                            final String type = split[0];
-                            Log.e("========", " "+Environment.getExternalStorageDirectory() + "/" + split[1]);
 
-                            if ("primary".equalsIgnoreCase(type)) {
-                                Picasso.with(this).load(Environment.getExternalStorageDirectory() + "/" + split[1]).into(iv1);
-                            }
-                        }
-                        else if ("com.android.providers.downloads.documents".equals(uri.getAuthority())){
-                            Log.e("========", " downloads");
-                        }
-                        else if ("com.android.providers.media.documents".equals(uri.getAuthority())){
-                            Log.e("========", " media");
-
-                        }
-
-                    }
                     break;
 
                 case 203:

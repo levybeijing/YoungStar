@@ -27,6 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chuanqing.youngstar.R;
+import com.chuanqing.youngstar.Urls;
 import com.chuanqing.youngstar.base.BaseActivity;
 import com.chuanqing.youngstar.tools.StringUtil;
 import com.chuanqing.youngstar.widget.CirImageView;
@@ -102,7 +103,7 @@ public class AuthenActivity extends BaseActivity implements View.OnClickListener
 
     }
 
-    private List<String> list=new ArrayList<>();
+//    private List<String> list=new ArrayList<>();
 
     @Override
     public void onClick(View v) {
@@ -122,6 +123,7 @@ public class AuthenActivity extends BaseActivity implements View.OnClickListener
 //                    Toast.makeText(this, "头像不能为空", Toast.LENGTH_SHORT).show();
 //                    return;
 //                }
+
                 if (sex==null||sex.length()==0){
                     Toast.makeText(this, "请选择性别", Toast.LENGTH_SHORT).show();
                     return;
@@ -253,13 +255,13 @@ public class AuthenActivity extends BaseActivity implements View.OnClickListener
         }
         intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(out));
         startActivityForResult(intent, CROP_SMALL_PICTURE);
+        Toast.makeText(this, mFile, Toast.LENGTH_SHORT).show();
+
     }
 
     //裁剪后的地址
     public  String getPath() {
-//        if (mFile == null) {
-        mFile = Environment.getExternalStorageDirectory() + "/" +"star/"+StringUtil.getRandomName(8) + ".png";
-//        }
+        mFile = Urls.IMGPATH +StringUtil.getRandomName(8) + ".png";
         return mFile;
     }
 

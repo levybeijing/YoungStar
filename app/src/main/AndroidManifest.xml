@@ -7,7 +7,7 @@
     <!-- //读取外置存储卡 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <!--  -->
+    <!---->
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -40,8 +40,16 @@
         <activity android:name=".login.forget.ForgetPWDActivity"></activity>
         <activity android:name=".login.privacy.PrivacyProtectActivity"></activity>
         <activity android:name=".login.protocol.UserProtocolActivity"></activity>
-        <activity android:name=".login._student.ImageAuthenActivity"></activity>
-        <activity android:name=".login._student.AuthenActivity"></activity>
+        <activity android:name=".login._student.ImageAuthenActivity">
+
+        </activity>
+        <activity android:name=".login._student.AuthenActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".login.choose.ChooseActivity"></activity>
         <activity android:name=".login._student.LableActivity"></activity>
         <activity android:name=".login.phonebind.PhoneBindActivity"></activity>
@@ -78,12 +86,11 @@
         <activity android:name="._mine.student.ChangeVerisActivity"></activity>
         <activity android:name="._mine.company.ChangeVericActivity"></activity>
         <activity android:name="._mine.company.EditPhotocActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
+
+        <activity android:name="._mine.company.SubAccountActivity"></activity>
+        <activity android:name="._mine.company.FollowcActivity"></activity>
 
         <!--孟\/-->
         <activity android:name="._active.leitai.LeitaiMoreActivity" />
