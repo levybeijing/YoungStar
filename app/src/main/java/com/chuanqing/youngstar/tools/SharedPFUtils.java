@@ -26,8 +26,6 @@ public class SharedPFUtils {
             SharedPreferences.Editor editor = sp.edit();
         }
 
-
-
         public static void setParam(Context context , String key, Object object){
 
         String type = object.getClass().getSimpleName();

@@ -68,8 +68,7 @@ public class ImageAuthenActivity extends BaseActivity implements View.OnClickLis
     private List<Boolean> isOk=new ArrayList<>();
     private boolean havelable=false;
     private List<String> listName=new ArrayList<>();
-    private String lable;
-
+    private String lable="演员";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -115,6 +114,7 @@ public class ImageAuthenActivity extends BaseActivity implements View.OnClickLis
                 Intent intent = new Intent(ImageAuthenActivity.this,LableActivity.class);
                 startActivityForResult(intent,FORLABLE);
                 break;
+//
             case R.id.rl1_imgauthen:
                 Intent intent2 = new Intent(
                         Intent.ACTION_PICK,
@@ -122,24 +122,25 @@ public class ImageAuthenActivity extends BaseActivity implements View.OnClickLis
                 startActivityForResult(intent2, 202);
                 break;
             case R.id.rl2_imgauthen:
-                Intent intent3 = new Intent(Intent.ACTION_PICK);
-                intent3.setType("image/*");
+                Intent intent3 = new Intent(
+                        Intent.ACTION_PICK,
+                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(intent3, 203);
                 break;
             case R.id.rl3_imgauthen:
-                Intent intent4 = new Intent(Intent.ACTION_PICK);
-                intent4.setType("image/*");
+                Intent intent4 = new Intent(
+                        Intent.ACTION_PICK,
+                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(intent4, 204);
                 break;
             case R.id.tv_ok_imgthen:
-//              开始上传文件???????
-//                然后接口访问{}
-                if (!havelable){
-                    Toast.makeText(this, "请添加标签", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+//                if (!havelable){
+//                    Toast.makeText(this, "请添加标签", Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
                 for (int i = 0; i < isOk.size(); i++) {
                     if (!isOk.get(i)){
+                        Toast.makeText(this, "图片上传未成功", Toast.LENGTH_SHORT).show();
                         return;
                     }
                 }
@@ -159,48 +160,72 @@ public class ImageAuthenActivity extends BaseActivity implements View.OnClickLis
         if (resultCode==Activity.RESULT_OK){
             switch (requestCode){
                 case 202:
-                    handleImg(202,data);
+                    if (resultCode == RESULT_OK) {//resultcode是setResult里面设置的code值
+                        String path;
+
+                        try {
+                            Uri selectedImage = data.getData(); //获取系统返回的照片的Uri
+                            String[] filePathColumn = {MediaStore.Images.Media.DATA};
+                            Cursor cursor = getContentResolver().query(selectedImage,
+                                    filePathColumn, null, null, null);//从系统表中查询指定Uri对应的照片
+                            cursor.moveToFirst();
+                            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                            path = cursor.getString(columnIndex);  //获取照片路径
+                            Log.e("==========", "onActivityResult: "+path);
+                            cursor.close();
+                            Bitmap bitmap = BitmapFactory.decodeFile(path);
+                            iv1.setImageBitmap(bitmap);
+                            findViewById(R.id.tv1_imgauthen).setVisibility(View.INVISIBLE);
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+//                    if (resultCode==RESULT_OK){
+//                        handleImg(202,data);
+//                    }
                     break;
                 case 203:
-                    handleImg(203,data);
+                    if (resultCode==RESULT_OK){
+                        handleImg(203,data);
+                    }
                     break;
                 case 204:
-                    handleImg(204,data);
+                    if (resultCode==RESULT_OK){
+                        handleImg(204,data);
+                    }
                     break;
                 case FORLABLE:
-                    if (requestCode!=200){
-                        break;
-                    }
-                    String lable1 = data.getStringExtra("lable1");
-                    String lable2 = data.getStringExtra("lable2");
-                    if (lable1 ==null|| lable1.length()==0){
-                    }else{
-                        havelable=true;
-                        TextView tv1=new TextView(this);
-                        tv1.setText(lable1);
-                        tv1.setBackground(getResources().getDrawable(R.mipmap.bg_red,null));
-                        ll_lable.addView(tv1);
-                        lable=lable1;
-                    }
-
-                    if (lable2 ==null|| lable2.length()==0){
-                    }else{
-                        havelable=true;
-                        TextView tv2=new TextView(this);
-                        tv2.setText(lable2);
-                        tv2.setBackground(getResources().getDrawable(R.mipmap.bg_red,null));
-                        ll_lable.addView(tv2);
-                        lable=lable+lable2;
-                    }
-
+//                    if (requestCode!=200){
+//                        break;
+//                    }
+//                    String lable1 = data.getStringExtra("lable1");
+//                    String lable2 = data.getStringExtra("lable2");
+//                    if (lable1 ==null|| lable1.length()==0){
+//                    }else{
+//                        havelable=true;
+//                        TextView tv1=new TextView(this);
+//                        tv1.setText(lable1);
+//                        tv1.setBackground(getResources().getDrawable(R.mipmap.bg_red,null));
+//                        ll_lable.addView(tv1);
+//                        lable=lable1;
+//                    }
+//
+//                    if (lable2 ==null|| lable2.length()==0){
+//                    }else{
+//                        havelable=true;
+//                        TextView tv2=new TextView(this);
+//                        tv2.setText(lable2);
+//                        tv2.setBackground(getResources().getDrawable(R.mipmap.bg_red,null));
+//                        ll_lable.addView(tv2);
+//                        lable=lable+lable2;
+//                    }
                     break;
             }
         }
-
-
     }
     private void handleImg(int code,Intent data){
-            String path;
+            String path=null;
             Bitmap bitmap=null;
             String name=null;
             try {
@@ -222,17 +247,20 @@ public class ImageAuthenActivity extends BaseActivity implements View.OnClickLis
                 findViewById(R.id.tv1_imgauthen).setVisibility(View.INVISIBLE);
                 iv1.setImageBitmap(bitmap);
                 listName.set(0,name);
+//                uploadOss(202,name,path);
                 break;
             case 203:
                 findViewById(R.id.tv2_imgauthen).setVisibility(View.INVISIBLE);
                 iv2.setImageBitmap(bitmap);
                 listName.set(1,name);
+//                uploadOss(203,name,path);
 
                 break;
             case 204:
                 findViewById(R.id.tv3_imgauthen).setVisibility(View.INVISIBLE);
                 iv3.setImageBitmap(bitmap);
                 listName.set(2,name);
+//                uploadOss(204,name,path);
 
                 break;
         }
@@ -268,15 +296,16 @@ public class ImageAuthenActivity extends BaseActivity implements View.OnClickLis
                 switch (code){
                     case 202:
                         isOk.set(0,true);
+                        Log.e("===============", "=202");
                         break;
                     case 203:
                         isOk.set(1,true);
+                        Log.e("===============", "=203");
                         break;
                     case 204:
                         isOk.set(2,true);
+                        Log.e("===============", "=204");
                         break;
-//                    检验是否都上传完成
-
                 }
             }
 
@@ -296,18 +325,6 @@ public class ImageAuthenActivity extends BaseActivity implements View.OnClickLis
                 }
             }
         });
-        switch (code){
-            case 202:
-
-                break;
-            case 203:
-
-                break;
-            case 204:
-
-                break;
-
-        }
     }
 //
     private void request(){
@@ -332,6 +349,7 @@ public class ImageAuthenActivity extends BaseActivity implements View.OnClickLis
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
                         Log.e("===========", "onSuccess: "+s);
+//                        然后进入 粉丝状态的界面
                     }
                 });
     }
