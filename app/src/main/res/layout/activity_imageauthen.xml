@@ -67,6 +67,7 @@
                 android:background="@mipmap/img_uploads"
                 />
             <TextView
+                android:id="@+id/tv1_imgauthen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="点击上传身份证人像面"
@@ -89,6 +90,8 @@
                 android:background="@mipmap/img_uploads"
                 />
             <TextView
+                android:id="@+id/tv2_imgauthen"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="点击上传身份证国徽面"
@@ -111,6 +114,7 @@
                 android:background="@mipmap/img_uploads"
                 />
             <TextView
+                android:id="@+id/tv3_imgauthen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="点击上传学生证"
@@ -131,5 +135,6 @@
         android:gravity="center"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/ll_imgauthen"
+        android:layout_marginTop="20dp"
         />
 </RelativeLayout>
