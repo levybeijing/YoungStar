@@ -45,7 +45,7 @@ public class ImageAuthenActivity extends BaseActivity implements View.OnClickLis
     private RelativeLayout rl1;
     private RelativeLayout rl2;
     private RelativeLayout rl3;
-    private ImageView iv1;
+    private ImageView iv1, iv2, iv3;
     private List<Boolean> isOk=new ArrayList<>();
 
     @Override
@@ -67,14 +67,16 @@ public class ImageAuthenActivity extends BaseActivity implements View.OnClickLis
         findViewById(R.id.rl_imgauthen).setOnClickListener(this);
 
         rl1 = findViewById(R.id.rl1_imgauthen);
-        iv1 = findViewById(R.id.iv1_imgauthen);
         rl1.setOnClickListener(this);
+        iv1 = findViewById(R.id.iv1_imgauthen);
+
         rl2 = findViewById(R.id.rl2_imgauthen);
-
         rl2.setOnClickListener(this);
-        rl3 = findViewById(R.id.rl3_imgauthen);
+        iv2 = findViewById(R.id.iv2_imgauthen);
 
+        rl3 = findViewById(R.id.rl3_imgauthen);
         rl3.setOnClickListener(this);
+        iv3 = findViewById(R.id.iv3_imgauthen);
 
         TextView ok=findViewById(R.id.tv_ok_imgthen);
         ok.setOnClickListener(this);
@@ -125,7 +127,24 @@ public class ImageAuthenActivity extends BaseActivity implements View.OnClickLis
         if (resultCode==Activity.RESULT_OK){
             switch (requestCode){
                 case 202:
-
+                    if (resultCode == RESULT_OK) {//resultcode是setResult里面设置的code值
+                        String path;
+                        try {
+                            Uri selectedImage = data.getData(); //获取系统返回的照片的Uri
+                            String[] filePathColumn = {MediaStore.Images.Media.DATA};
+                            Cursor cursor = getContentResolver().query(selectedImage,
+                                    filePathColumn, null, null, null);//从系统表中查询指定Uri对应的照片
+                            cursor.moveToFirst();
+                            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                            path = cursor.getString(columnIndex);  //获取照片路径
+                            cursor.close();
+                            Bitmap bitmap = BitmapFactory.decodeFile(path);
+                            iv1.setImageBitmap(bitmap);
+                        } catch (Exception e) {
+                            // TODO Auto-generatedcatch block
+                            e.printStackTrace();
+                        }
+                    }
                     break;
 
                 case 203:
