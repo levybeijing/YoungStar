@@ -32,7 +32,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="(1/2)"
+            android:text="(0/2)"
             android:layout_alignParentRight="true"
             android:textColor="#999999"
             android:layout_centerVertical="true"
@@ -67,6 +67,7 @@
                 android:background="@mipmap/img_uploads"
                 />
             <TextView
+                android:id="@+id/tv1_imgauthen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="点击上传身份证人像面"
@@ -80,10 +81,17 @@
             android:id="@+id/rl2_imgauthen"
             android:layout_width="270dp"
             android:layout_height="135dp"
-            android:background="@mipmap/img_uploads"
             android:layout_margin="10dp"
             >
+            <ImageView
+                android:id="@+id/iv2_imgauthen"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@mipmap/img_uploads"
+                />
             <TextView
+                android:id="@+id/tv2_imgauthen"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="点击上传身份证国徽面"
@@ -97,10 +105,16 @@
             android:id="@+id/rl3_imgauthen"
             android:layout_width="270dp"
             android:layout_height="135dp"
-            android:background="@mipmap/img_uploads"
             android:layout_margin="10dp"
             >
+            <ImageView
+                android:id="@+id/iv3_imgauthen"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@mipmap/img_uploads"
+                />
             <TextView
+                android:id="@+id/tv3_imgauthen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="点击上传学生证"
@@ -121,5 +135,6 @@
         android:gravity="center"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/ll_imgauthen"
+        android:layout_marginTop="20dp"
         />
 </RelativeLayout>

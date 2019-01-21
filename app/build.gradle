@@ -48,7 +48,6 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
     //导入视频播放器包
     implementation 'cn.jzvd:jiaozivideoplayer:6.4.1'
-
 //    阿里服务器
     implementation 'com.aliyun.dpa:oss-android-sdk:+'
 

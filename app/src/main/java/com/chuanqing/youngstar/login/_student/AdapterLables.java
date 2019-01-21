@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.chuanqing.youngstar.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -18,6 +19,7 @@ public class AdapterLables extends RecyclerView.Adapter<AdapterLables.MyViewHold
     private Context context;
     private OnItemClickListenerPosition  itemClickListener;
     private List<String> list;
+    private List<Boolean> checked=new ArrayList<>();
 
     public AdapterLables(Context context_) {
         context=context_;
@@ -43,12 +45,17 @@ public class AdapterLables extends RecyclerView.Adapter<AdapterLables.MyViewHold
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    holder.iv.setVisibility(View.VISIBLE);
+//                    if (checked.size()>0){
+//                        if (checked.get(position)){
+//                            holder.iv.setVisibility(View.VISIBLE);
+//                        }else{
+//                            holder.iv.setVisibility(View.INVISIBLE);
+//                        }
+//                    }
                     itemClickListener.onItemClick(position);
                 }
             });
         }
-
     }
 
     @Override
@@ -56,14 +63,17 @@ public class AdapterLables extends RecyclerView.Adapter<AdapterLables.MyViewHold
         return super.getItemViewType(position);
     }
 
-
-
     @Override
     public int getItemCount() {
         if (list==null) {
             return 0;
         }
         return list.size();
+    }
+
+    public void setFlag(List<Boolean> list_) {
+        checked=list_;
+        notifyDataSetChanged();
     }
 
     public void setData(List<String> list_) {

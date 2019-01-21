@@ -18,8 +18,6 @@
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
         tools:ignore="ProtectedPermissions" />
 
-
-
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -81,7 +79,14 @@
         <activity android:name="._mine.FeedbackActivity"></activity>
         <activity android:name="._mine.SystemSetActivity"></activity>
         <activity android:name="._mine.PlaySetActivity"></activity>
+        <activity android:name="._mine.student.ChangeVerisActivity"></activity>
+        <activity android:name="._mine.company.ChangeVericActivity"></activity>
+        <activity android:name="._mine.company.EditPhotocActivity">
 
+        </activity>
+
+        <activity android:name="._mine.company.SubAccountActivity"></activity>
+        <activity android:name="._mine.company.FollowcActivity"></activity>
 
         <!--孟\/-->
         <activity android:name="._active.leitai.LeitaiMoreActivity" />
