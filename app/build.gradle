@@ -51,4 +51,8 @@ dependencies {
 
 //    阿里服务器
     implementation 'com.aliyun.dpa:oss-android-sdk:+'
+
+    //图片选择器
+    implementation 'com.foamtrace:photopicker:1.0'
+
 }

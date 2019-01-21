@@ -40,4 +40,13 @@
         <!-- 指定消失的动画xml -->
         <item name="android:windowExitAnimation">@anim/pophidden_anim</item>
     </style>
+
+    <style name="PhotoTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!--toolBar背景-->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <!--status bar 背景-->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <!--toolBar 文本/ icon 着色-->
+        <item name="colorControlNormal">@color/mainColor</item>
+    </style>
 </resources>

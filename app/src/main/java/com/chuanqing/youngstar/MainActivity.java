@@ -1,24 +1,43 @@
 package com.chuanqing.youngstar;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.chuanqing.youngstar._active.StarActivityFragment;
+import com.chuanqing.youngstar._add.AddAudioActivity;
+import com.chuanqing.youngstar._add.PublishActivity;
+import com.chuanqing.youngstar._add.student.WorksActivity;
 import com.chuanqing.youngstar._home.HomeFragment;
+import com.chuanqing.youngstar._home.searchstudent.SearchStatusActivity;
 import com.chuanqing.youngstar._mine.MineFragment;
 import com.chuanqing.youngstar._square.SquareFragment;
 import com.chuanqing.youngstar.base.BaseActivity;
+import com.chuanqing.youngstar.mybean.StatusBean;
+import com.chuanqing.youngstar.tools.Api;
 import com.chuanqing.youngstar.tools.ToastUtils;
+import com.google.gson.Gson;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.StringCallback;
 
 import java.util.Timer;
 import java.util.TimerTask;
+
+import okhttp3.Call;
+import okhttp3.Response;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
     HomeFragment homeFragment;
@@ -82,7 +101,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         main_second.setOnClickListener(this);
         main_third.setOnClickListener(this);
         main_four.setOnClickListener(this);
-
+        img_center.setOnClickListener(this);
     }
     @Override
     public void onClick(View v) {
@@ -100,7 +119,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 setChioceItem(3);
                 break;
             case R.id.main_img_center:
-                //中间按钮切换身份使用
+                showPopwindow();  //展示中间按钮点击事件
             default:
                 break;
         }
@@ -237,5 +256,92 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 //                this.finish();
             }
         }
+    }
+
+    /**
+     * 显示popupWindow
+     */
+    private void showPopwindow() {
+        // 利用layoutInflater获得View
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.add_student, null);
+
+        // 下面是两种方法得到宽度和高度 getWindow().getDecorView().getWidth()
+
+        PopupWindow window = new PopupWindow(view, WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.MATCH_PARENT);
+
+        // 设置popWindow弹出窗体可点击，这句话必须添加，并且是true
+        window.setFocusable(false);
+        WindowManager wm = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics dm = new DisplayMetrics();
+        wm.getDefaultDisplay().getMetrics(dm);
+
+
+        // 实例化一个ColorDrawable颜色为半透明
+        ColorDrawable dw = new ColorDrawable(0xb0000000);
+        window.setBackgroundDrawable(dw);
+
+        // 设置popWindow的显示和消失动画
+        window.setAnimationStyle(R.style.mypopwindow_anim_style);
+//        //底部弹出
+        window.showAtLocation(MainActivity.this.findViewById(R.id.main_img_center),Gravity.BOTTOM,0,0);
+
+        LinearLayout layout_video = view.findViewById(R.id.add_video);
+        LinearLayout layout_zuopinji = view.findViewById(R.id.add_zuopinji);
+        LinearLayout layout_luyin = view.findViewById(R.id.add_luyin);
+        ImageView img_no = view.findViewById(R.id.add_no);
+        //取消事件
+        img_no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (window.isShowing()){
+                    window.dismiss();
+                }
+            }
+        });
+        //视频、图片
+        layout_video.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (window.isShowing()){
+                    window.dismiss();
+                    Intent intent = new Intent(MainActivity.this, PublishActivity   .class);
+                    startActivity(intent);
+                }
+            }
+        });
+        //作品集
+        layout_zuopinji.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (window.isShowing()){
+                    window.dismiss();
+                    Intent intent = new Intent(MainActivity.this, WorksActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
+        //录音
+        layout_luyin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (window.isShowing()){
+                    window.dismiss();
+                    Intent intent = new Intent(MainActivity.this, AddAudioActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
+
+        // popWindow消失监听方法
+        window.setOnDismissListener(new PopupWindow.OnDismissListener() {
+
+            @Override
+            public void onDismiss() {
+                System.out.println("popWindow消失");
+            }
+        });
+
     }
 }

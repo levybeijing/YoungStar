@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.chuanqing.youngstar">
 
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- //读取外置存储卡 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -66,14 +67,11 @@
         <activity android:name="._add.PublishActivity"></activity>
         <activity android:name="._add.company.RecuitActivity"></activity>
         <activity android:name="._add.student.WorksActivity"></activity>
-        <activity android:name="._mine.student.AddAudioActivity"></activity>
-
+        <activity android:name="._add.AddAudioActivity"></activity>
         <!--mine-->
         <activity android:name="._mine.OfficalMsgActivity"></activity>
         <activity android:name="._mine.EditUserDataActivity"></activity>
         <activity android:name="._mine.WalletActivity"></activity>
-
-        <activity android:name="._mine.EditPhotoActivity"></activity>
         <activity android:name="._mine.EditPhoneActivity"></activity>
         <activity android:name="._mine.EditPWDActivity"></activity>
         <activity android:name="._mine.EditEmailActivity"></activity>
@@ -104,6 +102,11 @@
                 android:resource="@xml/photopath" />
         </provider>
 
+        <activity
+            android:name="com.foamtrace.photopicker.PhotoPickerActivity"
+            android:configChanges="orientation|screenSize"/>
+
+        <activity android:name="com.foamtrace.photopicker.PhotoPreviewActivity"/>
     </application>
 
 </manifest>

@@ -10,6 +10,9 @@ import android.widget.ImageView;
 import com.chuanqing.youngstar.R;
 import com.chuanqing.youngstar.base.BaseActivity;
 
+/**
+ * 作品集
+ */
 public class WorksActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

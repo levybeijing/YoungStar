@@ -18,6 +18,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:background="@color/touming"
         android:layout_height="70dp">
         <LinearLayout
             android:layout_width="match_parent"
@@ -119,7 +120,7 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!--叫号图标-->
+        <!--添加信息图标-->
         <ImageView
             android:id="@+id/main_img_center"
             android:layout_width="53dp"
