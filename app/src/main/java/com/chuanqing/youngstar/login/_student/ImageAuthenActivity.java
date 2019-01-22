@@ -5,12 +5,14 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -55,6 +57,7 @@ public class ImageAuthenActivity extends BaseActivity implements View.OnClickLis
     private List<String> listName=new ArrayList<>();
     private boolean havelable=false;
     private String lable;
+    private float density;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,6 +73,10 @@ public class ImageAuthenActivity extends BaseActivity implements View.OnClickLis
         listName.add(null);
         listName.add(null);
         listName.add(null);
+//
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+        density = dm.density;
         initView();
     }
 
@@ -173,15 +180,14 @@ public class ImageAuthenActivity extends BaseActivity implements View.OnClickLis
                     }
                     String lable1 = data.getStringExtra("lable1");
                     String lable2 = data.getStringExtra("lable2");
-                    Log.e("================", "onActivityResult: "+lable1);
-                    Log.e("================", "onActivityResult: "+lable2);
                     if (lable1 !=null&&lable1.length()!=0){
                         havelable=true;
                         TextView tv1=new TextView(this);
                         tv1.setGravity(Gravity.CENTER);
-                        tv1.setWidth(LinearLayout.LayoutParams.WRAP_CONTENT);
-                        tv1.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
+                        tv1.setWidth((int) (60*density));
+                        tv1.setHeight((int) (30*density));
                         tv1.setText(lable1);
+                        tv1.setTextColor(Color.parseColor("#FFFFFF"));
                         tv1.setBackground(getResources().getDrawable(R.mipmap.bg_red,null));
                         ll_lable.addView(tv1);
                         lable=lable1;
@@ -190,9 +196,10 @@ public class ImageAuthenActivity extends BaseActivity implements View.OnClickLis
                         havelable=true;
                         TextView tv2=new TextView(this);
                         tv2.setGravity(Gravity.CENTER);
-                        tv2.setWidth(LinearLayout.LayoutParams.WRAP_CONTENT);
-                        tv2.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
+                        tv2.setWidth((int) (60*density));
+                        tv2.setHeight((int) (30*density));
                         tv2.setText(lable2);
+                        tv2.setTextColor(Color.parseColor("#FFFFFF"));
                         tv2.setBackground(getResources().getDrawable(R.mipmap.bg_red,null));
                         ll_lable.addView(tv2);
                         lable+=lable2;
