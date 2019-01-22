@@ -17,16 +17,22 @@ import java.util.List;
 
 public class AdapterLables extends RecyclerView.Adapter<AdapterLables.MyViewHolder> {
     private Context context;
-    private OnItemClickListenerPosition  itemClickListener;
+    private ClickPositon  itemClickListener;
+
     private List<String> list;
-    private List<Boolean> checked=new ArrayList<>();
+    private int[] flag=new int[]{-1,-1};
+
 
     public AdapterLables(Context context_) {
         context=context_;
     }
 
-    public void setOnItemClickListener(OnItemClickListenerPosition itemClickListene_){
+    public void setOnItemClickListener(ClickPositon itemClickListene_){
         itemClickListener=itemClickListene_;
+    }
+
+    public interface ClickPositon{
+        void sendInfo(int p,String lable);
     }
 
     @Override
@@ -39,20 +45,18 @@ public class AdapterLables extends RecyclerView.Adapter<AdapterLables.MyViewHold
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         holder.tv.setText(list.get(position));
+        if (position!=flag[0]&&position!=flag[1]){
+            holder.iv.setVisibility(View.INVISIBLE);
+        }else{
+            holder.iv.setVisibility(View.VISIBLE);
+        }
         //监听事件
         View itemView =holder.itemView;
         if (itemClickListener != null) {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    if (checked.size()>0){
-//                        if (checked.get(position)){
-//                            holder.iv.setVisibility(View.VISIBLE);
-//                        }else{
-//                            holder.iv.setVisibility(View.INVISIBLE);
-//                        }
-//                    }
-                    itemClickListener.onItemClick(position);
+                    itemClickListener.sendInfo(position,list.get(position));
                 }
             });
         }
@@ -71,8 +75,8 @@ public class AdapterLables extends RecyclerView.Adapter<AdapterLables.MyViewHold
         return list.size();
     }
 
-    public void setFlag(List<Boolean> list_) {
-        checked=list_;
+    public void setFlag(int[] flag_) {
+        flag=flag_;
         notifyDataSetChanged();
     }
 

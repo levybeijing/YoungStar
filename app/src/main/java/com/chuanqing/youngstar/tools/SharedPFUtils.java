@@ -15,8 +15,8 @@ public class SharedPFUtils {
 
     /**
      * 身份标识 identity 1 student 2 company 3 invest 4 fans
-     * 用户编号 usercode
-     * 用户密码 password
+     * 用户编号 usercode ""
+     * 用户密码 password ""
      * 登录状态 islogin  true or false
      *
      *

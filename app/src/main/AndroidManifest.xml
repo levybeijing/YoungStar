@@ -29,7 +29,11 @@
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".SpleashActivity"
             >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity android:name="._home.WebViewActivity"/>
@@ -41,11 +45,7 @@
         <activity android:name=".login.privacy.PrivacyProtectActivity"></activity>
         <activity android:name=".login.protocol.UserProtocolActivity"></activity>
         <activity android:name=".login._student.ImageAuthenActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".login._student.AuthenActivity">
 

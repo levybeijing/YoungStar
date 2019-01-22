@@ -3,13 +3,49 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@mipmap/bg_statusbar"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="身份标签"
+            android:textColor="#FFF"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="13dp"
+            android:textSize="18dp"
+            />
+        <TextView
+            android:id="@+id/tv_sure_lable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="确定"
+            android:textColor="#FFF"
+            android:gravity="center"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="16dp"
+            />
+        <ImageView
+            android:id="@+id/iv_close_lable"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="13dp"
+            android:background="@mipmap/close_lable"
+            android:layout_alignParentBottom="true"
+            />
+    </RelativeLayout>
     <LinearLayout
         android:id="@+id/ll_lable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="86dp"
         android:layout_marginLeft="15dp"
         >
         <TextView
