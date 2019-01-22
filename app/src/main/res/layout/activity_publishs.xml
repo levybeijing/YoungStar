@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <include android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/common_top_fabu"></include>
     <LinearLayout
         android:id="@+id/ll_top_publish"
         android:layout_width="match_parent"
         android:layout_height="215dp"
-        android:layout_marginTop="79dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="30dp"
+        android:background="@color/white"
         android:orientation="vertical"
         android:padding="15dp"
         >
@@ -23,6 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@null"
+                android:maxLength="20"
                 android:hint="请输入标题"
                 android:paddingLeft="10dp"
                 />
@@ -50,6 +57,7 @@
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:hint="请输入作品说明"
+                android:maxLength="200"
                 android:gravity="left"
                 android:padding="10dp"
                 />
@@ -63,11 +71,25 @@
                 android:textColor="#999999"
                 />
         </RelativeLayout>
+
     </LinearLayout>
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_publish"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/ll_top_publish"
-        />
-</RelativeLayout>
+    <ImageView
+        android:id="@+id/publishs_fengmian"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_marginLeft="15dp"
+        android:src="@mipmap/up_fengmian"/>
+    <ImageView
+        android:id="@+id/publishs_info"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        android:src="@mipmap/up_tupian"/>
+    <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:id="@+id/rv_publish"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_below="@id/ll_top_publish"-->
+        <!--/>-->
+</LinearLayout>

@@ -20,6 +20,9 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.Locale;
 
+/**
+ * 录音
+ */
 
 public class AddAudioActivity extends BaseActivity implements View.OnClickListener {
 

@@ -76,7 +76,7 @@ public class HomeViewpager1 extends PagerAdapter {
 
         Glide.with(context)
                 .load(Api.ossurl+arrayList.get(i).getData().get(i).getDeatil().get(0).getImg())
-                .error(R.mipmap.my11)
+                .error( R.mipmap.my11)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .into(img1);
         tv_1.setText(arrayList.get(i).getData().get(i).getDeatil().get(0).getUser_code());

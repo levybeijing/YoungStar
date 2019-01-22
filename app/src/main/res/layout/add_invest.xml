@@ -1,30 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="345dp"
-    android:layout_height="182dp"
-    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
     >
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="44dp"
-        android:layout_centerHorizontal="true"
-        >
-        <ImageView
-            android:id="@+id/iv_service_invest"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:background="@mipmap/service_company"
-            />
-        <TextView
-            android:layout_width="match_parent"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="36dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/filletlinearlayout"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/add_luyin"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="VIP客服"
-            android:layout_marginTop="10dp"
-            android:singleLine="true"
+            android:orientation="vertical"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="44dp"
+            android:layout_marginBottom="44dp"
             android:gravity="center"
-            />
+            >
+            <ImageView
+                android:id="@+id/iv_record_student"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@mipmap/service_company"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="专属客服"
+                android:textColor="@color/home_gray"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                />
+        </LinearLayout>
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/add_no"
+        android:layout_width="53dp"
+        android:layout_height="53dp"
+        android:layout_marginBottom="10dp"
+        android:scaleType="fitXY"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:src="@mipmap/fabu_no" />
 </RelativeLayout>

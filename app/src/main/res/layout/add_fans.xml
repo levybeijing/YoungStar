@@ -1,19 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="345dp"
-    android:layout_height="182dp"
-    android:orientation="horizontal"
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="wrap_content"
+android:layout_height="match_parent"
     >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginRight="15dp"
+    android:layout_marginLeft="15dp"
+    android:layout_marginBottom="36dp"
+    android:layout_alignParentBottom="true"
+    android:background="@drawable/filletlinearlayout"
+    android:orientation="horizontal">
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:id="@+id/add_video"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:gravity="center"
         android:layout_marginTop="44dp"
-        android:layout_marginLeft="60dp"
+        android:layout_marginBottom="44dp"
         >
         <ImageView
-            android:id="@+id/iv_change_fans"
+            android:id="@+id/iv_videoimg_student"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:background="@mipmap/change_fans"
@@ -23,6 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="切换身份"
+            android:textColor="@color/home_gray"
             android:layout_marginTop="10dp"
             android:singleLine="true"
             android:gravity="center"
@@ -30,15 +42,18 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:id="@+id/add_luyin"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="44dp"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="60dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginBottom="44dp"
+        android:gravity="center"
         >
         <ImageView
-            android:id="@+id/iv_service_fans"
+            android:id="@+id/iv_record_student"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:background="@mipmap/service_company"
@@ -47,9 +62,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="专属客服"
+            android:textColor="@color/home_gray"
             android:layout_marginTop="10dp"
-            android:singleLine="true"
             android:gravity="center"
             />
     </LinearLayout>
+</LinearLayout>
+
+<ImageView
+    android:id="@+id/add_no"
+    android:layout_width="53dp"
+    android:layout_height="53dp"
+    android:layout_marginBottom="10dp"
+    android:scaleType="fitXY"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    android:src="@mipmap/fabu_no" />
 </RelativeLayout>
