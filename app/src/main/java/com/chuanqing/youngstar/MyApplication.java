@@ -66,7 +66,7 @@ public class MyApplication extends Application {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                oss = new OSSClient(MyApplication.this, Urls.IMAGEURL, credentialProvider);
+                oss = new OSSClient(MyApplication.this, "oss-cn-beijing.aliyuncs.com", credentialProvider);
             }
         }).start();
     }

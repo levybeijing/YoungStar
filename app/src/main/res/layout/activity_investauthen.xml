@@ -5,60 +5,229 @@
     android:layout_height="match_parent">
 
     <!--公司头像选择-->
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:orientation="vertical"
-        android:layout_centerHorizontal="true"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@mipmap/bg_statusbar"
         >
-        <RadioGroup
-            android:id="@+id/rg1_investauthen1"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
-            <RadioButton
-                android:id="@+id/rb1_investauthen1"
-                android:background="@mipmap/company1"
-                style="@style/photo_company" />
-            <RadioButton
-                android:id="@+id/rb2_investauthen1"
-                android:background="@mipmap/company2"
-                style="@style/photo_company" />
-            <RadioButton
-                android:id="@+id/rb3_investauthen1"
-                android:background="@mipmap/company3"
-                style="@style/photo_company" />
-            <RadioButton
-                android:id="@+id/rb4_investauthen1"
-                android:background="@mipmap/company4"
-                style="@style/photo_company" />
-        </RadioGroup>
+            android:text="资料填写"
+            android:textColor="#FFF"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="13dp"
+            android:textSize="18dp"
+            />
+        <ImageView
+            android:id="@+id/iv_back_investauthen1"
+            android:layout_width="12dp"
+            android:layout_height="21dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="13dp"
+            android:background="@mipmap/back_top"
+            android:layout_alignParentBottom="true"
+            />
+    </RelativeLayout>
+    <!--公司头像选择-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="82dp"
+        >
 
-        <RadioGroup
-            android:id="@+id/rg2_investauthen1"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:gravity="center_horizontal"
             >
-            <RadioButton
-                android:id="@+id/rb5_investauthen1"
-                android:background="@mipmap/company5"
-                style="@style/photo_company" />
-            <RadioButton
-                android:id="@+id/rb6_investauthen1"
-                android:background="@mipmap/company6"
-                style="@style/photo_company" />
-            <RadioButton
-                android:id="@+id/rb7_investauthen1"
-                android:background="@mipmap/company7"
-                style="@style/photo_company" />
-            <RadioButton
-                android:id="@+id/rb8_investauthen1"
-                android:background="@mipmap/company8"
-                style="@style/photo_company" />
-        </RadioGroup>
+            <RelativeLayout
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:layout_margin="12dp"
+                >
+                <ImageView
+                    android:id="@+id/iv_1_investauthen1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@mipmap/company1"
+                    />
+                <ImageView
+                    android:id="@+id/iv1_investauthen1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@mipmap/checked_company"
+                    android:visibility="invisible"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:layout_margin="12dp"
+                >
+                <ImageView
+                    android:id="@+id/iv_2_investauthen1"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@mipmap/company2"
+                    />
+                <ImageView
+                    android:id="@+id/iv2_investauthen1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@mipmap/checked_company"
+                    android:visibility="invisible"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:layout_margin="12dp"
+                >
+                <ImageView
+                    android:id="@+id/iv_3_investauthen1"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@mipmap/company3"
+                    />
+                <ImageView
+                    android:id="@+id/iv3_investauthen1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@mipmap/checked_company"
+                    android:visibility="invisible"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:layout_margin="12dp"
+                >
+                <ImageView
+                    android:id="@+id/iv_4_investauthen1"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@mipmap/company4"
+                    />
+                <ImageView
+                    android:id="@+id/iv4_investauthen1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@mipmap/checked_company"
+                    android:visibility="invisible"
+                    />
+            </RelativeLayout>
+
+        </LinearLayout>
+        <!--2-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            >
+            <RelativeLayout
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:layout_margin="12dp"
+                >
+                <ImageView
+                    android:id="@+id/iv_5_investauthen1"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@mipmap/company5"
+                    />
+                <ImageView
+                    android:id="@+id/iv5_investauthen1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@mipmap/checked_company"
+                    android:visibility="invisible"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:layout_margin="12dp"
+                >
+                <ImageView
+                    android:id="@+id/iv_6_investauthen1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@mipmap/company6"
+                    />
+                <ImageView
+                    android:id="@+id/iv6_investauthen1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@mipmap/checked_company"
+                    android:visibility="invisible"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:layout_margin="12dp"
+                >
+                <ImageView
+                    android:id="@+id/iv_7_investauthen1"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@mipmap/company7"
+                    />
+                <ImageView
+                    android:id="@+id/iv7_investauthen1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@mipmap/checked_company"
+                    android:visibility="invisible"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:layout_margin="12dp"
+                >
+                <ImageView
+                    android:id="@+id/iv_8_investauthen1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@mipmap/company8"
+                    />
+                <ImageView
+                    android:id="@+id/iv8_investauthen1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@mipmap/checked_company"
+                    android:visibility="invisible"
+                    />
+            </RelativeLayout>
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <TextView
