@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:lh2="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <include android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/common_top_fabu"></include>
+
+    <com.chuanqing.youngstar.tools.CircleProgressBar
+        android:id="@+id/tape_CircleProgressBar"
+        android:layout_width="260dp"
+        android:layout_height="260dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="135dp"
+        lh2:circleWidth="6dp"
+        lh2:firstColor="#00000000"
+        lh2:secondColor="#3B95C8"/>
+    <RelativeLayout
+        android:layout_width="196dp"
+        android:layout_height="196dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="170dp"
+        android:background="@mipmap/luyin_bg"
+        >
+
+        <TextView
+            android:id="@+id/tape_miao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="26dp"
+            android:text="0"
+            android:textColor="#F56250"
+            android:textSize="40dp"
+            android:gravity="center"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="s"
+            android:textColor="#F56250"
+            android:textSize="28dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="38dp"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/tape_miao"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="80dp"
+        android:layout_centerHorizontal="true"
+        >
+        <ImageView
+            android:id="@+id/tape_star"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@mipmap/start_addaudio"
+            />
+        <TextView
+            android:id="@+id/tape_title"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:textSize="13sp"
+            android:text="开始"
+            android:textColor="@color/home_gray"
+            android:layout_below="@+id/tape_star"/>
+    </RelativeLayout>
+
+</RelativeLayout>

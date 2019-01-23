@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-    <include android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        layout="@layout/common_top_fabu"></include>
+    android:orientation="vertical"
+    tools:context="._add.TapeMoreActivity">
+
+    <include
+        layout="@layout/common_top_fabu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></include>
+
     <LinearLayout
         android:id="@+id/ll_top_publish"
         android:layout_width="match_parent"
@@ -15,52 +20,52 @@
         android:layout_marginBottom="30dp"
         android:background="@color/white"
         android:orientation="vertical"
-        android:padding="15dp"
-        >
+        android:padding="15dp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:gravity="center_vertical"
-            >
+            android:orientation="horizontal">
+
             <EditText
                 android:id="@+id/et_title_publish"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@null"
-                android:maxLength="20"
                 android:hint="请输入标题"
-                android:paddingLeft="10dp"
-                />
+                android:maxLength="20"
+                android:paddingLeft="10dp" />
+
             <TextView
                 android:id="@+id/tv_titlenum_publish"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="(0/20)"
-                android:textSize="12dp"
-                />
+                android:textSize="12dp" />
         </LinearLayout>
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#E5E5E5"
             android:layout_marginTop="10dp"
-            />
+            android:background="#E5E5E5" />
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
+
             <EditText
                 android:id="@+id/et_content_publish"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@null"
+                android:gravity="left"
                 android:hint="请输入作品说明"
                 android:maxLength="200"
-                android:gravity="left"
-                android:padding="10dp"
-                />
+                android:padding="10dp" />
+
             <TextView
                 android:id="@+id/tv_contentnum_publish"
                 android:layout_width="wrap_content"
@@ -68,38 +73,15 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
                 android:text="0/200"
-                android:textColor="#999999"
-                />
+                android:textColor="#999999" />
         </RelativeLayout>
 
     </LinearLayout>
     <ImageView
-        android:id="@+id/publishs_fengmian"
+        android:id="@+id/tape_more_yinpin"
         android:layout_width="110dp"
         android:layout_height="110dp"
         android:layout_marginLeft="15dp"
-        android:src="@mipmap/up_fengmian"/>
-    <ImageView
-        android:id="@+id/publishs_info"
-        android:layout_width="110dp"
-        android:layout_height="110dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="15dp"
-        android:src="@mipmap/up_tupian"/>
-    <cn.jzvd.JzvdStd
-        android:id="@+id/starshow_more_player"
-        android:layout_width="110dp"
-        android:layout_height="110dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="15dp"
-        android:visibility="gone">
-
-    </cn.jzvd.JzvdStd>
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_publish"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="15dp"
-        android:layout_below="@id/ll_top_publish"
-        />
+        android:src="@mipmap/up_yinpin_user"
+        android:scaleType="fitXY"/>
 </LinearLayout>

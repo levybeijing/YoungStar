@@ -63,4 +63,6 @@ public class Api {
     //关注公司或者学生
     public static String guanzhu = apiurl+"/Star/firstPage/addfocusOn";
 
+    //发布动态
+    public static String updongtai = apiurl+"/Star/user/addUserBlog";
 }

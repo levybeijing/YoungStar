@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.chuanqing.youngstar._active.StarActivityFragment;
 import com.chuanqing.youngstar._add.AddAudioActivity;
 import com.chuanqing.youngstar._add.PublishActivity;
+import com.chuanqing.youngstar._add.TapeActivity;
 import com.chuanqing.youngstar._add.student.WorksActivity;
 import com.chuanqing.youngstar._home.HomeFragment;
 import com.chuanqing.youngstar._home.searchstudent.SearchStatusActivity;
@@ -328,7 +329,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             public void onClick(View v) {
                 if (window.isShowing()){
                     window.dismiss();
-                    Intent intent = new Intent(MainActivity.this, AddAudioActivity.class);
+                    Intent intent = new Intent(MainActivity.this, TapeActivity.class);
                     startActivity(intent);
                 }
             }
