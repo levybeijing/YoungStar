@@ -4,12 +4,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@mipmap/bg_statusbar"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="个人资料填写"
+            android:textColor="#FFF"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="13dp"
+            android:textSize="18dp"
+            />
+        <ImageView
+            android:id="@+id/iv_back_imgauthen"
+            android:layout_width="12dp"
+            android:layout_height="21dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="13dp"
+            android:background="@mipmap/back_top"
+            android:layout_alignParentBottom="true"
+            />
+    </RelativeLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/rl_imgauthen"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="70dp"
         android:paddingLeft="25dp"
         android:paddingRight="25dp"
         >
@@ -22,8 +55,8 @@
             />
         <LinearLayout
             android:id="@+id/ll_container_imgauthen"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
             android:orientation="horizontal"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/iv_user_imgauthen"
@@ -133,8 +166,9 @@
         android:text="完成"
         android:textColor="#fff"
         android:gravity="center"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/ll_imgauthen"
         android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
         />
+    </LinearLayout>
+    </ScrollView>
 </RelativeLayout>

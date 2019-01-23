@@ -9,6 +9,7 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 
 import com.chuanqing.youngstar.base.BaseActivity;
+import com.chuanqing.youngstar.login._student.ImageAuthenActivity;
 import com.chuanqing.youngstar.login.choose.ChooseActivity;
 import com.chuanqing.youngstar.login.login.LoginActivity;
 import com.chuanqing.youngstar.tools.SharedPFUtils;
@@ -27,7 +28,7 @@ public class SpleashActivity extends BaseActivity {
 //        动态权限
         String[] permession =new String[]{
                 Manifest.permission.READ_PHONE_STATE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
         };
         PermissionsUtils.getInstance().chekPermissions(this, permession, new PermissionsUtils.IPermissionsResult() {
             @Override
@@ -65,15 +66,18 @@ public class SpleashActivity extends BaseActivity {
             public void onAnimationEnd(Animation animation) {
                 boolean islogin = (boolean) SharedPFUtils.getParam(SpleashActivity.this, "islogin", false);
                 int identity = (int) SharedPFUtils.getParam(SpleashActivity.this, "identity", -1);
-                if (islogin){
-                    if (identity>0){
-                        startActivity(new Intent(SpleashActivity.this,MainActivity.class));
-                    }else{
-                        startActivity(new Intent(SpleashActivity.this,ChooseActivity.class));
-                    }
-                }else{
-                    startActivity(new Intent(SpleashActivity.this,LoginActivity.class));
-                }
+//                if (islogin){
+//                    if (identity>0){
+//                        startActivity(new Intent(SpleashActivity.this,MainActivity.class));
+//                    }else{
+//                        startActivity(new Intent(SpleashActivity.this,ChooseActivity.class));
+//                    }
+//                }else{
+//                    startActivity(new Intent(SpleashActivity.this,LoginActivity.class));
+//                }
+
+                startActivity(new Intent(SpleashActivity.this, ImageAuthenActivity.class));
+
                 finish();
             }
         });

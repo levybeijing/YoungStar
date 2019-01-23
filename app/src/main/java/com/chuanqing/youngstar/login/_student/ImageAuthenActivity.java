@@ -1,23 +1,20 @@
 package com.chuanqing.youngstar.login._student;
 
 import android.app.Activity;
-import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.os.Parcelable;
-import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
-import android.support.v4.content.FileProvider;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -37,19 +34,9 @@ import com.chuanqing.youngstar.R;
 import com.chuanqing.youngstar.Urls;
 import com.chuanqing.youngstar.base.BaseActivity;
 import com.chuanqing.youngstar.tools.SharedPFUtils;
-import com.chuanqing.youngstar.tools.StringUtil;
-import com.chuanqing.youngstar.tools.UrlCollect;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
-import com.squareup.picasso.Picasso;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,10 +52,12 @@ public class ImageAuthenActivity extends BaseActivity implements View.OnClickLis
     private RelativeLayout rl2;
     private RelativeLayout rl3;
     private ImageView iv1, iv2, iv3;
+
     private List<Boolean> isOk=new ArrayList<>();
-    private boolean havelable=false;
     private List<String> listName=new ArrayList<>();
-    private String lable="演员";
+    private boolean havelable=false;
+    private String lable;
+    private float density;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -76,12 +65,18 @@ public class ImageAuthenActivity extends BaseActivity implements View.OnClickLis
         setContentView(R.layout.activity_imageauthen);
 
         student = getIntent().getParcelableExtra("student");
+//        阿里云上传文件的标记集合
         isOk.add(false);
         isOk.add(false);
         isOk.add(false);
+//        阿里云文件名集合  用于上传接口
         listName.add(null);
         listName.add(null);
         listName.add(null);
+//
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+        density = dm.density;
         initView();
     }
 
@@ -105,6 +100,8 @@ public class ImageAuthenActivity extends BaseActivity implements View.OnClickLis
 
         TextView ok=findViewById(R.id.tv_ok_imgthen);
         ok.setOnClickListener(this);
+
+        findViewById(R.id.iv_back_imgauthen).setOnClickListener(this);
     }
 
     @Override
@@ -134,21 +131,24 @@ public class ImageAuthenActivity extends BaseActivity implements View.OnClickLis
                 startActivityForResult(intent4, 204);
                 break;
             case R.id.tv_ok_imgthen:
-//                if (!havelable){
-//                    Toast.makeText(this, "请添加标签", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
+                if (!havelable){
+                    Toast.makeText(this, "请添加标签", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 for (int i = 0; i < isOk.size(); i++) {
                     if (!isOk.get(i)){
                         Toast.makeText(this, "图片上传未成功", Toast.LENGTH_SHORT).show();
                         return;
                     }
                 }
+//                请求验证
                 request();
+                break;
+            case R.id.iv_back_imgauthen:
+                finish();
                 break;
         }
     }
-
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -160,30 +160,9 @@ public class ImageAuthenActivity extends BaseActivity implements View.OnClickLis
         if (resultCode==Activity.RESULT_OK){
             switch (requestCode){
                 case 202:
-                    if (resultCode == RESULT_OK) {//resultcode是setResult里面设置的code值
-                        String path;
-
-                        try {
-                            Uri selectedImage = data.getData(); //获取系统返回的照片的Uri
-                            String[] filePathColumn = {MediaStore.Images.Media.DATA};
-                            Cursor cursor = getContentResolver().query(selectedImage,
-                                    filePathColumn, null, null, null);//从系统表中查询指定Uri对应的照片
-                            cursor.moveToFirst();
-                            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                            path = cursor.getString(columnIndex);  //获取照片路径
-                            Log.e("==========", "onActivityResult: "+path);
-                            cursor.close();
-                            Bitmap bitmap = BitmapFactory.decodeFile(path);
-                            iv1.setImageBitmap(bitmap);
-                            findViewById(R.id.tv1_imgauthen).setVisibility(View.INVISIBLE);
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+                    if (resultCode==RESULT_OK){
+                        handleImg(202,data);
                     }
-//                    if (resultCode==RESULT_OK){
-//                        handleImg(202,data);
-//                    }
                     break;
                 case 203:
                     if (resultCode==RESULT_OK){
@@ -196,30 +175,35 @@ public class ImageAuthenActivity extends BaseActivity implements View.OnClickLis
                     }
                     break;
                 case FORLABLE:
-//                    if (requestCode!=200){
-//                        break;
-//                    }
-//                    String lable1 = data.getStringExtra("lable1");
-//                    String lable2 = data.getStringExtra("lable2");
-//                    if (lable1 ==null|| lable1.length()==0){
-//                    }else{
-//                        havelable=true;
-//                        TextView tv1=new TextView(this);
-//                        tv1.setText(lable1);
-//                        tv1.setBackground(getResources().getDrawable(R.mipmap.bg_red,null));
-//                        ll_lable.addView(tv1);
-//                        lable=lable1;
-//                    }
-//
-//                    if (lable2 ==null|| lable2.length()==0){
-//                    }else{
-//                        havelable=true;
-//                        TextView tv2=new TextView(this);
-//                        tv2.setText(lable2);
-//                        tv2.setBackground(getResources().getDrawable(R.mipmap.bg_red,null));
-//                        ll_lable.addView(tv2);
-//                        lable=lable+lable2;
-//                    }
+                    if (resultCode!=RESULT_OK){
+                        break;
+                    }
+                    String lable1 = data.getStringExtra("lable1");
+                    String lable2 = data.getStringExtra("lable2");
+                    if (lable1 !=null&&lable1.length()!=0){
+                        havelable=true;
+                        TextView tv1=new TextView(this);
+                        tv1.setGravity(Gravity.CENTER);
+                        tv1.setWidth((int) (60*density));
+                        tv1.setHeight((int) (30*density));
+                        tv1.setText(lable1);
+                        tv1.setTextColor(Color.parseColor("#FFFFFF"));
+                        tv1.setBackground(getResources().getDrawable(R.mipmap.bg_red,null));
+                        ll_lable.addView(tv1);
+                        lable=lable1;
+                    }
+                    if (lable2 !=null&&lable2.length()!=0){
+                        havelable=true;
+                        TextView tv2=new TextView(this);
+                        tv2.setGravity(Gravity.CENTER);
+                        tv2.setWidth((int) (60*density));
+                        tv2.setHeight((int) (30*density));
+                        tv2.setText(lable2);
+                        tv2.setTextColor(Color.parseColor("#FFFFFF"));
+                        tv2.setBackground(getResources().getDrawable(R.mipmap.bg_red,null));
+                        ll_lable.addView(tv2);
+                        lable+=lable2;
+                    }
                     break;
             }
         }
@@ -247,20 +231,20 @@ public class ImageAuthenActivity extends BaseActivity implements View.OnClickLis
                 findViewById(R.id.tv1_imgauthen).setVisibility(View.INVISIBLE);
                 iv1.setImageBitmap(bitmap);
                 listName.set(0,name);
-//                uploadOss(202,name,path);
+                uploadOss(202,name,path);
                 break;
             case 203:
                 findViewById(R.id.tv2_imgauthen).setVisibility(View.INVISIBLE);
                 iv2.setImageBitmap(bitmap);
                 listName.set(1,name);
-//                uploadOss(203,name,path);
+                uploadOss(203,name,path);
 
                 break;
             case 204:
                 findViewById(R.id.tv3_imgauthen).setVisibility(View.INVISIBLE);
                 iv3.setImageBitmap(bitmap);
                 listName.set(2,name);
-//                uploadOss(204,name,path);
+                uploadOss(204,name,path);
 
                 break;
         }
@@ -277,9 +261,9 @@ public class ImageAuthenActivity extends BaseActivity implements View.OnClickLis
     }
     //     阿里云上传文件
     private void uploadOss(int code,String name,String path){
-
+        String s = SharedPFUtils.getParam(this,"usercode","")+File.separator+name;
 // 构造上传请求
-        PutObjectRequest put = new PutObjectRequest("star-1", name, path);
+        PutObjectRequest put = new PutObjectRequest("star-1", s, path);
 
 // 异步上传时可以设置进度回调
         put.setProgressCallback(new OSSProgressCallback<PutObjectRequest>() {
