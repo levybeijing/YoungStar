@@ -48,7 +48,6 @@ public class SquareStarShowAdaper extends RecyclerView.Adapter<SquareStarShowAda
         final SquareStarShowBean squareStarShowBean = arrayList.get(position);
         String tuUrl = Api.ossurl+squareStarShowBean.getData().getPageInfo().getList().get(position).getBlog_img();
 //        Log.e("图片显示地址",tuUrl);
-
         viewHolder.tv_number.setText(squareStarShowBean.getData().getPageInfo().getList().get(position).getNum()+"");
         //类型1（图片）2（视频）3（音频）
         if (squareStarShowBean.getData().getPageInfo().getList().get(position).getMedia_type()==1){
