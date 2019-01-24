@@ -5,15 +5,16 @@
     android:layout_width="wrap_content"
    >
     <ImageView
-        android:id="@+id/publishs_items_img"
-        android:layout_width="110dp"
-        android:layout_height="110dp"
+        android:id="@+id/publishs_img_items_img"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
         android:layout_marginBottom="10dp"
         android:scaleType="fitXY" />
     <ImageView
-        android:id="@+id/publishs_items_img_no"
+        android:id="@+id/publishs_img_items_img_no"
         android:layout_width="15dp"
         android:layout_height="15dp"
-        android:layout_marginLeft="95dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="150dp"
         android:src="@mipmap/img_yichu"/>
 </RelativeLayout>

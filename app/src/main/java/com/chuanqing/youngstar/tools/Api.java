@@ -65,4 +65,15 @@ public class Api {
 
     //发布动态
     public static String updongtai = apiurl+"/Star/user/addUserBlog";
+
+    /**
+     * 1.获取作品集编码
+     * 2.添加多媒体资料
+     * 3.删除作品集资料
+     * 4.上传作品集
+     */
+    public static String getcode = apiurl+"/Star/user/addUserCollection";
+    public static String addzuopin = apiurl+"/Star/user/addUserMedia";
+    public static String deletezuopin = apiurl+"/Star/user/deleteUserMedia";
+    public static String upzuopin = apiurl+"/Star/user/updateUserCollection";
 }

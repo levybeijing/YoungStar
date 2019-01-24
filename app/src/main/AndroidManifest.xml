@@ -13,8 +13,9 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission
-        android:name="android.permission.WRITE_SETTINGS"
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"
+        tools:ignore="ProtectedPermissions"></uses-permission>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
         tools:ignore="ProtectedPermissions" />
     <uses-permission
         android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
@@ -31,14 +32,16 @@
         android:supportsRtl="true"
         android:theme="@style/TranslucentTheme"
         >
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".SpleashActivity"
-            >
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".SpleashActivity"
+            >
+
         </activity>
 
         <activity android:name="._home.WebViewActivity"/>
@@ -122,6 +125,7 @@
         <activity android:name="._add.TapeActivity">
 
         </activity>
+        <activity android:name="._add.TapeZuopinActivity"></activity>
     </application>
 
 </manifest>

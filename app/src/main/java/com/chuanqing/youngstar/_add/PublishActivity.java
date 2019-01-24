@@ -106,8 +106,10 @@ public class PublishActivity extends BaseActivity{
     PublishAdapter adapter;
     ArrayList<String>  arrayList = new ArrayList<>();
     //视频播放器
-    @BindView(R.id.starshow_more_player)
+    @BindView(R.id.publish_player)
     JzvdStd player;
+    @BindView(R.id.publish_player_img)
+    ImageView player_img;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -303,13 +305,17 @@ public class PublishActivity extends BaseActivity{
             }
         });
 
-        player.setOnClickListener(new View.OnClickListener() {
+        player_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                media_type = "2";
-                //直接跳到系统相册去选取视频
-                Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Video.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent, REQUEST_CODE_PICK);
+//                media_type = "2";
+//                //直接跳到系统相册去选取视频
+//                Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Video.Media.EXTERNAL_CONTENT_URI);
+//                startActivityForResult(intent, REQUEST_CODE_PICK);
+                player.setVisibility(View.GONE);
+                player_img.setVisibility(View.GONE);
+                img_up_info.setVisibility(View.VISIBLE);
+
             }
         });
     }
@@ -352,6 +358,7 @@ public class PublishActivity extends BaseActivity{
                 if (window.isShowing()){
                     window.dismiss();
                     player.setVisibility(View.GONE);
+                    player_img.setVisibility(View.GONE);
                     //多选
                     PhotoPickerIntent intent = new PhotoPickerIntent(PublishActivity.this);
                     intent.setSelectModel(SelectModel.MULTI);
@@ -576,7 +583,6 @@ public class PublishActivity extends BaseActivity{
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (data==null){
-            player.setVisibility(View.GONE);
             return;
         }
         if (resultCode == RESULT_OK) {
@@ -595,6 +601,7 @@ public class PublishActivity extends BaseActivity{
                 // 选择照片
                 case REQUEST_CODE_CHOOSE:
                     refreshAdpater(data.getStringArrayListExtra(PhotoPickerActivity.EXTRA_RESULT));
+
                     break;
 //            // 多选
                 case REQUEST_CAMERA_CODE:
@@ -616,6 +623,7 @@ public class PublishActivity extends BaseActivity{
 //                    String number= cursor.getString(0); // 视频编号
                     pathvideo_bendi = cursor.getString(1); // 视频文件路径
                     player.setVisibility(View.VISIBLE);
+                    player_img.setVisibility(View.VISIBLE);
                     img_up_info.setVisibility(View.GONE);
                     player.setUp(pathvideo_bendi, "", Jzvd.SCREEN_WINDOW_NORMAL);
 
@@ -627,6 +635,8 @@ public class PublishActivity extends BaseActivity{
 //                    Log.e("-----","v_name="+name);
 
                     break;
+
+
             }
         }
     }
@@ -960,7 +970,7 @@ public class PublishActivity extends BaseActivity{
             public void onSuccess(PutObjectRequest request, PutObjectResult result) {
                 Log.e("测试上传视频","https://star-1.oss-cn-beijing.aliyuncs.com/"+objectname);
                 pathvideo_address = objectname;
-                upinfo(img_path,imgname);
+                upinfo(pathvideo_address,imgname);
             }
 
             @Override

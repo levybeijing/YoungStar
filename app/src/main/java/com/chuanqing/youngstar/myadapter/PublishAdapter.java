@@ -37,7 +37,9 @@ public class PublishAdapter extends RecyclerView.Adapter<PublishAdapter.ViewHold
             viewHolder.imageView.setImageDrawable(context.getResources().getDrawable(R.mipmap.up_tupian));
             if (i==8){
                 viewHolder.imageView.setVisibility(View.GONE);
+                viewHolder.imageView_no.setVisibility(View.GONE);
             }else {
+                viewHolder.imageView_no.setVisibility(View.GONE);
                 viewHolder.imageView.setVisibility(View.VISIBLE);
             }
             //点击事件
@@ -50,6 +52,14 @@ public class PublishAdapter extends RecyclerView.Adapter<PublishAdapter.ViewHold
         }else {
             Uri uri = Uri.parse(arrayList.get(i));
             viewHolder.imageView.setImageURI(uri);
+            viewHolder.imageView_no.setVisibility(View.VISIBLE);
+            viewHolder.imageView_no.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    arrayList.remove(i);
+                    notifyDataSetChanged();
+                }
+            });
         }
 //        viewHolder.imageView.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -66,9 +76,11 @@ public class PublishAdapter extends RecyclerView.Adapter<PublishAdapter.ViewHold
     }
     class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
+        ImageView imageView_no;
         public ViewHolder(View view){
             super(view);
             imageView = view.findViewById(R.id.publishs_items_img);
+            imageView_no = view.findViewById(R.id.publishs_items_img_no);
         }
     }
 
