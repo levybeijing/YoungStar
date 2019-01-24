@@ -1,27 +1,49 @@
 package com.chuanqing.youngstar._mine;
 
 
-import android.os.Build;
+import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.chuanqing.youngstar.R;
+import com.chuanqing.youngstar.Urls;
+import com.chuanqing.youngstar._mine.company.FragmentJob;
+import com.chuanqing.youngstar._mine.company.FragmentPublish;
 import com.chuanqing.youngstar._mine.student.FragmentStatus;
 import com.chuanqing.youngstar._mine.student.FragmentWorks;
+import com.chuanqing.youngstar.login.choose.ChooseActivity;
 import com.chuanqing.youngstar.myadapter.AdapterMineVP;
+import com.chuanqing.youngstar.myadapter.AdapterMineiRV;
+import com.chuanqing.youngstar.mybean.FragJobBean;
+import com.chuanqing.youngstar.mybean.FragMinecBean;
+import com.chuanqing.youngstar.mybean.FragMinesBean;
+import com.chuanqing.youngstar.mybean.MineWorksBean;
+import com.chuanqing.youngstar.tools.CircleImageView;
+import com.chuanqing.youngstar.tools.SharedPFUtils;
+import com.google.gson.Gson;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.StringCallback;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Response;
 
 /**
  * 我的页面
@@ -30,41 +52,112 @@ import java.util.List;
 public class MineFragment extends Fragment implements View.OnClickListener {
 
     private List<Fragment> list=new ArrayList<>();
-
+    private int identity=4;
+    //    11111111111
     private ViewPager vp;
+    private TextView tv1;
+    private TextView tv2;
+    private TextView tv3;
+    private TextView tv_wallet;
+    private TextView tv_lable;
+    private TextView tv_id;
+    private CircleImageView iv_photo;
+    private ImageView iv_sex;
+    //    22222222222
+    private ViewPager vp2;
+    private ImageView iv2_photo;
+    private TextView tv2_id;
+    private TextView tv2_wallet;
+    private TextView tv2_care;
+//    3333333333
+    private ImageView iv3_photo;
+    private TextView iv3_wallet;
+    private TextView iv3_care;
+    private int pagei=1;
+    private AdapterMineiRV adapter3;
+    private ImageView iv4_photo;
+    private TextView tv4_id;
+    private TextView tv4_change;
+    private TextView tv4_wallet;
+    private TextView tv4_care;
 
+    //
     public MineFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_mine_stu, container, false);
+//        identity = (int) SharedPFUtils.getParam(getContext(), "identity", 4);
+//        switch (identity){
+//            case 1:
+//                return inflater.inflate(R.layout.fragment_mines, container, false);
+//            case 2:
+//                return inflater.inflate(R.layout.fragment_minec, container, false);
+//            case 3:
+//                return inflater.inflate(R.layout.fragment_minei, container, false);
+//            case 4:
+//                return inflater.inflate(R.layout.fragment_minef, container, false);
+//        }
+        list.clear();
+        return inflater.inflate(R.layout.fragment_minef, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        vp = view.findViewById(R.id.vp_mines);
-        TabLayout tab = view.findViewById(R.id.tab_mines);
+        switch (identity){
+            case 1:
+                vp = view.findViewById(R.id.vp_mines);
 
-        RadioButton rb1 = view.findViewById(R.id.rb1_mines);
-        RadioButton rb2 = view.findViewById(R.id.rb2_mines);
-        rb1.setOnClickListener(this);
-        rb2.setOnClickListener(this);
+                RadioButton rb1 = view.findViewById(R.id.rb1_mines);
+                RadioButton rb2 = view.findViewById(R.id.rb2_mines);
+                rb1.setOnClickListener(this);
+                rb2.setOnClickListener(this);
 
+                tv1 = view.findViewById(R.id.tv1_mines);
+                tv2 = view.findViewById(R.id.tv2_mines);
+                tv3 = view.findViewById(R.id.tv3_mines);
 
-        list.add(new FragmentStatus());
-        list.add(new FragmentWorks());
-        vp.setAdapter(new AdapterMineVP(getChildFragmentManager(),list));
+                tv_wallet = view.findViewById(R.id.tv_wallet_mines);
+                tv_lable = view.findViewById(R.id.tv_lable_mines);
+                tv_id = view.findViewById(R.id.tv_id_mines);
 
-        tab.setTabMode(TabLayout.MODE_FIXED);
-        tab.setupWithViewPager(vp);
+                iv_photo = view.findViewById(R.id.iv_photo_mines);
+                iv_sex = view.findViewById(R.id.iv_sex_mines);
 
-        TabLayout.Tab tab1 = tab.getTabAt(0);
-        tab1.setText("动态");
-        TabLayout.Tab tab2 = tab.getTabAt(1);
-        tab2.setText("作品集");
+                list.add(new FragmentStatus());
+                list.add(new FragmentWorks());
+                vp.setAdapter(new AdapterMineVP(getChildFragmentManager(),list));
 
+                TabLayout tab = view.findViewById(R.id.tab_mines);
+                tab.setTabMode(TabLayout.MODE_FIXED);
+                tab.setupWithViewPager(vp);
+
+                TabLayout.Tab tab11 = tab.getTabAt(0);
+                tab11.setText("动态");
+                TabLayout.Tab tab12 = tab.getTabAt(1);
+                tab12.setText("作品集");
+
+                vp.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                    @Override
+                    public void onPageScrolled(int i, float v, int i1) {
+
+                    }
+
+                    @Override
+                    public void onPageSelected(int i) {
+                        if (i==0){
+                            rb1.setChecked(true);
+                        }else{
+                            rb2.setChecked(true);
+                        }
+                    }
+
+                    @Override
+                    public void onPageScrollStateChanged(int i) {
+
+                    }
+                });
 //        //设置tab1
 //        TabLayout.Tab tab1 = tab.getTabAt(0);
 ////        tab1.setCustomView(R.layout.item_tab_mall);//给每一个tab设置view
@@ -80,6 +173,161 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 ////        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
 ////            iv2.setBackground(getResources().getDrawable(R.mipmap.tab_gift));//设置tab上的文字
 ////        }
+                break;
+            case 2:
+                iv2_photo = view.findViewById(R.id.iv_photo_minec);
+                tv2_id = view.findViewById(R.id.tv_id_minec);
+                tv2_wallet = view.findViewById(R.id.tv_wallet_minec);
+                tv2_care = view.findViewById(R.id.tv_care_minec);
+
+                RadioButton rb21 = view.findViewById(R.id.rb1_minec);
+                RadioButton rb22 = view.findViewById(R.id.rb2_minec);
+                rb21.setOnClickListener(this);
+                rb22.setOnClickListener(this);
+
+                vp2 = view.findViewById(R.id.vp_minec);
+
+                vp2.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                    @Override
+                    public void onPageScrolled(int i, float v, int i1) {
+
+                    }
+
+                    @Override
+                    public void onPageSelected(int i) {
+                        if (i==0){
+                            rb21.setChecked(true);
+                        }else{
+                            rb22.setChecked(true);
+                        }
+                    }
+
+                    @Override
+                    public void onPageScrollStateChanged(int i) {
+
+                    }
+                });
+
+                list.add(new FragmentPublish());
+                list.add(new FragmentJob());
+
+                AdapterMineVP adapter=new AdapterMineVP(getChildFragmentManager(),list);
+                vp2.setAdapter(adapter);
+
+                TabLayout tab2 = view.findViewById(R.id.tab_minec);
+                tab2.setTabMode(TabLayout.MODE_FIXED);
+                tab2.setupWithViewPager(vp2);
+
+                TabLayout.Tab tab21 = tab2.getTabAt(0);
+                tab21.setText("公告");
+                TabLayout.Tab tab22 = tab2.getTabAt(1);
+                tab22.setText("星职场");
+            case 3:
+                iv3_photo = view.findViewById(R.id.iv_photo_minei);
+                iv3_wallet = view.findViewById(R.id.tv_wallet_minei);
+                iv3_care = view.findViewById(R.id.tv_care_minei);
+
+                RecyclerView rv3 = view.findViewById(R.id.rv_minei);
+                GridLayoutManager manager=new GridLayoutManager(getContext(),3);
+                rv3.setLayoutManager(manager);
+
+                adapter3 = new AdapterMineiRV(getContext());
+                rv3.setAdapter(adapter3);
+                requestWorks();
+            case 4:
+                iv4_photo = view.findViewById(R.id.iv_photo_minef);
+                tv4_id = view.findViewById(R.id.tv_id_minef);
+                view.findViewById(R.id.tv_change_minef).setOnClickListener(this);
+                tv4_wallet = view.findViewById(R.id.tv_wallet_minef);
+                tv4_care = view.findViewById(R.id.tv_care_minef);
+                view.findViewById(R.id.iv_msg_minef).setOnClickListener(this);
+
+                RecyclerView rv4 = view.findViewById(R.id.rv_minef);
+                GridLayoutManager manager4=new GridLayoutManager(getContext(),3);
+                rv4.setLayoutManager(manager4);
+
+                adapter3 = new AdapterMineiRV(getContext());
+                rv4.setAdapter(adapter3);
+
+                requestWorks();
+                break;
+        }
+        request();
+    }
+
+    private void requestWorks() {
+        OkGo.post(Urls.getBlogsINMy)//
+                .tag(this)//
+                .params("userCode", (String)SharedPFUtils.getParam(getContext(),"usercode",""))//文件名
+                .params("page", pagei)//墙的ID
+                .params("pageSize", 15)//缩略图 省略>?
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(String s, Call call, Response response) {
+//                        Log.e("=============", "getBlogsINMy"+s);
+                        MineWorksBean bean = new Gson().fromJson(s, MineWorksBean.class);
+                        List<MineWorksBean.DataBean.PageInfoBean.ListBean> list = bean.getData().getPageInfo().getList();
+                        adapter3.setData(list);
+                    }
+                });
+    }
+
+    private void request() {
+        OkGo.post(Urls.getUserByCode)//
+                .tag(this)//
+                .params("userCode", (String) SharedPFUtils.getParam(getContext(),"usercode",""))//文件名
+                .params("type",4)
+//将来写成 identity
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(String s, Call call, Response response) {
+                        Log.e("=============", "MineFragment"+s);
+                        switch (identity)
+                        {
+                            case 1:
+                                FragMinesBean.DataBean data = new Gson().fromJson(s, FragMinesBean.class).getData();
+//保存属性值 将来写到拦截器里面
+                                SharedPFUtils.setParam(getActivity(),"identity",data.getType());
+
+                                tv_id.setText(data.getUser_code()+"");
+                                tv_wallet.setText(data.getStandard_coin()+"");
+                                tv_lable.setText(data.getLabel());
+
+                                tv1.setText(data.getActivityUserNum()+"");
+                                tv2.setText(data.getUserRecommend()+"");
+                                tv3.setText(data.getUserConcernNum()+"");
+
+                                switch (data.getSex()){
+                                    case "男":
+                                        iv_sex.setImageBitmap(BitmapFactory.decodeResource(getContext().getResources(),R.mipmap.sex_man));
+                                        break;
+                                    case "女":
+                                        iv_sex.setImageBitmap(BitmapFactory.decodeResource(getContext().getResources(),R.mipmap.sex_woman));
+                                        break;
+                                }
+                                Glide.with(getActivity())
+                                        .load(Urls.IMAGEURL+data.getUser_img())
+                                        .into(iv_photo);
+                                break;
+                            case 2:
+                                FragMinecBean bean2 = new Gson().fromJson(s, FragMinecBean.class);
+                                FragMinecBean.DataBean data2 = bean2.getData();
+                                tv2_id.setText(data2.getUser_code());
+                                tv2_wallet.setText(data2.getStandard_coin()+"");
+                                tv2_care.setText(data2.getUserConcernNum()+"");
+                                Glide.with(getActivity()).load(Urls.IMAGEURL+data2.getUser_img()).into(iv2_photo);
+                                break;
+                            case 3:
+
+                                break;
+                            case 4:
+
+                                break;
+
+                        }
+
+                    }
+                });
     }
 
     @Override
@@ -91,6 +339,22 @@ public class MineFragment extends Fragment implements View.OnClickListener {
             case R.id.rb2_mines:
                 vp.setCurrentItem(1);
                 break;
+            case R.id.rb1_minec:
+                vp2.setCurrentItem(0);
+                break;
+            case R.id.rb2_minec:
+                vp2.setCurrentItem(1);
+                break;
+            case R.id.iv_msg_mines:
+            case R.id.iv_msg_minec:
+            case R.id.iv_msg_minei:
+            case R.id.iv_msg_minef:
+                startActivity(new Intent(getActivity(),OfficalMsgActivity.class));
+                break;
+            case R.id.tv_change_minef:
+                startActivity(new Intent(getActivity(), ChooseActivity.class));
+                break;
         }
     }
+
 }
