@@ -94,6 +94,7 @@ public class EditPhotocActivity extends BaseActivity implements View.OnClickList
                 break;
         }
     }
+
     private void checked(int i){
         checkedNum=i;
         i=i-1;

@@ -1,13 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@mipmap/bg_statusbar"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="消息"
+            android:textColor="#FFF"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="13dp"
+            android:textSize="18dp"
+            />
+        <ImageView
+            android:id="@+id/iv_back_officemsg"
+            android:layout_width="12dp"
+            android:layout_height="21dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="13dp"
+            android:background="@mipmap/back_top"
+            android:layout_alignParentBottom="true"
+            />
+    </RelativeLayout>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_officalmsg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="60dp"
         />
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

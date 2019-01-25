@@ -5,6 +5,32 @@
     android:layout_height="match_parent"
     android:id="@+id/rl_root_authen"
     >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@mipmap/bg_statusbar"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="个人资料填写"
+            android:textColor="#FFF"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="13dp"
+            android:textSize="18dp"
+            />
+        <ImageView
+            android:id="@+id/iv_back_authen"
+            android:layout_width="12dp"
+            android:layout_height="21dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="13dp"
+            android:background="@mipmap/back_top"
+            android:layout_alignParentBottom="true"
+            />
+    </RelativeLayout>
     <!---->
     <com.chuanqing.youngstar.widget.CirImageView
         android:id="@+id/iv_logo_authen"

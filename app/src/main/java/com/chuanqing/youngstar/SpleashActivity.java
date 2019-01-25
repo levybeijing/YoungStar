@@ -66,17 +66,17 @@ public class SpleashActivity extends BaseActivity {
             public void onAnimationEnd(Animation animation) {
                 boolean islogin = (boolean) SharedPFUtils.getParam(SpleashActivity.this, "islogin", false);
                 int identity = (int) SharedPFUtils.getParam(SpleashActivity.this, "identity", -1);
-//                if (islogin){
-//                    if (identity>0){
-//                        startActivity(new Intent(SpleashActivity.this,MainActivity.class));
-//                    }else{
-//                        startActivity(new Intent(SpleashActivity.this,ChooseActivity.class));
-//                    }
-//                }else{
-//                    startActivity(new Intent(SpleashActivity.this,LoginActivity.class));
-//                }
+                if (islogin){
+                    if (identity>0){
+                        startActivity(new Intent(SpleashActivity.this,MainActivity.class));
+                    }else{
+                        startActivity(new Intent(SpleashActivity.this,ChooseActivity.class));
+                    }
+                }else{
+                    startActivity(new Intent(SpleashActivity.this,LoginActivity.class));
+                }
 
-                startActivity(new Intent(SpleashActivity.this, ImageAuthenActivity.class));
+//                startActivity(new Intent(SpleashActivity.this, ImageAuthenActivity.class));
 
                 finish();
             }

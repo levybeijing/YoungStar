@@ -12,7 +12,7 @@ public class Urls {
     //    图片存储路径
     public static final String IMGPATH = Environment.getExternalStorageDirectory().getAbsolutePath()+ File.separator+"star/img/";
     //    OSS 阿里上传路径  图片命名规范:2483989924/20190107 1354459140.png
-    public static final String IMAGEURL = "https://star-1.oss-cn-beijing.aliyuncs.com";
+    public static final String IMAGEURL = "https://star-1.oss-cn-beijing.aliyuncs.com/";
 
     public static final String HOST = "http://39.107.70.80:8080/";
     //    获取验证码
@@ -41,8 +41,22 @@ public class Urls {
     public static final String getCompanyBlog = HOST + "Star/user/getCompanyBlog";
     //    我的公司招聘
     public static final String getEmploy = HOST + "Star/user/getEmploy";
+    //   粉丝投资人我的
+    public static final String getBlogsINMy = HOST + "Star/user/getBlogsINMy";
+    //   官方消息
+    public static final String getUserSystemInfo = HOST + "Star/user/getUserSystemInfo";
+    //   官方消息详情
+    public static final String getUserSystemInfoDetails = HOST + "Star/user/getUserSystemInfoDetails";
+    //   删除官方消息
+    public static final String deleteSystemINFO = HOST + "Star/user/deleteSystemINFO";
+
     //    我的钱包信息
     public static final String getUserWallet = HOST + "Star/user/getUserWallet";
-    //
+    //    学生参加的活动
+    public static final String getActivityUser = HOST + "Star/user/getActivityUser";
+    //    我关注的学生
+    public static final String getUserConcernStudent = HOST + "Star/user/getUserConcernStudent";
+    //    学生关注的公司
+    public static final String getUserConcernCompany = HOST + "Star/user/getUserConcernCompany";
 
 }

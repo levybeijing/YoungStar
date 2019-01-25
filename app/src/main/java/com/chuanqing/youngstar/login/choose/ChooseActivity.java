@@ -35,8 +35,7 @@ public class ChooseActivity  extends BaseActivity implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.iv_student_choose:
-//                startActivity(new Intent(ChooseActivity.this,AuthenActivity.class));
-                startActivity(new Intent(ChooseActivity.this,ImageAuthenActivity.class));
+                startActivity(new Intent(ChooseActivity.this,AuthenActivity.class));
                 break;
             case R.id.iv_invest_choose:
                 startActivity(new Intent(ChooseActivity.this,InvestAuthenActivity.class));

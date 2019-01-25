@@ -33,13 +33,15 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-//导入tablayout
+
+    implementation 'com.android.support:design:28.0.0' //导入tablayout
     implementation 'com.jakewharton:butterknife:8.8.1' //butterknife包使用
+    implementation 'com.android.support:support-v4:28.0.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'//butterknife包使用
     implementation 'com.youth.banner:banner:+' //轮播
     //加载网络图片
-    implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'com.github.bumptech.glide:glide:3.7.0'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'com.lzy.net:okgo:2.0.0'
     //RxJava扩展支持，根据需要添加
     implementation 'com.lzy.net:okserver:1.1.0'
@@ -48,6 +50,7 @@ dependencies {
     implementation 'cn.jzvd:jiaozivideoplayer:6.4.1'
 //    阿里服务器
     implementation 'com.aliyun.dpa:oss-android-sdk:+'
+
     //图片选择器
     implementation 'com.foamtrace:photopicker:1.0'
     //导入自定义加载等待Dialog弹窗控件  下

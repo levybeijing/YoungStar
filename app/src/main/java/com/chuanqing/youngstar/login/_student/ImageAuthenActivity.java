@@ -29,11 +29,14 @@ import com.alibaba.sdk.android.oss.callback.OSSProgressCallback;
 import com.alibaba.sdk.android.oss.internal.OSSAsyncTask;
 import com.alibaba.sdk.android.oss.model.PutObjectRequest;
 import com.alibaba.sdk.android.oss.model.PutObjectResult;
+import com.chuanqing.youngstar.MainActivity;
 import com.chuanqing.youngstar.MyApplication;
 import com.chuanqing.youngstar.R;
 import com.chuanqing.youngstar.Urls;
 import com.chuanqing.youngstar.base.BaseActivity;
+import com.chuanqing.youngstar.login.bean.CommenBean;
 import com.chuanqing.youngstar.tools.SharedPFUtils;
+import com.google.gson.Gson;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import java.io.File;
@@ -63,7 +66,7 @@ public class ImageAuthenActivity extends BaseActivity implements View.OnClickLis
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_imageauthen);
-
+//
         student = getIntent().getParcelableExtra("student");
 //        阿里云上传文件的标记集合
         isOk.add(false);
@@ -138,7 +141,7 @@ public class ImageAuthenActivity extends BaseActivity implements View.OnClickLis
                 for (int i = 0; i < isOk.size(); i++) {
                     if (!isOk.get(i)){
                         Toast.makeText(this, "图片上传未成功", Toast.LENGTH_SHORT).show();
-                        return;
+//                        return;
                     }
                 }
 //                请求验证
@@ -178,14 +181,16 @@ public class ImageAuthenActivity extends BaseActivity implements View.OnClickLis
                     if (resultCode!=RESULT_OK){
                         break;
                     }
+                    ll_lable.removeAllViews();
                     String lable1 = data.getStringExtra("lable1");
                     String lable2 = data.getStringExtra("lable2");
                     if (lable1 !=null&&lable1.length()!=0){
                         havelable=true;
                         TextView tv1=new TextView(this);
                         tv1.setGravity(Gravity.CENTER);
-                        tv1.setWidth((int) (60*density));
-                        tv1.setHeight((int) (30*density));
+                        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                                (int) (60*density), (int) (30*density));
+                        tv1.setLayoutParams(lp);
                         tv1.setText(lable1);
                         tv1.setTextColor(Color.parseColor("#FFFFFF"));
                         tv1.setBackground(getResources().getDrawable(R.mipmap.bg_red,null));
@@ -196,8 +201,9 @@ public class ImageAuthenActivity extends BaseActivity implements View.OnClickLis
                         havelable=true;
                         TextView tv2=new TextView(this);
                         tv2.setGravity(Gravity.CENTER);
-                        tv2.setWidth((int) (60*density));
-                        tv2.setHeight((int) (30*density));
+                        LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(
+                                (int) (60*density), (int) (30*density));
+                        tv2.setLayoutParams(lp2);
                         tv2.setText(lable2);
                         tv2.setTextColor(Color.parseColor("#FFFFFF"));
                         tv2.setBackground(getResources().getDrawable(R.mipmap.bg_red,null));
@@ -248,8 +254,6 @@ public class ImageAuthenActivity extends BaseActivity implements View.OnClickLis
 
                 break;
         }
-//  进行操作
-
     }
 
     public  String getName(String path) {
@@ -264,6 +268,7 @@ public class ImageAuthenActivity extends BaseActivity implements View.OnClickLis
         String s = SharedPFUtils.getParam(this,"usercode","")+File.separator+name;
 // 构造上传请求
         PutObjectRequest put = new PutObjectRequest("star-1", s, path);
+        Log.d("=============name", ""+s);
 
 // 异步上传时可以设置进度回调
         put.setProgressCallback(new OSSProgressCallback<PutObjectRequest>() {
@@ -334,6 +339,10 @@ public class ImageAuthenActivity extends BaseActivity implements View.OnClickLis
                     public void onSuccess(String s, Call call, Response response) {
                         Log.e("===========", "onSuccess: "+s);
 //                        然后进入 粉丝状态的界面
+                        CommenBean commenBean = new Gson().fromJson(s, CommenBean.class);
+                        if ("请求成功".equals(commenBean.getMessage())){
+                            startActivity(new Intent(ImageAuthenActivity.this, MainActivity.class));
+                        }
                     }
                 });
     }
