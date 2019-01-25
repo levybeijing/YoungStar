@@ -70,7 +70,9 @@
         <activity android:name=".login._invest.InvestAuthen2Activity"></activity>
         <!--add-->
         <activity android:name="._add.PublishActivity"></activity>
-        <activity android:name="._add.company.RecuitActivity"></activity>
+        <activity android:name="._add.company.RecuitActivity">
+
+        </activity>
         <activity android:name="._add.student.WorksActivity"></activity>
         <activity android:name="._add.AddAudioActivity"></activity>
         <!--mine-->

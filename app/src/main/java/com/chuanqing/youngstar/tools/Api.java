@@ -76,4 +76,14 @@ public class Api {
     public static String addzuopin = apiurl+"/Star/user/addUserMedia";
     public static String deletezuopin = apiurl+"/Star/user/deleteUserMedia";
     public static String upzuopin = apiurl+"/Star/user/updateUserCollection";
+    /**
+     * 招聘参数
+     * 1 招聘人数
+     * 2 薪资
+     * 3 福利待遇
+     */
+    public static String zhaopininfo = apiurl+"/Star/user/getEmployTerm";
+    /**上传招聘信息*/
+    public static String upzhaopininfo = apiurl+"/Star/user/addEmploy";
+
 }

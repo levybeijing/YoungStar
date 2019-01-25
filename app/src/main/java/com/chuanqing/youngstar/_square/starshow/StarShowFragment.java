@@ -31,6 +31,8 @@ import butterknife.ButterKnife;
 import okhttp3.Call;
 import okhttp3.Response;
 
+import static com.chuanqing.youngstar.MainActivity.usercodes;
+
 /**
  * 广场 星秀
  * A simple {@link Fragment} subclass.
@@ -90,7 +92,7 @@ public class StarShowFragment extends Fragment {
                 .params("page", page)
                 .params("pageSize", pageSize)
                 .params("type", 1)
-                .params("userCode", "8572451327") //先写死
+                .params("userCode", usercodes) //先写死
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {

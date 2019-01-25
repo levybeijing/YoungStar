@@ -33,6 +33,8 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.chuanqing.youngstar.MainActivity.identity;
+
 /**
  * 广场页面
  * A simple {@link Fragment} subclass.
@@ -65,23 +67,29 @@ public class SquareFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         showinfo();
         setTtitle();
+
     }
 
     /**
      * 展示信息
      */
     private void showinfo() {
+
         StarShowFragment starShowFragment = new StarShowFragment();
         FollowFragment followFragment = new FollowFragment();
         SquareZhichangFragment zhichangFragment = new SquareZhichangFragment();
+        if (identity==1){
+            //只有学生有这个职场
+            mFragments.add(zhichangFragment);
+            //学生职场
+            list.add("星职场");
+        }
         mFragments.add(starShowFragment);
-        //只有学生有这个职场
-        mFragments.add(zhichangFragment);
+
 
         mFragments.add(followFragment);
         list.add("星秀");
-        //学生职场
-        list.add("星职场");
+
         list.add("关注");
         mTabLayout.setTabMode(TabLayout.MODE_FIXED);
         mTabLayout.setupWithViewPager(mViewpager);

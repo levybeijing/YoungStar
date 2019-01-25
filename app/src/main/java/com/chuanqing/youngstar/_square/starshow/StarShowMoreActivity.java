@@ -52,6 +52,8 @@ import cn.jzvd.JzvdStd;
 import okhttp3.Call;
 import okhttp3.Response;
 
+import static com.chuanqing.youngstar.MainActivity.usercodes;
+
 public class StarShowMoreActivity extends BaseActivity {
     private static final String TAG = "StarShowMoreActivity";
     MediaPlayer mediaPlayer = new MediaPlayer();
@@ -102,7 +104,7 @@ public class StarShowMoreActivity extends BaseActivity {
         OkGo.post(Api.square_starshow_more)
                 .tag(this)
                 .params("userBlogId", getIntent().getStringExtra("userBlogId").toString())
-                .params("userCode", "8572451327") //先写死
+                .params("userCode", usercodes) //先写死
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Response response, Exception e) {
@@ -204,7 +206,7 @@ public class StarShowMoreActivity extends BaseActivity {
                                 public void onClick(View v) {
                                     OkGo.post(Api.dongtaizan)
                                             .tag(this)
-                                            .params("userCode","8572451327")
+                                            .params("userCode",usercodes)
                                             .params("concernCode",starShowMoreBean.getData().getId())
                                             .execute(new StringCallback() {
                                                 @Override
@@ -239,7 +241,7 @@ public class StarShowMoreActivity extends BaseActivity {
                                         if (btn_guanzhu.getText().toString().equals("关注")){
                                             OkGo.post(Api.guanzhu)
                                                     .tag(this)
-                                                    .params("userCode","8572451327")
+                                                    .params("userCode",usercodes)
                                                     .params("concernCode",starShowMoreBean.getData().getUser_code())
                                                     .params("type",starShowMoreBean.getData().getType())
                                                     .execute(new StringCallback() {

@@ -28,6 +28,8 @@ import butterknife.ButterKnife;
 import okhttp3.Call;
 import okhttp3.Response;
 
+import static com.chuanqing.youngstar.MainActivity.usercodes;
+
 /**
  * 参与人
  */
@@ -60,7 +62,7 @@ public class PartakeActivity extends BaseActivity implements XListView.IXListVie
                 .params("page",page)
                 .params("pageSize",pageSize)
                 .params("activityCode",getIntent().getStringExtra("activityCode"))
-                .params("code","145495544327")
+                .params("code",usercodes)
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Response response, Exception e) {

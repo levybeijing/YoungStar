@@ -26,6 +26,8 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.chuanqing.youngstar.MainActivity.identity;
+
 /**
  * 星活动页面
  * A simple {@link Fragment} subclass.
@@ -66,12 +68,16 @@ public class StarActivityFragment extends Fragment {
         StarleitaiFragment starShowFragment = new StarleitaiFragment();
         StarbangFragment starbangFragment = new StarbangFragment();
         ZhaopinFragment zhaopinFragment = new ZhaopinFragment();
+
+        if (identity==1){
+            mFragments.add(zhaopinFragment);
+            list.add("星职场");
+        }
         mFragments.add(starShowFragment);
         mFragments.add(starbangFragment);
-        mFragments.add(zhaopinFragment);
+
         list.add("星擂台");
         list.add("星榜");
-        list.add("星职场");
         mTabLayout.setTabMode(TabLayout.MODE_FIXED);
         mTabLayout.setupWithViewPager(mViewpager);
         mViewpager.setAdapter(new TablayoutAdapter(getFragmentManager(),mFragments,list));

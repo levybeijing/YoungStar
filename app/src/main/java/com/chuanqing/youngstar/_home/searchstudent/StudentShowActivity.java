@@ -37,6 +37,9 @@ import butterknife.ButterKnife;
 import okhttp3.Call;
 import okhttp3.Response;
 
+import static com.chuanqing.youngstar.MainActivity.identity;
+import static com.chuanqing.youngstar.MainActivity.usercodes;
+
 /**
  * 搜索页面
  */
@@ -84,6 +87,12 @@ public class StudentShowActivity extends AppCompatActivity  implements XListView
     @BindView(R.id.no_info)
     TextView tv_noinfo;
     private void searchinfo(){
+        if (identity==1){
+            relativeLayout3.setVisibility(View.VISIBLE);
+        }else {
+            relativeLayout3.setVisibility(View.GONE);
+        }
+
         //第一个展示，其他的隐藏
         view1.setVisibility(View.VISIBLE);
         view2.setVisibility(View.GONE);
@@ -178,7 +187,7 @@ public class StudentShowActivity extends AppCompatActivity  implements XListView
                 .params("page",page)
                 .params("pageSize",pageSize)
                 .params("keyWord",edt_info.getText().toString())
-                .params("code","8572451327")//先写死
+                .params("code",usercodes)//先写死
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Response response, Exception e) {
@@ -349,7 +358,7 @@ public class StudentShowActivity extends AppCompatActivity  implements XListView
                 .params("page",page2)
                 .params("pageSize",pageSize2)
                 .params("keyWord",edt_info.getText().toString())
-                .params("code","8572451327")//先写死
+                .params("code",usercodes)//先写死
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Response response, Exception e) {

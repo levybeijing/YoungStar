@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -21,6 +22,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
@@ -46,13 +48,17 @@ import com.alibaba.sdk.android.oss.common.auth.OSSPlainTextAKSKCredentialProvide
 import com.alibaba.sdk.android.oss.internal.OSSAsyncTask;
 import com.alibaba.sdk.android.oss.model.PutObjectRequest;
 import com.alibaba.sdk.android.oss.model.PutObjectResult;
+import com.android.tu.loadingdialog.LoadingDailog;
 import com.chuanqing.youngstar.BuildConfig;
 import com.chuanqing.youngstar.R;
 import com.chuanqing.youngstar._add.PublishActivity;
+import com.chuanqing.youngstar._add.RecordPlayer;
+import com.chuanqing.youngstar._add.TapeMoreActivity;
 import com.chuanqing.youngstar._add.TapeZuopinActivity;
 import com.chuanqing.youngstar.base.BaseActivity;
 import com.chuanqing.youngstar.myadapter.PublishAdapter;
 import com.chuanqing.youngstar.myadapter.PublishWorksAdapter;
+import com.chuanqing.youngstar.mybean.CommonBean;
 import com.chuanqing.youngstar.mybean.GetCodeBean;
 import com.chuanqing.youngstar.mybean.WorksBean;
 import com.chuanqing.youngstar.tools.Api;
@@ -84,17 +90,22 @@ import okhttp3.Call;
 import okhttp3.Response;
 
 import static android.support.v4.content.PermissionChecker.PERMISSION_GRANTED;
+import static com.chuanqing.youngstar.MainActivity.usercodes;
+import static com.chuanqing.youngstar._add.TapeActivity.recordFile;
+import static com.chuanqing.youngstar._add.TapeZuopinActivity.recordFile_zuopin;
 
 /**
  * 作品集
  */
 public class WorksActivity extends BaseActivity {
     private static final String TAG = "WorksActivity";
+    private RecordPlayer player;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_publishworks);
         ButterKnife.bind(this);
+        player = new RecordPlayer(WorksActivity.this);
         setTtitle();
         initView();
         getcode();
@@ -110,7 +121,7 @@ public class WorksActivity extends BaseActivity {
     @BindView(R.id.common_rigth_img)
     TextView right_tv;
     private void setTtitle(){
-        tv_title.setText("发布作品");
+        tv_title.setText("作品集");
         left_img.setVisibility(View.VISIBLE);
         //返回
         left_img.setOnClickListener(new View.OnClickListener() {
@@ -119,7 +130,24 @@ public class WorksActivity extends BaseActivity {
                 WorksActivity.this.finish();
             }
         });
-        right_tv.setVisibility(View.INVISIBLE);
+        right_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               if (fengmian_uri==null){
+                   ToastUtils.shortToast("请上传封面图片");
+               }else {
+                   if (TextUtils.isEmpty(name.getText().toString())){
+                       ToastUtils.shortToast("请输入作品集名称");
+                   }else {
+                       if (TextUtils.isEmpty(intro.getText().toString())){
+                           ToastUtils.shortToast("请输入作品说明");
+                       }else {
+                           beginupload(fengmian_uri);
+                       }
+                   }
+               }
+            }
+        });
     }
 
     ImageView cover;
@@ -187,7 +215,7 @@ public class WorksActivity extends BaseActivity {
     private void getcode(){
         OkGo.post(Api.getcode)
                 .tag(this)
-                .params("userCode","8572451327")
+                .params("userCode",usercodes)
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Response response, Exception e) {
@@ -256,12 +284,31 @@ public class WorksActivity extends BaseActivity {
                                         img_video_no.setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
+                                                linearLayout.removeView(view_video);
                                                 deletezuopin(getcode,worksBean.getData().getMediaTime().get(finalI).getMedia().get(finalJ).getId());
                                             }
                                         });
                                         linearLayout.addView(view_video);
                                     }else if (worksBean.getData().getMediaTime().get(i).getMedia().get(j).getType()==3){
-
+                                        View view_yinpin = LayoutInflater.from(WorksActivity.this).inflate(R.layout.publishworks_luyin_items,null);
+                                        ImageView img_yinpin = view_yinpin.findViewById(R.id.publishworks_yinpin_img);
+                                        ImageView img_yinpin_no = view_yinpin.findViewById(R.id.publishworks_yinpin_img_no);
+                                        linearLayout.addView(view_yinpin);
+                                        int finalJ1 = j;
+                                        int finalI1 = i;
+                                        img_yinpin_no.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                linearLayout.removeView(view_yinpin);
+                                                deletezuopin(getcode,worksBean.getData().getMediaTime().get(finalI1).getMedia().get(finalJ1).getId());
+                                            }
+                                        });
+                                        img_yinpin.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                playRecording();
+                                            }
+                                        });
                                     }
 
                                 }
@@ -280,7 +327,7 @@ public class WorksActivity extends BaseActivity {
     /**
      * 删除作品集
      */
-    private void deletezuopin(String userMediaId,int collectionCode){
+    private void deletezuopin(String collectionCode,int userMediaId){
         OkGo.post(Api.deletezuopin)
                 .tag(this)
                 .params("userMediaId",userMediaId)
@@ -295,13 +342,39 @@ public class WorksActivity extends BaseActivity {
     /**
      * 上传作品集
      */
-    private void upzuopin(){
+    private void upzuopin(String firstimg){
         OkGo.post(Api.upzuopin)
                 .tag(this)
+                .params("title",name.getText().toString())
+                .params("collectionDetail",intro.getText().toString())
+                .params("firstImg",firstimg)
+                .params("collectionCode",getcode)
                 .execute(new StringCallback() {
                     @Override
-                    public void onSuccess(String s, Call call, Response response) {
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        ToastUtils.shortToast(e+"");
+                        dissDialog();
+                    }
 
+                    @Override
+                    public void onSuccess(String s, Call call, Response response) {
+//                        Log.e(TAG, "onSuccess: 成功"+s );
+                        Gson gson = new Gson();
+                        CommonBean commonBean = gson.fromJson(s,CommonBean.class);
+                        if (commonBean.getState()==1){
+                            dissDialog();
+                            ToastUtils.shortToast("上传成功");
+                            Handler handler = new Handler();
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    WorksActivity.this.finish();
+                                }
+                            },500);
+                        }else {
+                            ToastUtils.shortToast(commonBean.getMessage());
+                        }
                     }
                 });
     }
@@ -314,7 +387,7 @@ public class WorksActivity extends BaseActivity {
      */
 
     //打开相机的返回码
-    private static final int CAMERA_REQUEST_CODE = 1;
+    private static final int CAMERA_REQUEST_CODE = 10000;
     //选择图片的返回码
     private static final int IMAGE_REQUEST_CODE = 2;
     //剪切图片的返回码
@@ -354,7 +427,7 @@ public class WorksActivity extends BaseActivity {
         openCamera();
     }
 
-    private void openCamera() {
+    private void openCamera() {//你点击的这里？对 这个是相机
         if (isSdCardExist()) {
             Intent cameraIntent = new Intent(
                     "android.media.action.IMAGE_CAPTURE");
@@ -744,16 +817,17 @@ public class WorksActivity extends BaseActivity {
     Uri shangchaunImg;
     private String pathvideo_address="",pathvideo_bendi="";
     ArrayList<String> videolist = new ArrayList<>(); //定义一个视频集合
-    ArrayList<String> imglist = new ArrayList<>(); //定义一个图片集合
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (data==null){
-            return;
-        }
+
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
+                case CAMERA_REQUEST_CODE:
+                    Log.e("zmm", "选择的图片的虚拟地址是------------>" +imageUri);
+                    beginuploadone(takePath);
+                    break;
                 case IMAGE_REQUEST_CODE://选择图片成功返回
                     if (data != null && data.getData() != null) {
                         imageUri = data.getData();
@@ -767,11 +841,17 @@ public class WorksActivity extends BaseActivity {
                     break;
                 // 多选
                 case REQUEST_CAMERA_CODE:
+                    if (data==null){
+                        return;
+                    }
 //                    //上传图片
                     beginupload(data.getStringArrayListExtra(PhotoPickerActivity.EXTRA_RESULT));
                     break;
                 //视频
                 case REQUEST_CODE_PICK:
+                    if (data==null){
+                        return;
+                    }
                     Uri uri = data.getData();
                     Cursor cursor = getContentResolver().query(uri, null, null, null, null);
                     cursor.moveToFirst();
@@ -840,7 +920,7 @@ public class WorksActivity extends BaseActivity {
 
     /**上传单张图片**/
     public void beginupload(Uri bitmap) {
-
+        showMyDialog();
         Log.e("传递值",bitmap+"");
         final String endpoint = "oss-cn-beijing.aliyuncs.com";
         final String startpoint = "star-1";
@@ -865,13 +945,58 @@ public class WorksActivity extends BaseActivity {
             @Override
             public void onSuccess(PutObjectRequest request, PutObjectResult result) {
                 Log.e("测试图片","https://star-1.oss-cn-beijing.aliyuncs.com/"+objectname);
-
+                upzuopin(objectname);
             }
 
             @Override
             public void onFailure(PutObjectRequest request, ClientException clientExcepion, ServiceException serviceException) {
                 ToastUtils.shortToast("图片上传失败导致信息无法发布");
+                dissDialog();
+                // 请求异常
+                if (clientExcepion != null) {
+                    // 本地异常如网络异常等
+                    clientExcepion.printStackTrace();
+                    ToastUtils.shortToast("图片上传失败导致信息无法发布");
+                }
+                if (serviceException != null) {
+                }
+            }
+        });
 
+    }
+
+    public void beginuploadone(String path) {
+
+        Log.e("传递值",path+"");
+        final String endpoint = "oss-cn-beijing.aliyuncs.com";
+        final String startpoint = "star-1";
+        //     明文设置secret的方式建议只在测试时使用，更多鉴权模式请参考后面的`访问控制`章节
+        OSSCredentialProvider credentialProvider = new OSSPlainTextAKSKCredentialProvider("LTAI8ygujYgDvLJ9", "nLrO1bpn9IOpEu0tt0zyAaChc22j0c");
+        OSS oss = new OSSClient(getApplicationContext(), endpoint, credentialProvider);
+        //通过填写文件名形成objectname,通过这个名字指定上传和下载的文件
+        // 构造上传请求
+        SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");//设置日期格式
+        final String objectname =df.format(new Date())+ ".png";
+
+        final String url = startpoint +"."+ endpoint+"/"+ objectname;
+
+        PutObjectRequest put = new PutObjectRequest(startpoint, objectname,path);
+        // 异步上传时可以设置进度回调
+        put.setProgressCallback(new OSSProgressCallback<PutObjectRequest>() {
+            @Override
+            public void onProgress(PutObjectRequest request, long currentSize, long totalSize) {
+            }
+        });
+        OSSAsyncTask task = oss.asyncPutObject(put, new OSSCompletedCallback<PutObjectRequest, PutObjectResult>() {
+            @Override
+            public void onSuccess(PutObjectRequest request, PutObjectResult result) {
+                Log.e("测试图片","https://star-1.oss-cn-beijing.aliyuncs.com/"+objectname);
+                addzuopin(objectname,1);
+            }
+
+            @Override
+            public void onFailure(PutObjectRequest request, ClientException clientExcepion, ServiceException serviceException) {
+                ToastUtils.shortToast("图片上传失败导致信息无法发布");
                 // 请求异常
                 if (clientExcepion != null) {
                     // 本地异常如网络异常等
@@ -951,4 +1076,34 @@ public class WorksActivity extends BaseActivity {
             deletezuopin(getcode,id);
         }
     };
+
+    private void playRecording() {
+//        Log.e(TAG, "playRecording: 播放"+recordFile );
+        player.playRecordFile(recordFile);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (recordFile_zuopin!=null){
+            beginupload(recordFile_zuopin+"",3);
+        }
+    }
+
+    private LoadingDailog loadBuilder;
+    private void showMyDialog(){
+        if (loadBuilder==null){
+            loadBuilder=new LoadingDailog.Builder(WorksActivity.this)
+                    .setMessage("信息上传中...")
+                    .setCancelable(false)
+                    .setCancelOutside(false).create();
+            loadBuilder.show();
+        }
+
+    }
+    private void dissDialog(){
+        if (loadBuilder!=null){
+            loadBuilder.dismiss();
+        }
+    }
 }

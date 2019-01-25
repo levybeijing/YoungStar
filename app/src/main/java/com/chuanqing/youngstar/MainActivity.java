@@ -21,14 +21,17 @@ import com.chuanqing.youngstar._active.StarActivityFragment;
 import com.chuanqing.youngstar._add.AddAudioActivity;
 import com.chuanqing.youngstar._add.PublishActivity;
 import com.chuanqing.youngstar._add.TapeActivity;
+import com.chuanqing.youngstar._add.company.RecuitActivity;
 import com.chuanqing.youngstar._add.student.WorksActivity;
 import com.chuanqing.youngstar._home.HomeFragment;
 import com.chuanqing.youngstar._home.searchstudent.SearchStatusActivity;
 import com.chuanqing.youngstar._mine.MineFragment;
 import com.chuanqing.youngstar._square.SquareFragment;
 import com.chuanqing.youngstar.base.BaseActivity;
+import com.chuanqing.youngstar.login.choose.ChooseActivity;
 import com.chuanqing.youngstar.mybean.StatusBean;
 import com.chuanqing.youngstar.tools.Api;
+import com.chuanqing.youngstar.tools.SharedPFUtils;
 import com.chuanqing.youngstar.tools.ToastUtils;
 import com.google.gson.Gson;
 import com.lzy.okgo.OkGo;
@@ -67,7 +70,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     // 定义FragmentManager对象管理器
     private FragmentManager fragmentManager;
     private static boolean mBackKeyPressed = false;//记录是否有首次按键
-
+    public static int identity;
+    public static String usercodes="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,7 +79,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         fragmentManager = getSupportFragmentManager();
         initView(); // 初始化界面控件
         setChioceItem(0); // 初始化页面加载时显示第中间的选项卡
-
+        identity = (int)SharedPFUtils.getParam(MainActivity.this,"identity","");
+        usercodes = (String) SharedPFUtils.getParam(MainActivity.this,"usercode","");
     }
 
     /**
@@ -120,7 +125,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 setChioceItem(3);
                 break;
             case R.id.main_img_center:
-                showPopwindow();  //展示中间按钮点击事件
+                if (identity==1){
+                    showPopwindow();  //展示中间按钮点击事件
+                }else if (identity==2){
+                    showPopwindowgongsi();
+                }else if (identity==3){
+                    showPopwindowtouziren();
+                }else if (identity==4){
+                    showPopwindowfensi();
+                }
             default:
                 break;
         }
@@ -260,7 +273,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
     /**
-     * 显示popupWindow
+     * 显示学生popupWindow
      */
     private void showPopwindow() {
         // 利用layoutInflater获得View
@@ -331,6 +344,234 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                     window.dismiss();
                     Intent intent = new Intent(MainActivity.this, TapeActivity.class);
                     startActivity(intent);
+                }
+            }
+        });
+
+        // popWindow消失监听方法
+        window.setOnDismissListener(new PopupWindow.OnDismissListener() {
+
+            @Override
+            public void onDismiss() {
+                System.out.println("popWindow消失");
+            }
+        });
+
+    }
+
+    /**
+     * 显示粉丝popupWindow
+     */
+    private void showPopwindowfensi() {
+        // 利用layoutInflater获得View
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.add_fans, null);
+
+        // 下面是两种方法得到宽度和高度 getWindow().getDecorView().getWidth()
+
+        PopupWindow window = new PopupWindow(view, WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.MATCH_PARENT);
+
+        // 设置popWindow弹出窗体可点击，这句话必须添加，并且是true
+        window.setFocusable(false);
+        WindowManager wm = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics dm = new DisplayMetrics();
+        wm.getDefaultDisplay().getMetrics(dm);
+
+
+        // 实例化一个ColorDrawable颜色为半透明
+        ColorDrawable dw = new ColorDrawable(0xb0000000);
+        window.setBackgroundDrawable(dw);
+
+        // 设置popWindow的显示和消失动画
+        window.setAnimationStyle(R.style.mypopwindow_anim_style);
+//        //底部弹出
+        window.showAtLocation(MainActivity.this.findViewById(R.id.main_img_center),Gravity.BOTTOM,0,0);
+
+        LinearLayout layout_video = view.findViewById(R.id.add_video);
+        LinearLayout layout_luyin = view.findViewById(R.id.add_luyin);
+        ImageView img_no = view.findViewById(R.id.add_no);
+        //取消事件
+        img_no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (window.isShowing()){
+                    window.dismiss();
+                }
+            }
+        });
+        //切换身份
+        layout_video.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (window.isShowing()){
+                    window.dismiss();
+                    Intent intent = new Intent(MainActivity.this, ChooseActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
+
+        //客服
+        layout_luyin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (window.isShowing()){
+                    window.dismiss();
+//                    Intent intent = new Intent(MainActivity.this, TapeActivity.class);
+//                    startActivity(intent);
+                }
+            }
+        });
+
+        // popWindow消失监听方法
+        window.setOnDismissListener(new PopupWindow.OnDismissListener() {
+
+            @Override
+            public void onDismiss() {
+                System.out.println("popWindow消失");
+            }
+        });
+
+    }
+
+    /**
+     * 显示公司popupWindow
+     */
+    private void showPopwindowgongsi() {
+        // 利用layoutInflater获得View
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.add_company, null);
+
+        // 下面是两种方法得到宽度和高度 getWindow().getDecorView().getWidth()
+
+        PopupWindow window = new PopupWindow(view, WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.MATCH_PARENT);
+
+        // 设置popWindow弹出窗体可点击，这句话必须添加，并且是true
+        window.setFocusable(false);
+        WindowManager wm = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics dm = new DisplayMetrics();
+        wm.getDefaultDisplay().getMetrics(dm);
+
+
+        // 实例化一个ColorDrawable颜色为半透明
+        ColorDrawable dw = new ColorDrawable(0xb0000000);
+        window.setBackgroundDrawable(dw);
+
+        // 设置popWindow的显示和消失动画
+        window.setAnimationStyle(R.style.mypopwindow_anim_style);
+//        //底部弹出
+        window.showAtLocation(MainActivity.this.findViewById(R.id.main_img_center),Gravity.BOTTOM,0,0);
+
+        LinearLayout layout_video = view.findViewById(R.id.add_video);
+        LinearLayout layout_zuopinji = view.findViewById(R.id.add_zuopinji);
+        LinearLayout layout_luyin = view.findViewById(R.id.add_luyin);
+        ImageView img_no = view.findViewById(R.id.add_no);
+        //取消事件
+        img_no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (window.isShowing()){
+                    window.dismiss();
+                }
+            }
+        });
+        //公告
+        layout_video.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (window.isShowing()){
+                    window.dismiss();
+                    Intent intent = new Intent(MainActivity.this, PublishActivity   .class);
+                    startActivity(intent);
+                }
+            }
+        });
+        //发布招聘
+        layout_zuopinji.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (window.isShowing()){
+                    window.dismiss();
+                    Intent intent = new Intent(MainActivity.this, RecuitActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
+        //客服
+        layout_luyin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (window.isShowing()){
+                    window.dismiss();
+//                    Intent intent = new Intent(MainActivity.this, TapeActivity.class);
+//                    startActivity(intent);
+                }
+            }
+        });
+
+        // popWindow消失监听方法
+        window.setOnDismissListener(new PopupWindow.OnDismissListener() {
+
+            @Override
+            public void onDismiss() {
+                System.out.println("popWindow消失");
+            }
+        });
+
+    }
+
+    /**
+     * 显示投资人popupWindow
+     */
+    private void showPopwindowtouziren() {
+        // 利用layoutInflater获得View
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.add_invest, null);
+
+        // 下面是两种方法得到宽度和高度 getWindow().getDecorView().getWidth()
+
+        PopupWindow window = new PopupWindow(view, WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.MATCH_PARENT);
+
+        // 设置popWindow弹出窗体可点击，这句话必须添加，并且是true
+        window.setFocusable(false);
+        WindowManager wm = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics dm = new DisplayMetrics();
+        wm.getDefaultDisplay().getMetrics(dm);
+
+
+        // 实例化一个ColorDrawable颜色为半透明
+        ColorDrawable dw = new ColorDrawable(0xb0000000);
+        window.setBackgroundDrawable(dw);
+
+        // 设置popWindow的显示和消失动画
+        window.setAnimationStyle(R.style.mypopwindow_anim_style);
+//        //底部弹出
+        window.showAtLocation(MainActivity.this.findViewById(R.id.main_img_center),Gravity.BOTTOM,0,0);
+
+        LinearLayout layout_luyin = view.findViewById(R.id.add_luyin);
+        ImageView img_no = view.findViewById(R.id.add_no);
+        //取消事件
+        img_no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (window.isShowing()){
+                    window.dismiss();
+                }
+            }
+        });
+
+
+        //客服
+        layout_luyin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (window.isShowing()){
+                    window.dismiss();
+//                    Intent intent = new Intent(MainActivity.this, TapeActivity.class);
+//                    startActivity(intent);
                 }
             }
         });

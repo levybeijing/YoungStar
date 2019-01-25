@@ -32,6 +32,8 @@ import butterknife.ButterKnife;
 import okhttp3.Call;
 import okhttp3.Response;
 
+import static com.chuanqing.youngstar.MainActivity.usercodes;
+
 /**
  * 广场 关注
  * A simple {@link Fragment} subclass.
@@ -75,7 +77,7 @@ public class FollowFragment extends Fragment implements XListView.IXListViewList
         OkGo.post(Api.square_guanzhu)
                 .params("page",page)
                 .params("pageSize",pageSize)
-                .params("userCode","8572451327") //先写默认的
+                .params("userCode",usercodes) //先写默认的
                 .tag(this)
                 .execute(new StringCallback() {
                     @Override
@@ -117,7 +119,7 @@ public class FollowFragment extends Fragment implements XListView.IXListViewList
         OkGo.post(Api.square_guanzhu)
                 .params("page",page2)
                 .params("pageSize",pageSize2)
-                .params("userCode","8572451327") //先写默认的
+                .params("userCode",usercodes) //先写默认的
                 .tag(this)
                 .execute(new StringCallback() {
                     @Override

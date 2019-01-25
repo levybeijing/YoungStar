@@ -6,6 +6,9 @@
     android:background="#F7F7F7"
     android:orientation="vertical"
     >
+    <include android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/common_top_fabu"></include>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -45,6 +48,10 @@
                         android:textSize="12dp"
                         />
                 </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/home_gray"></View>
                 <!--2-->
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -69,6 +76,10 @@
                         android:textSize="12dp"
                         />
                 </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/home_gray"></View>
                 <!--3-->
                 <RelativeLayout
                     android:id="@+id/rl_num_recuit"
@@ -83,7 +94,18 @@
                         android:text="招聘人数"
                         android:layout_centerVertical="true"
                         />
+                    <TextView
+                        android:id="@+id/recuit_peoplenum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/home_gray"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:textSize="12sp"
+                        android:layout_toLeftOf="@id/recuit_people_img"
+                        android:text=""/>
                     <ImageView
+                        android:id="@+id/recuit_people_img"
                         android:layout_width="7dp"
                         android:layout_height="14dp"
                         android:layout_weight="1"
@@ -93,6 +115,10 @@
                         android:layout_alignParentRight="true"
                         />
                 </RelativeLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/home_gray"></View>
                 <!--4-->
                 <RelativeLayout
                     android:id="@+id/rl_money_recuit"
@@ -107,7 +133,18 @@
                         android:text="工作薪资"
                         android:layout_centerVertical="true"
                         />
+                    <TextView
+                        android:id="@+id/recuit_xinzi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/home_gray"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:textSize="12sp"
+                        android:layout_toLeftOf="@id/recuit_xinzi_img"
+                        android:text=""/>
                     <ImageView
+                        android:id="@+id/recuit_xinzi_img"
                         android:layout_width="7dp"
                         android:layout_height="14dp"
                         android:layout_weight="1"
@@ -117,6 +154,10 @@
                         android:layout_alignParentRight="true"
                         />
                 </RelativeLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/home_gray"></View>
                 <!--5-->
                 <RelativeLayout
                     android:id="@+id/rl_major_recuit"
@@ -131,7 +172,18 @@
                         android:text="专业类型"
                         android:layout_centerVertical="true"
                         />
+                    <TextView
+                        android:id="@+id/recuit_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/home_gray"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:textSize="12sp"
+                        android:layout_toLeftOf="@id/recuit_type_img"
+                        android:text=""/>
                     <ImageView
+                        android:id="@+id/recuit_type_img"
                         android:layout_width="7dp"
                         android:layout_height="14dp"
                         android:layout_weight="1"
@@ -141,6 +193,10 @@
                         android:layout_alignParentRight="true"
                         />
                 </RelativeLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/home_gray"></View>
             <!--6-->
                 <RelativeLayout
                     android:id="@+id/rl_addre_recuit"
@@ -155,7 +211,18 @@
                         android:text="工作地点"
                         android:layout_centerVertical="true"
                         />
+                    <TextView
+                        android:id="@+id/recuit_address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/home_gray"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:textSize="12sp"
+                        android:layout_toLeftOf="@id/recuit_address_img"
+                        android:text=""/>
                     <ImageView
+                        android:id="@+id/recuit_address_img"
                         android:layout_width="7dp"
                         android:layout_height="14dp"
                         android:layout_weight="1"
@@ -165,6 +232,10 @@
                         android:layout_alignParentRight="true"
                         />
                 </RelativeLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/home_gray"></View>
                 <!--7-->
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -191,6 +262,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="无经验"
+                            android:checked="true"
                             android:layout_weight="1"
                             />
                         <RadioButton
@@ -259,12 +331,12 @@
                         android:textColor="#505050"
                         />
                 </LinearLayout>
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rv_lables_recuit"
+                <com.chuanqing.youngstar.tools.BamAutoLineList
+                    android:id="@+id/recuit_fulilinear"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    />
+                    android:layout_marginTop="15dp"
+                    android:orientation="vertical"></com.chuanqing.youngstar.tools.BamAutoLineList>
             </LinearLayout>
             <!--照片-->
             <LinearLayout
@@ -281,6 +353,12 @@
                     android:textSize="14dp"
                     android:textColor="#505050"
                     />
+                <ImageView
+                    android:id="@+id/recuit_fengmian_img"
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@mipmap/up_tupian"/>
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_imgs_recuit"
                     android:layout_width="match_parent"
@@ -359,31 +437,32 @@
                     android:paddingLeft="6dp"
                     />
             </LinearLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="101dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="*以上招聘信息只显示给艺人"
+                    android:textColor="#F56250"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="15dp"
+                    />
+                <TextView
+                    android:id="@+id/tv_release_recuit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@mipmap/bg_red"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="16dp"
+                    android:text="发布"
+                    android:textSize="18dp"
+                    android:gravity="center"
+                    android:textColor="#fff"
+                    />
+            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="101dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="*以上招聘信息只显示给艺人"
-            android:textColor="#F56250"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="15dp"
-            />
-        <TextView
-            android:id="@+id/tv_release_recuit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@mipmap/bg_red"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="16dp"
-            android:text="发布"
-            android:textSize="18dp"
-            android:gravity="center"
-            android:textColor="#fff"
-            />
-    </RelativeLayout>
+
 </LinearLayout>

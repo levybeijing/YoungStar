@@ -15,5 +15,6 @@
     <color name="touming">#00000000</color>
 <!--页面背景色-->
     <color name="main_page">#F7F7F7</color>
-
+    <!--福利不选中背景-->
+    <color name="fuli_no">#E5E5E5</color>
 </resources>

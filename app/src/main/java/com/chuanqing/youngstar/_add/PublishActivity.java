@@ -94,6 +94,7 @@ import okhttp3.Call;
 import okhttp3.Response;
 
 import static android.support.v4.content.PermissionChecker.PERMISSION_GRANTED;
+import static com.chuanqing.youngstar.MainActivity.usercodes;
 
 /**
  * 中间按钮--- 发布动态视频
@@ -177,7 +178,7 @@ public class PublishActivity extends BaseActivity{
 //        Log.e(TAG, "upinfo: 返回信息"+path );
         OkGo.post(Api.updongtai)
                 .tag(this)
-                .params("userCode","8572451327")
+                .params("userCode",usercodes)
                 .params("title",title.getText().toString())
                 .params("blogDetail",content.getText().toString())
                 .params("mediaUrl",path)

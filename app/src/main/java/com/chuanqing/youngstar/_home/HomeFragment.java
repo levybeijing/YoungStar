@@ -52,6 +52,8 @@ import butterknife.ButterKnife;
 import okhttp3.Call;
 import okhttp3.Response;
 
+import static com.chuanqing.youngstar.MainActivity.identity;
+
 /**
  * 首页
  * A simple {@link Fragment} subclass.
@@ -82,6 +84,13 @@ public class HomeFragment extends Fragment implements OnBannerListener {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        if (identity==1){
+            layout_yanyi.setVisibility(View.VISIBLE);
+            linearLayout_2_boty.setVisibility(View.VISIBLE);
+        }else {
+            layout_yanyi.setVisibility(View.GONE);
+            linearLayout_2_boty.setVisibility(View.GONE);
+        }
         setTtitle();
         initView();
         showactivity();
@@ -280,6 +289,8 @@ public class HomeFragment extends Fragment implements OnBannerListener {
     /**
      * 演绎专区
      */
+    @BindView(R.id.home_yanyi)
+    LinearLayout layout_yanyi;
     @BindView(R.id.home_activity_2_body)
     LinearLayout linearLayout_2_boty;
     String yanyiimg;

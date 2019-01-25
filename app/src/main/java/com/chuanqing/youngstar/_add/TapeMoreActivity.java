@@ -43,6 +43,7 @@ import butterknife.ButterKnife;
 import okhttp3.Call;
 import okhttp3.Response;
 
+import static com.chuanqing.youngstar.MainActivity.usercodes;
 import static com.chuanqing.youngstar._add.TapeActivity.recordFile;
 
 /**
@@ -212,7 +213,7 @@ public class TapeMoreActivity extends AppCompatActivity {
     private void upinfo(String path){
         OkGo.post(Api.updongtai)
                 .tag(this)
-                .params("userCode","8572451327")
+                .params("userCode",usercodes)
                 .params("title",title.getText().toString())
                 .params("blogDetail",content.getText().toString())
                 .params("mediaUrl",path)

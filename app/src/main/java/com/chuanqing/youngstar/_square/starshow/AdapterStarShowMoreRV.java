@@ -9,9 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.chuanqing.youngstar.R;
 import com.chuanqing.youngstar.tools.Api;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -49,7 +49,7 @@ public class AdapterStarShowMoreRV extends RecyclerView.Adapter<AdapterStarShowM
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
-        Picasso.with(context).load(Api.ossurl+list.get(position)).into(holder.iv1);
+        Glide.with(context).load(Api.ossurl+list.get(position)).into(holder.iv1);
         if (position==pos){
             holder.iv2.setVisibility(View.VISIBLE);
         }else{

@@ -36,6 +36,8 @@ import butterknife.ButterKnife;
 import okhttp3.Call;
 import okhttp3.Response;
 
+import static com.chuanqing.youngstar.MainActivity.usercodes;
+
 /**
  * 擂台活动详情
  */
@@ -91,7 +93,7 @@ public class LeitaiMoreActivity extends BaseActivity {
         OkGo.post(Api.activity_more)
                 .tag(this)
                 .params("activityCode",getIntent().getStringExtra("activitycode").toString())
-                .params("userCode","145495544327")//先写死
+                .params("userCode",usercodes)//先写死
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Response response, Exception e) {
@@ -107,15 +109,15 @@ public class LeitaiMoreActivity extends BaseActivity {
                         if (leitaiMoreBean.getState()==1){
                             //含，号
                             if (leitaiMoreBean.getData().getList_img().contains(",")){
-                                imgurl = leitaiMoreBean.getData().getList_img().split(",");
+                                imgurl = leitaiMoreBean.getData().getDetail_img().split(",");
                                 initView(imgurl);
                             }else {
                                 imgurl = new String[1];
-                                imgurl[0] = leitaiMoreBean.getData().getList_img();
+                                imgurl[0] = leitaiMoreBean.getData().getDetail_img();
                                 initView(imgurl);
                             }
                             Glide.with(LeitaiMoreActivity.this)
-                                    .load(Api.ossurl+leitaiMoreBean.getData().getDetail_img())
+                                    .load(Api.ossurl+leitaiMoreBean.getData().getActivity_detail())
                                     .placeholder(R.mipmap.my169)
                                     .error(R.mipmap.my169)
                                     .diskCacheStrategy(DiskCacheStrategy.NONE)
