@@ -79,8 +79,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         fragmentManager = getSupportFragmentManager();
         initView(); // 初始化界面控件
         setChioceItem(0); // 初始化页面加载时显示第中间的选项卡
-        identity = (int)SharedPFUtils.getParam(MainActivity.this,"identity","");
-        usercodes = (String) SharedPFUtils.getParam(MainActivity.this,"usercode","");
+
     }
 
     /**
@@ -585,5 +584,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             }
         });
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        identity = (int)SharedPFUtils.getParam(MainActivity.this,"identity","");
+        usercodes = (String) SharedPFUtils.getParam(MainActivity.this,"usercode","");
     }
 }
