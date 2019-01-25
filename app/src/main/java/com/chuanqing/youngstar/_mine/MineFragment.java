@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -31,6 +33,7 @@ import com.chuanqing.youngstar.myadapter.AdapterMineVP;
 import com.chuanqing.youngstar.myadapter.AdapterMineiRV;
 import com.chuanqing.youngstar.mybean.FragJobBean;
 import com.chuanqing.youngstar.mybean.FragMinecBean;
+import com.chuanqing.youngstar.mybean.FragMinefBean;
 import com.chuanqing.youngstar.mybean.FragMinesBean;
 import com.chuanqing.youngstar.mybean.MineWorksBean;
 import com.chuanqing.youngstar.tools.CircleImageView;
@@ -52,7 +55,7 @@ import okhttp3.Response;
 public class MineFragment extends Fragment implements View.OnClickListener {
 
     private List<Fragment> list=new ArrayList<>();
-    private int identity=4;
+    private int identity=3;
     //    11111111111
     private ViewPager vp;
     private TextView tv1;
@@ -71,15 +74,22 @@ public class MineFragment extends Fragment implements View.OnClickListener {
     private TextView tv2_care;
 //    3333333333
     private ImageView iv3_photo;
-    private TextView iv3_wallet;
-    private TextView iv3_care;
+    private TextView tv3_wallet;
+    private TextView tv3_care;
+    private TextView tv3_id;
+
     private int pagei=1;
     private AdapterMineiRV adapter3;
+//    44444444444
     private ImageView iv4_photo;
     private TextView tv4_id;
     private TextView tv4_change;
     private TextView tv4_wallet;
     private TextView tv4_care;
+    private RelativeLayout rl_top3;
+    private RelativeLayout rl_top4;
+    private RelativeLayout rl_top2;
+    private RelativeLayout rl_top1;
 
     //
     public MineFragment() {
@@ -100,13 +110,16 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 //                return inflater.inflate(R.layout.fragment_minef, container, false);
 //        }
         list.clear();
-        return inflater.inflate(R.layout.fragment_minef, container, false);
+        return inflater.inflate(R.layout.fragment_minei, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         switch (identity){
             case 1:
+                rl_top1 = view.findViewById(R.id.rl_mines);
+                rl_top1.setOnClickListener(this);
+
                 vp = view.findViewById(R.id.vp_mines);
 
                 RadioButton rb1 = view.findViewById(R.id.rb1_mines);
@@ -175,6 +188,9 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 ////        }
                 break;
             case 2:
+                rl_top2 = view.findViewById(R.id.rl_minec);
+                rl_top2.setOnClickListener(this);
+
                 iv2_photo = view.findViewById(R.id.iv_photo_minec);
                 tv2_id = view.findViewById(R.id.tv_id_minec);
                 tv2_wallet = view.findViewById(R.id.tv_wallet_minec);
@@ -222,10 +238,15 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                 tab21.setText("公告");
                 TabLayout.Tab tab22 = tab2.getTabAt(1);
                 tab22.setText("星职场");
+                break;
             case 3:
+                rl_top3 = view.findViewById(R.id.rl_minei);
+                rl_top3.setOnClickListener(this);
+
                 iv3_photo = view.findViewById(R.id.iv_photo_minei);
-                iv3_wallet = view.findViewById(R.id.tv_wallet_minei);
-                iv3_care = view.findViewById(R.id.tv_care_minei);
+                tv3_wallet = view.findViewById(R.id.tv_wallet_minei);
+                tv3_care = view.findViewById(R.id.tv_care_minei);
+                tv3_id = view.findViewById(R.id.tv_id_minei);
 
                 RecyclerView rv3 = view.findViewById(R.id.rv_minei);
                 GridLayoutManager manager=new GridLayoutManager(getContext(),3);
@@ -234,7 +255,11 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                 adapter3 = new AdapterMineiRV(getContext());
                 rv3.setAdapter(adapter3);
                 requestWorks();
+                break;
             case 4:
+                rl_top4 = view.findViewById(R.id.rl_minef);
+                rl_top4.setOnClickListener(this);
+
                 iv4_photo = view.findViewById(R.id.iv_photo_minef);
                 tv4_id = view.findViewById(R.id.tv_id_minef);
                 view.findViewById(R.id.tv_change_minef).setOnClickListener(this);
@@ -276,7 +301,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
         OkGo.post(Urls.getUserByCode)//
                 .tag(this)//
                 .params("userCode", (String) SharedPFUtils.getParam(getContext(),"usercode",""))//文件名
-                .params("type",4)
+                .params("type",3)
 //将来写成 identity
                 .execute(new StringCallback() {
                     @Override
@@ -318,10 +343,20 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                                 Glide.with(getActivity()).load(Urls.IMAGEURL+data2.getUser_img()).into(iv2_photo);
                                 break;
                             case 3:
-
+                                FragMinefBean bean3 = new Gson().fromJson(s, FragMinefBean.class);
+                                FragMinefBean.DataBean data3 = bean3.getData();
+                                tv3_id.setText(data3.getUser_code());
+                                tv3_care.setText(data3.getUserConcernNum()+"");
+                                tv3_wallet.setText(data3.getStandard_coin()+"");
+                                Glide.with(getActivity()).load(Urls.IMAGEURL+data3.getUser_img()).into(iv3_photo);
                                 break;
                             case 4:
-
+                                FragMinefBean bean4 = new Gson().fromJson(s, FragMinefBean.class);
+                                FragMinefBean.DataBean data4 = bean4.getData();
+                                tv4_id.setText(data4.getUser_code());
+                                tv4_care.setText(data4.getUserConcernNum()+"");
+                                tv4_wallet.setText(data4.getStandard_coin()+"");
+                                Glide.with(getActivity()).load(Urls.IMAGEURL+data4.getUser_img()).into(iv4_photo);
                                 break;
 
                         }
@@ -354,6 +389,19 @@ public class MineFragment extends Fragment implements View.OnClickListener {
             case R.id.tv_change_minef:
                 startActivity(new Intent(getActivity(), ChooseActivity.class));
                 break;
+            case R.id.rl_mines:
+//                vp2.setCurrentItem(1);
+                break;
+            case R.id.rl_minec:
+//                vp2.setCurrentItem(1);
+                break;
+            case R.id.rl_minei:
+//                vp2.setCurrentItem(1);
+                break;
+            case R.id.rl_minef:
+//                vp2.setCurrentItem(1);
+                break;
+
         }
     }
 

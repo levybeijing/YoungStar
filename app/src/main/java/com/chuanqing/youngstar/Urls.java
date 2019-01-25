@@ -41,9 +41,22 @@ public class Urls {
     public static final String getCompanyBlog = HOST + "Star/user/getCompanyBlog";
     //    我的公司招聘
     public static final String getEmploy = HOST + "Star/user/getEmploy";
-    //    我的钱包信息
-    public static final String getUserWallet = HOST + "Star/user/getUserWallet";
     //   粉丝投资人我的
     public static final String getBlogsINMy = HOST + "Star/user/getBlogsINMy";
+    //   官方消息
+    public static final String getUserSystemInfo = HOST + "Star/user/getUserSystemInfo";
+    //   官方消息详情
+    public static final String getUserSystemInfoDetails = HOST + "Star/user/getUserSystemInfoDetails";
+    //   删除官方消息
+    public static final String deleteSystemINFO = HOST + "Star/user/deleteSystemINFO";
+
+    //    我的钱包信息
+    public static final String getUserWallet = HOST + "Star/user/getUserWallet";
+    //    学生参加的活动
+    public static final String getActivityUser = HOST + "Star/user/getActivityUser";
+    //    我关注的学生
+    public static final String getUserConcernStudent = HOST + "Star/user/getUserConcernStudent";
+    //    学生关注的公司
+    public static final String getUserConcernCompany = HOST + "Star/user/getUserConcernCompany";
 
 }

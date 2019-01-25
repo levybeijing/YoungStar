@@ -6,11 +6,36 @@
     android:orientation="vertical"
     android:background="#F7F7F7"
     >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@mipmap/bg_statusbar"
+        >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#FFF"
+        android:gravity="center"
+        android:text="我的关注"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="13dp"
+        android:textSize="18dp"
+        />
+    <ImageView
+        android:id="@+id/iv_back_interests"
+        android:layout_width="12dp"
+        android:layout_height="21dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="13dp"
+        android:background="@mipmap/back_top"
+        android:layout_alignParentBottom="true"
+        />
+    </RelativeLayout>
     <android.support.design.widget.TabLayout
         android:id="@+id/tab_interests"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_height="50dp"
         />
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_interests"

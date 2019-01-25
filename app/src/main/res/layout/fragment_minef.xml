@@ -25,8 +25,8 @@
 
 
             <RelativeLayout
+                android:id="@+id/rl_minef"
                 xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/rl_mine"
                 android:layout_width="match_parent"
                 android:layout_height="375dp"
                 android:background="@mipmap/bg_fans"
@@ -65,7 +65,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_below="@+id/rl_tem"
                     android:textColor="#fff"
-                    android:text="ID:123456"
+                    android:text="ID:00000"
                     android:textSize="20dp"
                     android:layout_marginTop="30dp"
                     />
@@ -97,7 +97,7 @@
                         android:id="@+id/tv_wallet_minef"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="75"
+                        android:text="00"
                         android:textColor="#fff"
                         android:layout_marginLeft="20dp"
                         android:textSize="18dp"
@@ -115,7 +115,7 @@
                         android:id="@+id/tv_care_minef"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="725"
+                        android:text="000"
                         android:textColor="#fff"
                         android:textSize="20dp"
                         />

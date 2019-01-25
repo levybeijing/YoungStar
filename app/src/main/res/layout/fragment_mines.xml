@@ -19,8 +19,8 @@
             app:layout_scrollFlags="scroll|enterAlways"
             >
             <RelativeLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/rl_mines"
+                xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="375dp"
                 android:background="@mipmap/bg_student"
@@ -53,7 +53,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_below="@+id/rl_tem"
                     android:textColor="#fff"
-                    android:text="ID:123456"
+                    android:text="ID:000000"
                     android:textSize="20dp"
                     android:layout_marginTop="30dp"
                     />
@@ -97,7 +97,7 @@
                         android:id="@+id/tv_wallet_mines"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="75"
+                        android:text="00"
                         android:textColor="#fff"
                         android:layout_marginLeft="20dp"
                         android:textSize="18dp"
@@ -121,7 +121,7 @@
                             android:id="@+id/tv1_mines"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="19"
+                            android:text="00"
                             android:textColor="#fff"
                             android:textSize="20dp"
                             />
@@ -145,7 +145,7 @@
                             android:id="@+id/tv2_mines"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="725"
+                            android:text="0000"
                             android:textColor="#FFC21C"
                             android:textSize="20dp"
                             />
@@ -169,7 +169,7 @@
                             android:id="@+id/tv3_mines"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="75"
+                            android:text="000"
                             android:textColor="#fff"
                             android:textSize="20dp"
                             />

@@ -23,7 +23,7 @@
 
 
             <RelativeLayout
-                android:id="@+id/rl_top_minec"
+                android:id="@+id/rl_minec"
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="375dp"
@@ -63,7 +63,7 @@
                     android:layout_below="@+id/rl_tem"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="30dp"
-                    android:text="ID:123456"
+                    android:text="ID:00000"
                     android:textColor="#fff"
                     android:textSize="20dp" />
 
@@ -80,15 +80,15 @@
                         android:layout_height="17dp"
                         android:background="@mipmap/wallet_mine"
                         />
+
                     <TextView
                         android:id="@+id/tv_wallet_minec"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="75"
-                        android:textColor="#fff"
                         android:layout_marginLeft="20dp"
-                        android:textSize="18dp"
-                        />
+                        android:text="00"
+                        android:textColor="#fff"
+                        android:textSize="18dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -103,7 +103,7 @@
                         android:id="@+id/tv_care_minec"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="725"
+                        android:text="000"
                         android:textColor="#fff"
                         android:textSize="20dp"
                         />
@@ -161,7 +161,7 @@
                     android:id="@+id/rg_minec"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/rl_top_minec"
+                    android:layout_below="@+id/rl_minec"
                     android:gravity="center"
                     android:orientation="horizontal"
                     android:layout_marginTop="20dp"

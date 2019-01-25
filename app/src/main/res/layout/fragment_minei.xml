@@ -57,16 +57,17 @@
                         android:layout_centerInParent="true"
                         />
                 </RelativeLayout>
-            <TextView
-                android:id="@+id/tv_id_minei"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/rl_tem"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="30dp"
-                android:text="ID:123456"
-                android:textColor="#fff"
-                android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/tv_id_minei"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rl_tem"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="30dp"
+                    android:text="ID:00000"
+                    android:textColor="#fff"
+                    android:textSize="20dp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -85,7 +86,7 @@
                     android:id="@+id/tv_wallet_minei"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="75"
+                    android:text="00"
                     android:textColor="#fff"
                     android:layout_marginLeft="20dp"
                     android:textSize="18dp"
@@ -104,7 +105,7 @@
                     android:id="@+id/tv_care_minei"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="725"
+                    android:text="00"
                     android:textColor="#fff"
                     android:textSize="20dp"
                     />

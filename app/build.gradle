@@ -34,9 +34,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
-    implementation 'com.android.support:design:28.0.0' //导入tablayout
     implementation 'com.jakewharton:butterknife:8.8.1' //butterknife包使用
-    implementation 'com.android.support:support-v4:28.0.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'//butterknife包使用
     implementation 'com.youth.banner:banner:+' //轮播
     //加载网络图片
