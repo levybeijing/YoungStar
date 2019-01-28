@@ -589,7 +589,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void onResume() {
         super.onResume();
-        identity = (int)SharedPFUtils.getParam(MainActivity.this,"identity","");
+        identity = (int)SharedPFUtils.getParam(MainActivity.this,"identity",4);
         usercodes = (String) SharedPFUtils.getParam(MainActivity.this,"usercode","");
     }
 }

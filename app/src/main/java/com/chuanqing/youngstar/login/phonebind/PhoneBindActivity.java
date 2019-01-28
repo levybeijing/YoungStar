@@ -11,6 +11,11 @@ import com.chuanqing.youngstar.base.BaseActivity;
 
 public class PhoneBindActivity extends BaseActivity {
 
+    private EditText et_phone;
+    private EditText et_code;
+    private TextView tv_getcode;
+    private CheckBox checked;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,14 +26,14 @@ public class PhoneBindActivity extends BaseActivity {
 
     private void initView() {
 
-        EditText phone = findViewById(R.id.et_phone_bind);
-        EditText code = findViewById(R.id.et_code_bind);
+        et_phone = findViewById(R.id.et_phone_bind);
+        et_code = findViewById(R.id.et_code_bind);
 
-        TextView getcode = findViewById(R.id.tv_getcode_bind);
-        CheckBox checked = findViewById(R.id.checked_bind);
-        TextView protocol = findViewById(R.id.tv_protocol_bind);
-        TextView privacy = findViewById(R.id.tv_privacy_bind);
+        tv_getcode = findViewById(R.id.tv_getcode_bind);
+        checked = findViewById(R.id.checked_bind);
+        TextView tv_protocol = findViewById(R.id.tv_protocol_bind);
+        TextView tv_privacy = findViewById(R.id.tv_privacy_bind);
 
-        TextView login = findViewById(R.id.tv_tologin_bind);
+        TextView tv_login = findViewById(R.id.tv_tologin_bind);
     }
 }

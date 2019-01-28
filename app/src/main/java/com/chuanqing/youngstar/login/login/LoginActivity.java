@@ -199,7 +199,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                             SharedPFUtils.setParam(LoginActivity.this,"usercode",bean.getData().getUser_code());
                             SharedPFUtils.setParam(LoginActivity.this,"password",bean.getData().getPassword());
                             SharedPFUtils.setParam(LoginActivity.this,"islogin",true);
-//
+                            SharedPFUtils.setParam(LoginActivity.this,"phone",bean.getData().getMobile());
+                            SharedPFUtils.setParam(LoginActivity.this,"name","");
+
                             int identity = (int) SharedPFUtils.getParam(LoginActivity.this, "identity", -1);
                             if (identity>0){
                                 startActivity(new Intent(LoginActivity.this,MainActivity.class));

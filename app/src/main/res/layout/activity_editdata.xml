@@ -1,8 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@mipmap/bg_statusbar"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="编辑资料"
+            android:textColor="#FFF"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="13dp"
+            android:textSize="18dp"
+            />
+        <ImageView
+            android:id="@+id/iv_back_editdata"
+            android:layout_width="12dp"
+            android:layout_height="21dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="13dp"
+            android:background="@mipmap/back_top"
+            android:layout_alignParentBottom="true"
+            />
+    </RelativeLayout>
 <ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android" >
+     >
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,7 +43,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="79dp"
         android:background="#fff"
         >
         <ImageView
@@ -302,4 +333,4 @@
         android:layout_marginTop="10dp"
         />
 </LinearLayout>
-</ScrollView>
+</ScrollView></LinearLayout>

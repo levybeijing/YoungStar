@@ -66,6 +66,13 @@ public class AuthenActivity extends BaseActivity implements View.OnClickListener
 
     private void initView() {
 
+        findViewById(R.id.iv_back_authen).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         root = findViewById(R.id.rl_root_authen);
 //
         logo = findViewById(R.id.iv_logo_authen);

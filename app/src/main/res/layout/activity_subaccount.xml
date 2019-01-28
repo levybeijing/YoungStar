@@ -3,10 +3,36 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@mipmap/bg_statusbar"
+        >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="子账号管理"
+        android:textColor="#FFF"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="13dp"
+        android:textSize="18dp"
+        />
+    <ImageView
+        android:id="@+id/iv_back_subaccoun"
+        android:layout_width="12dp"
+        android:layout_height="21dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="13dp"
+        android:background="@mipmap/back_top"
+        android:layout_alignParentBottom="true"
+        />
+    </RelativeLayout>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_subaccount"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="82dp"
+        android:layout_marginTop="10dp"
         />
 </LinearLayout>

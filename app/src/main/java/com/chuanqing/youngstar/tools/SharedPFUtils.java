@@ -18,7 +18,9 @@ public class SharedPFUtils {
      * 用户编号 usercode ""
      * 用户密码 password ""
      * 登录状态 islogin  true or false
-     *
+     * 视频播放 videoplay 0 关闭 1 wifi 2 wifi+4G
+     * 铃声 voice true false
+     * 震动 shake true false
      *
      */
         public static void init(Context context){

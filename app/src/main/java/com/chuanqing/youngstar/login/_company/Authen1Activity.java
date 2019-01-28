@@ -3,15 +3,25 @@ package com.chuanqing.youngstar.login._company;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.chuanqing.youngstar.R;
+import com.chuanqing.youngstar.Urls;
 import com.chuanqing.youngstar.base.BaseActivity;
+import com.chuanqing.youngstar.mybean.FragCareCBean;
+import com.chuanqing.youngstar.tools.SharedPFUtils;
+import com.google.gson.Gson;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.StringCallback;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Response;
 
 public class Authen1Activity extends BaseActivity implements View.OnClickListener {
     private int chooseindex=1;
@@ -21,6 +31,8 @@ public class Authen1Activity extends BaseActivity implements View.OnClickListene
     private EditText et_phone;
     private EditText et_email;
     private EditText et_intro;
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -107,10 +119,10 @@ public class Authen1Activity extends BaseActivity implements View.OnClickListene
 //                头像?
 
                 String com = et_com.getText().toString().trim();
-                String name = et_com.getText().toString().trim();
-                String phone = et_com.getText().toString().trim();
-                String email = et_com.getText().toString().trim();
-                String intro = et_com.getText().toString().trim();
+                String name = et_name.getText().toString().trim();
+                String phone = et_phone.getText().toString().trim();
+                String email = et_email.getText().toString().trim();
+                String intro = et_intro.getText().toString().trim();
 
                 Intent intent=new Intent(this,Authen2Activity.class);
                 intent.putExtra("name",name);
@@ -119,7 +131,7 @@ public class Authen1Activity extends BaseActivity implements View.OnClickListene
                 intent.putExtra("email",email);
                 intent.putExtra("intro",intro);
 //                头像
-                intent.putExtra("photo","");
+                intent.putExtra("photo",chooseindex);
 
                 startActivity(intent);
                 break;

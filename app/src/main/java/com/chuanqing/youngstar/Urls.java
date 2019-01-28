@@ -49,7 +49,6 @@ public class Urls {
     public static final String getUserSystemInfoDetails = HOST + "Star/user/getUserSystemInfoDetails";
     //   删除官方消息
     public static final String deleteSystemINFO = HOST + "Star/user/deleteSystemINFO";
-
     //    我的钱包信息
     public static final String getUserWallet = HOST + "Star/user/getUserWallet";
     //    学生参加的活动
@@ -58,5 +57,28 @@ public class Urls {
     public static final String getUserConcernStudent = HOST + "Star/user/getUserConcernStudent";
     //    学生关注的公司
     public static final String getUserConcernCompany = HOST + "Star/user/getUserConcernCompany";
+    //    修改绑定手机
+    public static final String updateUserMobile = HOST + "Star/user/updateUserMobile";
+    //    修改密码
+    public static final String updateUserPassword = HOST + "Star/user/updateUserPassword";
+    //    反馈
+    public static final String addFeedback = HOST + "Star/user/addFeedback";
+    //    铃声设置
+    public static final String updateUserMusicSwitch = HOST + "Star/user/updateUserMusicSwitch";
+    //    震动设置
+    public static final String updateUserShockSwitch = HOST + "Star/user/updateUserShockSwitch";
+    //    视频设置
+    public static final String updateUserVideoSwitch = HOST + "Star/user/updateUserVideoSwitch";
+    //    忘记密码
+    public static final String forgetUserPassword = HOST + "Star/user/forgetUserPassword";
+    //    查询子账号列表
+    public static final String getCompanySecondary = HOST + "Star/user/getCompanySecondary";
+    //    添加子账号
+    public static final String addCompanySecondary = HOST + "Star/user/addCompanySecondary";
+    //    子账号审核
+    public static final String updateCompanySecondary = HOST + "Star/user/updateCompanySecondary";
+    //    修改头像
+    public static final String updateUserImg = HOST + "Star/user/updateUserImg";
+
 
 }

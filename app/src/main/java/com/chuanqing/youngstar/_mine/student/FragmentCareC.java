@@ -13,6 +13,9 @@ import android.view.ViewGroup;
 import com.chuanqing.youngstar.R;
 import com.chuanqing.youngstar.Urls;
 import com.chuanqing.youngstar.base.BaseFragment;
+import com.chuanqing.youngstar.myadapter.AdapterFragCareCRV;
+import com.chuanqing.youngstar.myadapter.AdapterFragStatusRV;
+import com.chuanqing.youngstar.mybean.FragCareCBean;
 import com.chuanqing.youngstar.mybean.FragStatusBean;
 import com.chuanqing.youngstar.tools.SharedPFUtils;
 import com.google.gson.Gson;
@@ -26,6 +29,7 @@ import okhttp3.Response;
 
 public class FragmentCareC extends BaseFragment {
     private int page=1;
+    private AdapterFragCareCRV adapter;
 
     @Nullable
     @Override
@@ -39,10 +43,9 @@ public class FragmentCareC extends BaseFragment {
         RecyclerView rv = view.findViewById(R.id.rv_fragstatus);
         LinearLayoutManager manager=new LinearLayoutManager(getContext());
         rv.setLayoutManager(manager);
-//        adapter = new AdapterFragStatusRV(getContext());
-//        rv.setAdapter(adapter);
-//
-//
+
+        adapter = new AdapterFragCareCRV(getContext());
+        rv.setAdapter(adapter);
 
         request();
     }
@@ -57,6 +60,9 @@ public class FragmentCareC extends BaseFragment {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
                         Log.e("=============", "getUserConcernCompany"+s);
+                        FragCareCBean bean = new Gson().fromJson(s, FragCareCBean.class);
+                        List<FragCareCBean.DataBean.PageInfoBean.ListBean> list = bean.getData().getPageInfo().getList();
+                        adapter.setData(list);
                     }
                 });
     }
