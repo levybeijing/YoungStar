@@ -56,7 +56,6 @@ public class ChangeVericActivity extends BaseActivity implements View.OnClickLis
             case R.id.tv_ok_changeveric:
 
                 break;
-
         }
     }
 }
