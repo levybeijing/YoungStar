@@ -217,8 +217,8 @@ public class Authen2Activity extends BaseActivity implements View.OnClickListene
                 break;
             case 304:
                 findViewById(R.id.tv4_comauthen2).setVisibility(View.INVISIBLE);
-                iv3.setImageBitmap(bitmap);
-                imglist.set(2,name);
+                iv4.setImageBitmap(bitmap);
+                imglist.set(3,name);
                 uploadOss(304,name,path);
 
                 break;

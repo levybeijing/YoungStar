@@ -55,7 +55,7 @@ import okhttp3.Response;
 
 public class AuthenActivity extends BaseActivity implements View.OnClickListener {
 
-    private String imgpath;
+    private boolean havephoto=false;
     private String sex;
     private EditText name;
     private EditText phone;
@@ -143,10 +143,10 @@ public class AuthenActivity extends BaseActivity implements View.OnClickListener
                 String trim5 = snumber.getText().toString().trim();
                 String trim6 = inumber.getText().toString().trim();
                 String trim7 = email.getText().toString().trim();
-//                if (imgpath==null||imgpath.length()==0){
-//                    Toast.makeText(this, "头像不能为空", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
+                if (!havephoto){
+                    Toast.makeText(this, "头像不能为空", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 if (sex==null||sex.length()==0){
                     Toast.makeText(this, "请选择性别", Toast.LENGTH_SHORT).show();
@@ -333,7 +333,7 @@ public class AuthenActivity extends BaseActivity implements View.OnClickListener
             @Override
             public void onSuccess(PutObjectRequest request, PutObjectResult result) {
                 Log.d("=============PutObject", "UploadSuccess");
-                changephoto(name);
+                havephoto=true;
             }
 
             @Override
@@ -353,19 +353,4 @@ public class AuthenActivity extends BaseActivity implements View.OnClickListener
             }
         });
     }
-
-    private void changephoto(String name) {
-        OkGo.post(Urls.updateUserImg)//
-                .tag(this)//
-                .params("userCode", (String)SharedPFUtils.getParam(this,"usercode",""))
-                .params("userImg",name)
-                .execute(new StringCallback() {
-                    @Override
-                    public void onSuccess(String s, Call call, Response response) {
-                        Log.e("===========", "updateUserImg: "+s);
-                    }
-                });
-    }
-//
-
 }

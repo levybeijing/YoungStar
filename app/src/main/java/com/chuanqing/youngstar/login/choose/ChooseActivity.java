@@ -29,6 +29,7 @@ public class ChooseActivity  extends BaseActivity implements View.OnClickListene
         findViewById(R.id.iv_company_choose).setOnClickListener(this);
         findViewById(R.id.iv_invest_choose).setOnClickListener(this);
         findViewById(R.id.iv_visitor_choose).setOnClickListener(this);
+        findViewById(R.id.iv_back_choose).setOnClickListener(this);
     }
 
     @Override
@@ -46,6 +47,9 @@ public class ChooseActivity  extends BaseActivity implements View.OnClickListene
             case R.id.iv_visitor_choose:
                 startActivity(new Intent(ChooseActivity.this,MainActivity.class));
                 SharedPFUtils.setParam(ChooseActivity.this,"identity",4);
+                finish();
+                break;
+            case R.id.iv_back_choose:
                 finish();
                 break;
         }
