@@ -207,8 +207,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         main_four_tv.setTextColor(gray);
         main_four.setBackgroundColor(whirt);
         main_four_img.setImageDrawable(MainActivity.this.getResources().getDrawable(R.mipmap.mine2));
-
-
     }
     /**
      * 隐藏Fragment

@@ -26,15 +26,32 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.sdk.android.oss.ClientException;
+import com.alibaba.sdk.android.oss.ServiceException;
+import com.alibaba.sdk.android.oss.callback.OSSCompletedCallback;
+import com.alibaba.sdk.android.oss.callback.OSSProgressCallback;
+import com.alibaba.sdk.android.oss.internal.OSSAsyncTask;
+import com.alibaba.sdk.android.oss.model.PutObjectRequest;
+import com.alibaba.sdk.android.oss.model.PutObjectResult;
+import com.chuanqing.youngstar.MainActivity;
+import com.chuanqing.youngstar.MyApplication;
 import com.chuanqing.youngstar.R;
 import com.chuanqing.youngstar.Urls;
 import com.chuanqing.youngstar.base.BaseActivity;
+import com.chuanqing.youngstar.login.bean.CommenBean;
+import com.chuanqing.youngstar.tools.SharedPFUtils;
 import com.chuanqing.youngstar.tools.StringUtil;
 import com.chuanqing.youngstar.widget.CirImageView;
+import com.google.gson.Gson;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.StringCallback;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Response;
 
 public class AuthenActivity extends BaseActivity implements View.OnClickListener {
 
@@ -172,6 +189,8 @@ public class AuthenActivity extends BaseActivity implements View.OnClickListener
                 student.setStudentNo(trim5);
                 student.setCardId(trim6);
                 student.setEmail(trim7);
+                String[] r = mFile.split("/");
+                student.setImgpath(SharedPFUtils.getParam(this,"usercode","")+File.separator+r[r.length-1]);
                 Intent intent = new Intent(AuthenActivity.this, ImageAuthenActivity.class);
                 intent.putExtra("student",student);
                 startActivity(intent);
@@ -228,6 +247,10 @@ public class AuthenActivity extends BaseActivity implements View.OnClickListener
                     // 让刚才选择裁剪得到的图片显示在界面上
                     Bitmap photo =BitmapFactory.decodeFile(mFile);
                     logo.setImageBitmap(photo);
+                    Log.e("==========", "CROP_SMALL_PICTURE: "+mFile);
+                    String[] r = mFile.split("/");
+                    String name = SharedPFUtils.getParam(this,"usercode","")+File.separator+r[r.length-1];
+                    uploadOss(name,mFile);
                 } else {
                     Log.e("data","data为空");
                 }
@@ -262,8 +285,6 @@ public class AuthenActivity extends BaseActivity implements View.OnClickListener
         }
         intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(out));
         startActivityForResult(intent, CROP_SMALL_PICTURE);
-        Toast.makeText(this, mFile, Toast.LENGTH_SHORT).show();
-
     }
 
     //裁剪后的地址
@@ -291,5 +312,60 @@ public class AuthenActivity extends BaseActivity implements View.OnClickListener
         }
         startActivityForResult(intent, CAMERA_REQUEST_CODE);
     }
+
+    //     阿里云上传文件
+    private void uploadOss(String name,String path){
+//        String s = SharedPFUtils.getParam(this,"usercode","")+File.separator+name;
+// 构造上传请求
+        PutObjectRequest put = new PutObjectRequest("star-1", name, path);
+        Log.e("=============name", "uploadOss:"+name);
+
+
+// 异步上传时可以设置进度回调
+        put.setProgressCallback(new OSSProgressCallback<PutObjectRequest>() {
+            @Override
+            public void onProgress(PutObjectRequest request, long currentSize, long totalSize) {
+                Log.d("PutObject", "currentSize: " + currentSize + " totalSize: " + totalSize);
+            }
+        });
+
+        OSSAsyncTask task = MyApplication.oss.asyncPutObject(put, new OSSCompletedCallback<PutObjectRequest, PutObjectResult>() {
+            @Override
+            public void onSuccess(PutObjectRequest request, PutObjectResult result) {
+                Log.d("=============PutObject", "UploadSuccess");
+                changephoto(name);
+            }
+
+            @Override
+            public void onFailure(PutObjectRequest request, ClientException clientExcepion, ServiceException serviceException) {
+                // 请求异常
+                if (clientExcepion != null) {
+                    // 本地异常如网络异常等
+                    clientExcepion.printStackTrace();
+                }
+                if (serviceException != null) {
+                    // 服务异常
+                    Log.e("ErrorCode", serviceException.getErrorCode());
+                    Log.e("RequestId", serviceException.getRequestId());
+                    Log.e("HostId", serviceException.getHostId());
+                    Log.e("RawMessage", serviceException.getRawMessage());
+                }
+            }
+        });
+    }
+
+    private void changephoto(String name) {
+        OkGo.post(Urls.updateUserImg)//
+                .tag(this)//
+                .params("userCode", (String)SharedPFUtils.getParam(this,"usercode",""))
+                .params("userImg",name)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(String s, Call call, Response response) {
+                        Log.e("===========", "updateUserImg: "+s);
+                    }
+                });
+    }
+//
 
 }

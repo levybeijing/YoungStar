@@ -287,20 +287,25 @@ public class ChangeVerisActivity extends BaseActivity implements View.OnClickLis
             public void onSuccess(PutObjectRequest request, PutObjectResult result) {
                 Log.d("=============PutObject", "UploadSuccess");
                 switch (code){
-                    case 500:
+                    case 600:
                         imglist.remove(0);
                         imglist.add(0,name);
-                        Log.e("===============", "=500");
+                        Log.e("===============", "=600");
                         break;
-                    case 501:
+                    case 601:
                         imglist.remove(1);
                         imglist.add(1,name);
-                        Log.e("===============", "=501");
+                        Log.e("===============", "=601");
                         break;
-                    case 502:
+                    case 602:
                         imglist.remove(2);
                         imglist.add(2,name);
-                        Log.e("===============", "=502");
+                        Log.e("===============", "=602");
+                        break;
+                    case 603:
+                        imglist.remove(3);
+                        imglist.add(3,name);
+                        Log.e("===============", "=603");
                         break;
                 }
             }

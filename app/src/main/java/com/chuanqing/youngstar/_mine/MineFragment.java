@@ -98,17 +98,17 @@ public class MineFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-//        identity = (int) SharedPFUtils.getParam(getContext(), "identity", 4);
-//        switch (identity){
-//            case 1:
-//                return inflater.inflate(R.layout.fragment_mines, container, false);
-//            case 2:
-//                return inflater.inflate(R.layout.fragment_minec, container, false);
-//            case 3:
-//                return inflater.inflate(R.layout.fragment_minei, container, false);
-//            case 4:
-//                return inflater.inflate(R.layout.fragment_minef, container, false);
-//        }
+        identity = (int) SharedPFUtils.getParam(getContext(), "identity", 4);
+        switch (identity){
+            case 1:
+                return inflater.inflate(R.layout.fragment_mines, container, false);
+            case 2:
+                return inflater.inflate(R.layout.fragment_minec, container, false);
+            case 3:
+                return inflater.inflate(R.layout.fragment_minei, container, false);
+            case 4:
+                return inflater.inflate(R.layout.fragment_minef, container, false);
+        }
         list.clear();
         return inflater.inflate(R.layout.fragment_minei, container, false);
     }
@@ -301,7 +301,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
         OkGo.post(Urls.getUserByCode)//
                 .tag(this)//
                 .params("userCode", (String) SharedPFUtils.getParam(getContext(),"usercode",""))//文件名
-                .params("type",3)
+                .params("type",identity)
 //将来写成 identity
                 .execute(new StringCallback() {
                     @Override
@@ -358,9 +358,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                                 tv4_wallet.setText(data4.getStandard_coin()+"");
                                 Glide.with(getActivity()).load(Urls.IMAGEURL+data4.getUser_img()).into(iv4_photo);
                                 break;
-
                         }
-
                     }
                 });
     }

@@ -35,6 +35,7 @@ import com.chuanqing.youngstar.R;
 import com.chuanqing.youngstar.Urls;
 import com.chuanqing.youngstar.base.BaseActivity;
 import com.chuanqing.youngstar.login.bean.CommenBean;
+import com.chuanqing.youngstar.login.login.LoginActivity;
 import com.chuanqing.youngstar.tools.SharedPFUtils;
 import com.google.gson.Gson;
 import com.lzy.okgo.OkGo;
@@ -320,7 +321,7 @@ public class ImageAuthenActivity extends BaseActivity implements View.OnClickLis
         OkGo.post(Urls.addStudent)//
                 .tag(this)//
                 .params("mobile", student.getPhone())
-                .params("userCode", (int)SharedPFUtils.getParam(this,"usercode",-1))
+                .params("userCode", (String)SharedPFUtils.getParam(this,"usercode",""))
                 .params("sex", student.getSex())
                 .params("name", student.getName())
                 .params("school", student.getSchool())
@@ -342,6 +343,10 @@ public class ImageAuthenActivity extends BaseActivity implements View.OnClickLis
                         CommenBean commenBean = new Gson().fromJson(s, CommenBean.class);
                         if ("请求成功".equals(commenBean.getMessage())){
                             startActivity(new Intent(ImageAuthenActivity.this, MainActivity.class));
+                            SharedPFUtils.setParam(ImageAuthenActivity.this,"identity",4);
+                            SharedPFUtils.setParam(ImageAuthenActivity.this,"checkdata",true);
+                        }else{
+                            Toast.makeText(ImageAuthenActivity.this, ""+commenBean.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
