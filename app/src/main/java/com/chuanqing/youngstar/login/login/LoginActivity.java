@@ -230,6 +230,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         VeriCodeBean bean = new Gson().fromJson(s, VeriCodeBean.class);
                         if ("请求成功".equals(bean.getMessage())){
                             register(phone,pwd);
+                        }else{
+                            Toast.makeText(LoginActivity.this, ""+bean.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -263,6 +265,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                             findViewById(R.id.loginlayout).setVisibility(View.VISIBLE);
                             findViewById(R.id.regilayout).setVisibility(View.INVISIBLE);
                             et_phone.setText(phone);
+                        }else{
+                            Toast.makeText(LoginActivity.this, registerBean.getMessage(), Toast.LENGTH_SHORT).show();
                         }
 
                     }
