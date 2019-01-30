@@ -2,6 +2,7 @@ package com.chuanqing.youngstar._mine;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
 
 import com.chuanqing.youngstar.R;
 import com.chuanqing.youngstar.base.BaseActivity;
@@ -13,10 +14,12 @@ public class CopyRightActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_copyright);
 
-        initView();
+        findViewById(R.id.iv_back_copyright).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
-    private void initView() {
-
-    }
 }

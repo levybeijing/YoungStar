@@ -207,8 +207,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         main_four_tv.setTextColor(gray);
         main_four.setBackgroundColor(whirt);
         main_four_img.setImageDrawable(MainActivity.this.getResources().getDrawable(R.mipmap.mine2));
-
-
     }
     /**
      * 隐藏Fragment
@@ -589,7 +587,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void onResume() {
         super.onResume();
-        identity = (int)SharedPFUtils.getParam(MainActivity.this,"identity","");
+        identity = (int)SharedPFUtils.getParam(MainActivity.this,"identity",4);
         usercodes = (String) SharedPFUtils.getParam(MainActivity.this,"usercode","");
     }
 }

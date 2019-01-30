@@ -5,19 +5,44 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@mipmap/bg_statusbar"
+        >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="编辑资料"
+        android:textColor="#FFF"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="13dp"
+        android:textSize="18dp"
+        />
+    <ImageView
+        android:id="@+id/iv_back_editemail"
+        android:layout_width="12dp"
+        android:layout_height="21dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="13dp"
+        android:background="@mipmap/back_top"
+        android:layout_alignParentBottom="true"
+        />
+    </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="101dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="79dp"
+        android:layout_marginTop="10dp"
         android:padding="16dp"
         android:background="#FFF"
         >
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:orientation="horizontal"
-            android:layout_weight="1"
             android:gravity="center_vertical"
             >
             <TextView
@@ -45,8 +70,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_height="50dp"
             android:gravity="center_vertical"
             >
             <TextView
@@ -60,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@null"
-                android:hint="请输入验证码"
+                android:hint="请输入新邮箱"
                 android:textSize="12dp"
                 android:layout_marginLeft="16dp"
                 />

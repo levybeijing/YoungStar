@@ -2,11 +2,19 @@ package com.chuanqing.youngstar._mine;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
 import com.chuanqing.youngstar.R;
+import com.chuanqing.youngstar.Urls;
 import com.chuanqing.youngstar.base.BaseActivity;
+import com.chuanqing.youngstar.tools.SharedPFUtils;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.StringCallback;
+
+import okhttp3.Call;
+import okhttp3.Response;
 
 public class FeedbackActivity extends BaseActivity {
 
@@ -19,13 +27,29 @@ public class FeedbackActivity extends BaseActivity {
     }
 
     private void initView() {
-        EditText id = findViewById(R.id.et_content_feedback);
-
+        EditText et_content = findViewById(R.id.et_content_feedback);
+        String content = et_content.getText().toString().trim();
         findViewById(R.id.tv_ok_feedback).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                feedback(content);
             }
         });
     }
+
+    private void feedback(String content){
+        OkGo.post(Urls.addFeedback)//
+                .tag(this)//
+                .params("userCode", (String) SharedPFUtils.getParam(this,"usercode",""))//文件名
+                .params("reason", content)//墙的ID
+                .params("mobile", (String) SharedPFUtils.getParam(this,"phone",""))//墙的ID
+                .params("name", (String) SharedPFUtils.getParam(this,"name",""))//墙的ID
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(String s, Call call, Response response) {
+                        Log.e("=============", "addFeedback"+s);
+                    }
+                });
+    }
+
 }

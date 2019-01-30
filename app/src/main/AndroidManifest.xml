@@ -88,19 +88,10 @@
         <activity android:name="._mine.student.ChangeVerisActivity"></activity>
         <activity android:name="._mine.company.ChangeVericActivity"></activity>
         <activity android:name="._mine.company.EditPhotocActivity"></activity>
-        <activity android:name="._mine.student.MatchActivity">
-
-        </activity>
-
+        <activity android:name="._mine.student.MatchActivity"></activity>
         <activity android:name="._mine.company.SubAccountActivity"></activity>
         <activity android:name="._mine.company.FollowcActivity"></activity>
-        <activity android:name="._mine.student.InterestActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name="._mine.student.InterestActivity"></activity>
         <!--孟\/-->
         <activity android:name="._active.leitai.LeitaiMoreActivity" />
         <activity android:name="._active.leitai.PartakeActivity" />
@@ -110,7 +101,6 @@
             android:name="._square.starshow.StarShowMoreActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait" />
-
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.chuanqing.youngstar.provider"
@@ -129,7 +119,6 @@
             android:name="com.foamtrace.photopicker.PhotoPreviewActivity"
             android:theme="@style/PhotoPickerTheme" />
         <activity android:name="._add.TapeActivity">
-
         </activity>
         <activity android:name="._add.TapeZuopinActivity"></activity>
     </application>

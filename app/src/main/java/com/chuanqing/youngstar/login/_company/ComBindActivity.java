@@ -56,7 +56,7 @@ public class ComBindActivity extends BaseActivity {
             }
         });
     }
-//TODO:
+
     private void request(String name, String phone, String id) {
         OkGo.post(Urls.addStudent)//
                 .tag(this)//

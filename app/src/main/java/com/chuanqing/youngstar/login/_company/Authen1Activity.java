@@ -1,17 +1,47 @@
 package com.chuanqing.youngstar.login._company;
 
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.alibaba.sdk.android.oss.ClientException;
+import com.alibaba.sdk.android.oss.ServiceException;
+import com.alibaba.sdk.android.oss.callback.OSSCompletedCallback;
+import com.alibaba.sdk.android.oss.callback.OSSProgressCallback;
+import com.alibaba.sdk.android.oss.internal.OSSAsyncTask;
+import com.alibaba.sdk.android.oss.model.PutObjectRequest;
+import com.alibaba.sdk.android.oss.model.PutObjectResult;
+import com.chuanqing.youngstar.MyApplication;
 import com.chuanqing.youngstar.R;
+import com.chuanqing.youngstar.Urls;
+import com.chuanqing.youngstar._mine.company.FollowcActivity;
 import com.chuanqing.youngstar.base.BaseActivity;
+import com.chuanqing.youngstar.mybean.FragCareCBean;
+import com.chuanqing.youngstar.tools.SharedPFUtils;
+import com.chuanqing.youngstar.tools.StringUtil;
+import com.google.gson.Gson;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.StringCallback;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Response;
 
 public class Authen1Activity extends BaseActivity implements View.OnClickListener {
     private int chooseindex=1;
@@ -21,6 +51,9 @@ public class Authen1Activity extends BaseActivity implements View.OnClickListene
     private EditText et_phone;
     private EditText et_email;
     private EditText et_intro;
+
+    private boolean havephoto=false;
+    private String name;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -107,11 +140,30 @@ public class Authen1Activity extends BaseActivity implements View.OnClickListene
 //                头像?
 
                 String com = et_com.getText().toString().trim();
-                String name = et_com.getText().toString().trim();
-                String phone = et_com.getText().toString().trim();
-                String email = et_com.getText().toString().trim();
-                String intro = et_com.getText().toString().trim();
-
+                String name = et_name.getText().toString().trim();
+                String phone = et_phone.getText().toString().trim();
+                String email = et_email.getText().toString().trim();
+                String intro = et_intro.getText().toString().trim();
+                if (com==null||com.length()==0){
+                    Toast.makeText(this, "公司名不能为空", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (name==null||name.length()==0){
+                    Toast.makeText(this, "姓名不能为空", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (phone==null||phone.length()==0){
+                    Toast.makeText(this, "电话不能为空", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (email==null||email.length()==0){
+                    Toast.makeText(this, "邮箱不能为空", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (intro==null||intro.length()==0){
+                    Toast.makeText(this, "介绍不能为空", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 Intent intent=new Intent(this,Authen2Activity.class);
                 intent.putExtra("name",name);
                 intent.putExtra("com",com);
@@ -119,7 +171,6 @@ public class Authen1Activity extends BaseActivity implements View.OnClickListene
                 intent.putExtra("email",email);
                 intent.putExtra("intro",intro);
 //                头像
-                intent.putExtra("photo","");
 
                 startActivity(intent);
                 break;
@@ -127,8 +178,33 @@ public class Authen1Activity extends BaseActivity implements View.OnClickListene
     }
 
     private void checked(int i){
-        chooseindex=i;
+
+        BitmapDrawable drawable = (BitmapDrawable) getResources().getDrawable(getpath(i));
+        Bitmap bitmap = drawable.getBitmap();
+
+        synchronized (this){
+        name = SharedPFUtils.getParam(this, "usercode", "") + File.separator + StringUtil.getRandomName(8)+".png";
+        File file=new File(Urls.IMAGEURL+File.separator+name);
+        if (!file.exists()){
+            file.getParentFile().mkdirs();
+        }
+        try {
+            FileOutputStream out=new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.PNG,100, out);
+            out.close();
+            uploadOss(name,file.getAbsolutePath());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+//        Log.e("=============name", "uploadOss:"+file.exists());
+//        Log.e("=============name", "uploadOss:"+file.length());
+
         i=i-1;
+        chooseindex=i;
         for (int j = 0; j < list.size(); j++) {
             if (i==j){
                 list.get(j).setVisibility(View.VISIBLE);
@@ -137,4 +213,67 @@ public class Authen1Activity extends BaseActivity implements View.OnClickListene
             }
         }
     }
+    private int getpath(int i){
+        switch (i){
+            case 1:
+                return R.mipmap.company1;
+            case 2:
+                return R.mipmap.company2;
+            case 3:
+                return R.mipmap.company3;
+            case 4:
+                return R.mipmap.company4;
+            case 5:
+                return R.mipmap.company5;
+            case 6:
+                return R.mipmap.company6;
+            case 7:
+                return R.mipmap.company7;
+            case 8:
+                return R.mipmap.company8;
+            default:
+                return 0;
+        }
+    }
+    //     阿里云上传文件
+    private void uploadOss(String name,String path){
+
+// 构造上传请求
+        PutObjectRequest put = new PutObjectRequest("star-1", name, path);
+        Log.e("=============name", "uploadOss:"+name);
+
+
+// 异步上传时可以设置进度回调
+        put.setProgressCallback(new OSSProgressCallback<PutObjectRequest>() {
+            @Override
+            public void onProgress(PutObjectRequest request, long currentSize, long totalSize) {
+                Log.d("PutObject", "currentSize: " + currentSize + " totalSize: " + totalSize);
+            }
+        });
+
+        OSSAsyncTask task = MyApplication.oss.asyncPutObject(put, new OSSCompletedCallback<PutObjectRequest, PutObjectResult>() {
+            @Override
+            public void onSuccess(PutObjectRequest request, PutObjectResult result) {
+                Log.e("=============PutObject", "UploadSuccess");
+                havephoto=true;
+            }
+
+            @Override
+            public void onFailure(PutObjectRequest request, ClientException clientExcepion, ServiceException serviceException) {
+                // 请求异常
+                if (clientExcepion != null) {
+                    // 本地异常如网络异常等
+                    clientExcepion.printStackTrace();
+                }
+                if (serviceException != null) {
+                    // 服务异常
+                    Log.e("ErrorCode", serviceException.getErrorCode());
+                    Log.e("RequestId", serviceException.getRequestId());
+                    Log.e("HostId", serviceException.getHostId());
+                    Log.e("RawMessage", serviceException.getRawMessage());
+                }
+            }
+        });
+    }
+
 }
