@@ -1,23 +1,26 @@
 package com.chuanqing.youngstar._mine;
 
-
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -31,7 +34,6 @@ import com.chuanqing.youngstar._mine.student.FragmentWorks;
 import com.chuanqing.youngstar.login.choose.ChooseActivity;
 import com.chuanqing.youngstar.myadapter.AdapterMineVP;
 import com.chuanqing.youngstar.myadapter.AdapterMineiRV;
-import com.chuanqing.youngstar.mybean.FragJobBean;
 import com.chuanqing.youngstar.mybean.FragMinecBean;
 import com.chuanqing.youngstar.mybean.FragMinefBean;
 import com.chuanqing.youngstar.mybean.FragMinesBean;
@@ -98,6 +100,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        SharedPFUtils.setParam(getContext(),"identity",3);////
         identity = (int) SharedPFUtils.getParam(getContext(), "identity", 4);
         switch (identity){
             case 1:
@@ -110,7 +113,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                 return inflater.inflate(R.layout.fragment_minef, container, false);
         }
         list.clear();
-        return inflater.inflate(R.layout.fragment_minei, container, false);
+        return inflater.inflate(R.layout.fragment_mines, container, false);
     }
 
     @Override
@@ -126,6 +129,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                 RadioButton rb2 = view.findViewById(R.id.rb2_mines);
                 rb1.setOnClickListener(this);
                 rb2.setOnClickListener(this);
+                RadioGroup rg = view.findViewById(R.id.rg_mines);
 
                 tv1 = view.findViewById(R.id.tv1_mines);
                 tv2 = view.findViewById(R.id.tv2_mines);
@@ -142,14 +146,14 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                 list.add(new FragmentWorks());
                 vp.setAdapter(new AdapterMineVP(getChildFragmentManager(),list));
 
-                TabLayout tab = view.findViewById(R.id.tab_mines);
-                tab.setTabMode(TabLayout.MODE_FIXED);
-                tab.setupWithViewPager(vp);
-
-                TabLayout.Tab tab11 = tab.getTabAt(0);
-                tab11.setText("动态");
-                TabLayout.Tab tab12 = tab.getTabAt(1);
-                tab12.setText("作品集");
+//                TabLayout tab = view.findViewById(R.id.tab_mines);
+//                tab.setTabMode(TabLayout.MODE_FIXED);
+//                tab.setupWithViewPager(vp);
+//
+//                TabLayout.Tab tab11 = tab.getTabAt(0);
+//                tab11.setText("动态");
+//                TabLayout.Tab tab12 = tab.getTabAt(1);
+//                tab12.setText("作品集");
 
                 vp.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
                     @Override
@@ -171,6 +175,19 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 
                     }
                 });
+                AppBarLayout appbars = view.findViewById(R.id.appbar_mines);
+                Toolbar toolbars = view.findViewById(R.id.toolbar_mines);
+                appbars.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+                    @Override
+                    public void onOffsetChanged(AppBarLayout appBarLayout, int i) {
+                        toolbars.setBackgroundColor(changeAlpha(getResources().getColor(R.color.mainColor),Math.abs(i*1.0f)/appbars.getTotalScrollRange()));
+//                        tab.setBackgroundColor(changeAlpha(getResources().getColor(R.color.mainColor),1-Math.abs(i*1.0f)/appbars.getTotalScrollRange()));
+                        if (i==100){
+//                            tab.setVisibility(View.VISIBLE);
+                            rg.setVisibility(View.INVISIBLE);
+                        }
+                    }
+                });
 //        //设置tab1
 //        TabLayout.Tab tab1 = tab.getTabAt(0);
 ////        tab1.setCustomView(R.layout.item_tab_mall);//给每一个tab设置view
@@ -178,13 +195,6 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 ////        ImageView iv1 = tab1.getCustomView().findViewById(R.id.iv_item_tab_mall);
 ////        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
 ////            iv1.setBackground(getResources().getDrawable(R.mipmap.tab_reme));//设置tab上的文字
-////        }
-//        //设置tab2
-//        TabLayout.Tab tab2 = tab.getTabAt(1);
-////        tab2.setCustomView(R.layout.item_tab_mall);//给每一个tab设置view
-////        ImageView iv2 = tab2.getCustomView().findViewById(R.id.iv_item_tab_mall);
-////        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-////            iv2.setBackground(getResources().getDrawable(R.mipmap.tab_gift));//设置tab上的文字
 ////        }
                 break;
             case 2:
@@ -254,6 +264,16 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 
                 adapter3 = new AdapterMineiRV(getContext());
                 rv3.setAdapter(adapter3);
+                //工具栏透明渐变
+                AppBarLayout appbari = view.findViewById(R.id.appbar_minei);
+                Toolbar toolbari = view.findViewById(R.id.toolbar_minei);
+                appbari.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+                    @Override
+                    public void onOffsetChanged(AppBarLayout appBarLayout, int i) {
+                        toolbari.setBackgroundColor(changeAlpha(getResources().getColor(R.color.mainColor),Math.abs(i*1.0f)/appbari.getTotalScrollRange()));
+                    }
+                });
+
                 requestWorks();
                 break;
             case 4:
@@ -273,11 +293,27 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 
                 adapter3 = new AdapterMineiRV(getContext());
                 rv4.setAdapter(adapter3);
-
+//工具栏透明渐变
+                AppBarLayout appbar = view.findViewById(R.id.appbar_minef);
+                Toolbar toolbar = view.findViewById(R.id.toolbar_minef);
+                appbar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+                    @Override
+                    public void onOffsetChanged(AppBarLayout appBarLayout, int i) {
+                        toolbar.setBackgroundColor(changeAlpha(getResources().getColor(R.color.mainColor),Math.abs(i*1.0f)/appbar.getTotalScrollRange()));
+                    }
+                });
                 requestWorks();
                 break;
         }
         request();
+    }
+
+    public int changeAlpha(int color, float fraction) {
+        int red = Color.red(color);
+        int green = Color.green(color);
+        int blue = Color.blue(color);
+        int alpha = (int) (Color.alpha(color) * fraction);
+        return Color.argb(alpha, red, green, blue);
     }
 
     private void requestWorks() {

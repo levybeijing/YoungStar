@@ -116,34 +116,35 @@ public class MyApplication extends Application {
 //                .setCookieStore(new MemoryCookieStore())                //cookie使用内存缓存（app退出后，cookie消失）
                     .setCookieStore(new PersistentCookieStore())    //cookie持久化存储，如果cookie不过期，则一直有效
                     //可以添加全局拦截器,不会用的千万不要传,错误写法直接导致任何回调不执行
-                    .addInterceptor(new Interceptor() {
-                        @Override
-                        public okhttp3.Response intercept(Chain chain) throws IOException {
-////                        创建一个request
-                        okhttp3.Response proceed = chain.proceed(chain.request());
-                        String string = proceed.body().string();
-                        Log.e("=====================" ,"intercept: "+string);
-                        try {
-                            JSONObject jo=new JSONObject(string);
-                            String message = jo.getString("message");
-                            Toast.makeText(MyApplication.this, "****", Toast.LENGTH_SHORT).show();
-                            if (message.equals("请重新登录")){
-//                                Intent intent=new Intent();
-//                                intent.setAction("action.LOGIN.OTHER");
-//                                sendBroadcast(intent);
-//                                return null;
-                            }else{
-
-                            }
-//                            proceed.body().close();
-//                            okhttp3.Response response = new okhttp3.Response();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-//                        return proceed;
-                            return chain.proceed(chain.request());
-                        }
-                    });
+//                    .addInterceptor(new Interceptor() {
+//                        @Override
+//                        public okhttp3.Response intercept(Chain chain) throws IOException {
+//////                        创建一个request
+//                        okhttp3.Response proceed = chain.proceed(chain.request());
+//                        String string = proceed.body().string();
+//                        Log.e("=====================" ,"intercept: "+string);
+//                        try {
+//                            JSONObject jo=new JSONObject(string);
+//                            String message = jo.getString("message");
+//                            Toast.makeText(MyApplication.this, "****", Toast.LENGTH_SHORT).show();
+//                            if (message.equals("请重新登录")){
+////                                Intent intent=new Intent();
+////                                intent.setAction("action.LOGIN.OTHER");
+////                                sendBroadcast(intent);
+////                                return null;
+//                            }else{
+//
+//                            }
+////                            proceed.body().close();
+////                            okhttp3.Response response = new okhttp3.Response();
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+////                        return proceed;
+//                            return chain.proceed(chain.request());
+//                        }
+//                    })
+                    ;
         } catch (Exception e) {
             e.printStackTrace();
         }

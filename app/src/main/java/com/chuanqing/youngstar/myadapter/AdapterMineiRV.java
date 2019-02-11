@@ -38,19 +38,21 @@ public class AdapterMineiRV extends RecyclerView.Adapter<AdapterMineiRV.MyViewHo
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int i) {
-        holder.tv_number.setText(list.get(i).getId()+"");
-        Glide.with(context).load(Urls.IMAGEURL+list.get(i).getBlog_img()).into(holder.iv_cover);
+//        holder.tv_number.setText(list.get(i).getId()+"");
+//        Glide.with(context).load(Urls.IMAGEURL+list.get(i).getBlog_img()).into(holder.iv_cover);
+        Glide.with(context).load("http://www.pptbz.com/pptpic/UploadFiles_6909/201203/2012031220134655.jpg").into(holder.iv_cover);
 //
-        String media_url = list.get(i).getMedia_url();
-        int media_type = list.get(i).getMedia_type();
+//        String media_url = list.get(i).getMedia_url();
+//        int media_type = list.get(i).getMedia_type();
     }
 
     @Override
     public int getItemCount() {
-        if (list==null){
-            return 0;
-        }
-        return list.size();
+//        if (list==null){
+////            return 0;
+////        }
+////        return list.size();
+        return 20;
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder
