@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
-
 import com.chuanqing.youngstar.R;
 import com.chuanqing.youngstar.base.BaseActivity;
 
@@ -40,13 +39,14 @@ public class SettinsActivity extends BaseActivity implements View.OnClickListene
 //                ???
                 break;
             case R.id.ll_clear_settings:
-//
+//image video 文件夹递归删除
+
                 break;
             case R.id.ll_aboutours_settings:
                 startActivity(new Intent(this,CopyRightActivity.class));
                 break;
             case R.id.ll_publish_settings:
-                startActivity(new Intent(this,SystemSetActivity.class));
+                startActivity(new Intent(this,ReliefActivity.class));
                 break;
             case R.id.ll_help_settings:
                 startActivity(new Intent(this,HelpActivity.class));

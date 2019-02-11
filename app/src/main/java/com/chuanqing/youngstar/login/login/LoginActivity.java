@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -48,6 +49,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private TimeCount time;
     private RadioButton login;
     private RadioButton register;
+    private CheckBox check;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +96,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         getcode = findViewById(R.id.tv_getcode_register);
         TextView protocol = findViewById(R.id.tv_protocol_register);
         TextView privacy = findViewById(R.id.tv_privacy_register);
+
+        check = findViewById(R.id.check_register);
 
         toregister.setOnClickListener(this);
         getcode.setOnClickListener(this);
@@ -144,6 +148,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 String trim2 = pwdagain.getText().toString().trim();
                 String trim3 = phone.getText().toString().trim();
                 String trim4 = code.getText().toString().trim();
+
+                if (!check.isChecked()){
+                    Toast.makeText(this, "请同意隐私保护和用户协议", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 if (!StringUtil.isPhoneNumber(trim3)){
                     Toast.makeText(this, "手机号不正确", Toast.LENGTH_SHORT).show();
                     return;

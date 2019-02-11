@@ -236,8 +236,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         if (!mBackKeyPressed) {
             ToastUtils.shortToast("再按一次退出程序");
             mBackKeyPressed = true;
-
-
             new Timer().schedule(new TimerTask() {
 
                 @Override
@@ -246,12 +244,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 }
             }, 2000);//延时两秒，如果超出则擦错第一次按键记录
         } else
-
         {
             this.finish();
             System.exit(0);
         }
-
     }
 
     //声明一个静态常量，用作退出BaseActivity的Tag

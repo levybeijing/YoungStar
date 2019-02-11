@@ -19,6 +19,7 @@ public class PrivacyProtectActivity extends BaseActivity implements IView{
 
         P p = new P(this);
         tv_privacy = findViewById(R.id.tv_privacy);
+        tv_privacy.setText(R.string.privacy);
     }
 
     @Override

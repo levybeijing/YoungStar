@@ -18,7 +18,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
@@ -100,7 +99,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        SharedPFUtils.setParam(getContext(),"identity",3);////
+//        SharedPFUtils.setParam(getContext(),"identity",3);////
         identity = (int) SharedPFUtils.getParam(getContext(), "identity", 4);
         switch (identity){
             case 1:
