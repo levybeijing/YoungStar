@@ -12,9 +12,14 @@
     <color name="home_gray">#999999</color>
     <color name="whole_hx">#DCDCDC</color>
     <color name="whole_info">#666666</color>
-    <color name="touming">#00000000</color>
+    <!--<color name="touming">#0fff</color>-->
 <!--页面背景色-->
     <color name="main_page">#F7F7F7</color>
     <!--福利不选中背景-->
     <color name="fuli_no">#E5E5E5</color>
+
+<!--主页底部导航切换颜色-->
+    <color name="checked">#F56250</color>
+    <color name="unchecked">#E6E7E7</color>
+
 </resources>

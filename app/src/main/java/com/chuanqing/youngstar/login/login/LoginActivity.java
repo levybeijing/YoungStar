@@ -150,7 +150,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 String trim4 = code.getText().toString().trim();
 
                 if (!StringUtil.isPhoneNumber(trim3)){
-                    Toast.makeText(this, "手机号不正确", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "请输入正确手机号", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (trim1==null||trim2==null||trim1.length()==0||trim2.length()==0){

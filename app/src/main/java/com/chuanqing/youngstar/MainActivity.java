@@ -16,6 +16,8 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,7 +50,7 @@ import java.util.TimerTask;
 import okhttp3.Call;
 import okhttp3.Response;
 
-public class MainActivity extends BaseActivity implements View.OnClickListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
     HomeFragment homeFragment;
     SquareFragment squareFragment;
     StarActivityFragment starActivityFragment;
@@ -111,10 +113,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         main_third.setOnClickListener(this);
         main_four.setOnClickListener(this);
         img_center.setOnClickListener(this);
+//        RadioGroup rg = findViewById(R.id.rg_main);
+//        rg.setOnCheckedChangeListener(this);
     }
+
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+
             case R.id.main_first:
                 setChioceItem(0);
                 break;
@@ -129,6 +136,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.main_img_center:
                 requestIdentity();
+//                RadioButton meduim = findViewById(R.id.rb_medium_main);
+//                meduim.setChecked(true);
 //                if (identity==1){
 //                    showPopwindow();  //展示中间按钮点击事件
 //                }else if (identity==2){
@@ -143,6 +152,26 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         }
     }
 
+    @Override
+    public void onCheckedChanged(RadioGroup group, int checkedId) {
+//        switch (checkedId){
+//            case R.id.rb_home_main:
+//                setChioceItem(0);
+//                break;
+//            case R.id.rb_square_main:
+//                setChioceItem(1);
+//                break;
+//            case R.id.rb_medium_main:
+//                requestIdentity();
+//                break;
+//            case R.id.rb_act_main:
+//                setChioceItem(2);
+//                break;
+//            case R.id.rb_mine_main:
+//                setChioceItem(3);
+//                break;
+//        }
+    }
     private void requestIdentity() {
         OkGo.post(Urls.getUserType)//
                 .tag(this)//
@@ -189,25 +218,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                         }
                         mineFragment = new MineFragment();
                         fragmentManager.beginTransaction().add(R.id.content,mineFragment).commit();
-//                        if (mineFragment!=null){
-//                            if (type!=(int)SharedPFUtils.getParam(MainActivity.this,"identity",4)){
-//                                mineFragment = new MineFragment();
-//                                fragmentManager.beginTransaction().add(R.id.content,mineFragment).commit();
-//                                SharedPFUtils.setParam(MainActivity.this,"identity", type);
-//                            }else {
-//                                fragmentManager.beginTransaction().show(mineFragment).commit();
-//                            }
-//                        }else{
-//                            mineFragment = new MineFragment();
-//                            fragmentManager.beginTransaction().add(R.id.content,mineFragment).commit();
-//                        }
                     }
                 });
     }
     /**
      * 设置点击选项卡的事件处理
      *
-     * @param index 选项卡的标号：0, 1, 2, 3,4
+     * @param index 选项卡的标号：0, 1, 2, 3, 4
      */
     private void setChioceItem(int index) {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -248,12 +265,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 main_four_tv.setTextColor(dark);
                 main_four_img.setImageDrawable(MainActivity.this.getResources().getDrawable(R.mipmap.mine1));
                 requestIdenMine();
-//                if (mineFragment == null) {
-//                    mineFragment = new MineFragment();
-//                    fragmentTransaction.add(R.id.content, mineFragment);
-//                } else {
-//                    fragmentTransaction.show(mineFragment);
-//                }
                 break;
         }
         fragmentTransaction.commit(); // 提交
@@ -653,4 +664,5 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         identity = (int)SharedPFUtils.getParam(MainActivity.this,"identity",4);
         usercodes = (String) SharedPFUtils.getParam(MainActivity.this,"usercode","");
     }
+
 }
