@@ -149,11 +149,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 String trim3 = phone.getText().toString().trim();
                 String trim4 = code.getText().toString().trim();
 
-                if (!check.isChecked()){
-                    Toast.makeText(this, "请同意隐私保护和用户协议", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
                 if (!StringUtil.isPhoneNumber(trim3)){
                     Toast.makeText(this, "手机号不正确", Toast.LENGTH_SHORT).show();
                     return;
@@ -164,6 +159,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 }
                 if (!trim1.equals(trim2)){
                     Toast.makeText(this, "前后密码不相同,请重新输入密码", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (!check.isChecked()){
+                    Toast.makeText(this, "请同意隐私保护和用户协议", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 VeriCode(trim3,trim4,trim1);
