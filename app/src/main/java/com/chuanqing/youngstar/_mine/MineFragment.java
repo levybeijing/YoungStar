@@ -232,7 +232,19 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 
                     }
                 });
-
+                AppBarLayout appbarc = view.findViewById(R.id.appbar_minec);
+                Toolbar toolbarc = view.findViewById(R.id.toolbar_minec);
+                appbarc.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+                    @Override
+                    public void onOffsetChanged(AppBarLayout appBarLayout, int i) {
+                        toolbarc.setBackgroundColor(changeAlpha(getResources().getColor(R.color.mainColor),Math.abs(i*1.0f)/appbarc.getTotalScrollRange()));
+//                        tab.setBackgroundColor(changeAlpha(getResources().getColor(R.color.mainColor),1-Math.abs(i*1.0f)/appbars.getTotalScrollRange()));
+                        if (i==100){
+//                            tab.setVisibility(View.VISIBLE);
+//                            rg.setVisibility(View.INVISIBLE);
+                        }
+                    }
+                });
                 list.add(new FragmentPublish());
                 list.add(new FragmentJob());
 
@@ -422,6 +434,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
             case R.id.tv_change_minef:
                 startActivity(new Intent(getActivity(), ChooseActivity.class));
                 break;
+//                设置背景图片
             case R.id.rl_mines:
 //                vp2.setCurrentItem(1);
                 break;

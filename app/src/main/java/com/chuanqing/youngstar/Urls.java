@@ -79,6 +79,7 @@ public class Urls {
     public static final String updateCompanySecondary = HOST + "Star/user/updateCompanySecondary";
     //    修改头像
     public static final String updateUserImg = HOST + "Star/user/updateUserImg";
-
+    //    查询用户身份状态
+    public static final String getUserType = HOST + "Star/user/getUserType";
 
 }

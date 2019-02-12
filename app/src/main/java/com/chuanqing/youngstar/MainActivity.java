@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.chuanqing.youngstar._active.StarActivityFragment;
 import com.chuanqing.youngstar._add.AddAudioActivity;
@@ -28,7 +30,10 @@ import com.chuanqing.youngstar._home.searchstudent.SearchStatusActivity;
 import com.chuanqing.youngstar._mine.MineFragment;
 import com.chuanqing.youngstar._square.SquareFragment;
 import com.chuanqing.youngstar.base.BaseActivity;
+import com.chuanqing.youngstar.login.bean.VeriCodeBean;
 import com.chuanqing.youngstar.login.choose.ChooseActivity;
+import com.chuanqing.youngstar.login.login.LoginActivity;
+import com.chuanqing.youngstar.mybean.IdentityBean;
 import com.chuanqing.youngstar.mybean.StatusBean;
 import com.chuanqing.youngstar.tools.Api;
 import com.chuanqing.youngstar.tools.SharedPFUtils;
@@ -79,7 +84,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         fragmentManager = getSupportFragmentManager();
         initView(); // 初始化界面控件
         setChioceItem(0); // 初始化页面加载时显示第中间的选项卡
-
     }
 
     /**
@@ -124,20 +128,82 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 setChioceItem(3);
                 break;
             case R.id.main_img_center:
-                if (identity==1){
-                    showPopwindow();  //展示中间按钮点击事件
-                }else if (identity==2){
-                    showPopwindowgongsi();
-                }else if (identity==3){
-                    showPopwindowtouziren();
-                }else if (identity==4){
-                    showPopwindowfensi();
-                }
+                requestIdentity();
+//                if (identity==1){
+//                    showPopwindow();  //展示中间按钮点击事件
+//                }else if (identity==2){
+//                    showPopwindowgongsi();
+//                }else if (identity==3){
+//                    showPopwindowtouziren();
+//                }else if (identity==4){
+//                    showPopwindowfensi();
+//                }
             default:
                 break;
         }
     }
 
+    private void requestIdentity() {
+        OkGo.post(Urls.getUserType)//
+                .tag(this)//
+                .params("userCode",(String)SharedPFUtils.getParam(this,"usercode",""))
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(String s, Call call, Response response) {
+//                        成功则提示 考虑自动登录
+                        Log.e("===============", "VeriCode: "+s);
+                        IdentityBean bean = new Gson().fromJson(s, IdentityBean.class);
+                        int type = bean.getData().getType();
+                        switch (type){
+                            case 1:
+                                showPopwindow();  //展示中间按钮点击事件
+                                break;
+                            case 2:
+                                showPopwindowgongsi();
+                                break;
+                            case 3:
+                                showPopwindowtouziren();
+                                break;
+                            case 4:
+                                showPopwindowfensi();
+                                break;
+                        }
+                        SharedPFUtils.setParam(MainActivity.this,"identity", type);
+                    }
+                });
+    }
+    private void requestIdenMine() {
+        OkGo.post(Urls.getUserType)//
+                .tag(this)//
+                .params("userCode",(String)SharedPFUtils.getParam(this,"usercode",""))
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(String s, Call call, Response response) {
+//                        成功则提示 考虑自动登录
+                        Log.e("===============", "VeriCode: "+s);
+                        IdentityBean bean = new Gson().fromJson(s, IdentityBean.class);
+                        int type = bean.getData().getType();
+                        SharedPFUtils.setParam(MainActivity.this,"identity", type);
+                        if (mineFragment!=null){
+                            fragmentManager.beginTransaction().remove(mineFragment).commit();
+                        }
+                        mineFragment = new MineFragment();
+                        fragmentManager.beginTransaction().add(R.id.content,mineFragment).commit();
+//                        if (mineFragment!=null){
+//                            if (type!=(int)SharedPFUtils.getParam(MainActivity.this,"identity",4)){
+//                                mineFragment = new MineFragment();
+//                                fragmentManager.beginTransaction().add(R.id.content,mineFragment).commit();
+//                                SharedPFUtils.setParam(MainActivity.this,"identity", type);
+//                            }else {
+//                                fragmentManager.beginTransaction().show(mineFragment).commit();
+//                            }
+//                        }else{
+//                            mineFragment = new MineFragment();
+//                            fragmentManager.beginTransaction().add(R.id.content,mineFragment).commit();
+//                        }
+                    }
+                });
+    }
     /**
      * 设置点击选项卡的事件处理
      *
@@ -181,12 +247,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             case 3:
                 main_four_tv.setTextColor(dark);
                 main_four_img.setImageDrawable(MainActivity.this.getResources().getDrawable(R.mipmap.mine1));
-                if (mineFragment == null) {
-                    mineFragment = new MineFragment();
-                    fragmentTransaction.add(R.id.content, mineFragment);
-                } else {
-                    fragmentTransaction.show(mineFragment);
-                }
+                requestIdenMine();
+//                if (mineFragment == null) {
+//                    mineFragment = new MineFragment();
+//                    fragmentTransaction.add(R.id.content, mineFragment);
+//                } else {
+//                    fragmentTransaction.show(mineFragment);
+//                }
                 break;
         }
         fragmentTransaction.commit(); // 提交
