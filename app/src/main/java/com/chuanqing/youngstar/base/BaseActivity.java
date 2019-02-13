@@ -1,9 +1,12 @@
 package com.chuanqing.youngstar.base;
 
+import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -11,33 +14,32 @@ import com.chuanqing.youngstar.tools.ScreenUtils;
 
 
 public class BaseActivity extends FragmentActivity {
+    /** 是否禁止旋转屏幕 **/
+    private boolean isAllowScreenRoate = true;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//取消标题
+        if (!isAllowScreenRoate) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        } else {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
+        //取消标题
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         final int sdk = Build.VERSION.SDK_INT;
         Window window = this.getWindow();
         WindowManager.LayoutParams params = window.getAttributes();
+        if(Build.VERSION.SDK_INT >= 21) {
+            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+            window.setStatusBarColor(Color.TRANSPARENT);
+        }
 
-//        if (sdk >= Build.VERSION_CODES.KITKAT) {
-//            int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
-//            // 设置透明状态栏
-//            if ((params.flags & bits) == 0) {
-//                params.flags |= bits;
-//                window.setAttributes(params);
-//            }
-//        }
 
 //        ScreenUtils.adaptScreen(this, 392,true);//在绘图之前执行该方法  392是设计图的dp值 可根据实际
         ScreenUtils.adaptScreen(this, 375,true);//在绘图之前执行该方法  392是设计图的dp值 可根据实际
-//        //取消标题
-//        requestWindowFeature(Window.FEATURE_NO_TITLE);
-//        //取消状态栏
-//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-//                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
     }
     @Override
     protected void onDestroy() {
