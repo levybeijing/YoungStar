@@ -1,8 +1,11 @@
 package com.chuanqing.youngstar;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -86,6 +89,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         fragmentManager = getSupportFragmentManager();
         initView(); // 初始化界面控件
         setChioceItem(0); // 初始化页面加载时显示第中间的选项卡
+
     }
 
     /**
