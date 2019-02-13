@@ -14,5 +14,6 @@ public class UserProtocolActivity extends BaseActivity {
         setContentView(R.layout.activity_protect);
 
         TextView tv_protocol = findViewById(R.id.tv_protocol);
+        tv_protocol.setText(R.string.protocol);
     }
 }

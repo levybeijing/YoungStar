@@ -1,6 +1,9 @@
 package com.chuanqing.youngstar.myadapter;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +14,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.chuanqing.youngstar.R;
+import com.chuanqing.youngstar._add.student.ImgActivity;
 import com.chuanqing.youngstar.mybean.WorksBean;
 import com.chuanqing.youngstar.tools.Api;
 
@@ -41,6 +45,14 @@ public class PublishWorksAdapter extends RecyclerView.Adapter<PublishWorksAdapte
         Glide.with(context)
                 .load(path)
                 .into(viewHolder.imageView);
+        viewHolder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                context.startActivity(new Intent(context, ImgActivity.class)
+                , ActivityOptions.makeSceneTransitionAnimation((Activity)context, v, "worksimg").toBundle()
+                );
+            }
+        });
         viewHolder.imageView_no.setVisibility(View.VISIBLE);
         viewHolder.imageView_no.setOnClickListener(new View.OnClickListener() {
             @Override

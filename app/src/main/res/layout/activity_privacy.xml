@@ -31,8 +31,12 @@
             android:layout_alignParentBottom="true"
             />
     </RelativeLayout>
-    <TextView
-        android:id="@+id/tv_privacy"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/tv_privacy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </ScrollView>
 </LinearLayout>

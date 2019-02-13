@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +16,10 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.chuanqing.youngstar._active.StarActivityFragment;
 import com.chuanqing.youngstar._add.AddAudioActivity;
@@ -28,7 +32,10 @@ import com.chuanqing.youngstar._home.searchstudent.SearchStatusActivity;
 import com.chuanqing.youngstar._mine.MineFragment;
 import com.chuanqing.youngstar._square.SquareFragment;
 import com.chuanqing.youngstar.base.BaseActivity;
+import com.chuanqing.youngstar.login.bean.VeriCodeBean;
 import com.chuanqing.youngstar.login.choose.ChooseActivity;
+import com.chuanqing.youngstar.login.login.LoginActivity;
+import com.chuanqing.youngstar.mybean.IdentityBean;
 import com.chuanqing.youngstar.mybean.StatusBean;
 import com.chuanqing.youngstar.tools.Api;
 import com.chuanqing.youngstar.tools.SharedPFUtils;
@@ -43,7 +50,7 @@ import java.util.TimerTask;
 import okhttp3.Call;
 import okhttp3.Response;
 
-public class MainActivity extends BaseActivity implements View.OnClickListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
     HomeFragment homeFragment;
     SquareFragment squareFragment;
     StarActivityFragment starActivityFragment;
@@ -79,7 +86,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         fragmentManager = getSupportFragmentManager();
         initView(); // 初始化界面控件
         setChioceItem(0); // 初始化页面加载时显示第中间的选项卡
-
     }
 
     /**
@@ -107,10 +113,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         main_third.setOnClickListener(this);
         main_four.setOnClickListener(this);
         img_center.setOnClickListener(this);
+//        RadioGroup rg = findViewById(R.id.rg_main);
+//        rg.setOnCheckedChangeListener(this);
     }
+
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+
             case R.id.main_first:
                 setChioceItem(0);
                 break;
@@ -124,24 +135,96 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 setChioceItem(3);
                 break;
             case R.id.main_img_center:
-                if (identity==1){
-                    showPopwindow();  //展示中间按钮点击事件
-                }else if (identity==2){
-                    showPopwindowgongsi();
-                }else if (identity==3){
-                    showPopwindowtouziren();
-                }else if (identity==4){
-                    showPopwindowfensi();
-                }
+                requestIdentity();
+//                RadioButton meduim = findViewById(R.id.rb_medium_main);
+//                meduim.setChecked(true);
+//                if (identity==1){
+//                    showPopwindow();  //展示中间按钮点击事件
+//                }else if (identity==2){
+//                    showPopwindowgongsi();
+//                }else if (identity==3){
+//                    showPopwindowtouziren();
+//                }else if (identity==4){
+//                    showPopwindowfensi();
+//                }
             default:
                 break;
         }
     }
 
+    @Override
+    public void onCheckedChanged(RadioGroup group, int checkedId) {
+//        switch (checkedId){
+//            case R.id.rb_home_main:
+//                setChioceItem(0);
+//                break;
+//            case R.id.rb_square_main:
+//                setChioceItem(1);
+//                break;
+//            case R.id.rb_medium_main:
+//                requestIdentity();
+//                break;
+//            case R.id.rb_act_main:
+//                setChioceItem(2);
+//                break;
+//            case R.id.rb_mine_main:
+//                setChioceItem(3);
+//                break;
+//        }
+    }
+    private void requestIdentity() {
+        OkGo.post(Urls.getUserType)//
+                .tag(this)//
+                .params("userCode",(String)SharedPFUtils.getParam(this,"usercode",""))
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(String s, Call call, Response response) {
+//                        成功则提示 考虑自动登录
+                        Log.e("===============", "VeriCode: "+s);
+                        IdentityBean bean = new Gson().fromJson(s, IdentityBean.class);
+                        int type = bean.getData().getType();
+                        switch (type){
+                            case 1:
+                                showPopwindow();  //展示中间按钮点击事件
+                                break;
+                            case 2:
+                                showPopwindowgongsi();
+                                break;
+                            case 3:
+                                showPopwindowtouziren();
+                                break;
+                            case 4:
+                                showPopwindowfensi();
+                                break;
+                        }
+                        SharedPFUtils.setParam(MainActivity.this,"identity", type);
+                    }
+                });
+    }
+    private void requestIdenMine() {
+        OkGo.post(Urls.getUserType)//
+                .tag(this)//
+                .params("userCode",(String)SharedPFUtils.getParam(this,"usercode",""))
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(String s, Call call, Response response) {
+//                        成功则提示 考虑自动登录
+                        Log.e("===============", "VeriCode: "+s);
+                        IdentityBean bean = new Gson().fromJson(s, IdentityBean.class);
+                        int type = bean.getData().getType();
+                        SharedPFUtils.setParam(MainActivity.this,"identity", type);
+                        if (mineFragment!=null){
+                            fragmentManager.beginTransaction().remove(mineFragment).commit();
+                        }
+                        mineFragment = new MineFragment();
+                        fragmentManager.beginTransaction().add(R.id.content,mineFragment).commit();
+                    }
+                });
+    }
     /**
      * 设置点击选项卡的事件处理
      *
-     * @param index 选项卡的标号：0, 1, 2, 3,4
+     * @param index 选项卡的标号：0, 1, 2, 3, 4
      */
     private void setChioceItem(int index) {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -181,12 +264,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             case 3:
                 main_four_tv.setTextColor(dark);
                 main_four_img.setImageDrawable(MainActivity.this.getResources().getDrawable(R.mipmap.mine1));
-                if (mineFragment == null) {
-                    mineFragment = new MineFragment();
-                    fragmentTransaction.add(R.id.content, mineFragment);
-                } else {
-                    fragmentTransaction.show(mineFragment);
-                }
+                requestIdenMine();
                 break;
         }
         fragmentTransaction.commit(); // 提交
@@ -236,8 +314,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         if (!mBackKeyPressed) {
             ToastUtils.shortToast("再按一次退出程序");
             mBackKeyPressed = true;
-
-
             new Timer().schedule(new TimerTask() {
 
                 @Override
@@ -246,12 +322,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 }
             }, 2000);//延时两秒，如果超出则擦错第一次按键记录
         } else
-
         {
             this.finish();
             System.exit(0);
         }
-
     }
 
     //声明一个静态常量，用作退出BaseActivity的Tag
@@ -590,4 +664,5 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         identity = (int)SharedPFUtils.getParam(MainActivity.this,"identity",4);
         usercodes = (String) SharedPFUtils.getParam(MainActivity.this,"usercode","");
     }
+
 }

@@ -9,27 +9,23 @@
     tools:context="._mine.MineFragment"
     >
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar_minef"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="375dp"
         >
         <android.support.design.widget.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_scrollFlags="scroll|enterAlways"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
             >
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                >
-
 
             <RelativeLayout
                 android:id="@+id/rl_minef"
-                xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="375dp"
                 android:background="@mipmap/bg_fans"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.8"
                 >
                 <!--<ImageView-->
                     <!--android:id="@+id/iv_photo_fans"-->
@@ -127,8 +123,16 @@
                         android:textSize="12dp"
                         />
                 </LinearLayout>
-
+            </RelativeLayout>
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar_minef"
+                android:background="@color/mainColor"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                app:layout_collapseMode="pin"
+                >
                 <LinearLayout
+
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:orientation="horizontal"
@@ -155,13 +159,13 @@
                         android:layout_margin="10dp"
                         />
                 </LinearLayout>
-            </RelativeLayout>
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rv_minef"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
-            </LinearLayout>
+            </android.support.v7.widget.Toolbar>
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
-
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_minef"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        />
 </android.support.design.widget.CoordinatorLayout>
