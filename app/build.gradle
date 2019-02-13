@@ -70,7 +70,6 @@ dependencies {
     implementation 'cn.jzvd:jiaozivideoplayer:6.4.1'
 //    阿里服务器
     implementation 'com.aliyun.dpa:oss-android-sdk:+'
-
     //图片选择器
     implementation 'com.foamtrace:photopicker:1.0'
     //导入自定义加载等待Dialog弹窗控件  下

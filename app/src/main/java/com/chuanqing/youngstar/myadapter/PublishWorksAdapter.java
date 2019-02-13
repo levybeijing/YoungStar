@@ -5,7 +5,9 @@ import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,11 +48,13 @@ public class PublishWorksAdapter extends RecyclerView.Adapter<PublishWorksAdapte
                 .load(path)
                 .into(viewHolder.imageView);
         viewHolder.imageView.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View v) {
-                context.startActivity(new Intent(context, ImgActivity.class)
-                , ActivityOptions.makeSceneTransitionAnimation((Activity)context, v, "worksimg").toBundle()
-                );
+                Intent intent = new Intent(context, ImgActivity.class);
+                intent.putExtra("url",path);
+                context.startActivity(intent
+                , ActivityOptions.makeSceneTransitionAnimation((Activity)context, v, "worksimg").toBundle());
             }
         });
         viewHolder.imageView_no.setVisibility(View.VISIBLE);
