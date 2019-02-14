@@ -144,7 +144,6 @@ public class TapeActivity extends BaseActivity {
         right_tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                ToastUtils.shortToast("完成");
                 if (recordFile==null){
                     ToastUtils.shortToast("请录制音频");
                 }else {
@@ -152,14 +151,13 @@ public class TapeActivity extends BaseActivity {
                         rb_toggle.setText("开始");
                         lock = false;
                         //先暂停录制后再跳转
-                            stopRecording();
+                        stopRecording();
                     }
                     MyApplication.getApplication().addActivity(TapeActivity.this);
                     Intent intent = new Intent(TapeActivity.this,TapeMoreActivity.class);
                     intent.putExtra("path",recordFile);
                     startActivity(intent);
                 }
-
             }
         });
     }
@@ -175,7 +173,6 @@ public class TapeActivity extends BaseActivity {
                 if (isChecked){
                     startRecording();
                     rb_toggle.setText("结束");
-//                    tv_tittle.setText("暂停");
                     lock = true;
                     new Thread(runnable).start();
                 }else{
@@ -235,15 +232,6 @@ public class TapeActivity extends BaseActivity {
             e.printStackTrace();
         }
     }
-//
-//    /**
-//     * 录制暂停
-//     */
-//    private void zanting(){
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-//            mediaRecorder.pause();
-//        }
-//    }
 
     /**
      * 录制完毕
@@ -254,17 +242,7 @@ public class TapeActivity extends BaseActivity {
             mediaRecorder.stop();
             mediaRecorder.release();
             mediaRecorder=null;
+            lock=false;
         }
     }
-//    private void playRecording() {
-////        Log.e(TAG, "playRecording: 播放"+recordFile );
-//        player.playRecordFile(recordFile);
-//    }
-//    private void pauseplayer() {
-//        player.pausePalyer();
-//    }
-//    private void stopplayer() {
-//        player.stopPalyer();
-//    }
-
 }

@@ -68,7 +68,9 @@
         <!--add-->
         <activity android:name="._add.PublishActivity"></activity>
         <activity android:name="._add.company.RecuitActivity"></activity>
-        <activity android:name="._add.student.WorksActivity"></activity>
+        <activity android:name="._add.student.WorksActivity"
+            android:launchMode="singleTop"
+            ></activity>
         <activity android:name="._add.AddAudioActivity"></activity>
         <!--mine-->
         <activity android:name="._mine.OfficalMsgActivity"></activity>
