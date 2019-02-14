@@ -15,7 +15,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.chuanqing.youngstar.MainActivity;
@@ -39,18 +41,21 @@ public class TapeActivity extends BaseActivity {
     private static final String TAG = "TapeActivity";
     private boolean lock=true;
     private int count=0;
+
+    @BindView(R.id.rb_tape_star)
+    RadioButton rb_toggle;
+
     Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            if (msg.what==1&&count<=100){
-                if (count==100){
-                    if (tv_tittle.getText().toString().equals("暂停")){
+            if (msg.what==1&&count<=90){
+                    if (count==100){
+                    if (rb_toggle.isChecked()){
                         //先暂停，然后跳转页面
                         stopRecording();
                         lock = false;
-                        tv_tittle.setText("开始");
-
+                        rb_toggle.setText("开始");
                         MyApplication.getApplication().addActivity(TapeActivity.this);
                         Intent intent = new Intent(TapeActivity.this,TapeMoreActivity.class);
                         intent.putExtra("path",recordFile);
@@ -143,8 +148,8 @@ public class TapeActivity extends BaseActivity {
                 if (recordFile==null){
                     ToastUtils.shortToast("请录制音频");
                 }else {
-                    if (tv_tittle.getText().toString().equals("暂停")){
-                        tv_tittle.setText("开始");
+                    if (rb_toggle.isChecked()){
+                        rb_toggle.setText("开始");
                         lock = false;
                         //先暂停录制后再跳转
                             stopRecording();
@@ -162,27 +167,23 @@ public class TapeActivity extends BaseActivity {
     /**
      * 写入信息
      */
-    @BindView(R.id.tape_star)
-    ImageView img_star;
-    @BindView(R.id.tape_title)
-    TextView tv_tittle;
 
     private void setinfo(){
-        img_star.setOnClickListener(new View.OnClickListener() {
+        rb_toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                if (tv_tittle.getText().toString().equals("开始")){
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
                     startRecording();
-                    tv_tittle.setText("暂停");
+                    rb_toggle.setText("结束");
+//                    tv_tittle.setText("暂停");
                     lock = true;
                     new Thread(runnable).start();
-                }else {
+                }else{
+//                    录制装填
                     stopRecording();
-                    tv_tittle.setText("开始");
+                    rb_toggle.setText("开始");
                     lock = false;
-
                 }
-
             }
         });
     }
@@ -192,6 +193,10 @@ public class TapeActivity extends BaseActivity {
      * 录制开始
      */
     private void startRecording() {
+        //        录音状态下锁定 不能重新开始
+        if (lock){
+            return;
+        }
         if (mediaRecorder==null){
             mediaRecorder = new MediaRecorder();
         }
@@ -230,15 +235,15 @@ public class TapeActivity extends BaseActivity {
             e.printStackTrace();
         }
     }
-
-    /**
-     * 录制暂停
-     */
-    private void zanting(){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            mediaRecorder.pause();
-        }
-    }
+//
+//    /**
+//     * 录制暂停
+//     */
+//    private void zanting(){
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//            mediaRecorder.pause();
+//        }
+//    }
 
     /**
      * 录制完毕
@@ -251,16 +256,15 @@ public class TapeActivity extends BaseActivity {
             mediaRecorder=null;
         }
     }
-    private void playRecording() {
-//        Log.e(TAG, "playRecording: 播放"+recordFile );
-        player.playRecordFile(recordFile);
-    }
-    private void pauseplayer() {
-        player.pausePalyer();
-    }
-    private void stopplayer() {
-        // TODO Auto-generated method stub
-        player.stopPalyer();
-    }
+//    private void playRecording() {
+////        Log.e(TAG, "playRecording: 播放"+recordFile );
+//        player.playRecordFile(recordFile);
+//    }
+//    private void pauseplayer() {
+//        player.pausePalyer();
+//    }
+//    private void stopplayer() {
+//        player.stopPalyer();
+//    }
 
 }

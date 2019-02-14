@@ -231,7 +231,7 @@ public class HomeFragment extends Fragment implements OnBannerListener {
 
                     @Override
                     public void onSuccess(String s, Call call, okhttp3.Response response) {
-                        Log.e("首页活动",s);
+
                         arrayList.clear();
                         Gson gson = new Gson();
                         final HomeActivityBean activityBean = gson.fromJson(s,HomeActivityBean.class);
@@ -407,7 +407,7 @@ public class HomeFragment extends Fragment implements OnBannerListener {
 
                     @Override
                     public void onSuccess(String s, Call call, okhttp3.Response response) {
-//                        Log.e("首页轮播",s);
+                        Log.e("首页轮播",s);
                         Gson gson = new Gson();
                         HomeLunboBean homeLunboBean = gson.fromJson(s,HomeLunboBean.class);
                         if (homeLunboBean.getState()==1){
@@ -415,7 +415,7 @@ public class HomeFragment extends Fragment implements OnBannerListener {
                                 img_url = new String[ homeLunboBean.getData().size()];
                                 for (int i = 0; i < homeLunboBean.getData().size(); i++) {
                                     list_path.add(Api.ossurl+homeLunboBean.getData().get(i).getImg());
-                                    img_url[i] = homeLunboBean.getData().get(i).getImg();
+                                    img_url[i] = homeLunboBean.getData().get(i).getUrl();
                                 }
                                 onshow();
                             }

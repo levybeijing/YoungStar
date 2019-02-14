@@ -198,6 +198,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     public void onSuccess(String s, Call call, Response response) {
 //                        成功则提示 考虑自动登录
                         Log.e("===============", "tologin: "+s);
+
                         LoginBean bean = new Gson().fromJson(s, LoginBean.class);
                         if ("请求成功".equals(bean.getMessage())){
 //                          设置全局请求头
@@ -211,9 +212,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                             SharedPFUtils.setParam(LoginActivity.this,"islogin",true);
                             SharedPFUtils.setParam(LoginActivity.this,"phone",bean.getData().getMobile());
                             SharedPFUtils.setParam(LoginActivity.this,"name","");
-
-                            int identity = (int) SharedPFUtils.getParam(LoginActivity.this, "identity", -1);
-                            if (identity>0){
+                            SharedPFUtils.setParam(LoginActivity.this, "identity", bean.getData().getType());
+//状态0（删除）1（待审核）2（通过）3（拒绝）4（禁用）
+                            int status = bean.getData().getStatus();
+                            if (status!=0){
                                 startActivity(new Intent(LoginActivity.this,MainActivity.class));
                             }else{
                                 startActivity(new Intent(LoginActivity.this,ChooseActivity.class));

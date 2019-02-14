@@ -192,7 +192,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                                 showPopwindow();  //展示中间按钮点击事件
                                 break;
                             case 2:
-                                showPopwindowgongsi();
+//                                showPopwindowgongsi();
+                                showPopwindow();
+
                                 break;
                             case 3:
                                 showPopwindowtouziren();

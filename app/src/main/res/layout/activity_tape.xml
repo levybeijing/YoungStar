@@ -48,29 +48,17 @@
             android:layout_toRightOf="@+id/tape_miao"
             />
     </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="80dp"
-        android:layout_centerHorizontal="true"
-        >
-        <ImageView
-            android:id="@+id/tape_star"
+        <RadioButton
+            android:id="@+id/rb_tape_star"
             android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:background="@mipmap/start_addaudio"
-            />
-        <TextView
-            android:id="@+id/tape_title"
-            android:layout_width="60dp"
-            android:layout_height="30dp"
-            android:gravity="center"
-            android:textSize="13sp"
+            android:layout_height="80dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="80dp"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
+            android:drawableTop="@drawable/selector_recordaudio"
+            android:button="@null"
             android:text="开始"
             android:textColor="@color/home_gray"
-            android:layout_below="@+id/tape_star"/>
-    </RelativeLayout>
-
+            />
 </RelativeLayout>

@@ -1,12 +1,16 @@
 package com.chuanqing.youngstar._home.searchstudent;
 
+import android.content.Context;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -117,6 +121,40 @@ public class StudentShowActivity extends AppCompatActivity  implements XListView
                         searchzhaopin();
                     }
                 }
+            }
+        });
+//        响应键盘搜索指令
+        edt_info.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                /*判断是否是“搜索”键*/
+                if(actionId == EditorInfo.IME_ACTION_SEARCH){
+                    String key = edt_info.getText().toString().trim();
+                    if(TextUtils.isEmpty(key)){
+                        ToastUtils.shortToast("请输入要搜索的信息");
+                        return true;
+                    }
+                    //  下面就是大家的业务逻辑
+                    if (TextUtils.isEmpty(edt_info.getText().toString())){
+                        ToastUtils.shortToast("请输入要搜索的信息");
+                    }else {
+                        if (onclickzhi.equals("1")){
+                            //查询学生
+                            searchstudent();
+                        }else if (onclickzhi.equals("2")){
+                            //查询活动
+                            searchactivity();
+                        }else if (onclickzhi.equals("3")){
+                            //查询招聘
+                            searchzhaopin();
+                        }
+                    }
+                    //  这里记得一定要将键盘隐藏了
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+                    return true;
+                }
+                return false;
             }
         });
         tv_back.setOnClickListener(new View.OnClickListener() {

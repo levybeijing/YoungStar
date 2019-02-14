@@ -22,6 +22,7 @@ android:layout_height="match_parent"
         android:layout_marginTop="44dp"
         android:layout_marginLeft="47dp"
         android:layout_marginBottom="44dp"
+        android:gravity="center_horizontal"
         >
         <ImageView
             android:id="@+id/iv_videoimg_student"
@@ -52,6 +53,8 @@ android:layout_height="match_parent"
         android:layout_marginTop="44dp"
         android:layout_marginBottom="44dp"
         android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+
         >
         <ImageView
             android:id="@+id/iv_works_student"
@@ -79,6 +82,7 @@ android:layout_height="match_parent"
         android:layout_alignParentRight="true"
         android:layout_marginTop="44dp"
         android:layout_marginRight="47dp"
+        android:gravity="center_horizontal"
         >
         <ImageView
             android:id="@+id/iv_record_student"

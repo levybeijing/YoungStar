@@ -2,6 +2,7 @@ package com.chuanqing.youngstar._home;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -24,8 +25,8 @@ public class WebViewActivity extends AppCompatActivity {
         setTtitle();
         webView = findViewById(R.id.web_view);
 
-        String detailUrl = getIntent().getStringExtra("detailUrl");
-
+        String detailUrl = "https://"+getIntent().getStringExtra("detailUrl");
+        Log.e("detailUrl",detailUrl);
         webView.loadUrl(detailUrl);
 
         ////webview一系列设置

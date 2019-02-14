@@ -10,7 +10,9 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,11 +41,11 @@ public class TapeZuopinActivity extends BaseActivity {
             super.handleMessage(msg);
             if (msg.what==1&&count<=100){
                 if (count==100){
-                    if (tv_tittle.getText().toString().equals("暂停")){
+                    if (rb_toggle.isChecked()){
                         //先暂停，然后跳转页面
                         stopRecording();
                         lock = false;
-                        tv_tittle.setText("开始");
+                        rb_toggle.setText("开始");
 
                         MyApplication.getApplication().addActivity(TapeZuopinActivity.this);
                         Intent intent = new Intent(TapeZuopinActivity.this,TapeMoreActivity.class);
@@ -137,8 +139,8 @@ public class TapeZuopinActivity extends BaseActivity {
                 if (recordFile_zuopin==null){
                     ToastUtils.shortToast("请录制音频");
                 }else {
-                    if (tv_tittle.getText().toString().equals("暂停")){
-                        tv_tittle.setText("开始");
+                    if (rb_toggle.isChecked()){
+                        rb_toggle.setText("开始");
                         lock = false;
                         //先暂停录制后再跳转
                             stopRecording();
@@ -153,32 +155,32 @@ public class TapeZuopinActivity extends BaseActivity {
     /**
      * 写入信息
      */
-    @BindView(R.id.tape_star)
-    ImageView img_star;
-    @BindView(R.id.tape_title)
-    TextView tv_tittle;
+//    @BindView(R.id.tape_star)
+//    ImageView img_star;
+//    @BindView(R.id.tape_title)
+//    TextView tv_tittle;
 
-    private void setinfo(){
-        img_star.setOnClickListener(new View.OnClickListener() {
+    @BindView(R.id.rb_tape_star)
+    RadioButton rb_toggle;
+
+    private void setinfo() {
+        rb_toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                if (tv_tittle.getText().toString().equals("开始")){
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
                     startRecording();
-                    tv_tittle.setText("暂停");
+                    rb_toggle.setText("暂停");
                     lock = true;
                     new Thread(runnable).start();
-                }else {
+                } else {
+//                    录制装填
                     stopRecording();
-                    tv_tittle.setText("开始");
+                    rb_toggle.setText("开始");
                     lock = false;
-
                 }
-
             }
         });
     }
-;
-
     /**
      * 录制开始
      */
