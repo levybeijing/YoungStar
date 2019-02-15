@@ -91,7 +91,6 @@ import okhttp3.Response;
 
 import static android.support.v4.content.PermissionChecker.PERMISSION_GRANTED;
 import static com.chuanqing.youngstar.MainActivity.usercodes;
-import static com.chuanqing.youngstar._add.TapeActivity.recordFile;
 import static com.chuanqing.youngstar._add.TapeZuopinActivity.recordFile_zuopin;
 
 /**
@@ -100,11 +99,17 @@ import static com.chuanqing.youngstar._add.TapeZuopinActivity.recordFile_zuopin;
 public class WorksActivity extends BaseActivity {
     private static final String TAG = "WorksActivity";
     private RecordPlayer player;
+    private File recordFile;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_publishworks);
         ButterKnife.bind(this);
+
+        String path = getIntent().getStringExtra("path");
+        recordFile=new File(path);
+
         player = new RecordPlayer(WorksActivity.this);
         setTtitle();
         initView();

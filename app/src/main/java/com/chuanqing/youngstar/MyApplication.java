@@ -33,7 +33,7 @@ import okhttp3.Response;
 public class MyApplication extends Application {
     private static Context context;
     //单例模式中获取唯一的MyApplication实例
-    private List<Activity> activityList = new LinkedList<Activity>();
+    private List<Activity> activityList = new LinkedList<>();
     private static MyApplication instance;
     public static MyApplication getInstance() {
         if(null == instance) {

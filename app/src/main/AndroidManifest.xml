@@ -15,14 +15,11 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS"
         tools:ignore="ProtectedPermissions"></uses-permission>
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
-        tools:ignore="ProtectedPermissions" />
     <uses-permission
         android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
         tools:ignore="ProtectedPermissions" /> <!-- 录音权限 -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-
+    <uses-permission android:name="android.permission.RECORD_VIDEO" />
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -32,7 +29,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
         >
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity"
+            android:launchMode="singleTop"
+            ></activity>
         <activity android:name=".SpleashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -71,7 +70,7 @@
         <activity android:name="._add.student.WorksActivity"
             android:launchMode="singleTop"
             ></activity>
-        <activity android:name="._add.AddAudioActivity"></activity>
+        <!--<activity android:name="._add.AddAudioActivity"></activity>-->
         <!--mine-->
         <activity android:name="._mine.OfficalMsgActivity"></activity>
         <activity android:name="._mine.OfficalMsgDetailActivity"></activity>
@@ -123,6 +122,7 @@
         <activity android:name="._add.TapeActivity">
         </activity>
         <activity android:name="._add.TapeZuopinActivity"></activity>
+        <activity android:name="._add.TapeMoreActivity"></activity>
     </application>
 
 </manifest>

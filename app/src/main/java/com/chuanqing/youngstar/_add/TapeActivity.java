@@ -2,35 +2,27 @@ package com.chuanqing.youngstar._add;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
 import android.media.MediaRecorder;
-import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.os.SystemClock;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.chuanqing.youngstar.MainActivity;
 import com.chuanqing.youngstar.MyApplication;
 import com.chuanqing.youngstar.R;
+import com.chuanqing.youngstar.Urls;
 import com.chuanqing.youngstar.base.BaseActivity;
 import com.chuanqing.youngstar.tools.CircleProgressBar;
 import com.chuanqing.youngstar.tools.ToastUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.DecimalFormat;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -43,31 +35,35 @@ public class TapeActivity extends BaseActivity {
     private int count=0;
 
     @BindView(R.id.rb_tape_star)
-    RadioButton rb_toggle;
+    CheckBox rb_toggle;
 
     Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            if (msg.what==1&&count<=90){
-                    if (count==100){
-                    if (rb_toggle.isChecked()){
-                        //先暂停，然后跳转页面
-                        stopRecording();
-                        lock = false;
-                        rb_toggle.setText("开始");
-                        MyApplication.getApplication().addActivity(TapeActivity.this);
-                        Intent intent = new Intent(TapeActivity.this,TapeMoreActivity.class);
-                        intent.putExtra("path",recordFile);
-                        startActivity(intent);
-                    }
+            if (!lock){
+//                count=0;
+                return;
+            }
+            if (msg.what==1&&count<=100){
+                if (count==100){
+                    //先暂停，然后跳转页面
+                    stopRecording();
+                    lock = false;
+                    rb_toggle.setText("开始");
+                    rb_toggle.setChecked(false);
+                    MyApplication.getApplication().addActivity(TapeActivity.this);
+                    Intent intent = new Intent(TapeActivity.this,TapeMoreActivity.class);
+                    intent.putExtra("path",recordFile);
+                    startActivity(intent);
+                }else{
+                    tv_miao.setText(++count+"");
+                    //动画进度条展示
+                    circleProgressBar.setFirstColor(white);
+                    circleProgressBar.setColorArray(colors); //觉得进度条颜色丑的，这里可以自行传入一个颜色渐变数组。
+                    circleProgressBar.setCircleWidth(6);
+                    circleProgressBar.setProgress(count); // 使用数字过渡动画
                 }
-                tv_miao.setText(""+count++);
-                //动画进度条展示
-                circleProgressBar.setFirstColor(white);
-                circleProgressBar.setColorArray(colors); //觉得进度条颜色丑的，这里可以自行传入一个颜色渐变数组。
-                circleProgressBar.setCircleWidth(6);
-                circleProgressBar.setProgress(count); // 使用数字过渡动画
             }
         }
     };
@@ -88,10 +84,10 @@ public class TapeActivity extends BaseActivity {
     };
 
     // 录音类
-    private MediaRecorder mediaRecorder;
+    public MediaRecorder mediaRecorder;
     // 以文件的形式保存
-    public static File recordFile;
-    private RecordPlayer player;
+    public File recordFile;
+//    private RecordPlayer player;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,17 +95,30 @@ public class TapeActivity extends BaseActivity {
         setContentView(R.layout.activity_tape);
         ButterKnife.bind(this);
         try {
-            Log.e(TAG, "onCreate: 根目录"+Environment
-                    .getExternalStorageDirectory()
-                    .getCanonicalFile());
+            Log.e(TAG, "onCreate: 根目录"+Environment.getExternalStorageDirectory().getCanonicalFile());
         } catch (IOException e) {
             e.printStackTrace();
         }
 //        recordFile = new File(Environment.getExternalStorageDirectory(), "kk.amr");
-        player = new RecordPlayer(TapeActivity.this);
+//        player = new RecordPlayer(TapeActivity.this);
         setTtitle();
-        setinfo();
-
+        rb_toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    startRecording();
+                    rb_toggle.setText("完成");
+                    lock = true;
+                    new Thread(runnable).start();
+                }else{
+//                    录制装填
+//                    Log.e(TAG, "onCheckedChanged: "+recordFile.exists());
+                    stopRecording();
+                    rb_toggle.setText("开始");
+                    lock = false;
+                }
+            }
+        });
     }
 
     /**
@@ -138,7 +147,7 @@ public class TapeActivity extends BaseActivity {
         left_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TapeActivity.this.finish();
+                finish();
             }
         });
         right_tv.setOnClickListener(new View.OnClickListener() {
@@ -161,67 +170,36 @@ public class TapeActivity extends BaseActivity {
             }
         });
     }
-
-    /**
-     * 写入信息
-     */
-
-    private void setinfo(){
-        rb_toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
-                    startRecording();
-                    rb_toggle.setText("结束");
-                    lock = true;
-                    new Thread(runnable).start();
-                }else{
-//                    录制装填
-                    stopRecording();
-                    rb_toggle.setText("开始");
-                    lock = false;
-                }
-            }
-        });
-    }
-;
-
     /**
      * 录制开始
      */
     private void startRecording() {
-        //        录音状态下锁定 不能重新开始
-        if (lock){
-            return;
-        }
         if (mediaRecorder==null){
             mediaRecorder = new MediaRecorder();
         }
 
-        if (!Environment.getExternalStorageState().equals(
-                android.os.Environment.MEDIA_MOUNTED))
+        if (!Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED))
         {
-            Toast.makeText(TapeActivity.this
-                    , "SD卡不存在，请插入SD卡！"
-                    , Toast.LENGTH_LONG)
-                    .show();
+            Toast.makeText(TapeActivity.this, "SD卡不存在，请插入SD卡！", Toast.LENGTH_LONG).show();
             return;
         }
         try
         {
             // 创建保存录音的音频文件
-            recordFile = new File(Environment
-                    .getExternalStorageDirectory()
-                    .getCanonicalFile() + "/sound.amr");
+            recordFile = new File(Urls.AUDIOPATH + "ss.amr");
+            recordFile.createNewFile();
+            if (!recordFile.getParentFile().exists()){
+                recordFile.getParentFile().mkdirs();
+                recordFile = new File(Urls.AUDIOPATH + "ss.amr");
+                recordFile.createNewFile();
+            }
             mediaRecorder = new MediaRecorder();
             // 设置录音的声音来源
             mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
             // 设置录制的声音的输出格式（必须在设置声音编码格式之前设置）
-            mediaRecorder.setOutputFormat(MediaRecorder
-                    .OutputFormat.THREE_GPP);
+            mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.AMR_WB);
             // 设置声音编码的格式
-            mediaRecorder.setAudioEncoder(MediaRecorder
-                    .AudioEncoder.AMR_NB);
+            mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_WB);
             mediaRecorder.setOutputFile(recordFile.getAbsolutePath());
             mediaRecorder.prepare();
             // 开始录音
@@ -238,11 +216,20 @@ public class TapeActivity extends BaseActivity {
      */
     private void stopRecording() {
         if (recordFile != null) {
-//            ToastUtils.shortToast("录制完毕");
-            mediaRecorder.stop();
-            mediaRecorder.release();
-            mediaRecorder=null;
-            lock=false;
+            if (mediaRecorder!=null){
+                mediaRecorder.reset();
+                mediaRecorder.release();
+                mediaRecorder=null;
+            }
+            circleProgressBar.setProgress(0); // 使用数字过渡动画
+            tv_miao.setText(""+0);
+            count=0;
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopRecording();
     }
 }

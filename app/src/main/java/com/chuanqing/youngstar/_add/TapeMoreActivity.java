@@ -1,6 +1,5 @@
 package com.chuanqing.youngstar._add;
 
-import android.net.Uri;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -44,18 +43,24 @@ import okhttp3.Call;
 import okhttp3.Response;
 
 import static com.chuanqing.youngstar.MainActivity.usercodes;
-import static com.chuanqing.youngstar._add.TapeActivity.recordFile;
 
 /**
  * 发布音频详情界面
  */
 public class TapeMoreActivity extends AppCompatActivity {
     private RecordPlayer player;
+    private File recordFile;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tape_more);
         ButterKnife.bind(this);
+
+        String path = getIntent().getStringExtra("path");
+        recordFile = new File(path);
+
         player = new RecordPlayer(TapeMoreActivity.this);
         MyApplication.getApplication().addActivity(TapeMoreActivity.this);
         initView();
