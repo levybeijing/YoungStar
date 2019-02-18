@@ -24,6 +24,7 @@ public class SharedPFUtils {
      * 是否在审核 checkdata true false
      *
      */
+    //     * 用户审核状态 status
         public static void init(Context context){
             SharedPreferences sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sp.edit();

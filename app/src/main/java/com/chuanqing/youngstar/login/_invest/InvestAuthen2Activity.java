@@ -31,6 +31,7 @@ import com.chuanqing.youngstar.MyApplication;
 import com.chuanqing.youngstar.R;
 import com.chuanqing.youngstar.Urls;
 import com.chuanqing.youngstar.base.BaseActivity;
+import com.chuanqing.youngstar.login._company.Authen2Activity;
 import com.chuanqing.youngstar.login._student.ImageAuthenActivity;
 import com.chuanqing.youngstar.login.bean.CommenBean;
 import com.chuanqing.youngstar.tools.SharedPFUtils;
@@ -282,6 +283,8 @@ public class InvestAuthen2Activity extends BaseActivity implements View.OnClickL
                         CommenBean commenBean = new Gson().fromJson(s, CommenBean.class);
                         if ("请求成功".equals(commenBean.getMessage())){
                             startActivity(new Intent(InvestAuthen2Activity.this, MainActivity.class));
+                            SharedPFUtils.setParam(InvestAuthen2Activity.this,"status",commenBean.getState());
+                            SharedPFUtils.setParam(InvestAuthen2Activity.this,"identity",4);
                         }
                     }
                 });

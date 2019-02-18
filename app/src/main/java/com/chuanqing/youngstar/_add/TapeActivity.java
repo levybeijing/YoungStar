@@ -7,6 +7,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
@@ -23,6 +24,9 @@ import com.chuanqing.youngstar.tools.ToastUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Locale;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -186,13 +190,14 @@ public class TapeActivity extends BaseActivity {
         try
         {
             // 创建保存录音的音频文件
-            recordFile = new File(Urls.AUDIOPATH + "ss.amr");
-            recordFile.createNewFile();
+            String name= DateFormat.format("yyyyMMdd_HHmmss", Calendar.getInstance(Locale.CHINA)).toString()+".amr";
+            recordFile = new File(Urls.AUDIOPATH + name);
             if (!recordFile.getParentFile().exists()){
                 recordFile.getParentFile().mkdirs();
-                recordFile = new File(Urls.AUDIOPATH + "ss.amr");
+                recordFile = new File(Urls.AUDIOPATH + name);
                 recordFile.createNewFile();
             }
+            Log.e(TAG, "startRecording: "+recordFile.exists());
             mediaRecorder = new MediaRecorder();
             // 设置录音的声音来源
             mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);

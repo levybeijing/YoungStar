@@ -1,14 +1,10 @@
 package com.chuanqing.youngstar;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -19,28 +15,20 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.chuanqing.youngstar._active.StarActivityFragment;
-import com.chuanqing.youngstar._add.AddAudioActivity;
 import com.chuanqing.youngstar._add.PublishActivity;
 import com.chuanqing.youngstar._add.TapeActivity;
 import com.chuanqing.youngstar._add.company.RecuitActivity;
 import com.chuanqing.youngstar._add.student.WorksActivity;
 import com.chuanqing.youngstar._home.HomeFragment;
-import com.chuanqing.youngstar._home.searchstudent.SearchStatusActivity;
 import com.chuanqing.youngstar._mine.MineFragment;
 import com.chuanqing.youngstar._square.SquareFragment;
 import com.chuanqing.youngstar.base.BaseActivity;
-import com.chuanqing.youngstar.login.bean.VeriCodeBean;
 import com.chuanqing.youngstar.login.choose.ChooseActivity;
-import com.chuanqing.youngstar.login.login.LoginActivity;
 import com.chuanqing.youngstar.mybean.IdentityBean;
-import com.chuanqing.youngstar.mybean.StatusBean;
-import com.chuanqing.youngstar.tools.Api;
 import com.chuanqing.youngstar.tools.SharedPFUtils;
 import com.chuanqing.youngstar.tools.ToastUtils;
 import com.google.gson.Gson;
@@ -139,20 +127,20 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                 setChioceItem(3);
                 break;
             case R.id.main_img_center:
-                requestIdentity();
-//                RadioButton meduim = findViewById(R.id.rb_medium_main);
-//                meduim.setChecked(true);
-//                if (identity==1){
-//                    showPopwindow();  //展示中间按钮点击事件
-//                }else if (identity==2){
-//                    showPopwindowgongsi();
-//                }else if (identity==3){
-//                    showPopwindowtouziren();
-//                }else if (identity==4){
-//                    showPopwindowfensi();
-//                }
-            default:
-                break;
+                int status = (int)SharedPFUtils.getParam(this, "status", -1);
+                if (status==1){
+                    requestIdentity();
+                }else{
+                    if (identity==1){
+                        showPopwindow();  //展示中间按钮点击事件
+                    }else if (identity==2){
+                        showPopwindowgongsi();
+                    }else if (identity==3){
+                        showPopwindowtouziren();
+                    }else if (identity==4){
+                        showPopwindowfensi();
+                    }
+                }
         }
     }
 
@@ -192,9 +180,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                                 showPopwindow();  //展示中间按钮点击事件
                                 break;
                             case 2:
-//                                showPopwindowgongsi();
-                                showPopwindow();
-
+                                showPopwindowgongsi();
+//                                showPopwindow();
                                 break;
                             case 3:
                                 showPopwindowtouziren();
@@ -270,7 +257,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             case 3:
                 main_four_tv.setTextColor(dark);
                 main_four_img.setImageDrawable(MainActivity.this.getResources().getDrawable(R.mipmap.mine1));
-                requestIdenMine();
+                int status = (int)SharedPFUtils.getParam(this, "status", -1);
+                if (status==1){
+                    requestIdenMine();
+                }else{
+                    if (mineFragment!=null){
+                        fragmentManager.beginTransaction().remove(mineFragment).commit();
+                    }
+                    mineFragment = new MineFragment();
+                    fragmentManager.beginTransaction().add(R.id.content,mineFragment).commit();
+                }
                 break;
         }
         fragmentTransaction.commit(); // 提交

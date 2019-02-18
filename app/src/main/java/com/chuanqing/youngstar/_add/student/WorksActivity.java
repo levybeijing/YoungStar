@@ -51,12 +51,9 @@ import com.alibaba.sdk.android.oss.model.PutObjectResult;
 import com.android.tu.loadingdialog.LoadingDailog;
 import com.chuanqing.youngstar.BuildConfig;
 import com.chuanqing.youngstar.R;
-import com.chuanqing.youngstar._add.PublishActivity;
 import com.chuanqing.youngstar._add.RecordPlayer;
-import com.chuanqing.youngstar._add.TapeMoreActivity;
 import com.chuanqing.youngstar._add.TapeZuopinActivity;
 import com.chuanqing.youngstar.base.BaseActivity;
-import com.chuanqing.youngstar.myadapter.PublishAdapter;
 import com.chuanqing.youngstar.myadapter.PublishWorksAdapter;
 import com.chuanqing.youngstar.mybean.CommonBean;
 import com.chuanqing.youngstar.mybean.GetCodeBean;
@@ -108,8 +105,9 @@ public class WorksActivity extends BaseActivity {
         ButterKnife.bind(this);
 
         String path = getIntent().getStringExtra("path");
-        recordFile=new File(path);
-
+        if (path!=null){
+            recordFile=new File(path);
+        }
         player = new RecordPlayer(WorksActivity.this);
         setTtitle();
         initView();

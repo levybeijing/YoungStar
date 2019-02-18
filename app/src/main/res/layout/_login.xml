@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <LinearLayout
@@ -94,6 +97,7 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/other_login"
         android:layout_marginTop="28dp"
+        android:layout_marginBottom="20dp"
         >
         <ImageView
             android:id="@+id/qq_login"
@@ -117,3 +121,4 @@
             />
     </RelativeLayout>
 </RelativeLayout>
+</ScrollView>

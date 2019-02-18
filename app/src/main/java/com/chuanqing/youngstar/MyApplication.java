@@ -41,6 +41,7 @@ public class MyApplication extends Application {
         }
         return instance;
     }
+
     //添加Activity到容器中
     public void addActivity(Activity activity)  {
         activityList.add(activity);

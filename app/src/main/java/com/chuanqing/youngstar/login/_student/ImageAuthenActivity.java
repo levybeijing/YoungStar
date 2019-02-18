@@ -345,6 +345,7 @@ public class ImageAuthenActivity extends BaseActivity implements View.OnClickLis
                             startActivity(new Intent(ImageAuthenActivity.this, MainActivity.class));
                             SharedPFUtils.setParam(ImageAuthenActivity.this,"identity",4);
                             SharedPFUtils.setParam(ImageAuthenActivity.this,"checkdata",true);
+                            SharedPFUtils.setParam(ImageAuthenActivity.this,"status",commenBean.getState());
                         }else{
                             Toast.makeText(ImageAuthenActivity.this, ""+commenBean.getMessage(), Toast.LENGTH_SHORT).show();
                         }

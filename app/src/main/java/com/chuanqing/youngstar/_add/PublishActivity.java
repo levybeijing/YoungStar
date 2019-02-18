@@ -561,7 +561,6 @@ public class PublishActivity extends BaseActivity{
                 } else {
                     return Uri.fromFile(file);
                 }
-
             }
         }
         return Uri.EMPTY;

@@ -112,7 +112,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                 return inflater.inflate(R.layout.fragment_minef, container, false);
         }
         list.clear();
-        return inflater.inflate(R.layout.fragment_mines, container, false);
+        return inflater.inflate(R.layout.fragment_minef, container, false);
     }
 
     @Override
@@ -140,7 +140,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 
                 iv_photo = view.findViewById(R.id.iv_photo_mines);
                 iv_sex = view.findViewById(R.id.iv_sex_mines);
-
+                iv_photo.setOnClickListener(this);
                 list.add(new FragmentStatus());
                 list.add(new FragmentWorks());
                 vp.setAdapter(new AdapterMineVP(getChildFragmentManager(),list));
@@ -204,6 +204,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                 tv2_id = view.findViewById(R.id.tv_id_minec);
                 tv2_wallet = view.findViewById(R.id.tv_wallet_minec);
                 tv2_care = view.findViewById(R.id.tv_care_minec);
+                iv2_photo.setOnClickListener(this);
 
                 RadioButton rb21 = view.findViewById(R.id.rb1_minec);
                 RadioButton rb22 = view.findViewById(R.id.rb2_minec);
@@ -268,6 +269,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                 tv3_wallet = view.findViewById(R.id.tv_wallet_minei);
                 tv3_care = view.findViewById(R.id.tv_care_minei);
                 tv3_id = view.findViewById(R.id.tv_id_minei);
+                iv3_photo.setOnClickListener(this);
 
                 RecyclerView rv3 = view.findViewById(R.id.rv_minei);
                 GridLayoutManager manager=new GridLayoutManager(getContext(),3);
@@ -297,6 +299,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                 tv4_wallet = view.findViewById(R.id.tv_wallet_minef);
                 tv4_care = view.findViewById(R.id.tv_care_minef);
                 view.findViewById(R.id.iv_msg_minef).setOnClickListener(this);
+                iv4_photo.setOnClickListener(this);
 
                 RecyclerView rv4 = view.findViewById(R.id.rv_minef);
                 GridLayoutManager manager4=new GridLayoutManager(getContext(),3);
@@ -446,6 +449,18 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.rl_minef:
 //                vp2.setCurrentItem(1);
+                break;
+            case R.id.iv_photo_mines:
+                startActivity(new Intent(getContext(),EditUserDataActivity.class));
+                break;
+            case R.id.iv_photo_minec:
+                startActivity(new Intent(getContext(),EditUserDataActivity.class));
+                break;
+            case R.id.iv_photo_minei:
+                startActivity(new Intent(getContext(),EditUserDataActivity.class));
+                break;
+            case R.id.iv_photo_minef:
+                startActivity(new Intent(getContext(),EditUserDataActivity.class));
                 break;
 
         }

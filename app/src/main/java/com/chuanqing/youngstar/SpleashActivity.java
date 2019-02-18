@@ -67,6 +67,7 @@ public class SpleashActivity extends BaseActivity {
             public void onAnimationEnd(Animation animation) {
                 boolean islogin = (boolean) SharedPFUtils.getParam(SpleashActivity.this, "islogin", false);
                 int identity = (int) SharedPFUtils.getParam(SpleashActivity.this, "identity", -1);
+
                 if (islogin){
                     if (identity>0){
                         startActivity(new Intent(SpleashActivity.this,MainActivity.class));
@@ -76,14 +77,12 @@ public class SpleashActivity extends BaseActivity {
                 }else{
                     startActivity(new Intent(SpleashActivity.this,LoginActivity.class));
                 }
-
-//                startActivity(new Intent(SpleashActivity.this, ImageAuthenActivity.class));
-
                 finish();
             }
         });
 
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);

@@ -8,6 +8,8 @@ import android.view.View;
 import com.chuanqing.youngstar.R;
 import com.chuanqing.youngstar._mine.company.ChangeVericActivity;
 import com.chuanqing.youngstar.base.BaseActivity;
+import com.chuanqing.youngstar.login.login.LoginActivity;
+import com.chuanqing.youngstar.tools.SharedPFUtils;
 
 public class EditUserDataActivity extends BaseActivity implements View.OnClickListener {
 
@@ -15,6 +17,8 @@ public class EditUserDataActivity extends BaseActivity implements View.OnClickLi
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editdata);
+
+
 
         initView();
     }
@@ -36,7 +40,10 @@ public class EditUserDataActivity extends BaseActivity implements View.OnClickLi
         switch (v.getId()){
             case R.id.tv_exit_editdata:
 //           退出登录
-
+                SharedPFUtils.setParam(EditUserDataActivity.this, "islogin", false);
+                Intent intent = new Intent(this, LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
                 break;
             case R.id.ll_set_editdata:
                 startActivity(new Intent(this,SettinsActivity.class));

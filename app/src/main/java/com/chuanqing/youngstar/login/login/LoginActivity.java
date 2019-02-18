@@ -6,6 +6,7 @@ import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -98,7 +99,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         TextView privacy = findViewById(R.id.tv_privacy_register);
 
         check = findViewById(R.id.check_register);
+        check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
+            }
+        });
         toregister.setOnClickListener(this);
         getcode.setOnClickListener(this);
         protocol.setOnClickListener(this);
@@ -213,7 +219,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                             SharedPFUtils.setParam(LoginActivity.this,"phone",bean.getData().getMobile());
                             SharedPFUtils.setParam(LoginActivity.this,"name","");
                             SharedPFUtils.setParam(LoginActivity.this, "identity", bean.getData().getType());
-//状态0（删除）1（待审核）2（通过）3（拒绝）4（禁用）
+                            //状态0（删除）1（待审核）2（通过）3（拒绝）4（禁用）
+                            SharedPFUtils.setParam(LoginActivity.this, "status", bean.getData().getStatus());
                             int status = bean.getData().getStatus();
                             if (status!=0){
                                 startActivity(new Intent(LoginActivity.this,MainActivity.class));

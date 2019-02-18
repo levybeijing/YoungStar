@@ -30,6 +30,7 @@ import com.chuanqing.youngstar.MyApplication;
 import com.chuanqing.youngstar.R;
 import com.chuanqing.youngstar.Urls;
 import com.chuanqing.youngstar.base.BaseActivity;
+import com.chuanqing.youngstar.login._invest.InvestAuthen2Activity;
 import com.chuanqing.youngstar.login.bean.CommenBean;
 import com.chuanqing.youngstar.tools.SharedPFUtils;
 import com.google.gson.Gson;
@@ -311,8 +312,12 @@ public class Authen2Activity extends BaseActivity implements View.OnClickListene
                         Log.e("===========", "onSuccess: "+s);
 //                        finish
                         CommenBean commenBean = new Gson().fromJson(s, CommenBean.class);
-                        if ("请求成功".equals(commenBean.getMessage()))
+                        if ("请求成功".equals(commenBean.getMessage())){
+                            SharedPFUtils.setParam(Authen2Activity.this,"status",commenBean.getState());
+                            SharedPFUtils.setParam(Authen2Activity.this,"identity",4);
                             startActivity(new Intent(Authen2Activity.this, MainActivity.class));
+                        }
+
                     }
                 });
     }
