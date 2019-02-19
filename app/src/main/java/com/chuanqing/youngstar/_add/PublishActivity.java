@@ -509,15 +509,15 @@ public class PublishActivity extends BaseActivity{
 
 
         Intent intent = new Intent("com.android.camera.action.CROP");
-        //TODO:访问相册需要被限制，需要通过FileProvider创建一个content类型的Uri
+        //访问相册需要被限制，需要通过FileProvider创建一个content类型的Uri
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             //添加这一句表示对目标应用临时授权该Uri所代表的文件
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            //TODO:访问相册需要被限制，需要通过FileProvider创建一个content类型的Uri
+            //访问相册需要被限制，需要通过FileProvider创建一个content类型的Uri
             imageUri = FileProvider.getUriForFile(getApplicationContext(),
                     BuildConfig.APPLICATION_ID + ".provider", file);
             cropUri = Uri.fromFile(cropFile);
-            //TODO:cropUri 是裁剪以后的图片保存的地方。也就是我们要写入此Uri.故不需要用FileProvider
+            //cropUri 是裁剪以后的图片保存的地方。也就是我们要写入此Uri.故不需要用FileProvider
             //cropUri = FileProvider.getUriForFile(getApplicationContext(),
             //    BuildConfig.APPLICATION_ID + ".provider", cropFile);
         } else {

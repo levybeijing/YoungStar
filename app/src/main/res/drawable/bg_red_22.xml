@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <corners android:radius="22dp"/>
+    <gradient
+        android:type="linear"
+        android:startColor="#F56250"
+        android:endColor="#F55067"
+        android:angle="0"
+        />
+    <!--
+    <gradient
+        android:angle="integer"
+        android:centerX="integer"
+        android:centerY="integer"
+        android:centerColor="integer"
+        android:endColor="color"
+        android:gradientRadius="integer"
+        android:startColor="color"
+        android:type=["linear" | "radial" | "sweep"]
+        android:useLevel=["true" | "false"] />
+     -->
+</shape>
