@@ -5,6 +5,9 @@ import android.os.Environment;
 import java.io.File;
 
 public class Urls {
+
+    //    客服电话
+    public static final String SERVICE = "400-800-1234";
     //    音频存储路径
     public static final String AUDIOPATH = Environment.getExternalStorageDirectory().getAbsolutePath()+ File.separator+"star/audio/";
     //    视频存储路径

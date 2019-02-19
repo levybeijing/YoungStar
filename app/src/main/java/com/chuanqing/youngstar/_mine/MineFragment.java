@@ -3,6 +3,7 @@ package com.chuanqing.youngstar._mine;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -28,6 +29,7 @@ import com.chuanqing.youngstar.R;
 import com.chuanqing.youngstar.Urls;
 import com.chuanqing.youngstar._mine.company.FragmentJob;
 import com.chuanqing.youngstar._mine.company.FragmentPublish;
+import com.chuanqing.youngstar._mine.company.SubAccountActivity;
 import com.chuanqing.youngstar._mine.student.FragmentStatus;
 import com.chuanqing.youngstar._mine.student.FragmentWorks;
 import com.chuanqing.youngstar.login.choose.ChooseActivity;
@@ -84,7 +86,6 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 //    44444444444
     private ImageView iv4_photo;
     private TextView tv4_id;
-    private TextView tv4_change;
     private TextView tv4_wallet;
     private TextView tv4_care;
     private RelativeLayout rl_top3;
@@ -112,6 +113,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                 return inflater.inflate(R.layout.fragment_minef, container, false);
         }
         list.clear();
+//        identity=2;
         return inflater.inflate(R.layout.fragment_minef, container, false);
     }
 
@@ -137,6 +139,10 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                 tv_wallet = view.findViewById(R.id.tv_wallet_mines);
                 tv_lable = view.findViewById(R.id.tv_lable_mines);
                 tv_id = view.findViewById(R.id.tv_id_mines);
+
+                view.findViewById(R.id.iv_msg_mines).setOnClickListener(this);
+                view.findViewById(R.id.iv_call_mines).setOnClickListener(this);
+                view.findViewById(R.id.iv_share_mines).setOnClickListener(this);
 
                 iv_photo = view.findViewById(R.id.iv_photo_mines);
                 iv_sex = view.findViewById(R.id.iv_sex_mines);
@@ -205,6 +211,10 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                 tv2_wallet = view.findViewById(R.id.tv_wallet_minec);
                 tv2_care = view.findViewById(R.id.tv_care_minec);
                 iv2_photo.setOnClickListener(this);
+
+                view.findViewById(R.id.iv_msg_minec).setOnClickListener(this);
+                view.findViewById(R.id.iv_tocall_minec).setOnClickListener(this);
+                view.findViewById(R.id.iv_manage_minec).setOnClickListener(this);
 
                 RadioButton rb21 = view.findViewById(R.id.rb1_minec);
                 RadioButton rb22 = view.findViewById(R.id.rb2_minec);
@@ -462,7 +472,19 @@ public class MineFragment extends Fragment implements View.OnClickListener {
             case R.id.iv_photo_minef:
                 startActivity(new Intent(getContext(),EditUserDataActivity.class));
                 break;
-
+            case R.id.iv_manage_minec:
+                startActivity(new Intent(getContext(), SubAccountActivity.class));
+                break;
+            case R.id.iv_tocall_minec:
+            case R.id.iv_call_mines:
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                Uri data = Uri.parse("tel:" +Urls.SERVICE);
+                intent.setData(data);
+                startActivity(intent);
+                break;
+            case R.id.iv_share_mines:
+//                TODO:startActivity(new Intent(getContext(), SubAccountActivity.class));
+                break;
         }
     }
 

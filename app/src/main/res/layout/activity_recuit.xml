@@ -8,7 +8,7 @@
     >
     <include android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        layout="@layout/common_top_fabu"></include>
+        layout="@layout/common_top_fabu"/>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -51,7 +51,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/home_gray"></View>
+                    android:background="@color/home_gray"/>
                 <!--2-->
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -79,7 +79,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/home_gray"></View>
+                    android:background="@color/home_gray"/>
                 <!--3-->
                 <RelativeLayout
                     android:id="@+id/rl_num_recuit"
@@ -118,7 +118,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/home_gray"></View>
+                    android:background="@color/home_gray"/>
                 <!--4-->
                 <RelativeLayout
                     android:id="@+id/rl_money_recuit"
@@ -157,7 +157,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/home_gray"></View>
+                    android:background="@color/home_gray"/>
                 <!--5-->
                 <RelativeLayout
                     android:id="@+id/rl_major_recuit"
@@ -196,7 +196,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/home_gray"></View>
+                    android:background="@color/home_gray"/>
             <!--6-->
                 <RelativeLayout
                     android:id="@+id/rl_addre_recuit"
@@ -235,7 +235,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/home_gray"></View>
+                    android:background="@color/home_gray"/>
                 <!--7-->
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -336,7 +336,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
-                    android:orientation="vertical"></com.chuanqing.youngstar.tools.BamAutoLineList>
+                    android:orientation="vertical"/>
             </LinearLayout>
             <!--照片-->
             <LinearLayout

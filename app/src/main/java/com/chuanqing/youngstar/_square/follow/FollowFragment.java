@@ -72,7 +72,7 @@ public class FollowFragment extends Fragment implements XListView.IXListViewList
     @BindView(R.id.xlistview)
     XListView mListView;
     private Handler mHandler;
-    int page = 1, pageSize = 10;
+    int page = 1, pageSize = 5;
     private void showinfo() {
         OkGo.post(Api.square_guanzhu)
                 .params("page",page)
@@ -89,7 +89,7 @@ public class FollowFragment extends Fragment implements XListView.IXListViewList
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
 
-//                        Log.e("关注",s);
+                        Log.e("关注",s);
                         arrayList.clear();
                         Gson gson = new Gson();
                         SquareFollowBean squareFollowBean = gson.fromJson(s,SquareFollowBean.class);

@@ -79,10 +79,9 @@ public class SquareFollowAdapter extends BaseAdapter
             viewHolder.imgbig.setImageDrawable(context.getResources().getDrawable(R.mipmap.square_yinpin_zuopinji));
         }
 
-        if (squareFollowBean.getData().getPageInfo().getList().get(position).getTitle().length()>15){
-            viewHolder.tv_name.setText(squareFollowBean.getData().getPageInfo().getList().get(position).getTitle()+"..");
-        }else  if (squareFollowBean.getData().getPageInfo().getList().get(position).getTitle().length()>15){
-            viewHolder.tv_name.setText(squareFollowBean.getData().getPageInfo().getList().get(position).getTitle());
+        String title = squareFollowBean.getData().getPageInfo().getList().get(position).getTitle();
+        if (title!=null){
+            viewHolder.tv_name.setText(title +"..");
         }
         viewHolder.tv_time.setText(squareFollowBean.getData().getPageInfo().getList().get(position).getCreate_time());
         viewHolder.textView_renshu.setText(squareFollowBean.getData().getPageInfo().getList().get(position).getNum());

@@ -2,10 +2,16 @@ package com.chuanqing.youngstar._active.starbang;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Handler;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -14,13 +20,17 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.chuanqing.youngstar.MainActivity;
 import com.chuanqing.youngstar.R;
+import com.chuanqing.youngstar.Urls;
 import com.chuanqing.youngstar._active.leitai.LeitaiMoreActivity;
+import com.chuanqing.youngstar._square.starshow.StarShowMoreActivity;
 import com.chuanqing.youngstar.base.BaseActivity;
 import com.chuanqing.youngstar.myadapter.StarbangAdapter;
 import com.chuanqing.youngstar.myadapter.StarbangMoreAdapter;
@@ -176,10 +186,74 @@ public class StarbangMoreActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 //暂无分享功能
+                showdialog();
             }
         });
     }
 
 
+    private void showdialog() {
+
+        // 利用layoutInflater获得View
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.dialog_toshare, null);
+        // 下面是两种方法得到宽度和高度 getWindow().getDecorView().getWidth()
+        PopupWindow window = new PopupWindow(view, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+        // 设置popWindow弹出窗体可点击，这句话必须添加，并且是true
+        window.setFocusable(false);
+        WindowManager wm = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics dm = new DisplayMetrics();
+        wm.getDefaultDisplay().getMetrics(dm);
+
+        // 实例化一个ColorDrawable颜色为半透明
+        ColorDrawable dw = new ColorDrawable(0xb0000000);
+        window.setBackgroundDrawable(dw);
+
+        // 设置popWindow的显示和消失动画
+        window.setAnimationStyle(R.style.mypopwindow_anim_style);
+//        //底部弹出
+        window.showAtLocation(findViewById(R.id.rl_starbang), Gravity.BOTTOM,0,0);
+
+        ImageView wechat = view.findViewById(R.id.iv_wechat_dialogtoshare);
+        ImageView wx = view.findViewById(R.id.iv_wx_dialogtoshare);
+        ImageView wb = view.findViewById(R.id.iv_wb_dialogtoshare);
+        ImageView qq = view.findViewById(R.id.iv_qq_dialogtoshare);
+        TextView cancel = view.findViewById(R.id.tv_cancel_dialogtoshare);
+
+        wechat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(StarbangMoreActivity.this, "账号未申请下来", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        wx.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(StarbangMoreActivity.this, "账号未申请下来", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        wb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(StarbangMoreActivity.this, "账号未申请下来", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        qq.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(StarbangMoreActivity.this, "账号未申请下来", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                window.dismiss();
+            }
+        });
+    }
 
 }

@@ -3,15 +3,18 @@ package com.chuanqing.youngstar;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -133,6 +136,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                 }else{
                     if (identity==1){
                         showPopwindow();  //展示中间按钮点击事件
+//                        showPopwindowfensi();
                     }else if (identity==2){
                         showPopwindowgongsi();
                     }else if (identity==3){
@@ -181,7 +185,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                                 break;
                             case 2:
                                 showPopwindowgongsi();
-//                                showPopwindow();
                                 break;
                             case 3:
                                 showPopwindowtouziren();
@@ -490,9 +493,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             @Override
             public void onClick(View v) {
                 if (window.isShowing()){
+                    showdialog();
                     window.dismiss();
-//                    Intent intent = new Intent(MainActivity.this, TapeActivity.class);
-//                    startActivity(intent);
                 }
             }
         });
@@ -505,6 +507,35 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                 System.out.println("popWindow消失");
             }
         });
+
+    }
+
+    private void showdialog() {
+        View view = LayoutInflater.from(this).inflate(R.layout.dialog_service,null,false);
+        final AlertDialog dialog = new AlertDialog.Builder(this).setView(view).create();
+
+        TextView no = view.findViewById(R.id.tv_cancel_dialogservice);
+        TextView ok = view.findViewById(R.id.tv_ok_dialogservice);
+
+        no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                Uri data = Uri.parse("tel:" +Urls.SERVICE);
+                intent.setData(data);
+                startActivity(intent);
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
 
     }
 
@@ -567,7 +598,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             public void onClick(View v) {
                 if (window.isShowing()){
                     window.dismiss();
-                    Intent intent = new Intent(MainActivity.this, RecuitActivity.class);
+                    Intent intent = new Intent(Intent.ACTION_DIAL);
+                    Uri data = Uri.parse("tel:" +Urls.SERVICE);
+                    intent.setData(data);
                     startActivity(intent);
                 }
             }
@@ -577,9 +610,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             @Override
             public void onClick(View v) {
                 if (window.isShowing()){
+                    Intent intent = new Intent(MainActivity.this, RecuitActivity.class);
+                    startActivity(intent);
                     window.dismiss();
-//                    Intent intent = new Intent(MainActivity.this, TapeActivity.class);
-//                    startActivity(intent);
                 }
             }
         });
@@ -643,8 +676,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             public void onClick(View v) {
                 if (window.isShowing()){
                     window.dismiss();
-//                    Intent intent = new Intent(MainActivity.this, TapeActivity.class);
-//                    startActivity(intent);
                 }
             }
         });

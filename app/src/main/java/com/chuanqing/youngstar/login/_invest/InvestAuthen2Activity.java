@@ -285,6 +285,8 @@ public class InvestAuthen2Activity extends BaseActivity implements View.OnClickL
                             startActivity(new Intent(InvestAuthen2Activity.this, MainActivity.class));
                             SharedPFUtils.setParam(InvestAuthen2Activity.this,"status",commenBean.getState());
                             SharedPFUtils.setParam(InvestAuthen2Activity.this,"identity",4);
+
+                            finish();
                         }
                     }
                 });
