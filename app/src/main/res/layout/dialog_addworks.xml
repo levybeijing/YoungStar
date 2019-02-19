@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:background="#000"
+    android:background="@color/dialog_gray"
     >
     <LinearLayout
         android:layout_width="wrap_content"
@@ -19,36 +19,41 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@mipmap/dialog_addhot"
+                android:src="@mipmap/dialog_addworks"
                 />
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center_horizontal"
-                android:layout_centerHorizontal="true"
+            <RelativeLayout
+                android:layout_width="220dp"
+                android:layout_height="40dp"
+                android:orientation="horizontal"
                 android:layout_alignParentBottom="true"
-                android:layout_marginBottom="33dp"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
                 >
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="分享成功"
-                    android:textColor="#EA3D1C"
+                    android:id="@+id/tv_new_dialogaddworks"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:text="新建作品"
+                    android:textColor="#fff"
+                    android:gravity="center"
+                    android:background="@drawable/bg_red_22"
+                    android:layout_alignParentLeft="true"
                     />
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="您的个人热度+1"
-                    android:textColor="#EA3D1C"
-                    android:textSize="12dp"
+                    android:id="@+id/tv_choose_dialogaddworks"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:text="选择作品"
+                    android:textColor="#fff"
+                    android:gravity="center"
+                    android:background="@drawable/bg_red_22"
+                    android:layout_alignParentRight="true"
                     />
-            </LinearLayout>
-
+            </RelativeLayout>
         </RelativeLayout>
 
         <ImageView
-            android:id="@+id/iv_close_dialogaddhot"
+            android:id="@+id/iv_close_dialogaddworks"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:src="@mipmap/dialog_close30"

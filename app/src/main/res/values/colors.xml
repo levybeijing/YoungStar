@@ -22,4 +22,5 @@
     <color name="checked">#F56250</color>
     <color name="unchecked">#E6E7E7</color>
 
+    <color name="dialog_gray">#3B665252</color>
 </resources>
