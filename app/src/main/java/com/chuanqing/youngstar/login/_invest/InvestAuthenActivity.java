@@ -1,19 +1,35 @@
 package com.chuanqing.youngstar.login._invest;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.sdk.android.oss.ClientException;
+import com.alibaba.sdk.android.oss.ServiceException;
+import com.alibaba.sdk.android.oss.model.PutObjectRequest;
+import com.alibaba.sdk.android.oss.model.PutObjectResult;
+import com.chuanqing.youngstar.MainActivity;
 import com.chuanqing.youngstar.R;
 import com.chuanqing.youngstar.base.BaseActivity;
+import com.chuanqing.youngstar.tools.SharedPFUtils;
+import com.chuanqing.youngstar.tools.StringUtil;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
+import static com.chuanqing.youngstar.MyApplication.oss;
 
 
 public class InvestAuthenActivity extends BaseActivity implements View.OnClickListener {
@@ -25,6 +41,8 @@ public class InvestAuthenActivity extends BaseActivity implements View.OnClickLi
     private EditText et_email;
     private EditText et_intro;
     private String photo;
+    private Intent intent;
+    private ProgressDialog waitingDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -131,21 +149,83 @@ public class InvestAuthenActivity extends BaseActivity implements View.OnClickLi
                     Toast.makeText(this, "简介不能为空", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Intent intent=new Intent(this,InvestAuthen2Activity.class);
+                intent = new Intent(this, InvestAuthen2Activity.class);
                 intent.putExtra("name",name);
                 intent.putExtra("phone",phone);
                 intent.putExtra("email",email);
                 intent.putExtra("intro",intro);
-//              头像?????
-                intent.putExtra("photo",photo);
 
-                startActivity(intent);
+                waitingDialog = new ProgressDialog(InvestAuthenActivity.this);
+                waitingDialog.setTitle("图片上传");
+                waitingDialog.setMessage("上传中...");
+                waitingDialog.setIndeterminate(true);
+                waitingDialog.setCancelable(false);
+                waitingDialog.show();
+                uploadPhoto();
                 break;
         }
     }
 
+    private void uploadPhoto() {
+//        byte[] uploadData = new byte[100 * 1024];
+//        new Random().nextBytes(uploadData);
+        int res=0;
+        switch (chooseindex){
+            case R.id.iv_1_investauthen1:
+                res=R.mipmap.company1;
+                break;
+            case R.id.iv_2_investauthen1:
+                res=R.mipmap.company2;
+                break;
+            case R.id.iv_3_investauthen1:
+                res=R.mipmap.company3;
+                break;
+            case R.id.iv_4_investauthen1:
+                res=R.mipmap.company4;
+                break;
+            case R.id.iv_5_investauthen1:
+                res=R.mipmap.company5;
+                break;
+            case R.id.iv_6_investauthen1:
+                res=R.mipmap.company6;
+                break;
+            case R.id.iv_7_investauthen1:
+                res=R.mipmap.company7;
+                break;
+            case R.id.iv_8_investauthen1:
+                res=R.mipmap.company8;
+                break;
+        }
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), res);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG,100,baos);
+        byte[] bytes = baos.toByteArray();
+
+        photo= SharedPFUtils.getParam(this,"usercode","")+ File.separator+ StringUtil.getRandomName(8);
+// 构造上传请求。
+        PutObjectRequest put = new PutObjectRequest("star-1", photo, bytes);
+        try {
+            PutObjectResult putResult = oss.putObject(put);
+            waitingDialog.dismiss();
+            intent.putExtra("photo",photo);
+            startActivity(intent);
+
+            Log.d("PutObject", "UploadSuccess");
+            Log.d("ETag", putResult.getETag());
+            Log.d("RequestId", putResult.getRequestId());
+        } catch (ClientException e) {
+            // 本地异常，如网络异常等。
+            e.printStackTrace();
+        } catch (ServiceException e) {
+            // 服务异常。
+            Log.e("RequestId", e.getRequestId());
+            Log.e("ErrorCode", e.getErrorCode());
+            Log.e("HostId", e.getHostId());
+            Log.e("RawMessage", e.getRawMessage());
+        }
+    }
+
     private void checked(int i){
-        photo="";
         chooseindex=i;
         i=i-1;
         for (int j = 0; j < list.size(); j++) {

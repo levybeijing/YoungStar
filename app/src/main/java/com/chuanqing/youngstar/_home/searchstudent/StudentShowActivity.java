@@ -235,7 +235,7 @@ public class StudentShowActivity extends AppCompatActivity  implements XListView
 
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
-                        Log.e(TAG, "onSuccess: 搜索学生"+s );
+//                        Log.e(TAG, "onSuccess: 搜索学生"+s );
                         arrayList_student.clear();
                         Gson gson = new Gson();
                         final SearchStudentBean searchStudentBean = gson.fromJson(s,SearchStudentBean.class);

@@ -1,6 +1,7 @@
 package com.chuanqing.youngstar.login._invest;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -53,6 +54,7 @@ public class InvestAuthen2Activity extends BaseActivity implements View.OnClickL
     private String email;
     private String intro;
     private String photo;
+    private ProgressDialog waitingDialog;
 
     private List<Boolean> isOk=new ArrayList<>();
     private List<String> listName=new ArrayList<>();
@@ -64,12 +66,20 @@ public class InvestAuthen2Activity extends BaseActivity implements View.OnClickL
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_investauthen2);
+
         Intent intent = getIntent();
         name = intent.getStringExtra("name");
         phone = intent.getStringExtra("phone");
         email = intent.getStringExtra("email");
         intro = intent.getStringExtra("intro");
         photo = intent.getStringExtra("photo");
+
+        waitingDialog = new ProgressDialog(InvestAuthen2Activity.this);
+        waitingDialog.setTitle("图片上传");
+        waitingDialog.setMessage("上传中...");
+        waitingDialog.setIndeterminate(true);
+        waitingDialog.setCancelable(false);
+
 
         initView();
 
@@ -145,16 +155,19 @@ public class InvestAuthen2Activity extends BaseActivity implements View.OnClickL
             switch (requestCode){
                 case 401:
                     if (resultCode==RESULT_OK){
+                        waitingDialog.show();
                         handleImg(401,data);
                     }
                     break;
                 case 402:
                     if (resultCode==RESULT_OK){
+                        waitingDialog.show();
                         handleImg(402,data);
                     }
                     break;
                 case 403:
                     if (resultCode==RESULT_OK){
+                        waitingDialog.show();
                         handleImg(403,data);
                     }
                     break;
@@ -223,14 +236,20 @@ public class InvestAuthen2Activity extends BaseActivity implements View.OnClickL
                 Log.d("=============PutObject", "UploadSuccess");
                 switch (code){
                     case 401:
+                        waitingDialog.dismiss();
+                        Toast.makeText(InvestAuthen2Activity.this, "上传成功", Toast.LENGTH_SHORT).show();
                         isOk.set(0,true);
                         Log.e("===============", "=401");
                         break;
                     case 402:
+                        waitingDialog.dismiss();
+                        Toast.makeText(InvestAuthen2Activity.this, "上传成功", Toast.LENGTH_SHORT).show();
                         isOk.set(1,true);
                         Log.e("===============", "=402");
                         break;
                     case 403:
+                        waitingDialog.dismiss();
+                        Toast.makeText(InvestAuthen2Activity.this, "上传成功", Toast.LENGTH_SHORT).show();
                         isOk.set(2,true);
                         Log.e("===============", "=403");
                         break;

@@ -244,7 +244,7 @@ public class SearchStatusActivity extends BaseActivity  implements XListView.IXL
 
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
-                        Log.e(TAG, "onSuccess: hot"+s );
+//                        Log.e(TAG, "onSuccess: hot"+s );
                         arrayList.clear();
                         Gson gson = new Gson();
                         StatusListBean statusListBean = gson.fromJson(s,StatusListBean.class);
@@ -400,7 +400,7 @@ public class SearchStatusActivity extends BaseActivity  implements XListView.IXL
 
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
-                        Log.e(TAG, "onSuccess: hot"+s );
+//                        Log.e(TAG, "onSuccess: hot"+s );
                         arrayList.clear();
                         Gson gson = new Gson();
                         StatusListBean statusListBean = gson.fromJson(s,StatusListBean.class);

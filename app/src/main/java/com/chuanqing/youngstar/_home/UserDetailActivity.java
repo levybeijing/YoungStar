@@ -255,4 +255,6 @@ public class UserDetailActivity extends BaseActivity implements View.OnClickList
         int alpha = (int) (Color.alpha(color) * fraction);
         return Color.argb(alpha, red, green, blue);
     }
+
+
 }
