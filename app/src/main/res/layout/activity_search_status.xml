@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,7 +7,7 @@
     tools:context="._home.searchstudent.SearchStatusActivity">
     <include android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        layout="@layout/common_top_search2"></include>
+        layout="@layout/common_top_search2"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="44dp"
@@ -35,7 +34,7 @@
                 android:layout_width="50dp"
                 android:layout_height="2dp"
                 android:layout_alignParentBottom="true"
-                android:background="@color/mainColor"></View>
+                android:background="@color/mainColor"/>
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/student_search_relativelayout2"
@@ -58,7 +57,7 @@
                 android:layout_width="50dp"
                 android:layout_height="2dp"
                 android:layout_alignParentBottom="true"
-                android:background="@color/mainColor"></View>
+                android:background="@color/mainColor"/>
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/student_search_relativelayout3"
@@ -81,34 +80,34 @@
                 android:layout_width="50dp"
                 android:layout_height="2dp"
                 android:layout_alignParentBottom="true"
-                android:background="@color/mainColor"></View>
+                android:background="@color/mainColor"/>
         </RelativeLayout>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/whole_hx"></View>
+        android:background="@color/whole_hx"/>
     <com.chuanqing.youngstar.view.XListView
         android:id="@+id/fenlie_xlistview1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"
         android:divider="@null"
-        android:scrollbars="none"></com.chuanqing.youngstar.view.XListView>
+        android:scrollbars="none"/>
     <com.chuanqing.youngstar.view.XListView
         android:id="@+id/fenlie_xlistview2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"
         android:divider="@null"
-        android:scrollbars="none"></com.chuanqing.youngstar.view.XListView>
+        android:scrollbars="none"/>
     <com.chuanqing.youngstar.view.XListView
         android:id="@+id/fenlie_xlistview3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"
         android:divider="@null"
-        android:scrollbars="none"></com.chuanqing.youngstar.view.XListView>
+        android:scrollbars="none"/>
     <TextView
         android:id="@+id/no_info"
         android:layout_width="match_parent"

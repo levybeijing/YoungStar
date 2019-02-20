@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.chuanqing.youngstar.R;
 import com.chuanqing.youngstar.base.BaseActivity;
@@ -18,7 +19,7 @@ import java.util.List;
 public class InvestAuthenActivity extends BaseActivity implements View.OnClickListener {
 
     private List<ImageView> list=new ArrayList<>();
-    private int chooseindex=1;
+    private int chooseindex=-1;
     private EditText et_name;
     private EditText et_phone;
     private EditText et_email;
@@ -106,16 +107,35 @@ public class InvestAuthenActivity extends BaseActivity implements View.OnClickLi
                 checked(8);
                 break;
             case R.id.tv_next_investauthen1:
+                if (chooseindex<0){
+                    Toast.makeText(this, "头像不能为空", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 String name = et_name.getText().toString().trim();
+                if (name==null||name.length()==0){
+                    Toast.makeText(this, "姓名不能为空", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 String phone = et_phone.getText().toString().trim();
+                if (phone==null||phone.length()==0){
+                    Toast.makeText(this, "联系方式不能为空", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 String email = et_email.getText().toString().trim();
+                if (email==null||email.length()==0){
+                    Toast.makeText(this, "邮箱不能为空", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 String intro = et_intro.getText().toString().trim();
+                if (intro==null||intro.length()==0){
+                    Toast.makeText(this, "简介不能为空", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 Intent intent=new Intent(this,InvestAuthen2Activity.class);
                 intent.putExtra("name",name);
                 intent.putExtra("phone",phone);
                 intent.putExtra("email",email);
                 intent.putExtra("intro",intro);
-
 //              头像?????
                 intent.putExtra("photo",photo);
 

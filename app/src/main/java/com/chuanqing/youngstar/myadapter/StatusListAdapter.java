@@ -1,17 +1,20 @@
 package com.chuanqing.youngstar.myadapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.chuanqing.youngstar.R;
+import com.chuanqing.youngstar._home.UserDetailActivity;
 import com.chuanqing.youngstar.mybean.SearchStudentBean;
 import com.chuanqing.youngstar.mybean.StatusBean;
 import com.chuanqing.youngstar.mybean.StatusListBean;
@@ -26,6 +29,7 @@ public class StatusListAdapter extends BaseAdapter {
         this.context = context;
         this.arrayList = arrayList;
     }
+
     @Override
     public int getCount() {
         return arrayList.size();
@@ -59,15 +63,27 @@ public class StatusListAdapter extends BaseAdapter {
         viewHolder.tv_id.setText("SID:"+searchStudentBean.getData().getPageInfo().getList().get(position).getUser_code());
         viewHolder.tv_type.setText(searchStudentBean.getData().getPageInfo().getList().get(position).getLabel());
         viewHolder.tv_redu.setText(searchStudentBean.getData().getPageInfo().getList().get(position).getRecommendTotal()+"");
+        viewHolder.ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(context, UserDetailActivity.class);
+                intent.putExtra("usercode",searchStudentBean.getData().getPageInfo().getList().get(position).getUser_code());
+                context.startActivity(intent);
+            }
+        });
         return view;
     }
-    private static class ViewHolder{
+
+
+    public static class ViewHolder{
         ImageView img_head;
         TextView tv_id;
         TextView tv_type;
         TextView tv_redu;
         Button btn_guanzhu;
+        LinearLayout ll;
         private ViewHolder(View view){
+            ll = view.findViewById(R.id.ll_statuslist);
             img_head = view.findViewById(R.id.search_student_headimg);
             tv_id = view.findViewById(R.id.search_student_id);
             tv_type = view.findViewById(R.id.search_student_type);

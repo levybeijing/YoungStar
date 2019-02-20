@@ -15,10 +15,12 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="15dp"
         >
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="161dp"
+            android:layout_height="200dp"
             android:background="@drawable/bg_white10"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
             >
             <TextView
                 android:layout_width="wrap_content"
@@ -33,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_alignParentBottom="true"
-                android:layout_marginBottom="24dp"
+                android:layout_marginTop="26dp"
                 >
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -119,7 +121,16 @@
                         />
                 </LinearLayout>
             </LinearLayout>
-        </RelativeLayout>
+            <TextView
+                android:id="@+id/tv_first_dialogtoshare"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="第一次分享成功后可获得1次点赞机会"
+                android:textColor="#666666"
+                android:gravity="center"
+                android:visibility="gone"
+                />
+        </LinearLayout>
         <TextView
             android:id="@+id/tv_cancel_dialogtoshare"
             android:layout_width="match_parent"
