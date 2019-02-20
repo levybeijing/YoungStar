@@ -40,6 +40,8 @@ public class Urls {
     public static final String getUserBlog = HOST + "Star/user/getUserBlog";
     //    我的作品集列表
     public static final String getUserCollection = HOST + "Star/user/getUserCollection";
+    //    查询用户身份状态
+    public static final String getActivityByuserCode = HOST + "Star/user/getActivityByuserCode";
     //     我的公司公告
     public static final String getCompanyBlog = HOST + "Star/user/getCompanyBlog";
     //    我的公司招聘
@@ -84,5 +86,14 @@ public class Urls {
     public static final String updateUserImg = HOST + "Star/user/updateUserImg";
     //    查询用户身份状态
     public static final String getUserType = HOST + "Star/user/getUserType";
+    //***********************************首页***************************************//
+    //    学生详情
+    public static final String getStudentDetail = HOST + "Star/firstPage/getStudentDetail";
+    //    关注
+    public static final String addfocusOn = HOST + "Star/firstPage/addfocusOn";
+    //    取消关注
+    public static final String delfocusOn = HOST + "Star/firstPage/delfocusOn";
+    //    给学生点赞
+    public static final String addStudentRecommendFree = HOST + "Star/firstPage/addStudentRecommendFree";
 
 }
