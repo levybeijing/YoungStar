@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -49,6 +50,10 @@ public class InvestAuthenActivity extends BaseActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_investauthen);
 
+        waitingDialog = new ProgressDialog(InvestAuthenActivity.this);
+        waitingDialog.setTitle("图片上传");
+        waitingDialog.setMessage("上传中...");
+        waitingDialog.setIndeterminate(true);
         initView();
     }
 
@@ -69,7 +74,7 @@ public class InvestAuthenActivity extends BaseActivity implements View.OnClickLi
         ImageView photo6 = findViewById(R.id.iv6_investauthen1);
         ImageView photo7 = findViewById(R.id.iv7_investauthen1);
         ImageView photo8 = findViewById(R.id.iv8_investauthen1);
-
+//
         list.add(photo1);
         list.add(photo2);
         list.add(photo3);
@@ -154,55 +159,50 @@ public class InvestAuthenActivity extends BaseActivity implements View.OnClickLi
                 intent.putExtra("phone",phone);
                 intent.putExtra("email",email);
                 intent.putExtra("intro",intro);
-
-                waitingDialog = new ProgressDialog(InvestAuthenActivity.this);
-                waitingDialog.setTitle("图片上传");
-                waitingDialog.setMessage("上传中...");
-                waitingDialog.setIndeterminate(true);
-                waitingDialog.setCancelable(false);
+//                waitingDialog.setCancelable(false);
                 waitingDialog.show();
                 uploadPhoto();
                 break;
         }
     }
-
+    Bitmap bitmap;
     private void uploadPhoto() {
-//        byte[] uploadData = new byte[100 * 1024];
-//        new Random().nextBytes(uploadData);
-        int res=0;
         switch (chooseindex){
             case R.id.iv_1_investauthen1:
-                res=R.mipmap.company1;
+                bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.company1,null);
                 break;
             case R.id.iv_2_investauthen1:
-                res=R.mipmap.company2;
+                bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.company2,null);
                 break;
             case R.id.iv_3_investauthen1:
-                res=R.mipmap.company3;
+                bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.company3,null);
                 break;
             case R.id.iv_4_investauthen1:
-                res=R.mipmap.company4;
+                bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.company4,null);
                 break;
             case R.id.iv_5_investauthen1:
-                res=R.mipmap.company5;
+                bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.company5,null);
                 break;
             case R.id.iv_6_investauthen1:
-                res=R.mipmap.company6;
+                bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.company6,null);
                 break;
             case R.id.iv_7_investauthen1:
-                res=R.mipmap.company7;
+                bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.company7,null);
                 break;
             case R.id.iv_8_investauthen1:
-                res=R.mipmap.company8;
+                bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.company8,null);
+//                bitmap = ((BitmapDrawable)getResources().getDrawable(R.mipmap.company8)).getBitmap();
                 break;
         }
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), res);
+        photo = SharedPFUtils.getParam(this,"usercode","")+ File.separator+ StringUtil.getRandomName(8)+".png";
+        Log.e("==========", "uploadPhoto: "+photo);
+
+//        bitmap = BitmapFactory.decodeResource(getResources(), res,null);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG,100,baos);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
         byte[] bytes = baos.toByteArray();
 
-        photo= SharedPFUtils.getParam(this,"usercode","")+ File.separator+ StringUtil.getRandomName(8);
-// 构造上传请求。
+        // 构造上传请求。
         PutObjectRequest put = new PutObjectRequest("star-1", photo, bytes);
         try {
             PutObjectResult putResult = oss.putObject(put);

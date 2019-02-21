@@ -204,14 +204,12 @@ public class InvestAuthen2Activity extends BaseActivity implements View.OnClickL
                 iv2.setImageBitmap(bitmap);
                 listName.set(1,name);
                 uploadOss(402,name,path);
-
                 break;
             case 403:
                 findViewById(R.id.tv3_investauthen2).setVisibility(View.INVISIBLE);
                 iv3.setImageBitmap(bitmap);
                 listName.set(2,name);
                 uploadOss(403,name,path);
-
                 break;
         }
     }
