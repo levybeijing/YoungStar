@@ -483,7 +483,9 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                 startActivity(intent);
                 break;
             case R.id.iv_share_mines:
-//                TODO:startActivity(new Intent(getContext(), SubAccountActivity.class));
+//                TODO:
+// startActivity(new Intent(getContext(), SubAccountActivity.class));
+
                 break;
         }
     }

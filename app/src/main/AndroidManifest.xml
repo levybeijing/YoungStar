@@ -43,6 +43,8 @@
         <activity android:name="._home.WebViewActivity"/>
         <activity android:name="._home.UserDetailActivity"/>
         <activity android:name="._home.searchstudent.StudentShowActivity"/>
+        <activity android:name=".AuditingActivity"/>
+        <activity android:name=".AuditFailedActivity"/>
         <!--login-->
         <activity android:name=".login.login.LoginActivity">
 

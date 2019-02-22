@@ -67,6 +67,12 @@ public class InvestAuthen2Activity extends BaseActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_investauthen2);
 
+        waitingDialog = new ProgressDialog(InvestAuthen2Activity.this);
+        waitingDialog.setTitle("图片上传");
+        waitingDialog.setMessage("上传中...");
+        waitingDialog.setIndeterminate(true);
+        waitingDialog.setCancelable(false);
+
         Intent intent = getIntent();
         name = intent.getStringExtra("name");
         phone = intent.getStringExtra("phone");
@@ -79,7 +85,6 @@ public class InvestAuthen2Activity extends BaseActivity implements View.OnClickL
         waitingDialog.setMessage("上传中...");
         waitingDialog.setIndeterminate(true);
         waitingDialog.setCancelable(false);
-
 
         initView();
 
@@ -136,8 +141,8 @@ public class InvestAuthen2Activity extends BaseActivity implements View.OnClickL
 //          判断内容
                 for (int i = 0; i < isOk.size(); i++) {
                     if (!isOk.get(i)){
-                        Toast.makeText(this, "图片上传未成功", Toast.LENGTH_SHORT).show();
-//                        return;
+                        Toast.makeText(this, "第"+i+"图片上传未成功", Toast.LENGTH_SHORT).show();
+                        return;
                     }
                 }
                 request();
@@ -271,6 +276,7 @@ public class InvestAuthen2Activity extends BaseActivity implements View.OnClickL
             }
         });
     }
+
     public  String getName(String path) {
         if (path!=null){
             String[] split = path.split("/");
@@ -282,7 +288,7 @@ public class InvestAuthen2Activity extends BaseActivity implements View.OnClickL
     private void request(){
         OkGo.post(Urls.addInvestor)//
                 .tag(this)//
-                .params("userCode", (int) SharedPFUtils.getParam(this,"usercode",-1))
+                .params("userCode", (String) SharedPFUtils.getParam(this,"usercode",""))
                 .params("name", name)
                 .params("mobile", phone)
                 .params("investorHistory",intro)
@@ -302,7 +308,6 @@ public class InvestAuthen2Activity extends BaseActivity implements View.OnClickL
                             startActivity(new Intent(InvestAuthen2Activity.this, MainActivity.class));
                             SharedPFUtils.setParam(InvestAuthen2Activity.this,"status",commenBean.getState());
                             SharedPFUtils.setParam(InvestAuthen2Activity.this,"identity",4);
-
                             finish();
                         }
                     }

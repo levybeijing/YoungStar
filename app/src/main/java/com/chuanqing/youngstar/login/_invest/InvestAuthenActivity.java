@@ -54,6 +54,7 @@ public class InvestAuthenActivity extends BaseActivity implements View.OnClickLi
         waitingDialog.setTitle("图片上传");
         waitingDialog.setMessage("上传中...");
         waitingDialog.setIndeterminate(true);
+        waitingDialog.setCancelable(false);
         initView();
     }
 
@@ -159,7 +160,7 @@ public class InvestAuthenActivity extends BaseActivity implements View.OnClickLi
                 intent.putExtra("phone",phone);
                 intent.putExtra("email",email);
                 intent.putExtra("intro",intro);
-//                waitingDialog.setCancelable(false);
+
                 waitingDialog.show();
                 uploadPhoto();
                 break;
@@ -167,29 +168,31 @@ public class InvestAuthenActivity extends BaseActivity implements View.OnClickLi
     }
     Bitmap bitmap;
     private void uploadPhoto() {
+        Log.e("==============", "chooseindex: "+chooseindex );
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
         switch (chooseindex){
-            case R.id.iv_1_investauthen1:
+            case 1:
                 bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.company1,null);
                 break;
-            case R.id.iv_2_investauthen1:
+            case 2:
                 bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.company2,null);
                 break;
-            case R.id.iv_3_investauthen1:
+            case 3:
                 bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.company3,null);
                 break;
-            case R.id.iv_4_investauthen1:
+            case 4:
                 bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.company4,null);
                 break;
-            case R.id.iv_5_investauthen1:
+            case 5:
                 bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.company5,null);
                 break;
-            case R.id.iv_6_investauthen1:
+            case 6:
                 bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.company6,null);
                 break;
-            case R.id.iv_7_investauthen1:
+            case 7:
                 bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.company7,null);
                 break;
-            case R.id.iv_8_investauthen1:
+            case 8:
                 bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.company8,null);
 //                bitmap = ((BitmapDrawable)getResources().getDrawable(R.mipmap.company8)).getBitmap();
                 break;
@@ -198,7 +201,7 @@ public class InvestAuthenActivity extends BaseActivity implements View.OnClickLi
         Log.e("==========", "uploadPhoto: "+photo);
 
 //        bitmap = BitmapFactory.decodeResource(getResources(), res,null);
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
         byte[] bytes = baos.toByteArray();
 

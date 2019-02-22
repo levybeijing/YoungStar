@@ -127,16 +127,25 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                 setChioceItem(2);
                 break;
             case R.id.main_four:
-                setChioceItem(3);
+                int stat = (int)SharedPFUtils.getParam(this, "status", -1);
+                switch (stat){
+                    case 1:
+                        startActivity(new Intent(MainActivity.this,AuditingActivity.class));
+                        break;
+                    case 2:
+                        setChioceItem(3);
+                        break;
+                    case 3:
+                    case 4:
+                        startActivity(new Intent(MainActivity.this,AuditFailedActivity.class));
+                        break;
+                }
                 break;
             case R.id.main_img_center:
                 int status = (int)SharedPFUtils.getParam(this, "status", -1);
-                if (status==1){
-                    requestIdentity();
-                }else{
+                if (status==2){
                     if (identity==1){
                         showPopwindow();  //展示中间按钮点击事件
-//                        showPopwindowfensi();
                     }else if (identity==2){
                         showPopwindowgongsi();
                     }else if (identity==3){
@@ -144,6 +153,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                     }else if (identity==4){
                         showPopwindowfensi();
                     }
+                }else{
+                    requestIdentity();
                 }
         }
     }
@@ -178,7 +189,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 //                        成功则提示 考虑自动登录
                         Log.e("===============", "VeriCode: "+s);
                         IdentityBean bean = new Gson().fromJson(s, IdentityBean.class);
+                        int status = bean.getData().getStatus();
                         int type = bean.getData().getType();
+                        SharedPFUtils.setParam(MainActivity.this,"identity", type);
+                        SharedPFUtils.setParam(MainActivity.this,"status", status);
+                        if (status==1){
+                            startActivity(new Intent(MainActivity.this,AuditingActivity.class));
+                            return;
+                        }
+                        if (status==3||status==4){
+                            startActivity(new Intent(MainActivity.this,AuditFailedActivity.class));
+                            return;
+                        }
                         switch (type){
                             case 1:
                                 showPopwindow();  //展示中间按钮点击事件
@@ -193,7 +215,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                                 showPopwindowfensi();
                                 break;
                         }
-                        SharedPFUtils.setParam(MainActivity.this,"identity", type);
+
                     }
                 });
     }
