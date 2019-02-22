@@ -139,12 +139,12 @@ public class InvestAuthen2Activity extends BaseActivity implements View.OnClickL
                 break;
             case R.id.tv_ok_investauthen2:
 //          判断内容
-                for (int i = 0; i < isOk.size(); i++) {
-                    if (!isOk.get(i)){
-                        Toast.makeText(this, "第"+i+"图片上传未成功", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                }
+//                for (int i = 0; i < isOk.size(); i++) {
+//                    if (!isOk.get(i)){
+//                        Toast.makeText(this, "第"+i+"图片上传未成功", Toast.LENGTH_SHORT).show();
+//                        return;
+//                    }
+//                }
                 request();
                 break;
         }
@@ -241,19 +241,19 @@ public class InvestAuthen2Activity extends BaseActivity implements View.OnClickL
                     case 401:
                         waitingDialog.dismiss();
                         Toast.makeText(InvestAuthen2Activity.this, "上传成功", Toast.LENGTH_SHORT).show();
-                        isOk.set(0,true);
+//                        isOk.set(0,true);
                         Log.e("===============", "=401");
                         break;
                     case 402:
                         waitingDialog.dismiss();
                         Toast.makeText(InvestAuthen2Activity.this, "上传成功", Toast.LENGTH_SHORT).show();
-                        isOk.set(1,true);
+//                        isOk.set(1,true);
                         Log.e("===============", "=402");
                         break;
                     case 403:
                         waitingDialog.dismiss();
                         Toast.makeText(InvestAuthen2Activity.this, "上传成功", Toast.LENGTH_SHORT).show();
-                        isOk.set(2,true);
+//                        isOk.set(2,true);
                         Log.e("===============", "=403");
                         break;
                 }
