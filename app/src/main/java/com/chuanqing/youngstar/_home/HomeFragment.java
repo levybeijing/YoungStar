@@ -27,13 +27,13 @@ import com.chuanqing.youngstar._home.searchstudent.StudentShowActivity;
 import com.chuanqing.youngstar.myadapter.HomeActivityAdapter;
 import com.chuanqing.youngstar.myadapter.HomeViewpager1;
 import com.chuanqing.youngstar.myadapter.HomeViewpager2;
-import com.chuanqing.youngstar.myadapter.MyAdapter;
 import com.chuanqing.youngstar.mybean.HomeActivityBean;
 import com.chuanqing.youngstar.mybean.HomeFenleiVPBean;
 import com.chuanqing.youngstar.mybean.HomeLunboBean;
 import com.chuanqing.youngstar.mybean.HomeYanyiBean;
 import com.chuanqing.youngstar.tools.Api;
 import com.chuanqing.youngstar.tools.CircleImageView;
+import com.chuanqing.youngstar.tools.SharedPFUtils;
 import com.chuanqing.youngstar.tools.ToastUtils;
 import com.chuanqing.youngstar.tools.ZoomOutPageTransformer;
 import com.google.gson.Gson;
@@ -52,7 +52,6 @@ import butterknife.ButterKnife;
 import okhttp3.Call;
 import okhttp3.Response;
 
-import static com.chuanqing.youngstar.MainActivity.identity;
 
 /**
  * 首页
@@ -84,7 +83,7 @@ public class HomeFragment extends Fragment implements OnBannerListener {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if (identity==1){
+        if ((int)SharedPFUtils.getParam(getContext(),"identity",4) ==1){
             layout_yanyi.setVisibility(View.VISIBLE);
             linearLayout_2_boty.setVisibility(View.VISIBLE);
         }else {
@@ -231,12 +230,13 @@ public class HomeFragment extends Fragment implements OnBannerListener {
 
                     @Override
                     public void onSuccess(String s, Call call, okhttp3.Response response) {
-
+//                        Log.e("========***========", "onSuccess: "+s);
                         arrayList.clear();
                         Gson gson = new Gson();
                         final HomeActivityBean activityBean = gson.fromJson(s,HomeActivityBean.class);
                         if (activityBean.getState()==1){
-                            if (activityBean.getData()!=null){
+                            if (activityBean.getData()!=null&&activityBean.getData().size()!=0){
+
                                 for (int i = 0; i <activityBean.getData().size() ; i++) {
                                     final View v_item=LayoutInflater.from(context).inflate(R.layout.home_activity_items,null);
                                     ImageView img;
@@ -278,6 +278,8 @@ public class HomeFragment extends Fragment implements OnBannerListener {
                                         }
                                     });
                                 }
+                            }else {
+                                getActivity().findViewById(R.id.ll_acts_homefrag).setVisibility(View.GONE);
                             }
                         }else {
                             ToastUtils.shortToast(activityBean.getMessage());
@@ -306,10 +308,11 @@ public class HomeFragment extends Fragment implements OnBannerListener {
 
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
+//                        Log.e("=============", "onSuccess: "+s);
                         Gson gson = new Gson();
                         final HomeYanyiBean yanyiBean = gson.fromJson(s,HomeYanyiBean.class);
                         if (yanyiBean.getState()==1){
-                            if (yanyiBean.getData().size()>0){
+                            if (yanyiBean.getData()!=null&&yanyiBean.getData().size()!=0){
                                 for (int i = 0; i <yanyiBean.getData().size() ; i++) {
                                     final View v_item=LayoutInflater.from(context).inflate(R.layout.home_yanyi_items,null);
                                     ImageView img;
@@ -333,7 +336,7 @@ public class HomeFragment extends Fragment implements OnBannerListener {
                                             .diskCacheStrategy(DiskCacheStrategy.NONE)
                                             .into(img);
                                     String headimg = Api.ossurl+yanyiBean.getData().get(i).getUser_img();
-                                    Log.e("演绎图片",headimg);
+//                                    Log.e("演绎图片",headimg);
                                     Glide.with(context)
                                             .load(headimg)
                                             .error(R.mipmap.my11)
@@ -355,7 +358,7 @@ public class HomeFragment extends Fragment implements OnBannerListener {
                                     });
                                 }
                             }else {
-
+                                getActivity().findViewById(R.id.home_yanyi).setVisibility(View.GONE);
                             }
                         }else {
                             ToastUtils.shortToast(yanyiBean.getMessage());

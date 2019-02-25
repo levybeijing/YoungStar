@@ -11,7 +11,7 @@
         android:orientation="vertical">
         <include android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            layout="@layout/common_top"></include>
+            layout="@layout/common_top"/>
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -26,7 +26,7 @@
                     app:indicator_width="10dp"
                     app:indicator_height="10dp"
                     app:indicator_drawable_selected="@mipmap/lunbo1"
-                    app:indicator_drawable_unselected="@mipmap/lunbo2"></com.youth.banner.Banner>
+                    app:indicator_drawable_unselected="@mipmap/lunbo2"/>
 
                 <LinearLayout
                     android:id="@+id/ll_layout"
@@ -78,6 +78,7 @@
 
                     <!--活动精选-->
                     <LinearLayout
+                        android:id="@+id/ll_acts_homefrag"
                         android:layout_width="match_parent"
                         android:layout_height="37dp"
                         android:layout_marginTop="50dp"
@@ -99,17 +100,13 @@
                             android:layout_gravity="center_vertical"
                             android:src="@mipmap/home_activity_more"/>
                     </LinearLayout>
-                    <!--<ListView-->
-                        <!--android:id="@+id/home_activity_1_list"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="match_parent"></ListView>-->
                 <LinearLayout
                     android:id="@+id/home_activity_1_body"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
                 </LinearLayout>
-                <!--活动精选-->
+                <!--演绎专区-->
                 <LinearLayout
                     android:id="@+id/home_yanyi"
                     android:layout_width="match_parent"

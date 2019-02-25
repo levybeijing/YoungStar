@@ -21,7 +21,6 @@ import com.chuanqing.youngstar.R;
 import com.chuanqing.youngstar._active.starbang.StarbangMoreActivity;
 import com.chuanqing.youngstar.mybean.StarbangBean;
 import com.chuanqing.youngstar.tools.Api;
-import com.chuanqing.youngstar.tools.ToastUtils;
 
 import java.util.ArrayList;
 

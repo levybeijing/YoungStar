@@ -1,7 +1,5 @@
 package com.chuanqing.youngstar.tools;
 
-import java.security.SecureRandom;
-
 public class Api {
     public static String apiurl = "http://39.107.70.80:8080";
     public static String ossurl = "https://star-1.oss-cn-beijing.aliyuncs.com/";

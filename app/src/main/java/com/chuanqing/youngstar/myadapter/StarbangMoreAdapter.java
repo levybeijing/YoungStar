@@ -1,6 +1,7 @@
 package com.chuanqing.youngstar.myadapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.chuanqing.youngstar.R;
+import com.chuanqing.youngstar._home.UserDetailActivity;
 import com.chuanqing.youngstar.mybean.StarBangMoreBean;
 import com.chuanqing.youngstar.tools.Api;
 import com.chuanqing.youngstar.tools.ToastUtils;
@@ -53,14 +55,17 @@ public class StarbangMoreAdapter extends BaseAdapter {
                 .placeholder(R.mipmap.my11)
                 .error(R.mipmap.my11)
                 .into(viewHolder.img_head);
-        viewHolder.tv_id.setText("ID:"+starBangMoreBean.getData().getStudent().get(position).getUser_code());
+        String user_code = starBangMoreBean.getData().getStudent().get(position).getUser_code();
+        viewHolder.tv_id.setText("ID:"+ user_code);
         viewHolder.tv_redu.setText(""+starBangMoreBean.getData().getStudent().get(position).getRecommend());
         viewHolder.tv_mingci.setText(starBangMoreBean.getData().getActivity_name()+"大赛中"+"第"+(position+1)+"名");
         //点击事件
         viewHolder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtils.shortToast("跳转到学生详情页面");
+                Intent intent =new Intent(context, UserDetailActivity.class);
+                intent.putExtra("usercode",user_code);
+                context.startActivity(intent);
             }
         });
         return view;
