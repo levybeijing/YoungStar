@@ -56,9 +56,7 @@ public class ImageAuthenActivity extends BaseActivity implements View.OnClickLis
     private RelativeLayout rl2;
     private RelativeLayout rl3;
     private ImageView iv1, iv2, iv3;
-
-    private List<Boolean> isOk=new ArrayList<>();
-    private List<String> listName=new ArrayList<>();
+    private String[] names=new String[3];
     private boolean havelable=false;
     private String lable;
     private float density;
@@ -69,14 +67,6 @@ public class ImageAuthenActivity extends BaseActivity implements View.OnClickLis
         setContentView(R.layout.activity_imageauthen);
 //
         student = getIntent().getParcelableExtra("student");
-//        阿里云上传文件的标记集合
-        isOk.add(false);
-        isOk.add(false);
-        isOk.add(false);
-//        阿里云文件名集合  用于上传接口
-        listName.add(null);
-        listName.add(null);
-        listName.add(null);
 //
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -139,13 +129,12 @@ public class ImageAuthenActivity extends BaseActivity implements View.OnClickLis
                     Toast.makeText(this, "请添加标签", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                for (int i = 0; i < isOk.size(); i++) {
-                    if (!isOk.get(i)){
-                        Toast.makeText(this, "图片上传未成功", Toast.LENGTH_SHORT).show();
-//                        return;
+                for (int i = 0; i < names.length; i++) {
+                    if (names[i]==null){
+                        Toast.makeText(this, "第"+(i+1)+"图片未上传", Toast.LENGTH_SHORT).show();
+                        return;
                     }
                 }
-//                请求验证
                 request();
                 break;
             case R.id.iv_back_imgauthen:
@@ -237,22 +226,17 @@ public class ImageAuthenActivity extends BaseActivity implements View.OnClickLis
             case 202:
                 findViewById(R.id.tv1_imgauthen).setVisibility(View.INVISIBLE);
                 iv1.setImageBitmap(bitmap);
-                listName.set(0,name);
                 uploadOss(202,name,path);
                 break;
             case 203:
                 findViewById(R.id.tv2_imgauthen).setVisibility(View.INVISIBLE);
                 iv2.setImageBitmap(bitmap);
-                listName.set(1,name);
                 uploadOss(203,name,path);
-
                 break;
             case 204:
                 findViewById(R.id.tv3_imgauthen).setVisibility(View.INVISIBLE);
                 iv3.setImageBitmap(bitmap);
-                listName.set(2,name);
                 uploadOss(204,name,path);
-
                 break;
         }
     }
@@ -285,15 +269,15 @@ public class ImageAuthenActivity extends BaseActivity implements View.OnClickLis
                 Log.d("=============PutObject", "UploadSuccess");
                 switch (code){
                     case 202:
-                        isOk.set(0,true);
+                        names[0]=name;
                         Log.e("===============", "=202");
                         break;
                     case 203:
-                        isOk.set(1,true);
+                        names[1]=name;
                         Log.e("===============", "=203");
                         break;
                     case 204:
-                        isOk.set(2,true);
+                        names[2]=name;
                         Log.e("===============", "=204");
                         break;
                 }
@@ -328,9 +312,9 @@ public class ImageAuthenActivity extends BaseActivity implements View.OnClickLis
                 .params("major", student.getMajor())
                 .params("studentNo", student.getStudentNo())
                 .params("cardId", student.getCardId())
-                .params("cardImg1", listName.get(0))
-                .params("cardImg2", listName.get(1))
-                .params("studentCardImg", listName.get(2))
+                .params("cardImg1", names[0])
+                .params("cardImg2", names[1])
+                .params("studentCardImg", names[2])
                 .params("type", "1")
                 .params("label", lable)
                 .params("userImg", student.getImgpath())

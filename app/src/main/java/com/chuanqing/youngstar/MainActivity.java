@@ -116,7 +116,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-
             case R.id.main_first:
                 setChioceItem(0);
                 break;
@@ -143,19 +142,19 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                 break;
             case R.id.main_img_center:
                 int status = (int)SharedPFUtils.getParam(this, "status", -1);
-                if (status==2){
-                    if (identity==1){
-                        showPopwindow();  //展示中间按钮点击事件
-                    }else if (identity==2){
-                        showPopwindowgongsi();
-                    }else if (identity==3){
-                        showPopwindowtouziren();
-                    }else if (identity==4){
-                        showPopwindowfensi();
-                    }
-                }else{
+//                if (status==2){
+//                    if (identity==1){
+//                        showPopwindow();  //展示中间按钮点击事件
+//                    }else if (identity==2){
+//                        showPopwindowgongsi();
+//                    }else if (identity==3){
+//                        showPopwindowtouziren();
+//                    }else if (identity==4){
+//                        showPopwindowfensi();
+//                    }
+//                }else{
                     requestIdentity();
-                }
+//                }
         }
     }
 
@@ -231,6 +230,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                         IdentityBean bean = new Gson().fromJson(s, IdentityBean.class);
                         int type = bean.getData().getType();
                         SharedPFUtils.setParam(MainActivity.this,"identity", type);
+                        SharedPFUtils.setParam(MainActivity.this,"status", bean.getData().getStatus());
                         if (mineFragment!=null){
                             fragmentManager.beginTransaction().remove(mineFragment).commit();
                         }
@@ -283,15 +283,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                 main_four_tv.setTextColor(dark);
                 main_four_img.setImageDrawable(MainActivity.this.getResources().getDrawable(R.mipmap.mine1));
                 int status = (int)SharedPFUtils.getParam(this, "status", -1);
-                if (status==1){
+//                if (status==1){
                     requestIdenMine();
-                }else{
-                    if (mineFragment!=null){
-                        fragmentManager.beginTransaction().remove(mineFragment).commit();
-                    }
-                    mineFragment = new MineFragment();
-                    fragmentManager.beginTransaction().add(R.id.content,mineFragment).commit();
-                }
+//                }else{
+//                    if (mineFragment!=null){
+//                        fragmentManager.beginTransaction().remove(mineFragment).commit();
+//                    }
+//                    mineFragment = new MineFragment();
+//                    fragmentManager.beginTransaction().add(R.id.content,mineFragment).commit();
+//                }
                 break;
         }
         fragmentTransaction.commit(); // 提交

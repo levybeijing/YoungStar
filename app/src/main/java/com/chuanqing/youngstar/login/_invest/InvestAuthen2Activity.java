@@ -56,8 +56,7 @@ public class InvestAuthen2Activity extends BaseActivity implements View.OnClickL
     private String photo;
     private ProgressDialog waitingDialog;
 
-    private List<Boolean> isOk=new ArrayList<>();
-    private List<String> listName=new ArrayList<>();
+    private String[] names=new String[3];
     private ImageView iv1;
     private ImageView iv2;
     private ImageView iv3;
@@ -87,15 +86,6 @@ public class InvestAuthen2Activity extends BaseActivity implements View.OnClickL
         waitingDialog.setCancelable(false);
 
         initView();
-
-        //        阿里云上传文件的标记集合
-        isOk.add(false);
-        isOk.add(false);
-        isOk.add(false);
-//        阿里云文件名集合  用于上传接口
-        listName.add(null);
-        listName.add(null);
-        listName.add(null);
     }
 
     private void initView() {
@@ -139,12 +129,12 @@ public class InvestAuthen2Activity extends BaseActivity implements View.OnClickL
                 break;
             case R.id.tv_ok_investauthen2:
 //          判断内容
-//                for (int i = 0; i < isOk.size(); i++) {
-//                    if (!isOk.get(i)){
-//                        Toast.makeText(this, "第"+i+"图片上传未成功", Toast.LENGTH_SHORT).show();
-//                        return;
-//                    }
-//                }
+                for (int i = 0; i < names.length; i++) {
+                    if (names[i]==null){
+                        Toast.makeText(this, "第"+(i+1)+"图片未上传", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
                 request();
                 break;
         }
@@ -201,19 +191,16 @@ public class InvestAuthen2Activity extends BaseActivity implements View.OnClickL
             case 401:
                 findViewById(R.id.tv1_investauthen2).setVisibility(View.INVISIBLE);
                 iv1.setImageBitmap(bitmap);
-                listName.set(0,name);
                 uploadOss(401,name,path);
                 break;
             case 402:
                 findViewById(R.id.tv2_investauthen2).setVisibility(View.INVISIBLE);
                 iv2.setImageBitmap(bitmap);
-                listName.set(1,name);
                 uploadOss(402,name,path);
                 break;
             case 403:
                 findViewById(R.id.tv3_investauthen2).setVisibility(View.INVISIBLE);
                 iv3.setImageBitmap(bitmap);
-                listName.set(2,name);
                 uploadOss(403,name,path);
                 break;
         }
@@ -223,7 +210,7 @@ public class InvestAuthen2Activity extends BaseActivity implements View.OnClickL
         String s = SharedPFUtils.getParam(this,"usercode","")+ File.separator+name;
 // 构造上传请求
         PutObjectRequest put = new PutObjectRequest("star-1", s, path);
-        Log.d("=============name", ""+s);
+        Log.e("=============name", ""+s);
 
 // 异步上传时可以设置进度回调
         put.setProgressCallback(new OSSProgressCallback<PutObjectRequest>() {
@@ -236,24 +223,21 @@ public class InvestAuthen2Activity extends BaseActivity implements View.OnClickL
         OSSAsyncTask task = MyApplication.oss.asyncPutObject(put, new OSSCompletedCallback<PutObjectRequest, PutObjectResult>() {
             @Override
             public void onSuccess(PutObjectRequest request, PutObjectResult result) {
-                Log.d("=============PutObject", "UploadSuccess");
+                Log.e("=============PutObject", "UploadSuccess");
                 switch (code){
                     case 401:
                         waitingDialog.dismiss();
-                        Toast.makeText(InvestAuthen2Activity.this, "上传成功", Toast.LENGTH_SHORT).show();
-//                        isOk.set(0,true);
                         Log.e("===============", "=401");
+                        names[0]=s;
                         break;
                     case 402:
                         waitingDialog.dismiss();
-                        Toast.makeText(InvestAuthen2Activity.this, "上传成功", Toast.LENGTH_SHORT).show();
-//                        isOk.set(1,true);
+                        names[1]=s;
                         Log.e("===============", "=402");
                         break;
                     case 403:
                         waitingDialog.dismiss();
-                        Toast.makeText(InvestAuthen2Activity.this, "上传成功", Toast.LENGTH_SHORT).show();
-//                        isOk.set(2,true);
+                        names[2]=s;
                         Log.e("===============", "=403");
                         break;
                 }
@@ -292,15 +276,19 @@ public class InvestAuthen2Activity extends BaseActivity implements View.OnClickL
                 .params("name", name)
                 .params("mobile", phone)
                 .params("investorHistory",intro)
-                .params("cardImg1", listName.get(0))
-                .params("cardImg2", listName.get(1))
-                .params("personCardImg", listName.get(2))
+                .params("cardImg1", names[0])
+                .params("cardImg2",names[1])
+                .params("personCardImg", names[2])
                 .params("type", "3")
                 .params("userImg", photo)
                 .params("mail", email)
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
+                        Log.e("===========", "onSuccess: "+photo);
+                        Log.e("===========", "onSuccess: "+names[0]);
+                        Log.e("===========", "onSuccess: "+names[1]);
+                        Log.e("===========", "onSuccess: "+names[2]);
                         Log.e("===========", "onSuccess: "+s);
 //                        然后进入 粉丝状态的界面
                         CommenBean commenBean = new Gson().fromJson(s, CommenBean.class);

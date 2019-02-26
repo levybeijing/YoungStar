@@ -53,8 +53,7 @@ public class Authen2Activity extends BaseActivity implements View.OnClickListene
     private String intro;
     private String photo;
 
-    private List<String> imglist=new ArrayList<>();
-    private List<Boolean> oklist=new ArrayList<>();
+    private String[] names=new String[4];
     private ImageView iv1;
     private ImageView iv2;
     private ImageView iv3;
@@ -73,19 +72,7 @@ public class Authen2Activity extends BaseActivity implements View.OnClickListene
         phone = intent.getStringExtra("phone");
         email = intent.getStringExtra("email");
         intro = intent.getStringExtra("intro");
-//        头像>??????
         photo = intent.getStringExtra("photo");
-
-        imglist.add(null);
-        imglist.add(null);
-        imglist.add(null);
-        imglist.add(null);
-//
-        oklist.add(false);
-        oklist.add(false);
-        oklist.add(false);
-        oklist.add(false);
-
     }
 
     private void initView() {
@@ -136,9 +123,9 @@ public class Authen2Activity extends BaseActivity implements View.OnClickListene
                 startActivityForResult(intent4, 304);
                 break;
             case R.id.tv_ok_comauthen2:
-                for (int i = 0; i < oklist.size(); i++) {
-                    if (!oklist.get(i)){
-                        Toast.makeText(this, "图片上传中,请稍后!", Toast.LENGTH_SHORT).show();
+                for (int i = 0; i < names.length; i++) {
+                    if (names[i]==null){
+                        Toast.makeText(this, "第"+(i+1)+"图片未上传", Toast.LENGTH_SHORT).show();
                         return;
                     }
                 }
@@ -199,27 +186,25 @@ public class Authen2Activity extends BaseActivity implements View.OnClickListene
             case 301:
                 findViewById(R.id.tv1_comauthen2).setVisibility(View.INVISIBLE);
                 iv1.setImageBitmap(bitmap);
-                imglist.set(0,name);
+                names[0]=name;
                 uploadOss(301,name,path);
                 break;
             case 302:
                 findViewById(R.id.tv2_comauthen2).setVisibility(View.INVISIBLE);
                 iv2.setImageBitmap(bitmap);
-                imglist.set(1,name);
+                names[1]=name;
                 uploadOss(302,name,path);
-
                 break;
             case 303:
                 findViewById(R.id.tv3_comauthen2).setVisibility(View.INVISIBLE);
                 iv3.setImageBitmap(bitmap);
-                imglist.set(2,name);
+                names[2]=name;
                 uploadOss(303,name,path);
-
                 break;
             case 304:
                 findViewById(R.id.tv4_comauthen2).setVisibility(View.INVISIBLE);
                 iv4.setImageBitmap(bitmap);
-                imglist.set(3,name);
+                names[3]=name;
                 uploadOss(304,name,path);
 
                 break;
@@ -247,19 +232,15 @@ public class Authen2Activity extends BaseActivity implements View.OnClickListene
                 Log.d("=============PutObject", "UploadSuccess");
                 switch (code){
                     case 301:
-                        oklist.set(0,true);
                         Log.e("=======/========", "=301");
                         break;
                     case 302:
-                        oklist.set(1,true);
                         Log.e("===============", "=302");
                         break;
                     case 303:
-                        oklist.set(2,true);
                         Log.e("===============", "=303");
                         break;
                     case 304:
-                        oklist.set(3,true);
                         Log.e("===============", "=304");
                         break;
                 }
@@ -299,10 +280,10 @@ public class Authen2Activity extends BaseActivity implements View.OnClickListene
                 .params("companyTel", phone)
                 .params("ownerName", name)
                 .params("companyDetail", intro)
-                .params("companyImg1", imglist.get(0))
-                .params("ownerImg1", imglist.get(1))
-                .params("ownerImg2", imglist.get(2))
-                .params("otherImg", imglist.get(3))
+                .params("companyImg1", names[0])
+                .params("ownerImg1", names[1])
+                .params("ownerImg2", names[2])
+                .params("otherImg", names[3])
                 .params("userImg", photo)//传回来的头像
                 .params("type", 2)
                 .params("mail", email)
