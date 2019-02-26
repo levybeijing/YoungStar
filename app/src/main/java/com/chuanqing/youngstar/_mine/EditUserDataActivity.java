@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.chuanqing.youngstar.R;
 import com.chuanqing.youngstar._mine.company.ChangeVericActivity;
 import com.chuanqing.youngstar.base.BaseActivity;
@@ -18,12 +21,17 @@ public class EditUserDataActivity extends BaseActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editdata);
 
-
-
         initView();
     }
 
     private void initView() {
+        TextView tv_phone = findViewById(R.id.tv_phone_editdata);
+        tv_phone.setText((String)SharedPFUtils.getParam(this,"phone",""));
+
+        ImageView iv_photo = findViewById(R.id.iv_photo_editdata);
+        String photo = (String) SharedPFUtils.getParam(this, "photo", "");
+        Glide.with(this).load(photo).into(iv_photo);
+
         findViewById(R.id.tv_exit_editdata).setOnClickListener(this);
         findViewById(R.id.ll_set_editdata).setOnClickListener(this);
         findViewById(R.id.ll_changepwd_editdata).setOnClickListener(this);

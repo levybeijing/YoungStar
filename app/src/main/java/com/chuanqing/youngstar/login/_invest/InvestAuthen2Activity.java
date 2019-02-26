@@ -79,12 +79,6 @@ public class InvestAuthen2Activity extends BaseActivity implements View.OnClickL
         intro = intent.getStringExtra("intro");
         photo = intent.getStringExtra("photo");
 
-        waitingDialog = new ProgressDialog(InvestAuthen2Activity.this);
-        waitingDialog.setTitle("图片上传");
-        waitingDialog.setMessage("上传中...");
-        waitingDialog.setIndeterminate(true);
-        waitingDialog.setCancelable(false);
-
         initView();
     }
 

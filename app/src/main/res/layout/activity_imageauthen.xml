@@ -63,14 +63,14 @@
                 android:layout_marginLeft="10dp"
                 >
             </LinearLayout>
+
             <TextView
+                android:id="@+id/tv_lablenum_imgauthen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="(0/2)"
                 android:layout_alignParentRight="true"
-                android:textColor="#999999"
-                android:layout_centerVertical="true"
-                />
+                android:text="(0/2)"
+                android:textColor="#999999" />
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="1dp"

@@ -282,7 +282,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             case 3:
                 main_four_tv.setTextColor(dark);
                 main_four_img.setImageDrawable(MainActivity.this.getResources().getDrawable(R.mipmap.mine1));
-                int status = (int)SharedPFUtils.getParam(this, "status", -1);
+//                int status = (int)SharedPFUtils.getParam(this, "status", -1);
 //                if (status==1){
                     requestIdenMine();
 //                }else{

@@ -17,7 +17,7 @@ public class Urls {
     public static final String IMGPATH = Environment.getExternalStorageDirectory().getAbsolutePath()+ File.separator+"star/img/";
     //    OSS 阿里上传路径  图片命名规范:2483989924/20190107 1354459140.png
     public static final String IMAGEURL = "https://star-1.oss-cn-beijing.aliyuncs.com/";
-
+    //
     public static final String HOST = "http://39.107.70.80:8080/";
     //    获取验证码
     public static final String getSms = HOST + "Star/user/getSms";

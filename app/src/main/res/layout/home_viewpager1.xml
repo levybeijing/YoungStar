@@ -10,7 +10,6 @@
     <LinearLayout
         android:layout_rowWeight="1"
         android:layout_columnWeight="1"
-        android:layout_margin="9dp"
         android:layout_height="60dp"
         android:gravity="center"
         android:orientation="vertical">
@@ -31,7 +30,6 @@
     <LinearLayout
         android:layout_rowWeight="1"
         android:layout_columnWeight="1"
-        android:layout_margin="9dp"
         android:layout_height="60dp"
         android:gravity="center"
         android:orientation="vertical">
@@ -52,7 +50,6 @@
     <LinearLayout
         android:layout_rowWeight="1"
         android:layout_columnWeight="1"
-        android:layout_margin="9dp"
         android:layout_height="60dp"
         android:gravity="center"
         android:orientation="vertical">
@@ -73,7 +70,6 @@
     <LinearLayout
         android:layout_rowWeight="1"
         android:layout_columnWeight="1"
-        android:layout_margin="9dp"
         android:layout_height="60dp"
         android:gravity="center"
         android:orientation="vertical">
@@ -94,10 +90,10 @@
     <LinearLayout
         android:layout_rowWeight="1"
         android:layout_columnWeight="1"
-        android:layout_margin="9dp"
         android:layout_height="60dp"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
         <com.chuanqing.youngstar.tools.CircleImageView
             android:id="@+id/home_img5"
             android:layout_width="60dp"
@@ -115,7 +111,6 @@
     <LinearLayout
         android:layout_rowWeight="1"
         android:layout_columnWeight="1"
-        android:layout_margin="9dp"
         android:layout_height="60dp"
         android:gravity="center"
         android:orientation="vertical">

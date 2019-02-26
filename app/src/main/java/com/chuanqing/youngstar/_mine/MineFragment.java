@@ -98,9 +98,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-//        SharedPFUtils.setParam(getContext(),"identity",3);////
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         identity = (int) SharedPFUtils.getParam(getContext(), "identity", 4);
         switch (identity){
             case 1:
@@ -113,7 +111,6 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                 return inflater.inflate(R.layout.fragment_minef, container, false);
         }
         list.clear();
-//        identity=2;
         return inflater.inflate(R.layout.fragment_minef, container, false);
     }
 

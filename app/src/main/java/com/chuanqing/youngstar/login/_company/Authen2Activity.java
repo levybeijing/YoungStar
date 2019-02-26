@@ -1,6 +1,7 @@
 package com.chuanqing.youngstar.login._company;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -52,6 +53,7 @@ public class Authen2Activity extends BaseActivity implements View.OnClickListene
     private String email;
     private String intro;
     private String photo;
+    private ProgressDialog waitingDialog;
 
     private String[] names=new String[4];
     private ImageView iv1;
@@ -63,6 +65,13 @@ public class Authen2Activity extends BaseActivity implements View.OnClickListene
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comauthen2);
+
+
+        waitingDialog = new ProgressDialog(Authen2Activity.this);
+        waitingDialog.setTitle("图片上传");
+        waitingDialog.setMessage("上传中...");
+        waitingDialog.setIndeterminate(true);
+        waitingDialog.setCancelable(false);
 
         initView();
 
@@ -142,21 +151,29 @@ public class Authen2Activity extends BaseActivity implements View.OnClickListene
             switch (requestCode) {
                 case 301:
                     if (resultCode == RESULT_OK) {
+                        waitingDialog.show();
+
                         handleImg(301, data);
                     }
                     break;
                 case 302:
                     if (resultCode == RESULT_OK) {
+                        waitingDialog.show();
+
                         handleImg(302, data);
                     }
                     break;
                 case 303:
                     if (resultCode == RESULT_OK) {
+                        waitingDialog.show();
+
                         handleImg(303, data);
                     }
                     break;
                 case 304:
                     if (resultCode == RESULT_OK) {
+                        waitingDialog.show();
+
                         handleImg(304, data);
                     }
                     break;
@@ -186,27 +203,22 @@ public class Authen2Activity extends BaseActivity implements View.OnClickListene
             case 301:
                 findViewById(R.id.tv1_comauthen2).setVisibility(View.INVISIBLE);
                 iv1.setImageBitmap(bitmap);
-                names[0]=name;
                 uploadOss(301,name,path);
                 break;
             case 302:
                 findViewById(R.id.tv2_comauthen2).setVisibility(View.INVISIBLE);
                 iv2.setImageBitmap(bitmap);
-                names[1]=name;
                 uploadOss(302,name,path);
                 break;
             case 303:
                 findViewById(R.id.tv3_comauthen2).setVisibility(View.INVISIBLE);
                 iv3.setImageBitmap(bitmap);
-                names[2]=name;
                 uploadOss(303,name,path);
                 break;
             case 304:
                 findViewById(R.id.tv4_comauthen2).setVisibility(View.INVISIBLE);
                 iv4.setImageBitmap(bitmap);
-                names[3]=name;
                 uploadOss(304,name,path);
-
                 break;
         }
     }
@@ -216,13 +228,12 @@ public class Authen2Activity extends BaseActivity implements View.OnClickListene
         String s = SharedPFUtils.getParam(this,"usercode","")+ File.separator+name;
 // 构造上传请求
         PutObjectRequest put = new PutObjectRequest("star-1", s, path);
-        Log.d("=============name", ""+s);
-
+//        Log.d("=============name", ""+s);
 // 异步上传时可以设置进度回调
         put.setProgressCallback(new OSSProgressCallback<PutObjectRequest>() {
             @Override
             public void onProgress(PutObjectRequest request, long currentSize, long totalSize) {
-                Log.d("PutObject", "currentSize: " + currentSize + " totalSize: " + totalSize);
+//                Log.d("PutObject", "currentSize: " + currentSize + " totalSize: " + totalSize);
             }
         });
 
@@ -232,15 +243,19 @@ public class Authen2Activity extends BaseActivity implements View.OnClickListene
                 Log.d("=============PutObject", "UploadSuccess");
                 switch (code){
                     case 301:
+                        names[0]=name;
                         Log.e("=======/========", "=301");
                         break;
                     case 302:
+                        names[1]=name;
                         Log.e("===============", "=302");
                         break;
                     case 303:
+                        names[2]=name;
                         Log.e("===============", "=303");
                         break;
                     case 304:
+                        names[3]=name;
                         Log.e("===============", "=304");
                         break;
                 }

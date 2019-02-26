@@ -60,6 +60,7 @@ public class ImageAuthenActivity extends BaseActivity implements View.OnClickLis
     private boolean havelable=false;
     private String lable;
     private float density;
+    private TextView tv_num;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -94,7 +95,7 @@ public class ImageAuthenActivity extends BaseActivity implements View.OnClickLis
 
         TextView ok=findViewById(R.id.tv_ok_imgthen);
         ok.setOnClickListener(this);
-
+        tv_num = findViewById(R.id.tv_lablenum_imgauthen);
         findViewById(R.id.iv_back_imgauthen).setOnClickListener(this);
     }
 
@@ -171,6 +172,7 @@ public class ImageAuthenActivity extends BaseActivity implements View.OnClickLis
                     if (resultCode!=RESULT_OK){
                         break;
                     }
+                    int count=0;
                     ll_lable.removeAllViews();
                     String lable1 = data.getStringExtra("lable1");
                     String lable2 = data.getStringExtra("lable2");
@@ -186,6 +188,7 @@ public class ImageAuthenActivity extends BaseActivity implements View.OnClickLis
                         tv1.setBackground(getResources().getDrawable(R.mipmap.bg_red,null));
                         ll_lable.addView(tv1);
                         lable=lable1;
+                        count++;
                     }
                     if (lable2 !=null&&lable2.length()!=0){
                         havelable=true;
@@ -199,7 +202,9 @@ public class ImageAuthenActivity extends BaseActivity implements View.OnClickLis
                         tv2.setBackground(getResources().getDrawable(R.mipmap.bg_red,null));
                         ll_lable.addView(tv2);
                         lable+=lable2;
+                        count++;
                     }
+                    tv_num.setText("("+count+"/2"+")");
                     break;
             }
         }

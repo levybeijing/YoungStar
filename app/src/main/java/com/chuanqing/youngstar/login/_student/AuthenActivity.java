@@ -65,9 +65,7 @@ public class AuthenActivity extends BaseActivity implements View.OnClickListener
     private EditText inumber;
     private EditText email;
     private PopupWindow popupWindow;
-
     private RelativeLayout root;
-
     private static final int ALBUM_REQUEST_CODE=1001;
     private static final int CAMERA_REQUEST_CODE=1002;
     private static final int CROP_SMALL_PICTURE=1003;
@@ -112,18 +110,13 @@ public class AuthenActivity extends BaseActivity implements View.OnClickListener
         next.setOnClickListener(this);
 //
         // 一个自定义的布局，作为显示的内容
-        View view = LayoutInflater.from(this).inflate(
-                R.layout.photo_choose_pop, null);
-
-        popupWindow = new PopupWindow(view,
-                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
+        View view = LayoutInflater.from(this).inflate(R.layout.photo_choose_pop, null);
 
         view.findViewById(R.id.cv_gallery_pop).setOnClickListener(this);
         view.findViewById(R.id.cv_camera_pop).setOnClickListener(this);
         view.findViewById(R.id.cv_cancel_pop).setOnClickListener(this);
-
-        popupWindow.setBackgroundDrawable(getResources().getDrawable(
-                R.drawable.bg_white5));
+        popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
+        popupWindow.setBackgroundDrawable(getResources().getDrawable(R.drawable.bg_white5));
 
     }
 
@@ -136,13 +129,6 @@ public class AuthenActivity extends BaseActivity implements View.OnClickListener
                 popupWindow.showAtLocation(root,Gravity.BOTTOM,0,0);
                 break;
             case R.id.iv_next_authen:
-                String trim1 = name.getText().toString().trim();
-                String trim2 = phone.getText().toString().trim();
-                String trim3 = school.getText().toString().trim();
-                String trim4 = major.getText().toString().trim();
-                String trim5 = snumber.getText().toString().trim();
-                String trim6 = inumber.getText().toString().trim();
-                String trim7 = email.getText().toString().trim();
                 if (!havephoto){
                     Toast.makeText(this, "头像不能为空", Toast.LENGTH_SHORT).show();
                     return;
@@ -152,30 +138,37 @@ public class AuthenActivity extends BaseActivity implements View.OnClickListener
                     Toast.makeText(this, "请选择性别", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                String trim1 = name.getText().toString().trim();
                 if (trim1==null||trim1.length()==0){
                     Toast.makeText(this, "用户名不能为空", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                String trim2 = phone.getText().toString().trim();
                 if (trim2==null||trim2.length()==0){
                     Toast.makeText(this, "手机号不能为空", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                String trim3 = school.getText().toString().trim();
                 if (trim3==null||trim3.length()==0){
                     Toast.makeText(this, "学校不能为空", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                String trim4 = major.getText().toString().trim();
                 if (trim4==null||trim4.length()==0){
                     Toast.makeText(this, "专业不能为空", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                String trim5 = snumber.getText().toString().trim();
                 if (trim5==null||trim5.length()==0){
                     Toast.makeText(this, "学号不能为空", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                String trim6 = inumber.getText().toString().trim();
                 if (trim6==null||trim6.length()==0){
                     Toast.makeText(this, "身份证号不能为空", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                String trim7 = email.getText().toString().trim();
                 if (trim7==null||trim7.length()==0) {
                     Toast.makeText(this, "邮箱不能为空", Toast.LENGTH_SHORT).show();
                     return;
@@ -216,7 +209,6 @@ public class AuthenActivity extends BaseActivity implements View.OnClickListener
                 break;
         }
     }
-
 
     private File tempFile;
 

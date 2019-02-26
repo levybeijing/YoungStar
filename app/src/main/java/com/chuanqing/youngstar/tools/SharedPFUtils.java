@@ -23,6 +23,7 @@ public class SharedPFUtils {
      * 震动 shake true false
      * 是否在审核 checkdata true false
      * 用户头像 photo ""
+     * 手机号 phone ""
      *
      */
     //     * 用户审核状态 status

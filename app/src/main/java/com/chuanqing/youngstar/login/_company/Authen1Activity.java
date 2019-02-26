@@ -1,8 +1,10 @@
 package com.chuanqing.youngstar.login._company;
 
+import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -26,6 +28,7 @@ import com.chuanqing.youngstar.R;
 import com.chuanqing.youngstar.Urls;
 import com.chuanqing.youngstar._mine.company.FollowcActivity;
 import com.chuanqing.youngstar.base.BaseActivity;
+import com.chuanqing.youngstar.login._invest.InvestAuthenActivity;
 import com.chuanqing.youngstar.mybean.FragCareCBean;
 import com.chuanqing.youngstar.tools.SharedPFUtils;
 import com.chuanqing.youngstar.tools.StringUtil;
@@ -33,6 +36,7 @@ import com.google.gson.Gson;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -43,23 +47,29 @@ import java.util.List;
 import okhttp3.Call;
 import okhttp3.Response;
 
+import static com.chuanqing.youngstar.MyApplication.oss;
+
 public class Authen1Activity extends BaseActivity implements View.OnClickListener {
-    private int chooseindex=1;
+    private int chooseindex=-1;
     private List<ImageView> list=new ArrayList<>();
     private EditText et_com;
     private EditText et_name;
     private EditText et_phone;
     private EditText et_email;
     private EditText et_intro;
-
-    private boolean havephoto=false;
-    private String name;
+    private String photo;
+    private Intent intent;
+    private ProgressDialog waitingDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comauthen1);
-
+        waitingDialog = new ProgressDialog(Authen1Activity.this);
+        waitingDialog.setTitle("图片上传");
+        waitingDialog.setMessage("上传中...");
+        waitingDialog.setIndeterminate(true);
+        waitingDialog.setCancelable(false);
         initView();
     }
 
@@ -137,74 +147,112 @@ public class Authen1Activity extends BaseActivity implements View.OnClickListene
                 checked(8);
                 break;
             case R.id.tv_next_comauthen1:
-//                头像?
-
+                if (chooseindex<0||photo==null){
+                    Toast.makeText(this, "请选择头像", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 String com = et_com.getText().toString().trim();
-                String name = et_name.getText().toString().trim();
-                String phone = et_phone.getText().toString().trim();
-                String email = et_email.getText().toString().trim();
-                String intro = et_intro.getText().toString().trim();
                 if (com==null||com.length()==0){
                     Toast.makeText(this, "公司名不能为空", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                String name = et_name.getText().toString().trim();
                 if (name==null||name.length()==0){
                     Toast.makeText(this, "姓名不能为空", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                String phone = et_phone.getText().toString().trim();
                 if (phone==null||phone.length()==0){
                     Toast.makeText(this, "电话不能为空", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                String email = et_email.getText().toString().trim();
                 if (email==null||email.length()==0){
                     Toast.makeText(this, "邮箱不能为空", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                String intro = et_intro.getText().toString().trim();
                 if (intro==null||intro.length()==0){
                     Toast.makeText(this, "介绍不能为空", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Intent intent=new Intent(this,Authen2Activity.class);
+                intent = new Intent(this, Authen2Activity.class);
                 intent.putExtra("name",name);
                 intent.putExtra("com",com);
                 intent.putExtra("phone",phone);
                 intent.putExtra("email",email);
                 intent.putExtra("intro",intro);
-//                头像
 
+                intent.putExtra("photo",photo);
                 startActivity(intent);
                 break;
         }
     }
-
-    private void checked(int i){
-
-        BitmapDrawable drawable = (BitmapDrawable) getResources().getDrawable(getpath(i));
-        Bitmap bitmap = drawable.getBitmap();
-
-        synchronized (this){
-        name = SharedPFUtils.getParam(this, "usercode", "") + File.separator + StringUtil.getRandomName(8)+".png";
-        File file=new File(Urls.IMAGEURL+File.separator+name);
-        if (!file.exists()){
-            file.getParentFile().mkdirs();
+    Bitmap bitmap;
+    private void uploadPhoto() {
+        Log.e("==============", "chooseindex: "+chooseindex );
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        switch (chooseindex){
+            case 1:
+                bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.company1,null);
+                break;
+            case 2:
+                bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.company2,null);
+                break;
+            case 3:
+                bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.company3,null);
+                break;
+            case 4:
+                bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.company4,null);
+                break;
+            case 5:
+                bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.company5,null);
+                break;
+            case 6:
+                bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.company6,null);
+                break;
+            case 7:
+                bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.company7,null);
+                break;
+            case 8:
+                bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.company8,null);
+//                bitmap = ((BitmapDrawable)getResources().getDrawable(R.mipmap.company8)).getBitmap();
+                break;
         }
+        photo = SharedPFUtils.getParam(this,"usercode","")+ File.separator+ StringUtil.getRandomName(8)+".png";
+        Log.e("==========", "uploadPhoto: "+photo);
+
+//        bitmap = BitmapFactory.decodeResource(getResources(), res,null);
+
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        byte[] bytes = baos.toByteArray();
+
+        // 构造上传请求。
+        PutObjectRequest put = new PutObjectRequest("star-1", photo, bytes);
         try {
-            FileOutputStream out=new FileOutputStream(file);
-            bitmap.compress(Bitmap.CompressFormat.PNG,100, out);
-            out.close();
-            uploadOss(name,file.getAbsolutePath());
-        } catch (FileNotFoundException e) {
+            PutObjectResult putResult = oss.putObject(put);
+            waitingDialog.dismiss();
+            intent.putExtra("photo",photo);
+            startActivity(intent);
+
+            Log.d("PutObject", "UploadSuccess");
+            Log.d("ETag", putResult.getETag());
+            Log.d("RequestId", putResult.getRequestId());
+        } catch (ClientException e) {
+            // 本地异常，如网络异常等。
             e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (ServiceException e) {
+            // 服务异常。
+            Log.e("RequestId", e.getRequestId());
+            Log.e("ErrorCode", e.getErrorCode());
+            Log.e("HostId", e.getHostId());
+            Log.e("RawMessage", e.getRawMessage());
         }
     }
 
-//        Log.e("=============name", "uploadOss:"+file.exists());
-//        Log.e("=============name", "uploadOss:"+file.length());
-
-        i=i-1;
+    private void checked(int i){
         chooseindex=i;
+        i=i-1;
         for (int j = 0; j < list.size(); j++) {
             if (i==j){
                 list.get(j).setVisibility(View.VISIBLE);
@@ -213,67 +261,98 @@ public class Authen1Activity extends BaseActivity implements View.OnClickListene
             }
         }
     }
-    private int getpath(int i){
-        switch (i){
-            case 1:
-                return R.mipmap.company1;
-            case 2:
-                return R.mipmap.company2;
-            case 3:
-                return R.mipmap.company3;
-            case 4:
-                return R.mipmap.company4;
-            case 5:
-                return R.mipmap.company5;
-            case 6:
-                return R.mipmap.company6;
-            case 7:
-                return R.mipmap.company7;
-            case 8:
-                return R.mipmap.company8;
-            default:
-                return 0;
-        }
-    }
-    //     阿里云上传文件
-    private void uploadOss(String name,String path){
-
-// 构造上传请求
-        PutObjectRequest put = new PutObjectRequest("star-1", name, path);
-        Log.e("=============name", "uploadOss:"+name);
-
-
-// 异步上传时可以设置进度回调
-        put.setProgressCallback(new OSSProgressCallback<PutObjectRequest>() {
-            @Override
-            public void onProgress(PutObjectRequest request, long currentSize, long totalSize) {
-                Log.d("PutObject", "currentSize: " + currentSize + " totalSize: " + totalSize);
-            }
-        });
-
-        OSSAsyncTask task = MyApplication.oss.asyncPutObject(put, new OSSCompletedCallback<PutObjectRequest, PutObjectResult>() {
-            @Override
-            public void onSuccess(PutObjectRequest request, PutObjectResult result) {
-                Log.e("=============PutObject", "UploadSuccess");
-                havephoto=true;
-            }
-
-            @Override
-            public void onFailure(PutObjectRequest request, ClientException clientExcepion, ServiceException serviceException) {
-                // 请求异常
-                if (clientExcepion != null) {
-                    // 本地异常如网络异常等
-                    clientExcepion.printStackTrace();
-                }
-                if (serviceException != null) {
-                    // 服务异常
-                    Log.e("ErrorCode", serviceException.getErrorCode());
-                    Log.e("RequestId", serviceException.getRequestId());
-                    Log.e("HostId", serviceException.getHostId());
-                    Log.e("RawMessage", serviceException.getRawMessage());
-                }
-            }
-        });
-    }
+//    private void checked(int i){
+//
+//        BitmapDrawable drawable = (BitmapDrawable) getResources().getDrawable(getpath(i));
+//        Bitmap bitmap = drawable.getBitmap();
+//
+//        synchronized (this){
+//        photo = SharedPFUtils.getParam(this, "usercode", "") + File.separator + StringUtil.getRandomName(8)+".png";
+//        File file=new File(Urls.IMAGEURL+File.separator+name);
+//        if (!file.exists()){
+//            file.getParentFile().mkdirs();
+//        }
+//        try {
+//            FileOutputStream out=new FileOutputStream(file);
+//            bitmap.compress(Bitmap.CompressFormat.PNG,100, out);
+//            out.close();
+//            uploadOss(name,file.getAbsolutePath());
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+//        i=i-1;
+//        chooseindex=i;
+//        for (int j = 0; j < list.size(); j++) {
+//            if (i==j){
+//                list.get(j).setVisibility(View.VISIBLE);
+//            }else{
+//                list.get(j).setVisibility(View.INVISIBLE);
+//            }
+//        }
+//    }
+//    private int getpath(int i){
+//        switch (i){
+//            case 1:
+//                return R.mipmap.company1;
+//            case 2:
+//                return R.mipmap.company2;
+//            case 3:
+//                return R.mipmap.company3;
+//            case 4:
+//                return R.mipmap.company4;
+//            case 5:
+//                return R.mipmap.company5;
+//            case 6:
+//                return R.mipmap.company6;
+//            case 7:
+//                return R.mipmap.company7;
+//            case 8:
+//                return R.mipmap.company8;
+//            default:
+//                return 0;
+//        }
+//    }
+//    //     阿里云上传文件
+//    private void uploadOss(String name,String path){
+//
+//// 构造上传请求
+//        PutObjectRequest put = new PutObjectRequest("star-1", name, path);
+//        Log.e("=============name", "uploadOss:"+name);
+//
+//
+//// 异步上传时可以设置进度回调
+//        put.setProgressCallback(new OSSProgressCallback<PutObjectRequest>() {
+//            @Override
+//            public void onProgress(PutObjectRequest request, long currentSize, long totalSize) {
+//                Log.d("PutObject", "currentSize: " + currentSize + " totalSize: " + totalSize);
+//            }
+//        });
+//
+//        OSSAsyncTask task = MyApplication.oss.asyncPutObject(put, new OSSCompletedCallback<PutObjectRequest, PutObjectResult>() {
+//            @Override
+//            public void onSuccess(PutObjectRequest request, PutObjectResult result) {
+//                Log.e("=============PutObject", "UploadSuccess");
+//            }
+//
+//            @Override
+//            public void onFailure(PutObjectRequest request, ClientException clientExcepion, ServiceException serviceException) {
+//                // 请求异常
+//                if (clientExcepion != null) {
+//                    // 本地异常如网络异常等
+//                    clientExcepion.printStackTrace();
+//                }
+//                if (serviceException != null) {
+//                    // 服务异常
+//                    Log.e("ErrorCode", serviceException.getErrorCode());
+//                    Log.e("RequestId", serviceException.getRequestId());
+//                    Log.e("HostId", serviceException.getHostId());
+//                    Log.e("RawMessage", serviceException.getRawMessage());
+//                }
+//            }
+//        });
+//    }
 
 }
