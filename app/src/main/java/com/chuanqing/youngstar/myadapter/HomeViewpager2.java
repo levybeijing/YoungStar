@@ -7,16 +7,11 @@ import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridLayout;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.chuanqing.youngstar.R;
 import com.chuanqing.youngstar._home.searchstudent.SearchStatusActivity;
 import com.chuanqing.youngstar.mybean.HomeFenleiVPBean;
-import com.chuanqing.youngstar.tools.Api;
 
 import java.util.ArrayList;
 

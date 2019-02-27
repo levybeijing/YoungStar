@@ -28,9 +28,9 @@ public class EditUserDataActivity extends BaseActivity implements View.OnClickLi
         TextView tv_phone = findViewById(R.id.tv_phone_editdata);
         tv_phone.setText((String)SharedPFUtils.getParam(this,"phone",""));
 
-        ImageView iv_photo = findViewById(R.id.iv_photo_editdata);
-        String photo = (String) SharedPFUtils.getParam(this, "photo", "");
-        Glide.with(this).load(photo).into(iv_photo);
+//        ImageView iv_photo = findViewById(R.id.iv_photo_editdata);
+//        String photo = (String) SharedPFUtils.getParam(this, "photo", "");
+//        Glide.with(this).load(photo).into(iv_photo);
 
         findViewById(R.id.tv_exit_editdata).setOnClickListener(this);
         findViewById(R.id.ll_set_editdata).setOnClickListener(this);
@@ -48,7 +48,7 @@ public class EditUserDataActivity extends BaseActivity implements View.OnClickLi
         switch (v.getId()){
             case R.id.tv_exit_editdata:
 //           退出登录
-                SharedPFUtils.setParam(EditUserDataActivity.this, "islogin", false);
+                SharedPFUtils.clearData();
                 Intent intent = new Intent(this, LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);

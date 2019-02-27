@@ -26,7 +26,6 @@ public class SettinsActivity extends BaseActivity implements View.OnClickListene
         findViewById(R.id.ll_help_settings).setOnClickListener(this);
 
         findViewById(R.id.iv_back_settings).setOnClickListener(this);
-
     }
 
     @Override

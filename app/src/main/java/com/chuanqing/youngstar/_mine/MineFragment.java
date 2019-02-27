@@ -398,6 +398,8 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                                 tv2_wallet.setText(data2.getStandard_coin()+"");
                                 tv2_care.setText(data2.getUserConcernNum()+"");
                                 Glide.with(getActivity()).load(Urls.IMAGEURL+data2.getUser_img()).into(iv2_photo);
+
+
                                 break;
                             case 3:
                                 FragMinefBean bean3 = new Gson().fromJson(s, FragMinefBean.class);

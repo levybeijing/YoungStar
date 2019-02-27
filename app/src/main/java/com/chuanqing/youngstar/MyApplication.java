@@ -13,6 +13,7 @@ import com.alibaba.sdk.android.oss.OSSClient;
 import com.alibaba.sdk.android.oss.common.OSSLog;
 import com.alibaba.sdk.android.oss.common.auth.OSSCredentialProvider;
 import com.alibaba.sdk.android.oss.common.auth.OSSStsTokenCredentialProvider;
+import com.chuanqing.youngstar.tools.SharedPFUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
 import com.lzy.okgo.cache.CacheMode;
@@ -65,7 +66,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         this.mContext = this;
-
+        SharedPFUtils.init(this);
 // 在移动端建议使用STS方式初始化OSSClient。
 // 更多信息可查看sample 中 sts 使用方式(https://github.com/aliyun/aliyun-oss-android-sdk/tree/master/app/src/main/java/com/alibaba/sdk/android/oss/app)
         final OSSCredentialProvider credentialProvider = new OSSStsTokenCredentialProvider("LTAI8ygujYgDvLJ9", "nLrO1bpn9IOpEu0tt0zyAaChc22j0c", "");

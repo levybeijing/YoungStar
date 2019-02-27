@@ -150,24 +150,26 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 break;
 //                注册
             case R.id.iv_toregister_register:
-                String trim1 = pwd.getText().toString().trim();
-                String trim2 = pwdagain.getText().toString().trim();
                 String trim3 = phone.getText().toString().trim();
-                String trim4 = code.getText().toString().trim();
-
                 if (!StringUtil.isPhoneNumber(trim3)){
                     Toast.makeText(this, "请输入正确手机号", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (trim1==null||trim2==null||trim1.length()==0||trim2.length()==0){
+                String trim1 = pwd.getText().toString().trim();
+                if (trim1==null||trim1.length()==0){
                     Toast.makeText(this, "请输入密码", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                if (trim1.length()<8){
+                    Toast.makeText(this, "密码必须大于等于8位", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                String trim2 = pwdagain.getText().toString().trim();
                 if (!trim1.equals(trim2)){
                     Toast.makeText(this, "前后密码不相同,请重新输入密码", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
+                String trim4 = code.getText().toString().trim();
                 if (!check.isChecked()){
                     Toast.makeText(this, "请同意隐私保护和用户协议", Toast.LENGTH_SHORT).show();
                     return;

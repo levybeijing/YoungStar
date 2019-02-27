@@ -63,6 +63,7 @@ import com.chuanqing.youngstar.base.BaseActivity;
 import com.chuanqing.youngstar.myadapter.PublishAdapter;
 import com.chuanqing.youngstar.mybean.CommonBean;
 import com.chuanqing.youngstar.tools.Api;
+import com.chuanqing.youngstar.tools.SharedPFUtils;
 import com.chuanqing.youngstar.tools.ToastUtils;
 import com.chuanqing.youngstar.tools.UiUtils;
 import com.foamtrace.photopicker.ImageCaptureManager;
@@ -133,7 +134,13 @@ public class PublishActivity extends BaseActivity{
     String media_type = "1"; //用于保存上传的类型是1图片，还是2视频，先默认是1
     boolean info_img = false; //用于判断是否选择了详情图片
     private void setTtitle(){
-        tv_title.setText("发布作品");
+        int identity = (int)SharedPFUtils.getParam(this, "identity", 4);
+        if (identity==1){
+            tv_title.setText("发布作品");
+        }else{
+            tv_title.setText("发布公告");
+        }
+
         left_img.setVisibility(View.VISIBLE);
         //返回
         left_img.setOnClickListener(new View.OnClickListener() {

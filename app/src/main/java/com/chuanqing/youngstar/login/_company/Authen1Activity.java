@@ -147,7 +147,7 @@ public class Authen1Activity extends BaseActivity implements View.OnClickListene
                 checked(8);
                 break;
             case R.id.tv_next_comauthen1:
-                if (chooseindex<0||photo==null){
+                if (chooseindex<0){
                     Toast.makeText(this, "请选择头像", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -183,8 +183,7 @@ public class Authen1Activity extends BaseActivity implements View.OnClickListene
                 intent.putExtra("email",email);
                 intent.putExtra("intro",intro);
 
-                intent.putExtra("photo",photo);
-                startActivity(intent);
+                uploadPhoto();
                 break;
         }
     }

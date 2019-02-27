@@ -116,7 +116,7 @@ public class HomeFragment extends Fragment implements OnBannerListener {
 
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
-//                        Log.e("分类",s);
+                        Log.e("分类",s);
                         Gson gson = new Gson();
                         HomeFenleiVPBean fenleiVPBean = gson.fromJson(s,HomeFenleiVPBean.class);
                         if (fenleiVPBean.getState()==1){
@@ -125,8 +125,6 @@ public class HomeFragment extends Fragment implements OnBannerListener {
                             }
                             setviewpagertitle();
                             setviewpager();
-
-
                         }else {
                             ToastUtils.shortToast(fenleiVPBean.getMessage());
                         }

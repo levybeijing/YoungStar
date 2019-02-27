@@ -281,6 +281,7 @@ public class RecuitActivity extends BaseActivity implements View.OnClickListener
     boolean fuli = false;
     ArrayList<String> fuli_list = new ArrayList<>();
     String benefits = "";
+    private int count=0;
     private void createView(ArrayList<UpZhaopinBean.DataBean> name) {
         for (int i = 0; i < name.size(); i++) {
             // 实例化一个View，以放到List里
@@ -297,11 +298,14 @@ public class RecuitActivity extends BaseActivity implements View.OnClickListener
                         fuli_list.add(textView.getText().toString());
                         fuli=!fuli;
                         textView.setBackground(RecuitActivity.this.getResources().getDrawable(R.drawable.fillettextview));
+                        count++;
                     }else {
                         fuli_list.remove(textView.getText().toString());
                         fuli=!fuli;
                         textView.setBackground(RecuitActivity.this.getResources().getDrawable(R.drawable.fillettextviewup));
+                        count--;
                     }
+                    lablenum.setText("("+count+"/5)");
                 }
             });
             recuit_linner.addView(item);
@@ -317,7 +321,7 @@ public class RecuitActivity extends BaseActivity implements View.OnClickListener
     @BindView(R.id.common_rigth_img)
     TextView right_tv;
     private void setTtitle(){
-        tv_title.setText("发布");
+        tv_title.setText("发布招聘");
         left_img.setVisibility(View.VISIBLE);
         //返回
         left_img.setOnClickListener(new View.OnClickListener() {

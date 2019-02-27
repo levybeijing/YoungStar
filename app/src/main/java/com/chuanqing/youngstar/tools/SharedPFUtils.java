@@ -12,6 +12,8 @@ public class SharedPFUtils {
      * 保存在手机里面的文件名
      */
     private static final String FILE_NAME = "userinfo";
+    private static SharedPreferences.Editor editor;
+    private static SharedPreferences sp;
 
     /**
      * 身份标识 identity 1 student 2 company 3 invest 4 fans
@@ -24,34 +26,29 @@ public class SharedPFUtils {
      * 是否在审核 checkdata true false
      * 用户头像 photo ""
      * 手机号 phone ""
-     *
      */
     //     * 用户审核状态 status
-        public static void init(Context context){
-            SharedPreferences sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sp.edit();
-        }
+    public static void init(Context context) {
+        sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+        editor = sp.edit();
+    }
 
-        public static void setParam(Context context , String key, Object object){
+    public static void setParam(Context context, String key, Object object) {
 
         String type = object.getClass().getSimpleName();
         SharedPreferences sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
 
-        if("String".equals(type)){
-            editor.putString(key, (String)object);
-        }
-        else if("Integer".equals(type)){
-            editor.putInt(key, (Integer)object);
-        }
-        else if("Boolean".equals(type)){
-            editor.putBoolean(key, (Boolean)object);
-        }
-        else if("Float".equals(type)){
-            editor.putFloat(key, (Float)object);
-        }
-        else if("Long".equals(type)){
-            editor.putLong(key, (Long)object);
+        if ("String".equals(type)) {
+            editor.putString(key, (String) object);
+        } else if ("Integer".equals(type)) {
+            editor.putInt(key, (Integer) object);
+        } else if ("Boolean".equals(type)) {
+            editor.putBoolean(key, (Boolean) object);
+        } else if ("Float".equals(type)) {
+            editor.putFloat(key, (Float) object);
+        } else if ("Long".equals(type)) {
+            editor.putLong(key, (Long) object);
         }
         editor.commit();
     }
@@ -59,30 +56,32 @@ public class SharedPFUtils {
 
     /**
      * 得到保存数据的方法，我们根据默认值得到保存的数据的具体类型，然后调用相对于的方法获取值
+     *
      * @param context
      * @param key
      * @param defaultObject
      * @return
      */
-    public static Object getParam(Context context , String key, Object defaultObject){
+    public static Object getParam(Context context, String key, Object defaultObject) {
         String type = defaultObject.getClass().getSimpleName();
         SharedPreferences sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
 
-        if("String".equals(type)){
-            return sp.getString(key, (String)defaultObject);
-        }
-        else if("Integer".equals(type)){
-            return sp.getInt(key, (Integer)defaultObject);
-        }
-        else if("Boolean".equals(type)){
-            return sp.getBoolean(key, (Boolean)defaultObject);
-        }
-        else if("Float".equals(type)){
-            return sp.getFloat(key, (Float)defaultObject);
-        }
-        else if("Long".equals(type)){
-            return sp.getLong(key, (Long)defaultObject);
+        if ("String".equals(type)) {
+            return sp.getString(key, (String) defaultObject);
+        } else if ("Integer".equals(type)) {
+            return sp.getInt(key, (Integer) defaultObject);
+        } else if ("Boolean".equals(type)) {
+            return sp.getBoolean(key, (Boolean) defaultObject);
+        } else if ("Float".equals(type)) {
+            return sp.getFloat(key, (Float) defaultObject);
+        } else if ("Long".equals(type)) {
+            return sp.getLong(key, (Long) defaultObject);
         }
         return null;
+    }
+
+    public static void clearData() {
+        editor.clear();
+        editor.commit();
     }
 }

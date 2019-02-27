@@ -152,28 +152,24 @@ public class Authen2Activity extends BaseActivity implements View.OnClickListene
                 case 301:
                     if (resultCode == RESULT_OK) {
                         waitingDialog.show();
-
                         handleImg(301, data);
                     }
                     break;
                 case 302:
                     if (resultCode == RESULT_OK) {
                         waitingDialog.show();
-
                         handleImg(302, data);
                     }
                     break;
                 case 303:
                     if (resultCode == RESULT_OK) {
                         waitingDialog.show();
-
                         handleImg(303, data);
                     }
                     break;
                 case 304:
                     if (resultCode == RESULT_OK) {
                         waitingDialog.show();
-
                         handleImg(304, data);
                     }
                     break;
@@ -222,18 +218,17 @@ public class Authen2Activity extends BaseActivity implements View.OnClickListene
                 break;
         }
     }
-
     //     阿里云上传文件
     private void uploadOss(int code,String name,String path){
         String s = SharedPFUtils.getParam(this,"usercode","")+ File.separator+name;
-// 构造上传请求
+        // 构造上传请求
         PutObjectRequest put = new PutObjectRequest("star-1", s, path);
-//        Log.d("=============name", ""+s);
-// 异步上传时可以设置进度回调
+        Log.e("=============name", ""+s);
+        // 异步上传时可以设置进度回调
         put.setProgressCallback(new OSSProgressCallback<PutObjectRequest>() {
             @Override
             public void onProgress(PutObjectRequest request, long currentSize, long totalSize) {
-//                Log.d("PutObject", "currentSize: " + currentSize + " totalSize: " + totalSize);
+        //                Log.d("PutObject", "currentSize: " + currentSize + " totalSize: " + totalSize);
             }
         });
 
@@ -244,18 +239,25 @@ public class Authen2Activity extends BaseActivity implements View.OnClickListene
                 switch (code){
                     case 301:
                         names[0]=name;
+                        waitingDialog.dismiss();
                         Log.e("=======/========", "=301");
                         break;
                     case 302:
                         names[1]=name;
+                        waitingDialog.dismiss();
+
                         Log.e("===============", "=302");
                         break;
                     case 303:
                         names[2]=name;
+                        waitingDialog.dismiss();
+
                         Log.e("===============", "=303");
                         break;
                     case 304:
                         names[3]=name;
+                        waitingDialog.dismiss();
+
                         Log.e("===============", "=304");
                         break;
                 }

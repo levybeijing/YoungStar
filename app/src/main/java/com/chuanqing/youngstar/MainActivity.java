@@ -27,10 +27,12 @@ import com.chuanqing.youngstar._add.TapeActivity;
 import com.chuanqing.youngstar._add.company.RecuitActivity;
 import com.chuanqing.youngstar._add.student.WorksActivity;
 import com.chuanqing.youngstar._home.HomeFragment;
+import com.chuanqing.youngstar._mine.EditUserDataActivity;
 import com.chuanqing.youngstar._mine.MineFragment;
 import com.chuanqing.youngstar._square.SquareFragment;
 import com.chuanqing.youngstar.base.BaseActivity;
 import com.chuanqing.youngstar.login.choose.ChooseActivity;
+import com.chuanqing.youngstar.login.login.LoginActivity;
 import com.chuanqing.youngstar.mybean.IdentityBean;
 import com.chuanqing.youngstar.tools.SharedPFUtils;
 import com.chuanqing.youngstar.tools.ToastUtils;
@@ -126,19 +128,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                 setChioceItem(2);
                 break;
             case R.id.main_four:
-                int stat = (int)SharedPFUtils.getParam(this, "status", -1);
-                switch (stat){
-                    case 1:
-                        startActivity(new Intent(MainActivity.this,AuditingActivity.class));
-                        break;
-                    case 2:
-                        setChioceItem(3);
-                        break;
-                    case 3:
-                    case 4:
-                        startActivity(new Intent(MainActivity.this,AuditFailedActivity.class));
-                        break;
-                }
+                setChioceItem(3);
                 break;
             case R.id.main_img_center:
                 int status = (int)SharedPFUtils.getParam(this, "status", -1);
@@ -228,9 +218,27 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 //                        成功则提示 考虑自动登录
                         Log.e("===============", "VeriCode: "+s);
                         IdentityBean bean = new Gson().fromJson(s, IdentityBean.class);
+                        if (bean.getData()==null){
+                            SharedPFUtils.clearData();
+                            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                            return;
+                        }
                         int type = bean.getData().getType();
+                        int status = bean.getData().getStatus();
+
                         SharedPFUtils.setParam(MainActivity.this,"identity", type);
-                        SharedPFUtils.setParam(MainActivity.this,"status", bean.getData().getStatus());
+                        SharedPFUtils.setParam(MainActivity.this,"status", status);
+                        switch (status){
+                            case 1:
+                                startActivity(new Intent(MainActivity.this,AuditingActivity.class));
+                                return;
+                            case 3:
+                            case 4:
+                                startActivity(new Intent(MainActivity.this,AuditFailedActivity.class));
+                                return;
+                        }
                         if (mineFragment!=null){
                             fragmentManager.beginTransaction().remove(mineFragment).commit();
                         }

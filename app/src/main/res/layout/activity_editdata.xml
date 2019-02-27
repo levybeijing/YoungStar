@@ -40,21 +40,21 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/main_page">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#fff"
-        >
-        <ImageView
-            android:id="@+id/iv_photo_editdata"
-            android:layout_width="77dp"
-            android:layout_height="77dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="24dp"
-            />
-    </LinearLayout>
-    
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="#fff"-->
+        <!--&gt;-->
+        <!--<ImageView-->
+            <!--android:id="@+id/iv_photo_editdata"-->
+            <!--android:layout_width="77dp"-->
+            <!--android:layout_height="77dp"-->
+            <!--android:layout_marginTop="5dp"-->
+            <!--android:layout_marginBottom="5dp"-->
+            <!--android:layout_marginLeft="24dp"-->
+            <!--/>-->
+    <!--</LinearLayout>-->
+    <!---->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="250dp"
