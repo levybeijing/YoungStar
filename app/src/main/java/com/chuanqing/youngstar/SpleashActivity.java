@@ -29,6 +29,7 @@ public class SpleashActivity extends BaseActivity {
         String[] permession =new String[]{
                 Manifest.permission.READ_PHONE_STATE,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.CAMERA,
                 Manifest.permission.RECORD_AUDIO
         };
         PermissionsUtils.getInstance().chekPermissions(this, permession, new PermissionsUtils.IPermissionsResult() {

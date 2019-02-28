@@ -43,6 +43,7 @@
         >
         <!--1-->
         <RelativeLayout
+            android:id="@+id/rl_test"
             android:layout_width="270dp"
             android:layout_height="135dp"
             android:layout_margin="10dp"

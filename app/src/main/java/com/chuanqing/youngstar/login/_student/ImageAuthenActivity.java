@@ -106,7 +106,6 @@ public class ImageAuthenActivity extends BaseActivity implements View.OnClickLis
                 Intent intent = new Intent(ImageAuthenActivity.this,LableActivity.class);
                 startActivityForResult(intent,FORLABLE);
                 break;
-//
             case R.id.rl1_imgauthen:
                 Intent intent2 = new Intent(
                         Intent.ACTION_PICK,

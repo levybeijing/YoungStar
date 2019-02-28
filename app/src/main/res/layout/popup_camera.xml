@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="100dp"
+    android:layout_height="120dp"
+    android:orientation="vertical"
+    >
+    <Button
+        android:id="@+id/tv_camera_popup"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:text="拍照"
+        android:gravity="center"
+        android:textSize="20dp"
+        />
+    <Button
+        android:id="@+id/tv_gallery_popup"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:text="相册"
+        android:gravity="center"
+        android:textSize="20dp"
+        />
+</LinearLayout>

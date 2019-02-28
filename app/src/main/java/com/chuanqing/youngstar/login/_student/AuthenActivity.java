@@ -290,10 +290,10 @@ public class AuthenActivity extends BaseActivity implements View.OnClickListener
      */
     private void getPicFromCamera() {
         //用于保存调用相机拍照后所生成的文件
-        tempFile = new File(Environment.getExternalStorageDirectory().getPath(), System.currentTimeMillis() + ".png");
+        tempFile = new File(Urls.IMGPATH, System.currentTimeMillis() + ".png");
         //跳转到调用系统相机
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        //判断版本
+        //        //判断版本
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {   //如果在Android7.0以上,使用FileProvider获取Uri
             intent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
             Uri contentUri = FileProvider.getUriForFile(this, getPackageName()+".provider", tempFile);

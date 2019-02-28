@@ -1,10 +1,6 @@
 package com.chuanqing.youngstar.tools;
-import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.widget.ImageView;
-
-import com.chuanqing.youngstar.R;
 
 /**
  * @创建者 mingyan.su
@@ -22,9 +18,7 @@ public class ZoomOutPageTransformer implements ViewPager.PageTransformer {
         if (position <= 1) {
 
             float scaleFactor = MIN_SCALE + (1 - Math.abs(position)) * (MAX_SCALE - MIN_SCALE);
-
             page.setScaleX(scaleFactor);
-
             if (position > 0) {
                 page.setTranslationX(-scaleFactor * 2);
             } else if (position < 0) {
