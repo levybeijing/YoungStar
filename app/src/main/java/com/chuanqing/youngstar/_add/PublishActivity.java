@@ -457,14 +457,15 @@ public class PublishActivity extends BaseActivity{
      * @param view
      */
     public void onClickTakePhoto(View view) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            checkPermission(REQUEST_CODE_PERMISSION_CAMERA);
-            return;
-        }
+
         openCamera();
     }
 
     private void openCamera() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            checkPermission(REQUEST_CODE_PERMISSION_CAMERA);
+            return;
+        }
         if (isSdCardExist()) {
             Intent cameraIntent = new Intent(
                     "android.media.action.IMAGE_CAPTURE");
@@ -996,5 +997,4 @@ public class PublishActivity extends BaseActivity{
         });
 
     }
-
 }

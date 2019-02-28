@@ -1,6 +1,5 @@
 package com.chuanqing.youngstar.login._invest;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
@@ -11,7 +10,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
@@ -21,9 +19,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,22 +35,15 @@ import com.chuanqing.youngstar.MyApplication;
 import com.chuanqing.youngstar.R;
 import com.chuanqing.youngstar.Urls;
 import com.chuanqing.youngstar.base.BaseActivity;
-import com.chuanqing.youngstar.login._company.Authen2Activity;
-import com.chuanqing.youngstar.login._student.ImageAuthenActivity;
 import com.chuanqing.youngstar.login.bean.CommenBean;
-import com.chuanqing.youngstar.tools.DpOrPxUtils;
 import com.chuanqing.youngstar.tools.DpPxUtil;
 import com.chuanqing.youngstar.tools.SharedPFUtils;
-import com.chuanqing.youngstar.tools.StringUtil;
 import com.google.gson.Gson;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URLStreamHandler;
-import java.util.ArrayList;
-import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Response;
@@ -130,21 +119,12 @@ public class InvestAuthen2Activity extends BaseActivity implements View.OnClickL
         switch (v.getId()){
             case R.id.iv1_investauthen2:
                 showpop(R.id.iv1_investauthen2);
-//                window.showAsDropDown(iv1, DpPxUtil.dip2px(this,85),-DpPxUtil.dip2px(this,127.5f),Gravity.CENTER);
-//                Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-//                startActivityForResult(intent, 401);
                 break;
             case R.id.iv2_investauthen2:
                 showpop(R.id.iv2_investauthen2);
-
-//                Intent intent2 = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-//                startActivityForResult(intent2, 402);
                 break;
             case R.id.iv3_investauthen2:
                 showpop(R.id.iv3_investauthen2);
-
-//                Intent intent3 = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-//                startActivityForResult(intent3, 403);
                 break;
             case R.id.tv_ok_investauthen2:
 //          判断内容
