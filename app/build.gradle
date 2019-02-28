@@ -9,8 +9,21 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        externalNativeBuild{
+            cmake{
+                cppFlags "-frtti -fexceptions" //设置cpp配置参数，c文件请使用CFlags
+                abiFilters 'armeabi-v7a', "armeabi"
+            }
+        }
+        ndk{
+            abiFilters 'armeabi-v7a',"armeabi"
+        }
     }
-
+    sourceSets{
+        main{
+            jniLibs.srcDirs = ['libs']
+        }
+    }
     signingConfigs {
         debug {
             storeFile file("../youngstar.jks")
