@@ -18,6 +18,11 @@ android {
         ndk{
             abiFilters 'armeabi-v7a',"armeabi"
         }
+        externalNativeBuild {
+            cmake {
+                path "CMakeLists.txt"//配置文件路径
+            }
+        }
     }
     sourceSets{
         main{
@@ -82,7 +87,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
     //导入视频播放器包
     implementation 'cn.jzvd:jiaozivideoplayer:6.4.1'
-//    阿里服务器
+    //阿里服务器
     implementation 'com.aliyun.dpa:oss-android-sdk:+'
     //图片选择器
     implementation 'com.foamtrace:photopicker:1.0'
