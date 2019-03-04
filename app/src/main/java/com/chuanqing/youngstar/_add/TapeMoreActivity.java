@@ -59,6 +59,7 @@ public class TapeMoreActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         String path = getIntent().getStringExtra("path");
+//        Log.e("================", "发布音频详情界面path: "+path);
         recordFile = new File(path);
 
         player = new RecordPlayer(TapeMoreActivity.this);

@@ -168,7 +168,8 @@ public class TapeActivity extends BaseActivity {
                     }
                     MyApplication.getApplication().addActivity(TapeActivity.this);
                     Intent intent = new Intent(TapeActivity.this,TapeMoreActivity.class);
-                    intent.putExtra("path",recordFile);
+//                    Log.e("==========", "onClick: "+recordFile.getAbsolutePath());
+                    intent.putExtra("path",recordFile.getAbsolutePath());
                     startActivity(intent);
                 }
             }

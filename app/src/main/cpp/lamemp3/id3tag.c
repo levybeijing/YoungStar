@@ -35,21 +35,21 @@
 #include <config.h>
 #endif
 
-ifdef STDC_HEADERS
-include <stddef.h>
-include <stdlib.h>
-include <string.h>
-include <ctype.h>
-else
-ifndef HAVE_STRCHR
-define strchr index
-define strrchr rindex
-endif
+#ifdef STDC_HEADERS
+# include <stddef.h>
+# include <stdlib.h>
+# include <string.h>
+# include <ctype.h>
+//#else
+//# ifndef HAVE_STRCHR
+//#  define strchr index
+//#  define strrchr rindex
+//# endif
 char   *strchr(), *strrchr();
-ifndef HAVE_MEMCPY
-define memcpy(d, s, n) bcopy ((s), (d), (n))
-endif
-endif
+//# ifndef HAVE_MEMCPY
+//#  define memcpy(d, s, n) bcopy ((s), (d), (n))
+//# endif
+#endif
 
 
 #include "lame.h"

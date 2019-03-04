@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
@@ -19,6 +20,7 @@ import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
@@ -54,15 +56,18 @@ import com.alibaba.sdk.android.oss.model.PutObjectResult;
 import com.android.tu.loadingdialog.LoadingDailog;
 import com.bumptech.glide.Glide;
 import com.chuanqing.youngstar.BuildConfig;
+import com.chuanqing.youngstar.Urls;
 import com.chuanqing.youngstar._add.PublishActivity;
 import com.chuanqing.youngstar.MyApplication;
 import com.chuanqing.youngstar.R;
 import com.chuanqing.youngstar._active.leitai.LeitaiMoreActivity;
 import com.chuanqing.youngstar._add.student.WorksActivity;
 import com.chuanqing.youngstar.base.BaseActivity;
+import com.chuanqing.youngstar.login._invest.InvestAuthen2Activity;
 import com.chuanqing.youngstar.myadapter.PublishAdapter;
 import com.chuanqing.youngstar.mybean.CommonBean;
 import com.chuanqing.youngstar.tools.Api;
+import com.chuanqing.youngstar.tools.DpPxUtil;
 import com.chuanqing.youngstar.tools.SharedPFUtils;
 import com.chuanqing.youngstar.tools.ToastUtils;
 import com.chuanqing.youngstar.tools.UiUtils;
@@ -159,7 +164,7 @@ public class PublishActivity extends BaseActivity{
                         ToastUtils.shortToast("请输入详情信息");
                     }else {
                         if (media_type.equals("1")){
-                            if (fengmian_uri==null){
+                            if (fengmian_uri==null&&!cover.exists()){
                                 ToastUtils.shortToast("请上传封面图片");
                             }else {
                                 if (!info_img){
@@ -291,6 +296,7 @@ public class PublishActivity extends BaseActivity{
         });
 
         img_up_fengmian.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
 //                //单选
@@ -298,9 +304,8 @@ public class PublishActivity extends BaseActivity{
 //                intent.setSelectModel(SelectModel.SINGLE);
 //                intent.setShowCarema(false); // 是否显示拍照， 默认false
 //                startActivityForResult(intent, REQUEST_CODE_CHOOSE);
-                onClickOpenGallery(v);
-
-
+                showpop();
+//                onClickOpenGallery(v);
             }
         });
 
@@ -324,6 +329,58 @@ public class PublishActivity extends BaseActivity{
                 player_img.setVisibility(View.GONE);
                 img_up_info.setVisibility(View.VISIBLE);
 
+            }
+        });
+    }
+    private File cover;
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    private void showpop() {
+        PopupWindow window;
+        View pop = LayoutInflater.from(this).inflate(R.layout.popup_camera, null, false);
+        window = new PopupWindow(pop, DpPxUtil.dip2px(this,100),DpPxUtil.dip2px(this,120),true);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        window.setOutsideTouchable(true);
+        window.setTouchable(true);
+        window.showAsDropDown(img_up_fengmian, DpPxUtil.dip2px(this,85),-DpPxUtil.dip2px(this,127.5f),Gravity.CENTER);
+        pop.findViewById(R.id.tv_camera_popup).setOnClickListener(new View.OnClickListener() {
+
+
+
+            @Override
+            public void onClick(View v) {
+                window.dismiss();
+                //用于保存调用相机拍照后所生成的文件
+                cover = new File(Urls.IMGPATH, System.currentTimeMillis() + ".png");
+                if (!cover.getParentFile().exists()){
+                    cover.getParentFile().mkdirs();
+                    try {
+                        cover.createNewFile();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                //跳转到调用系统相机
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                //  判断版本
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {   //如果在Android7.0以上,使用FileProvider获取Uri
+                    intent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                    Uri contentUri = FileProvider.getUriForFile(PublishActivity.this, getPackageName()+".provider", cover);
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, contentUri);
+                    Log.e("getPicFromCamera", contentUri.toString());
+                } else {    //否则使用Uri.fromFile(file)方法获取Uri
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(cover));
+                }
+                startActivityForResult(intent, 511);
+//                openCamera();
+            }
+        });
+        pop.findViewById(R.id.tv_gallery_popup).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//                startActivityForResult(intent, 401);
+                window.dismiss();
+                openGallery();
             }
         });
     }
@@ -439,12 +496,10 @@ public class PublishActivity extends BaseActivity{
     public static final int REQUEST_CODE_PERMISSION_CAMERA = 100;
 
     public static final int REQUEST_CODE_PERMISSION_GALLERY = 101;
-
     //照片图片名
     private String photo_image;
     //截图图片名
     private String crop_image;
-
     //拍摄的图片的真实路径
     private String takePath;
     //拍摄的图片的虚拟路径
@@ -505,53 +560,6 @@ public class PublishActivity extends BaseActivity{
         intent.setType("image/*");//相片类型
         startActivityForResult(intent, IMAGE_REQUEST_CODE);
     }
-
-    /**
-     * @param path 原始图片的路径
-     */
-    public void cropPhoto(String path) {
-        crop_image = new SimpleDateFormat("yyyy_MMdd_hhmmss").format(new Date()) + "_crop" +
-                ".jpg";
-        File cropFile = createFile(crop_image);
-        File file = new File(path);
-
-
-        Intent intent = new Intent("com.android.camera.action.CROP");
-        //访问相册需要被限制，需要通过FileProvider创建一个content类型的Uri
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            //添加这一句表示对目标应用临时授权该Uri所代表的文件
-            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            //访问相册需要被限制，需要通过FileProvider创建一个content类型的Uri
-            imageUri = FileProvider.getUriForFile(getApplicationContext(),
-                    BuildConfig.APPLICATION_ID + ".provider", file);
-            cropUri = Uri.fromFile(cropFile);
-            //cropUri 是裁剪以后的图片保存的地方。也就是我们要写入此Uri.故不需要用FileProvider
-            //cropUri = FileProvider.getUriForFile(getApplicationContext(),
-            //    BuildConfig.APPLICATION_ID + ".provider", cropFile);
-        } else {
-            imageUri = Uri.fromFile(file);
-            cropUri = Uri.fromFile(cropFile);
-        }
-
-        intent.setDataAndType(imageUri, "image/*");
-        intent.putExtra("crop", "true");
-//        //设置宽高比例
-//        intent.putExtra("aspectX", 1);
-//        intent.putExtra("aspectY", 1);
-        //设置裁剪图片宽高
-        intent.putExtra("outputX", 800);
-        intent.putExtra("outputY", 800);
-        intent.putExtra("scale", true);
-        //裁剪成功以后保存的位置
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, cropUri);
-        intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
-        intent.putExtra("noFaceDetection", true);
-        startActivityForResult(intent, CROP_REREQUEST_CODE);
-
-
-    }
-
-
     /**
      * 获得一个uri。该uri就是将要拍摄的照片的uri
      *
@@ -635,16 +643,13 @@ public class PublishActivity extends BaseActivity{
                     img_up_info.setVisibility(View.GONE);
                     player.setUp(pathvideo_bendi, "", Jzvd.SCREEN_WINDOW_NORMAL);
 
-//                    String size = cursor.getString(2); // 视频大小
-//                    String name = cursor.getString(3); // 视频文件名
-//                    Log.e("-----","number="+number);
-//                    Log.e("-----","v_path="+path);
-//                    Log.e("-----","v_size="+size);
-//                    Log.e("-----","v_name="+name);
-
                     break;
-
-
+                case 511:
+                    if (cover.exists()){
+                        Bitmap bitmap = BitmapFactory.decodeFile(cover.getAbsolutePath());
+                        img_up_fengmian.setImageBitmap(bitmap);
+                    }
+                    break;
             }
         }
     }
@@ -722,7 +727,6 @@ public class PublishActivity extends BaseActivity{
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public static Bitmap getBitmapFormUri(Activity ac, Uri uri) throws FileNotFoundException, IOException {

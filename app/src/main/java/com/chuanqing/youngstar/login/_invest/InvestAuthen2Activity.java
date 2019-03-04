@@ -257,7 +257,6 @@ public class InvestAuthen2Activity extends BaseActivity implements View.OnClickL
                         Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                         startActivityForResult(intent, 403);
                         window.dismiss();
-
                     }
                 });
                 break;
