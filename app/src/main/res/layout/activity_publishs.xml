@@ -106,7 +106,6 @@
                     android:layout_width="110dp"
                     android:layout_height="110dp"
                     android:visibility="gone">
-
                 </cn.jzvd.JzvdStd>
                 <ImageView
                     android:id="@+id/publish_player_img"

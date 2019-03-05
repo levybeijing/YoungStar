@@ -9,21 +9,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        externalNativeBuild {
-            cmake {
-                cppFlags "" //设置cpp配置参数，c文件请使用CFlags
-                abiFilters 'armeabi-v7a', 'arm64-v8a'
-            }
-            ndk {
-                abiFilters 'armeabi-v7a', 'arm64-v8a'
-            }
-        }
 
-        sourceSets {
-            main {
-                jniLibs.srcDirs = ['libs']
-            }
-        }
         signingConfigs {
             debug {
                 storeFile file("../youngstar.jks")
@@ -40,7 +26,6 @@ android {
             }
         }
         compileOptions {
-
             sourceCompatibility JavaVersion.VERSION_1_8
             targetCompatibility JavaVersion.VERSION_1_8
 
@@ -59,11 +44,6 @@ android {
             abortOnError false
         }
         sourceSets { main { assets.srcDirs = ['src/main/assets', 'src/main/assets/'] } }
-    }
-    externalNativeBuild {
-        cmake {
-            path "CMakeLists.txt"//配置文件路径
-        }
     }
     dependencies {
         implementation fileTree(dir: 'libs', include: ['*.jar'])

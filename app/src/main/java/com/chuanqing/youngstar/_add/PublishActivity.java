@@ -37,7 +37,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -304,8 +303,8 @@ public class PublishActivity extends BaseActivity{
 //                intent.setSelectModel(SelectModel.SINGLE);
 //                intent.setShowCarema(false); // 是否显示拍照， 默认false
 //                startActivityForResult(intent, REQUEST_CODE_CHOOSE);
-                showpop();
 //                onClickOpenGallery(v);
+                showpop();
             }
         });
 
@@ -343,8 +342,6 @@ public class PublishActivity extends BaseActivity{
         window.setTouchable(true);
         window.showAsDropDown(img_up_fengmian, DpPxUtil.dip2px(this,85),-DpPxUtil.dip2px(this,127.5f),Gravity.CENTER);
         pop.findViewById(R.id.tv_camera_popup).setOnClickListener(new View.OnClickListener() {
-
-
 
             @Override
             public void onClick(View v) {
@@ -555,7 +552,6 @@ public class PublishActivity extends BaseActivity{
     }
 
     private void openGallery() {
-
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");//相片类型
         startActivityForResult(intent, IMAGE_REQUEST_CODE);
@@ -658,24 +654,18 @@ public class PublishActivity extends BaseActivity{
         Intent intent = new Intent("com.android.camera.action.CROP"); //打开系统自带的裁剪图片的intent
         intent.setDataAndType(uri, "image/*");
         intent.putExtra("scale", true);
-
         // 设置裁剪区域的宽高比例
         intent.putExtra("aspectX", 1);
         intent.putExtra("aspectY", 1);
-
-
         // 设置裁剪区域的宽度和高度
         intent.putExtra("outputX", 400);
         intent.putExtra("outputY", 400);
-
         // 取消人脸识别
         intent.putExtra("noFaceDetection", true);
         // 图片输出格式
-        intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
-
+        intent.putExtra("outputFormat", Bitmap.CompressFormat.PNG.toString());
         // 若为false则表示不返回数据
         intent.putExtra("return-data", false);
-
         // 指定裁剪完成以后的图片所保存的位置,pic info显示有延时
         if (fromCapture) {
             // 如果是使用拍照，那么原先的uri和最终目标的uri一致
@@ -921,8 +911,6 @@ public class PublishActivity extends BaseActivity{
             OSSAsyncTask task = oss.asyncPutObject(put, new OSSCompletedCallback<PutObjectRequest, PutObjectResult>() {
                 @Override
                 public void onSuccess(PutObjectRequest request, PutObjectResult result) {
-
-//                arrayList.remove(i);
 //                    Log.e("上传结果","https://star-1.oss-cn-beijing.aliyuncs.com/"+objectname);
                     img_path = img_path+ objectname+",";
                     if ((finalI +1)==arrayList.size()){
@@ -947,14 +935,11 @@ public class PublishActivity extends BaseActivity{
                     }
                 }
             });
-
-
         }
-
     }
 
     /**上传单个视频**/
-   private String pathvideo_address="",pathvideo_bendi="";
+    private String pathvideo_address="",pathvideo_bendi="";
     public void beginupload(String pathvideo,String imgname) {
         Log.e("本地视频地址",pathvideo);
         showMyDialog();
