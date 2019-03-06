@@ -14,6 +14,9 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import cafe.adriel.androidaudioconverter.AndroidAudioConverter;
+import cafe.adriel.androidaudioconverter.callback.IConvertCallback;
+
 public class AudioRecorder {
 
     //音频输入-麦克风
@@ -129,6 +132,7 @@ public class AudioRecorder {
             audioRecord.stop();
             status = Status.STATUS_STOP;
             release();
+
         }
     }
 

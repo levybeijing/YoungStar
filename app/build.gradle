@@ -74,5 +74,6 @@ android {
         implementation 'com.github.gittjy:LoadingDialog:1.0.2'
         //引入城市插件包
         implementation 'com.contrarywind:Android-PickerView:4.1.6'
+        implementation 'com.github.adrielcafe:AndroidAudioConverter:0.0.8'
     }
 }

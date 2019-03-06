@@ -39,6 +39,9 @@ import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cafe.adriel.androidaudioconverter.AndroidAudioConverter;
+import cafe.adriel.androidaudioconverter.callback.IConvertCallback;
+import cafe.adriel.androidaudioconverter.model.AudioFormat;
 import okhttp3.Call;
 import okhttp3.Response;
 
@@ -50,6 +53,7 @@ import static com.chuanqing.youngstar.MainActivity.usercodes;
 public class TapeMoreActivity extends AppCompatActivity {
     private RecordPlayer player;
     private File recordFile;
+    private String path;
 
 
     @Override
@@ -58,14 +62,37 @@ public class TapeMoreActivity extends AppCompatActivity {
         setContentView(R.layout.activity_tape_more);
         ButterKnife.bind(this);
 
-        String path = getIntent().getStringExtra("path");
-//        Log.e("================", "发布音频详情界面path: "+path);
+        path = getIntent().getStringExtra("path");
+        Log.e("================", "path: "+path);
         recordFile = new File(path);
 
         player = new RecordPlayer(TapeMoreActivity.this);
         MyApplication.getApplication().addActivity(TapeMoreActivity.this);
         initView();
         setTtitle();
+        final File flacFile = new File(path +".wav");
+        IConvertCallback callback = new IConvertCallback() {
+            @Override
+            public void onSuccess(File convertedFile) {
+                // So fast? Love it!
+                File file=new File(path +".mp3");
+                convertedFile.renameTo(file);
+                flacFile.delete();
+            }
+            @Override
+            public void onFailure(Exception error) {
+                // Oops! Something went wrong
+            }
+        };
+        AndroidAudioConverter.with(this)
+                // Your current audio file
+                .setFile(flacFile)
+                // Your desired audio format
+                .setFormat(AudioFormat.MP3)
+                // An callback to know when conversion is finished
+                .setCallback(callback)
+                // Start conversion
+                .convert();
     }
     /**
      * 写入title名字
@@ -159,7 +186,6 @@ public class TapeMoreActivity extends AppCompatActivity {
     }
 
     private void playRecording() {
-//        Log.e(TAG, "playRecording: 播放"+recordFile );
         player.playRecordFile(recordFile);
     }
 
@@ -177,7 +203,7 @@ public class TapeMoreActivity extends AppCompatActivity {
         //通过填写文件名形成objectname,通过这个名字指定上传和下载的文件
         // 构造上传请求
         SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");//设置日期格式
-        final String objectname =df.format(new Date())+ ".mp4";
+        final String objectname =df.format(new Date())+ ".mp3";
 
         PutObjectRequest put = new PutObjectRequest(startpoint, objectname,path+"");
         // 异步上传时可以设置进度回调
@@ -217,6 +243,7 @@ public class TapeMoreActivity extends AppCompatActivity {
      * 上传请求接口
      */
     private void upinfo(String path){
+        Log.e("==============", "upinfo: "+path);
         OkGo.post(Api.updongtai)
                 .tag(this)
                 .params("userCode",usercodes)

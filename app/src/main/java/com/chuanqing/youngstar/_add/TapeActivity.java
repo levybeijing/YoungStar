@@ -19,7 +19,9 @@ import com.chuanqing.youngstar.MyApplication;
 import com.chuanqing.youngstar.R;
 import com.chuanqing.youngstar.Urls;
 import com.chuanqing.youngstar.base.BaseActivity;
+import com.chuanqing.youngstar.tomp3.AudioRecorder;
 import com.chuanqing.youngstar.tools.CircleProgressBar;
+import com.chuanqing.youngstar.tools.StringUtil;
 import com.chuanqing.youngstar.tools.ToastUtils;
 
 import java.io.File;
@@ -46,7 +48,6 @@ public class TapeActivity extends BaseActivity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if (!lock){
-//                count=0;
                 return;
             }
             if (msg.what==1&&count<=100){
@@ -58,7 +59,7 @@ public class TapeActivity extends BaseActivity {
                     rb_toggle.setChecked(false);
                     MyApplication.getApplication().addActivity(TapeActivity.this);
                     Intent intent = new Intent(TapeActivity.this,TapeMoreActivity.class);
-                    intent.putExtra("path",recordFile);
+                    intent.putExtra("path",Urls.AUDIOPATH+name);
                     startActivity(intent);
                 }else{
                     tv_miao.setText(++count+"");
@@ -87,24 +88,17 @@ public class TapeActivity extends BaseActivity {
         }
     };
 
-    // 录音类
-    public MediaRecorder mediaRecorder;
-    // 以文件的形式保存
-    public File recordFile;
-//    private RecordPlayer player;
+    private AudioRecorder recorder;
+    private String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tape);
         ButterKnife.bind(this);
-        try {
-            Log.e(TAG, "onCreate: 根目录"+Environment.getExternalStorageDirectory().getCanonicalFile());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-//        recordFile = new File(Environment.getExternalStorageDirectory(), "kk.amr");
-//        player = new RecordPlayer(TapeActivity.this);
+
+        recorder = new AudioRecorder();
+
         setTtitle();
         rb_toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -116,7 +110,6 @@ public class TapeActivity extends BaseActivity {
                     new Thread(runnable).start();
                 }else{
 //                    录制装填
-//                    Log.e(TAG, "onCheckedChanged: "+recordFile.exists());
                     stopRecording();
                     rb_toggle.setText("开始");
                     lock = false;
@@ -157,7 +150,8 @@ public class TapeActivity extends BaseActivity {
         right_tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (recordFile==null){
+                File file=new File(Urls.AUDIOPATH+name+".mp3");
+                if (file==null){
                     ToastUtils.shortToast("请录制音频");
                 }else {
                     if (rb_toggle.isChecked()){
@@ -168,8 +162,7 @@ public class TapeActivity extends BaseActivity {
                     }
                     MyApplication.getApplication().addActivity(TapeActivity.this);
                     Intent intent = new Intent(TapeActivity.this,TapeMoreActivity.class);
-//                    Log.e("==========", "onClick: "+recordFile.getAbsolutePath());
-                    intent.putExtra("path",recordFile.getAbsolutePath());
+                    intent.putExtra("path",Urls.AUDIOPATH+name);
                     startActivity(intent);
                 }
             }
@@ -179,63 +172,29 @@ public class TapeActivity extends BaseActivity {
      * 录制开始
      */
     private void startRecording() {
-        if (mediaRecorder==null){
-            mediaRecorder = new MediaRecorder();
-        }
-
-        if (!Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED))
-        {
-            Toast.makeText(TapeActivity.this, "SD卡不存在，请插入SD卡！", Toast.LENGTH_LONG).show();
+        if (recorder==null){
             return;
         }
-        try
-        {
-            // 创建保存录音的音频文件
-            String name= DateFormat.format("yyyyMMdd_HHmmss", Calendar.getInstance(Locale.CHINA)).toString()+".amr";
-            recordFile = new File(Urls.AUDIOPATH + name);
-            if (!recordFile.getParentFile().exists()){
-                recordFile.getParentFile().mkdirs();
-                recordFile = new File(Urls.AUDIOPATH + name);
-                recordFile.createNewFile();
-            }
-            Log.e(TAG, "startRecording: "+recordFile.exists());
-            mediaRecorder = new MediaRecorder();
-            // 设置录音的声音来源
-            mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-            // 设置录制的声音的输出格式（必须在设置声音编码格式之前设置）
-            mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.AMR_WB);
-            // 设置声音编码的格式
-            mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_WB);
-            mediaRecorder.setOutputFile(recordFile.getAbsolutePath());
-            mediaRecorder.prepare();
-            // 开始录音
-            mediaRecorder.start();
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+        name="star"+System.currentTimeMillis();
+        recorder.createDefaultAudio(name);
+        recorder.startRecord();
     }
 
     /**
      * 录制完毕
      */
     private void stopRecording() {
-        if (recordFile != null) {
-            if (mediaRecorder!=null){
-                mediaRecorder.reset();
-                mediaRecorder.release();
-                mediaRecorder=null;
-            }
-            circleProgressBar.setProgress(0); // 使用数字过渡动画
-            tv_miao.setText(""+0);
-            count=0;
+        if (recorder==null){
+            return;
         }
+        recorder.stopRecord();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        stopRecording();
+        if (recorder!=null){
+            recorder.stopRecord();
+        }
     }
 }
