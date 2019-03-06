@@ -31,7 +31,7 @@ import com.alibaba.sdk.android.oss.internal.OSSAsyncTask;
 import com.alibaba.sdk.android.oss.model.PutObjectRequest;
 import com.alibaba.sdk.android.oss.model.PutObjectResult;
 import com.chuanqing.youngstar.MainActivity;
-import com.chuanqing.youngstar.MyApplication;
+import com.chuanqing.youngstar.MyApp;
 import com.chuanqing.youngstar.R;
 import com.chuanqing.youngstar.Urls;
 import com.chuanqing.youngstar.base.BaseActivity;
@@ -384,7 +384,7 @@ public class InvestAuthen2Activity extends BaseActivity implements View.OnClickL
             }
         });
 
-        OSSAsyncTask task = MyApplication.oss.asyncPutObject(put, new OSSCompletedCallback<PutObjectRequest, PutObjectResult>() {
+        OSSAsyncTask task = MyApp.oss.asyncPutObject(put, new OSSCompletedCallback<PutObjectRequest, PutObjectResult>() {
             @Override
             public void onSuccess(PutObjectRequest request, PutObjectResult result) {
                 Log.e("=============PutObject", "UploadSuccess");

@@ -16,7 +16,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.chuanqing.youngstar.MyApplication;
+import com.chuanqing.youngstar.MyApp;
 import com.chuanqing.youngstar.R;
 import com.chuanqing.youngstar.base.BaseActivity;
 import com.chuanqing.youngstar.tools.CircleProgressBar;
@@ -47,7 +47,7 @@ public class TapeZuopinActivity extends BaseActivity {
                         lock = false;
                         rb_toggle.setText("开始");
 
-                        MyApplication.getApplication().addActivity(TapeZuopinActivity.this);
+                        MyApp.getApplication().addActivity(TapeZuopinActivity.this);
                         Intent intent = new Intent(TapeZuopinActivity.this,TapeMoreActivity.class);
                         intent.putExtra("path",recordFile_zuopin);
                         startActivity(intent);

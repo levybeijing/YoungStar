@@ -16,7 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.chuanqing.youngstar.MyApplication;
+import com.chuanqing.youngstar.MyApp;
 import com.squareup.picasso.Transformation;
 
 import java.util.regex.Matcher;
@@ -26,7 +26,7 @@ import java.util.regex.Pattern;
 public class UiUtils {
 
     public static Context getContext() {
-        return MyApplication.getApplication();
+        return MyApp.getApplication();
     }
     /** dip转换px */
     public static int dip2px(int dip) {

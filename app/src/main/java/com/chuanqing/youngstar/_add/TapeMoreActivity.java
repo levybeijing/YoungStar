@@ -24,7 +24,7 @@ import com.alibaba.sdk.android.oss.internal.OSSAsyncTask;
 import com.alibaba.sdk.android.oss.model.PutObjectRequest;
 import com.alibaba.sdk.android.oss.model.PutObjectResult;
 import com.android.tu.loadingdialog.LoadingDailog;
-import com.chuanqing.youngstar.MyApplication;
+import com.chuanqing.youngstar.MyApp;
 import com.chuanqing.youngstar.R;
 import com.chuanqing.youngstar.mybean.CommonBean;
 import com.chuanqing.youngstar.tools.Api;
@@ -34,8 +34,6 @@ import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -55,7 +53,6 @@ public class TapeMoreActivity extends AppCompatActivity {
     private File recordFile;
     private String path;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,20 +61,22 @@ public class TapeMoreActivity extends AppCompatActivity {
 
         path = getIntent().getStringExtra("path");
         Log.e("================", "path: "+path);
-        recordFile = new File(path);
+        recordFile = new File(path+".wav");
+        Log.e("==========", ":"+recordFile.exists());
 
         player = new RecordPlayer(TapeMoreActivity.this);
-        MyApplication.getApplication().addActivity(TapeMoreActivity.this);
+        MyApp.getApplication().addActivity(TapeMoreActivity.this);
         initView();
         setTtitle();
-        final File flacFile = new File(path +".wav");
+//        final File flacFile = new File(path +".wav");
         IConvertCallback callback = new IConvertCallback() {
             @Override
             public void onSuccess(File convertedFile) {
                 // So fast? Love it!
                 File file=new File(path +".mp3");
                 convertedFile.renameTo(file);
-                flacFile.delete();
+                recordFile.delete();
+                Log.e("==========", "IConvertCallback##onSuccess:");
             }
             @Override
             public void onFailure(Exception error) {
@@ -86,7 +85,7 @@ public class TapeMoreActivity extends AppCompatActivity {
         };
         AndroidAudioConverter.with(this)
                 // Your current audio file
-                .setFile(flacFile)
+                .setFile(recordFile)
                 // Your desired audio format
                 .setFormat(AudioFormat.MP3)
                 // An callback to know when conversion is finished
@@ -123,7 +122,7 @@ public class TapeMoreActivity extends AppCompatActivity {
                     if (TextUtils.isEmpty(content.getText().toString())){
                         ToastUtils.shortToast("请输入作品");
                     }else {
-                        beginupload(recordFile);
+                        beginupload(path);
                     }
                 }
             }
@@ -191,21 +190,17 @@ public class TapeMoreActivity extends AppCompatActivity {
 
 
     private static final String TAG = "TapeMoreActivity";
-    public void beginupload(File path) {
+    public void beginupload(String path) {
         showMyDialog();
-//        Log.e(TAG, "beginupload: 路径"+path );
-//        https://star-1.oss-cn-beijing.aliyuncs.com
         final String endpoint = "oss-cn-beijing.aliyuncs.com";
         final String startpoint = "star-1";
+        String[] split = path.split("/");
+        String name=split[split.length-1]+".mp3";
         //     明文设置secret的方式建议只在测试时使用，更多鉴权模式请参考后面的`访问控制`章节
         OSSCredentialProvider credentialProvider = new OSSPlainTextAKSKCredentialProvider("LTAI8ygujYgDvLJ9", "nLrO1bpn9IOpEu0tt0zyAaChc22j0c");
         OSS oss = new OSSClient(getApplicationContext(), endpoint, credentialProvider);
-        //通过填写文件名形成objectname,通过这个名字指定上传和下载的文件
-        // 构造上传请求
-        SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");//设置日期格式
-        final String objectname =df.format(new Date())+ ".mp3";
 
-        PutObjectRequest put = new PutObjectRequest(startpoint, objectname,path+"");
+        PutObjectRequest put = new PutObjectRequest(startpoint, name,path+".mp3");
         // 异步上传时可以设置进度回调
         put.setProgressCallback(new OSSProgressCallback<PutObjectRequest>() {
             @Override
@@ -218,8 +213,8 @@ public class TapeMoreActivity extends AppCompatActivity {
             public void onSuccess(PutObjectRequest request, PutObjectResult result) {
 
 //                arrayList.remove(i);
-                Log.e("上传结果","https://star-1.oss-cn-beijing.aliyuncs.com/"+objectname);
-                upinfo(objectname);
+                Log.e("上传结果","https://star-1.oss-cn-beijing.aliyuncs.com/"+name);
+                upinfo(name);
             }
 
             @Override
@@ -242,14 +237,14 @@ public class TapeMoreActivity extends AppCompatActivity {
     /**
      * 上传请求接口
      */
-    private void upinfo(String path){
-        Log.e("==============", "upinfo: "+path);
+    private void upinfo(String name){
+        Log.e("==============", "upinfo: "+name);
         OkGo.post(Api.updongtai)
                 .tag(this)
                 .params("userCode",usercodes)
                 .params("title",title.getText().toString())
                 .params("blogDetail",content.getText().toString())
-                .params("mediaUrl",path)
+                .params("mediaUrl",name)
                 .params("type",1)
                 .params("mediaType",3)
                 .execute(new StringCallback() {
@@ -270,7 +265,7 @@ public class TapeMoreActivity extends AppCompatActivity {
                             handler.postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
-                                    MyApplication.getApplication().exit();
+                                    MyApp.getApplication().exit();
                                 }
                             },1000);
                         }else {

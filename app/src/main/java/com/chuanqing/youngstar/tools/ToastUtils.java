@@ -9,7 +9,7 @@ import android.widget.Toast;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import static com.chuanqing.youngstar.MyApplication.getApplication;
+import static com.chuanqing.youngstar.MyApp.getApplication;
 
 
 public class ToastUtils {

@@ -1,13 +1,9 @@
 package com.chuanqing.youngstar.login._company;
 
 import android.app.ProgressDialog;
-import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -18,36 +14,19 @@ import android.widget.Toast;
 
 import com.alibaba.sdk.android.oss.ClientException;
 import com.alibaba.sdk.android.oss.ServiceException;
-import com.alibaba.sdk.android.oss.callback.OSSCompletedCallback;
-import com.alibaba.sdk.android.oss.callback.OSSProgressCallback;
-import com.alibaba.sdk.android.oss.internal.OSSAsyncTask;
 import com.alibaba.sdk.android.oss.model.PutObjectRequest;
 import com.alibaba.sdk.android.oss.model.PutObjectResult;
-import com.chuanqing.youngstar.MyApplication;
 import com.chuanqing.youngstar.R;
-import com.chuanqing.youngstar.Urls;
-import com.chuanqing.youngstar._mine.company.FollowcActivity;
 import com.chuanqing.youngstar.base.BaseActivity;
-import com.chuanqing.youngstar.login._invest.InvestAuthenActivity;
-import com.chuanqing.youngstar.mybean.FragCareCBean;
 import com.chuanqing.youngstar.tools.SharedPFUtils;
 import com.chuanqing.youngstar.tools.StringUtil;
-import com.google.gson.Gson;
-import com.lzy.okgo.OkGo;
-import com.lzy.okgo.callback.StringCallback;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import okhttp3.Call;
-import okhttp3.Response;
-
-import static com.chuanqing.youngstar.MyApplication.oss;
+import static com.chuanqing.youngstar.MyApp.oss;
 
 public class Authen1Activity extends BaseActivity implements View.OnClickListener {
     private int chooseindex=-1;
@@ -330,7 +309,7 @@ public class Authen1Activity extends BaseActivity implements View.OnClickListene
 //            }
 //        });
 //
-//        OSSAsyncTask task = MyApplication.oss.asyncPutObject(put, new OSSCompletedCallback<PutObjectRequest, PutObjectResult>() {
+//        OSSAsyncTask task = MyApp.oss.asyncPutObject(put, new OSSCompletedCallback<PutObjectRequest, PutObjectResult>() {
 //            @Override
 //            public void onSuccess(PutObjectRequest request, PutObjectResult result) {
 //                Log.e("=============PutObject", "UploadSuccess");

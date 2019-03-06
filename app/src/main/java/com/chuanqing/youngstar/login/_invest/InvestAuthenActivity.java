@@ -4,21 +4,18 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.sdk.android.oss.ClientException;
 import com.alibaba.sdk.android.oss.ServiceException;
 import com.alibaba.sdk.android.oss.model.PutObjectRequest;
 import com.alibaba.sdk.android.oss.model.PutObjectResult;
-import com.chuanqing.youngstar.MainActivity;
 import com.chuanqing.youngstar.R;
 import com.chuanqing.youngstar.base.BaseActivity;
 import com.chuanqing.youngstar.tools.SharedPFUtils;
@@ -28,9 +25,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
-import static com.chuanqing.youngstar.MyApplication.oss;
+import static com.chuanqing.youngstar.MyApp.oss;
 
 
 public class InvestAuthenActivity extends BaseActivity implements View.OnClickListener {

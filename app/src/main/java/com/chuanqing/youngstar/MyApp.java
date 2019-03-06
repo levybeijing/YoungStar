@@ -3,9 +3,6 @@ package com.chuanqing.youngstar;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.alibaba.sdk.android.oss.ClientConfiguration;
 import com.alibaba.sdk.android.oss.OSS;
@@ -19,26 +16,22 @@ import com.lzy.okgo.cache.CacheEntity;
 import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.cookie.store.PersistentCookieStore;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import okhttp3.Interceptor;
-import okhttp3.Response;
+import cafe.adriel.androidaudioconverter.AndroidAudioConverter;
+import cafe.adriel.androidaudioconverter.callback.ILoadCallback;
 
 
-public class MyApplication extends Application {
+public class MyApp extends Application {
     private static Context context;
     //单例模式中获取唯一的MyApplication实例
     private List<Activity> activityList = new LinkedList<>();
-    private static MyApplication instance;
-    public static MyApplication getInstance() {
+    private static MyApp instance;
+    public static MyApp getInstance() {
         if(null == instance) {
-            instance = new MyApplication();
+            instance = new MyApp();
         }
         return instance;
     }
@@ -58,7 +51,7 @@ public class MyApplication extends Application {
     }
 
     // 获取到主线程的上下文
-    private static MyApplication mContext = null;
+    private static MyApp mContext = null;
     private static List<Activity> cacheActivity = new ArrayList<Activity>();
     public static OSS oss;
 
@@ -67,6 +60,16 @@ public class MyApplication extends Application {
         super.onCreate();
         this.mContext = this;
         SharedPFUtils.init(this);
+        AndroidAudioConverter.load(this, new ILoadCallback() {
+            @Override
+            public void onSuccess() {
+                // Great!
+            }
+            @Override
+            public void onFailure(Exception error) {
+                // FFmpeg is not supported by device
+            }
+        });
 // 在移动端建议使用STS方式初始化OSSClient。
 // 更多信息可查看sample 中 sts 使用方式(https://github.com/aliyun/aliyun-oss-android-sdk/tree/master/app/src/main/java/com/alibaba/sdk/android/oss/app)
         final OSSCredentialProvider credentialProvider = new OSSStsTokenCredentialProvider("LTAI8ygujYgDvLJ9", "nLrO1bpn9IOpEu0tt0zyAaChc22j0c", "");
@@ -82,14 +85,14 @@ public class MyApplication extends Application {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                oss = new OSSClient(MyApplication.this, "oss-cn-beijing.aliyuncs.com", credentialProvider);
+                oss = new OSSClient(MyApp.this, "oss-cn-beijing.aliyuncs.com", credentialProvider);
             }
         }).start();
         initOKGO();
     }
 
     // 对外暴露上下文
-    public static MyApplication getApplication() {
+    public static MyApp getApplication() {
         return mContext;
     }
 
@@ -128,7 +131,7 @@ public class MyApplication extends Application {
 //                        try {
 //                            JSONObject jo=new JSONObject(string);
 //                            String message = jo.getString("message");
-//                            Toast.makeText(MyApplication.this, "****", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(MyApp.this, "****", Toast.LENGTH_SHORT).show();
 //                            if (message.equals("请重新登录")){
 ////                                Intent intent=new Intent();
 ////                                intent.setAction("action.LOGIN.OTHER");

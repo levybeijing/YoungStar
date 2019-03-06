@@ -2,32 +2,24 @@ package com.chuanqing.youngstar._add;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.media.MediaRecorder;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Bundle;
-import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-import com.chuanqing.youngstar.MyApplication;
+
+import com.chuanqing.youngstar.MyApp;
 import com.chuanqing.youngstar.R;
 import com.chuanqing.youngstar.Urls;
 import com.chuanqing.youngstar.base.BaseActivity;
 import com.chuanqing.youngstar.tomp3.AudioRecorder;
 import com.chuanqing.youngstar.tools.CircleProgressBar;
-import com.chuanqing.youngstar.tools.StringUtil;
 import com.chuanqing.youngstar.tools.ToastUtils;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.Calendar;
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -57,7 +49,7 @@ public class TapeActivity extends BaseActivity {
                     lock = false;
                     rb_toggle.setText("开始");
                     rb_toggle.setChecked(false);
-                    MyApplication.getApplication().addActivity(TapeActivity.this);
+                    MyApp.getApplication().addActivity(TapeActivity.this);
                     Intent intent = new Intent(TapeActivity.this,TapeMoreActivity.class);
                     intent.putExtra("path",Urls.AUDIOPATH+name);
                     startActivity(intent);
@@ -160,7 +152,7 @@ public class TapeActivity extends BaseActivity {
                         //先暂停录制后再跳转
                         stopRecording();
                     }
-                    MyApplication.getApplication().addActivity(TapeActivity.this);
+                    MyApp.getApplication().addActivity(TapeActivity.this);
                     Intent intent = new Intent(TapeActivity.this,TapeMoreActivity.class);
                     intent.putExtra("path",Urls.AUDIOPATH+name);
                     startActivity(intent);
@@ -175,7 +167,7 @@ public class TapeActivity extends BaseActivity {
         if (recorder==null){
             return;
         }
-        name="star"+System.currentTimeMillis();
+        name=""+System.currentTimeMillis();
         recorder.createDefaultAudio(name);
         recorder.startRecord();
     }
@@ -193,7 +185,7 @@ public class TapeActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (recorder!=null){
+        if (recorder.getStatus()==AudioRecorder.Status.STATUS_START){
             recorder.stopRecord();
         }
     }
