@@ -130,7 +130,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                 setChioceItem(3);
                 break;
             case R.id.main_img_center:
-                int status = (int)SharedPFUtils.getParam(this, "status", -1);
+//                int status = (int)SharedPFUtils.getParam(this, "status", -1);
 //                if (status==2){
 //                    if (identity==1){
 //                        showPopwindow();  //展示中间按钮点击事件
@@ -711,13 +711,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
         // popWindow消失监听方法
         window.setOnDismissListener(new PopupWindow.OnDismissListener() {
-
             @Override
             public void onDismiss() {
                 System.out.println("popWindow消失");
             }
         });
-
     }
 
     @Override
