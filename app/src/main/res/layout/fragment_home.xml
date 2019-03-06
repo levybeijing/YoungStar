@@ -60,8 +60,7 @@
                                 android:layout_height="30dp"
                                 android:layout_gravity="center"
                                 android:layout_centerInParent="true"
-                                android:clipChildren="false">
-                            </android.support.v4.view.ViewPager>
+                                android:clipChildren="false"/>
                         </RelativeLayout>
 
                     </LinearLayout>
@@ -71,9 +70,8 @@
                         android:layout_height="210dp"
                         android:layout_gravity="center"
                         android:layout_marginBottom="30dp"
-                        android:clipChildren="false">
+                        android:clipChildren="false"/>
 
-                    </android.support.v4.view.ViewPager>
                 </LinearLayout>
 
                     <!--活动精选-->
@@ -136,7 +134,6 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
                 </LinearLayout>
-
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

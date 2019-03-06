@@ -82,7 +82,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         fragmentManager = getSupportFragmentManager();
         initView(); // 初始化界面控件
         setChioceItem(0); // 初始化页面加载时显示第中间的选项卡
-
     }
 
     /**

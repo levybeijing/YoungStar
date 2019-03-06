@@ -15,11 +15,6 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/ll_main"
         />
-
-    <!--<FrameLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="70dp"-->
-        <!--&gt;-->
         <LinearLayout
             android:id="@+id/ll_main"
             android:layout_width="match_parent"
@@ -123,87 +118,6 @@
                     android:text="我的" />
             </LinearLayout>
         </LinearLayout>
-
-        <!--<RadioGroup-->
-            <!--android:id="@+id/rg_main"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="50dp"-->
-            <!--android:layout_alignParentBottom="true"-->
-            <!--android:background="#00000000"-->
-            <!--android:orientation="horizontal"-->
-            <!--android:paddingBottom="5dp">-->
-
-            <!--<RadioButton-->
-                <!--android:id="@+id/rb_home_main"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:layout_weight="1"-->
-                <!--android:background="#fff"-->
-                <!--android:button="@null"-->
-                <!--android:checked="true"-->
-                <!--android:drawablePadding="3dp"-->
-                <!--android:drawableTop="@drawable/selector_home_main"-->
-                <!--android:gravity="center"-->
-                <!--android:layout_marginLeft="5dp"-->
-                <!--android:text="首页"-->
-                <!--android:textColor="@drawable/selector_txtcolor_main"-->
-                <!--/>-->
-
-            <!--<RadioButton-->
-                <!--android:id="@+id/rb_square_main"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="1"-->
-                <!--android:background="#fff"-->
-                <!--android:button="@null"-->
-                <!--android:drawablePadding="3dp"-->
-                <!--android:drawableTop="@drawable/selector_square_main"-->
-                <!--android:gravity="center"-->
-                <!--android:text="广场"-->
-                <!--android:textColor="@drawable/selector_txtcolor_main"-->
-                 <!--/>-->
-
-            <!--<RadioButton-->
-                <!--android:id="@+id/rb_medium_main"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:layout_weight="1"-->
-                <!--android:background="#fff"-->
-                <!--android:button="@null"-->
-                <!--android:clipChildren="false"-->
-                <!--android:gravity="center|bottom"-->
-                <!--/>-->
-
-            <!--<RadioButton-->
-                <!--android:id="@+id/rb_act_main"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="1"-->
-                <!--android:background="#fff"-->
-                <!--android:button="@null"-->
-                <!--android:drawablePadding="3dp"-->
-                <!--android:drawableTop="@drawable/selector_act_main"-->
-                <!--android:gravity="center"-->
-                <!--android:text="星活动"-->
-                <!--android:textColor="@drawable/selector_txtcolor_main"-->
-                 <!--/>-->
-
-            <!--<RadioButton-->
-                <!--android:id="@+id/rb_mine_main"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="1"-->
-                <!--android:background="#fff"-->
-                <!--android:button="@null"-->
-                <!--android:drawablePadding="3dp"-->
-                <!--android:drawableTop="@drawable/selector_mine_main"-->
-                <!--android:gravity="center"-->
-                <!--android:text="我的"-->
-                <!--android:textColor="@drawable/selector_txtcolor_main"-->
-                <!--android:layout_marginRight="5dp"/>-->
-        <!--</RadioGroup>-->
-
-        <!--添加信息图标-->
         <ImageView
             android:id="@+id/main_img_center"
             android:layout_width="53dp"
