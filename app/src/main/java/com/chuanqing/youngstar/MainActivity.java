@@ -142,8 +142,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 //                        showPopwindowfensi();
 //                    }
 //                }else{
-                    requestIdentity();
 //                }
+                requestIdentity();
         }
     }
 
@@ -482,7 +482,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         WindowManager wm = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
         DisplayMetrics dm = new DisplayMetrics();
         wm.getDefaultDisplay().getMetrics(dm);
-
 
         // 实例化一个ColorDrawable颜色为半透明
         ColorDrawable dw = new ColorDrawable(0xb0000000);
