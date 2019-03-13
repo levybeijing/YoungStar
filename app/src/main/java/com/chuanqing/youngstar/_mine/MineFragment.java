@@ -306,6 +306,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                 tv4_wallet = view.findViewById(R.id.tv_wallet_minef);
                 tv4_care = view.findViewById(R.id.tv_care_minef);
                 view.findViewById(R.id.iv_msg_minef).setOnClickListener(this);
+                view.findViewById(R.id.iv_tocall_minef).setOnClickListener(this);
                 iv4_photo.setOnClickListener(this);
 
                 RecyclerView rv4 = view.findViewById(R.id.rv_minef);
@@ -475,6 +476,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                 startActivity(new Intent(getContext(), SubAccountActivity.class));
                 break;
             case R.id.iv_tocall_minec:
+            case R.id.iv_tocall_minef:
             case R.id.iv_call_mines:
                 Intent intent = new Intent(Intent.ACTION_DIAL);
                 Uri data = Uri.parse("tel:" +Urls.SERVICE);
@@ -486,6 +488,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 // startActivity(new Intent(getContext(), SubAccountActivity.class));
 
                 break;
+
         }
     }
 

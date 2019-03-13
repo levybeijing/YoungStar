@@ -125,12 +125,15 @@ public class StarbangAdapter extends BaseAdapter {
             viewHolder.img1.setVisibility(View.VISIBLE);
             viewHolder.img2.setVisibility(View.VISIBLE);
             viewHolder.img3.setVisibility(View.VISIBLE);
-            Glide.with(context)
-                    .load(Api.ossurl+starbangBean.getData().getPageInfo().getList().get(position).getStudent().get(2).getUser_img())
-                    .error(R.mipmap.my11)
-                    .diskCacheStrategy(DiskCacheStrategy.NONE)
-                    .into(viewHolder.jijun_img);
-            viewHolder.tv_jijun.setText("ID:"+starbangBean.getData().getPageInfo().getList().get(position).getStudent().get(2).getUser_code());
+            StarbangBean.DataBean.PageInfoBean.ListBean.StudentBean studentBean = starbangBean.getData().getPageInfo().getList().get(position).getStudent().get(2);
+            if (studentBean!=null){
+                Glide.with(context)
+                        .load(Api.ossurl+ studentBean.getUser_img())
+                        .error(R.mipmap.my11)
+                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                        .into(viewHolder.jijun_img);
+                viewHolder.tv_jijun.setText("ID:"+ studentBean.getUser_code());
+            }
         }
 
         viewHolder.layout.setOnClickListener(new View.OnClickListener() {

@@ -235,7 +235,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                                 return;
                             case 3:
                             case 4:
-                                startActivity(new Intent(MainActivity.this,AuditFailedActivity.class));
+                                Intent intent = new Intent(MainActivity.this, AuditFailedActivity.class);
+                                intent.putExtra("info",bean.getMessage());
+                                startActivity(intent);
                                 return;
                         }
                         if (mineFragment!=null){

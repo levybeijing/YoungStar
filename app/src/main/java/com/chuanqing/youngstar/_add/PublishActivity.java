@@ -98,6 +98,7 @@ public class PublishActivity extends BaseActivity{
     private static final int REQUEST_CODE_CHOOSE = 23;//定义请求码常量 单选
     private static final int REQUEST_CAMERA_CODE = 24;//定义请求码常量  多选
     private static final int REQUEST_CODE_PICK = 25; //视频
+
     PublishAdapter adapter;
     ArrayList<String>  arrayList = new ArrayList<>();
     //视频播放器
@@ -105,11 +106,13 @@ public class PublishActivity extends BaseActivity{
     JzvdStd player;
     @BindView(R.id.publish_player_img)
     ImageView player_img;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_publishs);
         ButterKnife.bind(this);
+
         initView();
         setTtitle();
     }
@@ -123,7 +126,7 @@ public class PublishActivity extends BaseActivity{
     @BindView(R.id.common_rigth_img)
     TextView right_tv;
     ArrayList<String> imagePaths = new ArrayList<>();
-    ArrayList<String> imagePathsone = new ArrayList<>();
+//    ArrayList<String> imagePathsone = new ArrayList<>();
     String media_type = "1"; //用于保存上传的类型是1图片，还是2视频，先默认是1
     boolean info_img = false; //用于判断是否选择了详情图片
     private void setTtitle(){
@@ -452,6 +455,7 @@ public class PublishActivity extends BaseActivity{
         Uri uri = Uri.parse(paths.get(0));
         img_up_fengmian.setImageURI(uri);
     }
+
     PublishAdapter.CallBack callBack = new PublishAdapter.CallBack() {
         @Override
         public void clalback() {
@@ -583,9 +587,10 @@ public class PublishActivity extends BaseActivity{
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (data==null){
-            return;
-        }
+        Log.e("==============", "onActivityResult: "+ requestCode);
+//        if (data==null){
+//            return;
+//        }
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case IMAGE_REQUEST_CODE://选择图片成功返回
@@ -630,6 +635,7 @@ public class PublishActivity extends BaseActivity{
 
                     break;
                 case 511:
+                    Log.e("==============", "onActivityResult: "+ cover.exists());
                     if (cover.exists()){
                         Bitmap bitmap = BitmapFactory.decodeFile(cover.getAbsolutePath());
                         img_up_fengmian.setImageBitmap(bitmap);
@@ -784,9 +790,10 @@ public class PublishActivity extends BaseActivity{
         //没有权限的要去申请权限
         //注意：如果是在Fragment中申请权限，不要使用ActivityCompat.requestPermissions,
         // 直接使用Fragment的requestPermissions方法，否则会回调到Activity的onRequestPermissionsResult
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest
-                        .permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                requestCode);
+        ActivityCompat.requestPermissions(this, new String[]{
+                Manifest.permission.CAMERA,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE}, requestCode);
     }
 
     @Override
@@ -951,6 +958,7 @@ public class PublishActivity extends BaseActivity{
             public void onProgress(PutObjectRequest request, long currentSize, long totalSize) {
             }
         });
+
         OSSAsyncTask task = oss.asyncPutObject(put, new OSSCompletedCallback<PutObjectRequest, PutObjectResult>() {
             @Override
             public void onSuccess(PutObjectRequest request, PutObjectResult result) {

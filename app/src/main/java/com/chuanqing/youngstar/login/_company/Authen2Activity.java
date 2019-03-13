@@ -27,6 +27,7 @@ import com.chuanqing.youngstar.MyApp;
 import com.chuanqing.youngstar.R;
 import com.chuanqing.youngstar.Urls;
 import com.chuanqing.youngstar.base.BaseActivity;
+import com.chuanqing.youngstar.login._invest.InvestAuthen2Activity;
 import com.chuanqing.youngstar.login.bean.CommenBean;
 import com.chuanqing.youngstar.tools.SharedPFUtils;
 import com.google.gson.Gson;
@@ -307,6 +308,7 @@ public class Authen2Activity extends BaseActivity implements View.OnClickListene
                             SharedPFUtils.setParam(Authen2Activity.this,"status",commenBean.getState());
                             SharedPFUtils.setParam(Authen2Activity.this,"identity",4);
                             startActivity(new Intent(Authen2Activity.this, MainActivity.class));
+                            Toast.makeText(Authen2Activity.this, "提交审核成功！", Toast.LENGTH_SHORT).show();
                         }
 
                     }

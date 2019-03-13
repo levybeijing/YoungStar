@@ -61,10 +61,12 @@ public class MyApp extends Application {
         this.mContext = this;
         SharedPFUtils.init(this);
         AndroidAudioConverter.load(this, new ILoadCallback() {
+
             @Override
             public void onSuccess() {
                 // Great!
             }
+
             @Override
             public void onFailure(Exception error) {
                 // FFmpeg is not supported by device
