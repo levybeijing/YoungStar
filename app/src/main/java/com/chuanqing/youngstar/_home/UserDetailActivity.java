@@ -171,6 +171,9 @@ public class UserDetailActivity extends BaseActivity implements View.OnClickList
                         Glide.with(UserDetailActivity.this).load(Urls.IMAGEURL+data.getUser_img()).into(iv_bg);
                         tv_lable.setText(data.getLabel());
                         tv_id.setText("SID:"+data.getUser_code());
+                        if (!s.contains("sex")){
+                            return;
+                        }
                         switch (data.getSex()){
                             case "男":
                                 iv_sex.setImageBitmap(BitmapFactory.decodeResource(getResources(),R.mipmap.sex_man));
@@ -296,10 +299,10 @@ public class UserDetailActivity extends BaseActivity implements View.OnClickList
                                 tvhot.setText("");
                                 break;
                             case "免费次数不足，即将消耗星币":
-//弹窗，提示信息
+                            //弹窗，提示信息
                                 break;
                             case "星币不足，请充值":
-//跳转充值页面
+                            //跳转充值页面
                                 break;
                         }
                     }
