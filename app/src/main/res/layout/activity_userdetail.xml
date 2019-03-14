@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/ll_root_userdetail"
     >
 <android.support.design.widget.CoordinatorLayout
     android:layout_width="match_parent"
@@ -118,7 +119,7 @@
                         android:layout_margin="10dp"
                         />
                     <ImageView
-                        android:id="@+id/iv_manage_userdetail"
+                        android:id="@+id/iv_share_userdetail"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:background="@mipmap/share_mine"

@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.chuanqing.youngstar.R;
 import com.chuanqing.youngstar.Urls;
@@ -48,6 +49,7 @@ public class FeedbackActivity extends BaseActivity {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
                         Log.e("=============", "addFeedback"+s);
+                        Toast.makeText(FeedbackActivity.this, "反馈成功", Toast.LENGTH_SHORT).show();
                     }
                 });
     }

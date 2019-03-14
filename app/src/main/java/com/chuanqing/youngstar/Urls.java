@@ -86,7 +86,9 @@ public class Urls {
     //    修改头像
     public static final String updateUserImg = HOST + "Star/user/updateUserImg";
     //    查询用户身份状态
-    public static final String getUserType = HOST + "Star/user/getUserType";
+    public static final String getUserType = HOST + "Star/user/getUserType";//    查询用户身份状态
+
+    public static final String getUserDetails = HOST + "Star/user/getUserDetails";
     //***********************************首页***************************************//
     //    学生详情
     public static final String getStudentDetail = HOST + "Star/firstPage/getStudentDetail";

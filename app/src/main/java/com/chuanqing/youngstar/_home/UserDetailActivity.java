@@ -1,23 +1,33 @@
 package com.chuanqing.youngstar._home;
 
+import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.chuanqing.youngstar.MainActivity;
 import com.chuanqing.youngstar.R;
 import com.chuanqing.youngstar.Urls;
 import com.chuanqing.youngstar._mine.student.FragmentStatus;
@@ -84,6 +94,7 @@ public class UserDetailActivity extends BaseActivity implements View.OnClickList
 
         tvhot = findViewById(R.id.tv_hot_userdetail);
 
+        findViewById(R.id.iv_share_userdetail).setOnClickListener(this);
         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -191,7 +202,83 @@ public class UserDetailActivity extends BaseActivity implements View.OnClickList
             case R.id.ll_hot_userdetail:
                 topraise();
                 break;
+            case R.id.iv_share_userdetail:
+                showpopup();
+                break;
         }
+    }
+
+    private void showpopup() {
+        // 利用layoutInflater获得View
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.dialog_toshare, null);
+
+        // 下面是两种方法得到宽度和高度 getWindow().getDecorView().getWidth()
+        PopupWindow window = new PopupWindow(view, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+        // 设置popWindow弹出窗体可点击，这句话必须添加，并且是true
+        window.setFocusable(false);
+        WindowManager wm = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics dm = new DisplayMetrics();
+        wm.getDefaultDisplay().getMetrics(dm);
+
+
+        // 实例化一个ColorDrawable颜色为半透明
+        ColorDrawable dw = new ColorDrawable(0xb0000000);
+        window.setBackgroundDrawable(dw);
+
+        // 设置popWindow的显示和消失动画
+        window.setAnimationStyle(R.style.mypopwindow_anim_style);
+//        //底部弹出
+        window.showAtLocation(UserDetailActivity.this.findViewById(R.id.ll_root_userdetail), Gravity.BOTTOM,0,0);
+
+        ImageView iv_qq = view.findViewById(R.id.iv_qq_dialogtoshare);
+        ImageView iv_wx = view.findViewById(R.id.iv_wb_dialogtoshare);
+        ImageView iv_wb = view.findViewById(R.id.iv_wx_dialogtoshare);
+        ImageView iv_wechat = view.findViewById(R.id.iv_wechat_dialogtoshare);
+
+        //取消事件
+        iv_qq.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (window.isShowing()){
+                    window.dismiss();
+                }
+                Toast.makeText(UserDetailActivity.this, "iv_qq", Toast.LENGTH_SHORT).show();
+            }
+        });
+        //取消事件
+        iv_wx.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (window.isShowing()){
+                    window.dismiss();
+                }
+                Toast.makeText(UserDetailActivity.this, "iv_wx", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        //取消事件
+        iv_wb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (window.isShowing()){
+                    window.dismiss();
+                }
+                Toast.makeText(UserDetailActivity.this, "iv_wb", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        //取消事件
+        iv_wechat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (window.isShowing()){
+                    window.dismiss();
+                }
+                Toast.makeText(UserDetailActivity.this, "iv_wechat", Toast.LENGTH_SHORT).show();
+
+            }
+        });
     }
 
     private void topraise() {

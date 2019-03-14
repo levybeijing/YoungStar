@@ -46,6 +46,15 @@ public class IdentityBean {
         private String user_code;
         private int type;
         private int status;
+        private String reason;
+
+        public String getReason() {
+            return reason;
+        }
+
+        public void setReason(String reason) {
+            this.reason = reason;
+        }
 
         public String getUser_code() {
             return user_code;

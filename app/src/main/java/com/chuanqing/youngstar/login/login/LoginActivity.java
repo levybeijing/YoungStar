@@ -283,9 +283,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         RegisterBean registerBean = new Gson().fromJson(s, RegisterBean.class);
                         if ("请求成功".equals(registerBean.getMessage())){
                             Toast.makeText(LoginActivity.this, registerBean.getMessage(), Toast.LENGTH_SHORT).show();
-                            findViewById(R.id.loginlayout).setVisibility(View.VISIBLE);
-                            findViewById(R.id.regilayout).setVisibility(View.INVISIBLE);
-                            et_phone.setText(phone);
+                            startActivity(new Intent(LoginActivity.this,ChooseActivity.class));
+                            finish();
                         }else{
                             Toast.makeText(LoginActivity.this, registerBean.getMessage(), Toast.LENGTH_SHORT).show();
                         }

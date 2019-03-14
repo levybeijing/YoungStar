@@ -91,12 +91,15 @@ public class StarbangAdapter extends BaseAdapter {
             viewHolder.img1.setVisibility(View.VISIBLE);
             viewHolder.img2.setVisibility(View.GONE);
             viewHolder.img3.setVisibility(View.GONE);
-            Glide.with(context)
-                    .load(Api.ossurl+starbangBean.getData().getPageInfo().getList().get(position).getStudent().get(0).getUser_img())
-                    .error(R.mipmap.my11)
-                    .diskCacheStrategy(DiskCacheStrategy.NONE)
-                    .into(viewHolder.guanjun_img);
-            viewHolder.tv_guanju.setText("ID:"+starbangBean.getData().getPageInfo().getList().get(position).getStudent().get(0).getUser_code());
+            StarbangBean.DataBean.PageInfoBean.ListBean.StudentBean bean = starbangBean.getData().getPageInfo().getList().get(position).getStudent().get(0);
+            if (bean!=null){
+                Glide.with(context)
+                        .load(Api.ossurl+ bean.getUser_img())
+                        .error(R.mipmap.my11)
+                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                        .into(viewHolder.guanjun_img);
+                viewHolder.tv_guanju.setText("ID:"+ bean.getUser_code());
+            }
         }
         if (starbangBean.getData().getPageInfo().getList().get(position).getStudent().size()>1){
             viewHolder.guanjun_img.setVisibility(View.VISIBLE);
@@ -108,12 +111,15 @@ public class StarbangAdapter extends BaseAdapter {
             viewHolder.img1.setVisibility(View.VISIBLE);
             viewHolder.img2.setVisibility(View.VISIBLE);
             viewHolder.img3.setVisibility(View.GONE);
-            Glide.with(context)
-                    .load(Api.ossurl+starbangBean.getData().getPageInfo().getList().get(position).getStudent().get(1).getUser_img())
-                    .error(R.mipmap.my11)
-                    .diskCacheStrategy(DiskCacheStrategy.NONE)
-                    .into(viewHolder.yajun_img);
-            viewHolder.tv_yajun.setText("ID:"+starbangBean.getData().getPageInfo().getList().get(position).getStudent().get(1).getUser_code());
+            StarbangBean.DataBean.PageInfoBean.ListBean.StudentBean bean = starbangBean.getData().getPageInfo().getList().get(position).getStudent().get(1);
+            if (bean!=null){
+                Glide.with(context)
+                        .load(Api.ossurl+ bean.getUser_img())
+                        .error(R.mipmap.my11)
+                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                        .into(viewHolder.yajun_img);
+                viewHolder.tv_yajun.setText("ID:"+ bean.getUser_code());
+            }
         }
         if (starbangBean.getData().getPageInfo().getList().get(position).getStudent().size()>2){
             viewHolder.guanjun_img.setVisibility(View.VISIBLE);

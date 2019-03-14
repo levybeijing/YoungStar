@@ -26,6 +26,7 @@ import com.chuanqing.youngstar._square.follow.FollowFragment;
 import com.chuanqing.youngstar._square.starshow.StarShowFragment;
 import com.chuanqing.youngstar._square.zhichang.SquareZhichangFragment;
 import com.chuanqing.youngstar.myadapter.TablayoutAdapter;
+import com.chuanqing.youngstar.tools.SharedPFUtils;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -78,7 +79,7 @@ public class SquareFragment extends Fragment {
         StarShowFragment starShowFragment = new StarShowFragment();
         FollowFragment followFragment = new FollowFragment();
         SquareZhichangFragment zhichangFragment = new SquareZhichangFragment();
-        if (identity==1){
+        if ((int)SharedPFUtils.getParam(getContext(),"identity",4)==1){
             //只有学生有这个职场
             mFragments.add(zhichangFragment);
             //学生职场

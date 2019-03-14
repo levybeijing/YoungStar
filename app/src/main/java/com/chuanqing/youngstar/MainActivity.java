@@ -75,6 +75,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private static boolean mBackKeyPressed = false;//记录是否有首次按键
     public static int identity;
     public static String usercodes="";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -215,7 +216,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
 //                        成功则提示 考虑自动登录
-                        Log.e("===============", "VeriCode: "+s);
+                        Log.e("===============", "积分哈开始缴费单: "+SharedPFUtils.getParam(MainActivity.this,"usercode",""));
+                        Log.e("===============", "积分哈开始缴费单: "+s);
                         IdentityBean bean = new Gson().fromJson(s, IdentityBean.class);
                         if (bean.getData()==null){
                             SharedPFUtils.clearData();
@@ -236,7 +238,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                             case 3:
                             case 4:
                                 Intent intent = new Intent(MainActivity.this, AuditFailedActivity.class);
-                                intent.putExtra("info",bean.getMessage());
+                                intent.putExtra("info",bean.getData().getReason());
                                 startActivity(intent);
                                 return;
                         }

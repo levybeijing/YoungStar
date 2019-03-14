@@ -20,6 +20,7 @@ import com.chuanqing.youngstar._home.searchstudent.StudentShowActivity;
 import com.chuanqing.youngstar._square.follow.FollowFragment;
 import com.chuanqing.youngstar._square.starshow.StarShowFragment;
 import com.chuanqing.youngstar.myadapter.TablayoutAdapter;
+import com.chuanqing.youngstar.tools.SharedPFUtils;
 
 import java.util.ArrayList;
 
@@ -69,7 +70,7 @@ public class StarActivityFragment extends Fragment {
         StarbangFragment starbangFragment = new StarbangFragment();
         ZhaopinFragment zhaopinFragment = new ZhaopinFragment();
 
-        if (identity==1){
+        if ((int)SharedPFUtils.getParam(getContext(),"identity",4) ==1){
             mFragments.add(zhaopinFragment);
             list.add("星职场");
         }
