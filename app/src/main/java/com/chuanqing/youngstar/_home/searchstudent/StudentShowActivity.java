@@ -49,7 +49,9 @@ import static com.chuanqing.youngstar.MainActivity.usercodes;
  * 搜索页面
  */
 public class StudentShowActivity extends AppCompatActivity  implements XListView.IXListViewListener{
+
     private static final String TAG = "StudentShowActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,8 +63,7 @@ public class StudentShowActivity extends AppCompatActivity  implements XListView
         searchinfo();
     }
     /**
-     * 搜索
-     * 取消
+     * 搜索 取消
      */
     @BindView(R.id.student_search_img)
     ImageView img_search;
@@ -226,7 +227,7 @@ public class StudentShowActivity extends AppCompatActivity  implements XListView
                 .params("page",page)
                 .params("pageSize",pageSize)
                 .params("keyWord",edt_info.getText().toString())
-                .params("code",(int) SharedPFUtils.getParam(this,"usercode",-1))//先写死
+                .params("code",(String) SharedPFUtils.getParam(this,"usercode",""))//先写死
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Response response, Exception e) {
@@ -236,7 +237,7 @@ public class StudentShowActivity extends AppCompatActivity  implements XListView
 
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
-//                        Log.e(TAG, "onSuccess: 搜索学生"+s );
+                        Log.e("***=========", "onSuccess: 搜索学生"+s );
                         arrayList_student.clear();
                         Gson gson = new Gson();
                         final SearchStudentBean searchStudentBean = gson.fromJson(s,SearchStudentBean.class);
@@ -400,7 +401,7 @@ public class StudentShowActivity extends AppCompatActivity  implements XListView
                 .params("page",page2)
                 .params("pageSize",pageSize2)
                 .params("keyWord",edt_info.getText().toString())
-                .params("code",(int) SharedPFUtils.getParam(this,"usercode",-1))//先写死
+                .params("code",(String) SharedPFUtils.getParam(this,"usercode",""))//先写死
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Response response, Exception e) {

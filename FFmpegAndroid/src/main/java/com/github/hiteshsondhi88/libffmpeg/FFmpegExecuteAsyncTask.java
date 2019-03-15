@@ -73,7 +73,7 @@ class FFmpegExecuteAsyncTask extends AsyncTask<Void, String, CommandResult> {
         }
     }
 
-    private void checkAndUpdateProcess() throws TimeoutException, InterruptedException {
+    private void checkAndUpdateProcess() throws TimeoutException {
         while (!Util.isProcessCompleted(process)) {
             // checking if process is completed
             if (Util.isProcessCompleted(process)) {

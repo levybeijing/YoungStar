@@ -12,7 +12,7 @@ import com.chuanqing.youngstar.R;
 public class MyDialog {
     //点击确认按钮回调接口
     public interface OnConfirmListener {
-        public void onConfirmClick();
+        void onConfirmClick();
     }
     /**
      * @Title: show
@@ -26,9 +26,9 @@ public class MyDialog {
     public static void show(Activity activity, String content, final OnConfirmListener confirmListener){
         // 加载布局文件
         View view = View.inflate(activity, R.layout.dialog_view, null);
-        TextView text = (TextView) view.findViewById(R.id.text);
-        TextView confirm = (TextView) view.findViewById(R.id.confirm);
-        TextView cancel = (TextView) view.findViewById(R.id.cancel);
+        TextView text = view.findViewById(R.id.text);
+        TextView confirm = view.findViewById(R.id.confirm);
+        TextView cancel = view.findViewById(R.id.cancel);
 
         text.setText(content);
 

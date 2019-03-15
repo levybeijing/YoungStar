@@ -91,9 +91,9 @@ public class XListView extends ListView implements OnScrollListener {
 
 		// init header view
 		mHeaderView = new XListViewHeader(context);
-		mHeaderViewContent = (RelativeLayout) mHeaderView
+		mHeaderViewContent = mHeaderView
 				.findViewById(R.id.xlistview_header_content);
-		mHeaderTimeView = (TextView) mHeaderView
+		mHeaderTimeView = mHeaderView
 				.findViewById(R.id.xlistview_header_time);
 		addHeaderView(mHeaderView);
 
@@ -368,15 +368,15 @@ public class XListView extends ListView implements OnScrollListener {
 	 * onXScrolling when header/footer scroll back.
 	 */
 	public interface OnXScrollListener extends OnScrollListener {
-		public void onXScrolling(View view);
+		void onXScrolling(View view);
 	}
 
 	/**
 	 * implements this interface to get refresh/load more event.
 	 */
 	public interface IXListViewListener {
-		public void onRefresh();
+		void onRefresh();
 
-		public void onLoadMore();
+		void onLoadMore();
 	}
 }

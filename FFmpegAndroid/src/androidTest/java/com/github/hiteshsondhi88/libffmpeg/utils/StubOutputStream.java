@@ -8,7 +8,7 @@ public class StubOutputStream extends OutputStream {
     private boolean closed = false;
 
     @Override
-    public void write(int oneByte) throws IOException {
+    public void write(int oneByte) {
         // Do nothing for now, just need to test if output stream is closed
     }
 

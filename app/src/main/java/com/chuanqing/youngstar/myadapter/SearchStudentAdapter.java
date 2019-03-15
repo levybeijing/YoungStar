@@ -25,7 +25,8 @@ public class SearchStudentAdapter extends BaseAdapter {
     public SearchStudentAdapter(Context context,ArrayList<SearchStudentBean> arrayList){
         this.context = context;
         this.arrayList = arrayList;
-    };
+    }
+
     @Override
     public int getCount() {
         return arrayList.size();

@@ -8,7 +8,7 @@ public class StubInputStream extends InputStream {
     private boolean closed = false;
 
     @Override
-    public int read() throws IOException {
+    public int read() {
         // Do nothing for now, just need to test if input stream is closed
         return 0;
     }

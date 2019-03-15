@@ -45,7 +45,7 @@ public class UiUtils {
 
     /** 获取资源 */
     public static Resources getResources() {
-        System.out.println(".......haha" + getContext() == null ? true : false);
+        System.out.println(".......haha" + getContext() == null);
         return getContext().getResources();
     }
 
@@ -132,7 +132,7 @@ public class UiUtils {
 
         int index = newMoney.indexOf(".");
 
-        String decimal = newMoney.substring(index, newMoney.length());      //获取点后面的数
+        String decimal = newMoney.substring(index);      //获取点后面的数
 
         if (Double.parseDouble(decimal) > 0) {                              //判断点后面的数是否大于0
             return newMoney;

@@ -66,7 +66,7 @@ public class ZhichangMoreActivity extends BaseActivity {
         ButterKnife.bind(this);
         showinfo();
         setTtitle();
-        Log.e("信息值",getIntent().getStringExtra("employCode").toString());
+        Log.e("信息值", getIntent().getStringExtra("employCode"));
         btn_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -167,7 +167,7 @@ public class ZhichangMoreActivity extends BaseActivity {
     private void showinfo() {
         OkGo.post(Api.zhaoping_more)
                 .tag(this)
-                .params("employCode",getIntent().getStringExtra("employCode").toString())
+                .params("employCode", getIntent().getStringExtra("employCode"))
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Response response, Exception e) {
@@ -228,8 +228,8 @@ public class ZhichangMoreActivity extends BaseActivity {
     }
 
     private void initView(String[] jihe) {
-        mViewPager = (ViewPager) findViewById(R.id.viewpager);
-        ll_layout = (LinearLayout) findViewById(R.id.ll_layout);
+        mViewPager = findViewById(R.id.viewpager);
+        ll_layout = findViewById(R.id.ll_layout);
 
         //设置适配器
         mViewPager.setAdapter(new MyAdapter(this, jihe));

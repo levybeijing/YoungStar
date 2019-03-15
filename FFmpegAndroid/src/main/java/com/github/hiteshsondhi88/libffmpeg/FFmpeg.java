@@ -90,7 +90,7 @@ public class FFmpeg implements FFmpegInterface {
     }
 
     @Override
-    public String getDeviceFFmpegVersion() throws FFmpegCommandAlreadyRunningException {
+    public String getDeviceFFmpegVersion() {
         ShellCommand shellCommand = new ShellCommand();
         CommandResult commandResult = shellCommand.runWaitFor(new String[] { FileUtils.getFFmpeg(context), "-version" });
         if (commandResult.success) {

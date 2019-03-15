@@ -128,7 +128,7 @@ public class SquareFollowAdapter extends BaseAdapter
             linearLayout = view.findViewById(R.id.squarefollow_img_img);
             textView_renshu = view.findViewById(R.id.squarefollow_img_img_number);
             tv_info = view.findViewById(R.id.squarefollow_info);
-            circleImageView = (ImageView) view.findViewById(R.id.squarefollow_headimg);
+            circleImageView = view.findViewById(R.id.squarefollow_headimg);
             tv_id =view.findViewById(R.id.squarefollow_userid);
             tv_type = view.findViewById(R.id.squarefollow_type);
             tv_dianzan =view.findViewById(R.id.squarefollow_dianzannumber);

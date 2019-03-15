@@ -42,7 +42,7 @@ public class ShellCommandTest extends CommonTestCase {
         executor.shutdownNow();
     }
 
-    public void testRunWaitFor() throws Exception {
+    public void testRunWaitFor() {
         ShellCommand shellCommand = new ShellCommand();
         CommandResult commandResult = shellCommand.runWaitFor(new String[] {"ls"});
         assertNotNull(commandResult);

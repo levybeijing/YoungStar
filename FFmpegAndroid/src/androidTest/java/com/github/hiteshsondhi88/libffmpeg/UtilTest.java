@@ -16,11 +16,11 @@ import java.util.concurrent.TimeoutException;
 
 public class UtilTest extends CommonTestCase {
 
-    public void testIsDebug() throws Exception {
+    public void testIsDebug() {
         // do nothing for now
     }
 
-    public void testCloseInputStream() throws Exception {
+    public void testCloseInputStream() {
         StubInputStream stubInputStream = new StubInputStream();
         // initially input stream shouldn't be closed
         assertEquals(false, stubInputStream.isClosed());
@@ -32,7 +32,7 @@ public class UtilTest extends CommonTestCase {
         assertEquals(true, stubInputStream.isClosed());
     }
 
-    public void testCloseOutputStream() throws Exception {
+    public void testCloseOutputStream() {
         StubOutputStream stubOutputStream = new StubOutputStream();
         // initially output stream shouldn't be closed
         assertEquals(false, stubOutputStream.isClosed());
@@ -44,7 +44,7 @@ public class UtilTest extends CommonTestCase {
         assertEquals(true, stubOutputStream.isClosed());
     }
 
-    public void testConvertInputStreamToString() throws Exception {
+    public void testConvertInputStreamToString() {
         String exampleString1 = "Example to provide source to InputStream";
         String exampleString2 = "";
         String exampleString3 = 1+"";
@@ -88,7 +88,7 @@ public class UtilTest extends CommonTestCase {
         executor.shutdownNow();
     }
 
-    public void testKillAsync() throws Exception {
+    public void testKillAsync() {
         AsyncTask<Void, Void, Void> asyncTask = new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {

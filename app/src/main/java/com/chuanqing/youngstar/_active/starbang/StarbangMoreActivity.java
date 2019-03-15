@@ -107,7 +107,7 @@ public class StarbangMoreActivity extends BaseActivity {
     private void showinfo() {
         OkGo.post(Api.star_xingbang_more)
                 .tag(this)
-                .params("activityCode",getIntent().getStringExtra("activityCode").toString())
+                .params("activityCode", getIntent().getStringExtra("activityCode"))
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Response response, Exception e) {
@@ -150,7 +150,7 @@ public class StarbangMoreActivity extends BaseActivity {
                                 @Override
                                 public void onClick(View v) {
                                     Intent intent = new Intent(StarbangMoreActivity.this,LeitaiMoreActivity.class);
-                                    intent.putExtra("activitycode",getIntent().getStringExtra("activityCode").toString());
+                                    intent.putExtra("activitycode", getIntent().getStringExtra("activityCode"));
                                     startActivity(intent);
                                 }
                             });

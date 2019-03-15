@@ -54,8 +54,8 @@ public class LeitaiMoreActivity extends BaseActivity {
         setTtitle();
     }
     private void initView(String[] jihe) {
-        mViewPager = (ViewPager) findViewById(R.id.viewpager);
-        ll_layout = (LinearLayout) findViewById(R.id.ll_layout);
+        mViewPager = findViewById(R.id.viewpager);
+        ll_layout = findViewById(R.id.ll_layout);
 
         //左右都有图
         mViewPager.setCurrentItem(1);
@@ -92,7 +92,7 @@ public class LeitaiMoreActivity extends BaseActivity {
     private void showinfo() {
         OkGo.post(Api.activity_more)
                 .tag(this)
-                .params("activityCode",getIntent().getStringExtra("activitycode").toString())
+                .params("activityCode", getIntent().getStringExtra("activitycode"))
                 .params("userCode",usercodes)//先写死
                 .execute(new StringCallback() {
                     @Override
@@ -153,7 +153,7 @@ public class LeitaiMoreActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LeitaiMoreActivity.this,PartakeActivity.class);
-                intent.putExtra("activityCode",getIntent().getStringExtra("activitycode").toString());
+                intent.putExtra("activityCode", getIntent().getStringExtra("activitycode"));
                 startActivity(intent);
             }
         });

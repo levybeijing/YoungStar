@@ -1,5 +1,6 @@
 package com.chuanqing.youngstar._mine;
 
+import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -18,6 +19,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -109,6 +111,8 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                 return inflater.inflate(R.layout.fragment_minei, container, false);
             case 4:
                 return inflater.inflate(R.layout.fragment_minef, container, false);
+            case 5:
+                return inflater.inflate(R.layout.activity_auditing, container, false);
         }
         list.clear();
         return inflater.inflate(R.layout.fragment_minef, container, false);
@@ -325,6 +329,16 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                     }
                 });
                 requestWorks();
+                break;
+            case 5:
+                view.findViewById(R.id.tv_back_auditing).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent=new Intent();
+                        intent.setAction(Urls.TOHOMECAST);
+                        getContext().sendBroadcast(intent);
+                    }
+                });
                 break;
         }
         request();

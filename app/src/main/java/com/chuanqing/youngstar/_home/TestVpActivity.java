@@ -37,7 +37,7 @@ public class TestVpActivity extends BaseActivity implements ViewPager.OnPageChan
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_testvp);
-        vp = (ViewPager) findViewById(R.id.vp);
+        vp = findViewById(R.id.vp);
 
         //设置page间距
         vp.setPageMargin(20);

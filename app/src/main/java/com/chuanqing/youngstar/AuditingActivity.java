@@ -17,14 +17,14 @@ public class AuditingActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void initView() {
-        findViewById(R.id.iv_back_auditing).setOnClickListener(this);
+//        findViewById(R.id.iv_back_auditing).setOnClickListener(this);
         findViewById(R.id.tv_back_auditing).setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.iv_back_auditing:
+//            case R.id.iv_back_auditing:
             case R.id.tv_back_auditing:
                 finish();
                 break;

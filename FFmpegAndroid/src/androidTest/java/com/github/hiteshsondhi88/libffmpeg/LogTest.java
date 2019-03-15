@@ -10,71 +10,71 @@ public class LogTest extends CommonTestCase {
     private Object[] OBJECTS_TO_TEST = {null, "", "test string", 1, 1.00123, 2.45225747946181e-072};
     private Throwable[] EXCEPTIONS_TO_TEST = {new Exception(), new Exception("Test exception"), new Exception("")};
 
-    public void testD() throws Exception {
+    public void testD() {
         printLog(new PrintLogInterface() {
             @Override
-            public void print(Object obj) throws Exception {
+            public void print(Object obj) {
                 Log.d(obj);
             }
 
             @Override
-            public void print(Throwable throwable) throws Exception {
+            public void print(Throwable throwable) {
                 Log.d(throwable);
             }
         });
     }
 
-    public void testW() throws Exception {
+    public void testW() {
         printLog(new PrintLogInterface() {
             @Override
-            public void print(Object obj) throws Exception {
+            public void print(Object obj) {
                 Log.w(obj);
             }
 
             @Override
-            public void print(Throwable throwable) throws Exception {
+            public void print(Throwable throwable) {
                 Log.w(throwable);
             }
         });
     }
 
-    public void testI() throws Exception {
+    public void testI() {
         printLog(new PrintLogInterface() {
             @Override
-            public void print(Object obj) throws Exception {
+            public void print(Object obj) {
                 Log.i(obj);
             }
 
             @Override
-            public void print(Throwable throwable) throws Exception {
+            public void print(Throwable throwable) {
                 Log.i(throwable);
             }
         });
     }
 
-    public void testV() throws Exception {
+    public void testV() {
         printLog(new PrintLogInterface() {
             @Override
-            public void print(Object obj) throws Exception {
+            public void print(Object obj) {
                 Log.v(obj);
             }
 
             @Override
-            public void print(Throwable throwable) throws Exception {
+            public void print(Throwable throwable) {
                 Log.v(throwable);
             }
         });
     }
 
-    public void testE() throws Exception {
+    public void testE() {
         printLog(new PrintLogInterface() {
             @Override
-            public void print(Object obj) throws Exception {
+            public void print(Object obj) {
                 Log.e(obj);
             }
 
             @Override
-            public void print(Throwable throwable) throws Exception {
+            public void print(Throwable throwable) {
                 Log.e(throwable);
             }
         });

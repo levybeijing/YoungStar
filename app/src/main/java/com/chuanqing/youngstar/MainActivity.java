@@ -1,7 +1,9 @@
 package com.chuanqing.youngstar;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.support.v4.app.FragmentManager;
@@ -74,11 +76,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private static boolean mBackKeyPressed = false;//记录是否有首次按键
     public static int identity;
     public static String usercodes="";
+    private TOHOMEcast ecast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+//        动态注册广播
+        ecast = new TOHOMEcast();
+        IntentFilter filter=new IntentFilter();
+        filter.addAction(Urls.TOHOMECAST);
+        registerReceiver(ecast, filter);
+
         fragmentManager = getSupportFragmentManager();
         initView(); // 初始化界面控件
         setChioceItem(0); // 初始化页面加载时显示第中间的选项卡
@@ -89,20 +98,20 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
      */
     private void initView() {
         // 初始化底部导航栏的控件
-        main_first = (LinearLayout) findViewById(R.id.main_first);
-        main_first_img = (ImageView) findViewById(R.id.main_first_image);
-        main_first_tv = (TextView) findViewById(R.id.main_first_text);
-        main_second = (LinearLayout) findViewById(R.id.main_second);
-        main_second_img = (ImageView) findViewById(R.id.main_second_image);
-        main_second_tv = (TextView) findViewById(R.id.main_second_text);
-        main_third = (LinearLayout) findViewById(R.id.main_third);
-        main_third_img = (ImageView) findViewById(R.id.main_third_image);
-        main_third_tv = (TextView) findViewById(R.id.main_third_text);
-        main_four = (LinearLayout) findViewById(R.id.main_four);
-        main_four_img = (ImageView) findViewById(R.id.main_four_image);
-        main_four_tv = (TextView) findViewById(R.id.main_four_text);
+        main_first = findViewById(R.id.main_first);
+        main_first_img = findViewById(R.id.main_first_image);
+        main_first_tv = findViewById(R.id.main_first_text);
+        main_second = findViewById(R.id.main_second);
+        main_second_img = findViewById(R.id.main_second_image);
+        main_second_tv = findViewById(R.id.main_second_text);
+        main_third = findViewById(R.id.main_third);
+        main_third_img = findViewById(R.id.main_third_image);
+        main_third_tv = findViewById(R.id.main_third_text);
+        main_four = findViewById(R.id.main_four);
+        main_four_img = findViewById(R.id.main_four_image);
+        main_four_tv = findViewById(R.id.main_four_text);
         //中间切换身份用的图
-        img_center = (ImageView) findViewById(R.id.main_img_center);
+        img_center = findViewById(R.id.main_img_center);
         //点击事件写入
         main_first.setOnClickListener(this);
         main_second.setOnClickListener(this);
@@ -729,4 +738,21 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         usercodes = (String) SharedPFUtils.getParam(MainActivity.this,"usercode","");
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(ecast);
+    }
+
+    class TOHOMEcast extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            switch (action){
+                case Urls.TOHOMECAST:
+                    setChioceItem(0);
+                    break;
+            }
+        }
+    }
 }

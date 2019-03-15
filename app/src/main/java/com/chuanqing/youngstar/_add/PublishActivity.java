@@ -714,7 +714,7 @@ public class PublishActivity extends BaseActivity{
         }
     }
 
-    public static Bitmap getBitmapFormUri(Activity ac, Uri uri) throws FileNotFoundException, IOException {
+    public static Bitmap getBitmapFormUri(Activity ac, Uri uri) throws IOException {
         InputStream input = ac.getContentResolver().openInputStream(uri);
         BitmapFactory.Options onlyBoundsOptions = new BitmapFactory.Options();
         onlyBoundsOptions.inJustDecodeBounds = true;

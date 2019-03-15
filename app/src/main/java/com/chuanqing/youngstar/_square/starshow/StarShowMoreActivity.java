@@ -120,7 +120,7 @@ public class StarShowMoreActivity extends BaseActivity {
 
         OkGo.post(Api.square_starshow_more)
                 .tag(this)
-                .params("userBlogId", getIntent().getStringExtra("userBlogId").toString())
+                .params("userBlogId", getIntent().getStringExtra("userBlogId"))
                 .params("userCode", usercodes) //先写死
                 .execute(new StringCallback() {
                     @Override
@@ -136,7 +136,7 @@ public class StarShowMoreActivity extends BaseActivity {
                         StarShowMoreBean starShowMoreBean = gson.fromJson(s, StarShowMoreBean.class);
                         if (starShowMoreBean.getState() == 1) {
                             String url = Api.ossurl + starShowMoreBean.getData().getMedia_url();
-                            if (getIntent().getStringExtra("type").toString().equals("1")) {
+                            if (getIntent().getStringExtra("type").equals("1")) {
                                 vp.setVisibility(View.VISIBLE);
                                 rv.setVisibility(View.VISIBLE);
                                 player.setVisibility(View.GONE);
@@ -182,13 +182,13 @@ public class StarShowMoreActivity extends BaseActivity {
                                     }
                                 });
 
-                            } else if (getIntent().getStringExtra("type").toString().equals("2")) {
+                            } else if (getIntent().getStringExtra("type").equals("2")) {
                                 vp.setVisibility(View.GONE);
                                 rv.setVisibility(View.GONE);
                                 player.setVisibility(View.VISIBLE);
                                 linearLayout.setVisibility(View.GONE);
                                 player.setUp(url, starShowMoreBean.getData().getTitle(), Jzvd.SCREEN_WINDOW_NORMAL);
-                            } else if (getIntent().getStringExtra("type").toString().equals("3")) {
+                            } else if (getIntent().getStringExtra("type").equals("3")) {
                                 vp.setVisibility(View.GONE);
                                 rv.setVisibility(View.GONE);
                                 player.setVisibility(View.GONE);

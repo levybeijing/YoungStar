@@ -6,7 +6,7 @@ import java.io.IOException;
 public class WaveHeader {
     public final char fileID[] = {'R', 'I', 'F', 'F'};
     public int fileLength;
-    public char wavTag[] = {'W', 'A', 'V', 'E'};;
+    public char wavTag[] = {'W', 'A', 'V', 'E'};
     public char FmtHdrID[] = {'f', 'm', 't', ' '};
     public int FmtHdrLeth;
     public short FormatTag;

@@ -58,7 +58,7 @@ public class MyApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        this.mContext = this;
+        mContext = this;
         SharedPFUtils.init(this);
         AndroidAudioConverter.load(this, new ILoadCallback() {
 
