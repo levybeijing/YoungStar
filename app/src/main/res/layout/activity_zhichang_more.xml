@@ -4,7 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="._active.zhichang.ZhichangMoreActivity">
+    tools:context="._active.zhichang.ZhichangMoreActivity"
+    android:id="@+id/ll_root_zhichang"
+    >
     <include android:layout_width="match_parent"
         android:layout_height="wrap_content"
         layout="@layout/common_top"/>

@@ -12,11 +12,11 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/whole_hx"
-            android:layout_marginBottom="15dp"></View>
+            android:layout_marginBottom="15dp"/>
         <android.support.v7.widget.RecyclerView
             android:id="@+id/starshow_listview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 
 </FrameLayout>

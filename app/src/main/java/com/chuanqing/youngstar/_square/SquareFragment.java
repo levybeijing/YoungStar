@@ -87,7 +87,6 @@ public class SquareFragment extends Fragment {
         }
         mFragments.add(starShowFragment);
 
-
         mFragments.add(followFragment);
         list.add("星秀");
 

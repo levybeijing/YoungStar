@@ -1,6 +1,7 @@
 package com.chuanqing.youngstar._square.starshow;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -26,6 +27,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.chuanqing.youngstar.MainActivity;
 import com.chuanqing.youngstar.R;
+import com.chuanqing.youngstar._home.UserDetailActivity;
 import com.chuanqing.youngstar.base.BaseActivity;
 import com.chuanqing.youngstar.mybean.CommonBean;
 import com.chuanqing.youngstar.mybean.StarShowMoreBean;
@@ -57,16 +59,30 @@ import static com.chuanqing.youngstar.MainActivity.usercodes;
 public class StarShowMoreActivity extends BaseActivity {
     private static final String TAG = "StarShowMoreActivity";
     MediaPlayer mediaPlayer = new MediaPlayer();
+    @BindView(R.id.ll_author_starshowmore)
+    LinearLayout ll_author;
+    private String id,hot;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_star_show_more);
         ButterKnife.bind(this);
-        Log.e(TAG, "onCreate:id值"+getIntent().getStringExtra("userBlogId").toString() );
+        Intent intent = getIntent();
+        id = intent.getStringExtra("userBlogId");
+        hot = intent.getStringExtra("hot");
+        Log.e(TAG, "onCreate:id值"+ id);
         setTtitle();
         setinfo();
-
+        ll_author.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(StarShowMoreActivity.this, UserDetailActivity.class);
+                intent.putExtra("usercode",id);
+                intent.putExtra("hot",hot);
+                startActivity(intent);
+            }
+        });
     }
 
 
@@ -98,6 +114,7 @@ public class StarShowMoreActivity extends BaseActivity {
     ImageView img_zan;
     @BindView(R.id.starshow_more_info)
     TextView tv_info;
+
 
     private void setinfo() {
 
@@ -416,11 +433,8 @@ public class StarShowMoreActivity extends BaseActivity {
     }
 
     protected void onDestroy() {
-
         if (mediaPlayer != null)
-
             mediaPlayer.release();
-
         super.onDestroy();
 
     }

@@ -91,6 +91,7 @@ public class SquareStarShowAdaper extends RecyclerView.Adapter<SquareStarShowAda
                 Intent intent = new Intent(context,StarShowMoreActivity.class);
                 intent.putExtra("userBlogId",squareStarShowBean.getData().getPageInfo().getList().get(position).getId()+"");
                 intent.putExtra("type",squareStarShowBean.getData().getPageInfo().getList().get(position).getMedia_type()+"");
+                intent.putExtra("hot",squareStarShowBean.getData().getPageInfo().getList().get(position).getNum()+"");
                 context.startActivity(intent);
             }
         });

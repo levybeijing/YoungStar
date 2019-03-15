@@ -89,6 +89,9 @@ public class Urls {
     public static final String getUserType = HOST + "Star/user/getUserType";//    查询用户身份状态
 
     public static final String getUserDetails = HOST + "Star/user/getUserDetails";
+    //
+    public static final String addUserEmploy = HOST + "Star/user/addUserEmploy";
+
     //***********************************首页***************************************//
     //    学生详情
     public static final String getStudentDetail = HOST + "Star/firstPage/getStudentDetail";
@@ -98,5 +101,6 @@ public class Urls {
     public static final String delfocusOn = HOST + "Star/firstPage/delfocusOn";
     //    给学生点赞
     public static final String addStudentRecommendFree = HOST + "Star/firstPage/addStudentRecommendFree";
+
 
 }

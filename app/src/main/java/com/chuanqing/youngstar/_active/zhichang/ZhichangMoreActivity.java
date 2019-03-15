@@ -1,27 +1,40 @@
 package com.chuanqing.youngstar._active.zhichang;
 
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.chuanqing.youngstar.MainActivity;
 import com.chuanqing.youngstar.R;
+import com.chuanqing.youngstar.Urls;
 import com.chuanqing.youngstar._active.leitai.LeitaiMoreActivity;
 import com.chuanqing.youngstar.base.BaseActivity;
+import com.chuanqing.youngstar.login.bean.CommenBean;
+import com.chuanqing.youngstar.login.choose.ChooseActivity;
 import com.chuanqing.youngstar.myadapter.MyAdapter;
 import com.chuanqing.youngstar.mybean.ZhaopingMoreBean;
 import com.chuanqing.youngstar.tools.Api;
 import com.chuanqing.youngstar.tools.BamAutoLineList;
+import com.chuanqing.youngstar.tools.SharedPFUtils;
 import com.chuanqing.youngstar.tools.ToastUtils;
 import com.chuanqing.youngstar.tools.ZoomOutPageTransformer;
 import com.google.gson.Gson;
@@ -57,10 +70,51 @@ public class ZhichangMoreActivity extends BaseActivity {
         btn_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                OkGo.post(Urls.addUserEmploy)
+                        .tag(this)
+                        .params("employCode",getIntent().getStringExtra("employCode"))
+                        .params("userCode",(int) SharedPFUtils.getParam(ZhichangMoreActivity.this,"usercode",-1))
+                        .execute(new StringCallback() {
+                            @Override
+                            public void onSuccess(String s, Call call, Response response) {
+                                Log.e("===========", "onSuccess: "+s);
+                                CommenBean bean = new Gson().fromJson(s, CommenBean.class);
+                                if (bean.getMessage().equals("请求成功")){
+                                    Toast.makeText(ZhichangMoreActivity.this, "报名成功", Toast.LENGTH_SHORT).show();
+                                    showPop();
+                                }else{
+                                    Toast.makeText(ZhichangMoreActivity.this, bean.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
             }
         });
     }
+
+    private void showPop() {
+        // 利用layoutInflater获得View
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.dialog_signupok, null);
+
+        // 下面是两种方法得到宽度和高度 getWindow().getDecorView().getWidth()
+
+        PopupWindow window = new PopupWindow(view, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+
+        // 设置popWindow弹出窗体可点击，这句话必须添加，并且是true
+        window.setFocusable(false);
+        WindowManager wm = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics dm = new DisplayMetrics();
+        wm.getDefaultDisplay().getMetrics(dm);
+
+        // 实例化一个ColorDrawable颜色为半透明
+        ColorDrawable dw = new ColorDrawable(0xb0000000);
+        window.setBackgroundDrawable(dw);
+        // 设置popWindow的显示和消失动画
+        window.setAnimationStyle(R.style.mypopwindow_anim_style);
+//        //底部弹出
+        window.showAtLocation(ZhichangMoreActivity.this.findViewById(R.id.ll_root_zhichang), Gravity.BOTTOM,0,0);
+    }
+
     /**
      * 写入title名字
      */
