@@ -57,7 +57,7 @@ public class ZhichangMoreActivity extends BaseActivity {
     String[] imglist;
     String[] fulilist;
     @BindView(R.id.btn_signup_recruit)
-    ImageView btn_ok;
+    Button btn_ok;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +73,7 @@ public class ZhichangMoreActivity extends BaseActivity {
                 OkGo.post(Urls.addUserEmploy)
                         .tag(this)
                         .params("employCode",getIntent().getStringExtra("employCode"))
-                        .params("userCode",(int) SharedPFUtils.getParam(ZhichangMoreActivity.this,"usercode",-1))
+                        .params("userCode",(String) SharedPFUtils.getParam(ZhichangMoreActivity.this,"usercode",""))
                         .execute(new StringCallback() {
                             @Override
                             public void onSuccess(String s, Call call, Response response) {

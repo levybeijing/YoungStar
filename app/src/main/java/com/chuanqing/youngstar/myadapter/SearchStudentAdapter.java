@@ -67,7 +67,7 @@ public class SearchStudentAdapter extends BaseAdapter {
         }else {
             viewHolder.btn_guanzhu.setBackground(context.getResources().getDrawable(R.mipmap.leitai_baoming));
             viewHolder.btn_guanzhu.setText("关注");
-            viewHolder.btn_guanzhu.setTextColor(context.getResources().getColor(R.color.mainColor));
+            viewHolder.btn_guanzhu.setTextColor(context.getResources().getColor(R.color.white));
         }
         view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +75,7 @@ public class SearchStudentAdapter extends BaseAdapter {
                 Intent intent=new Intent(context, UserDetailActivity.class);
                 intent.putExtra("hot",listBean.getRecommendTotal()+"");
                 intent.putExtra("usercode",listBean.getCode());
+                intent.putExtra("flag",listBean.getFlag());
                 context.startActivity(intent);
             }
         });

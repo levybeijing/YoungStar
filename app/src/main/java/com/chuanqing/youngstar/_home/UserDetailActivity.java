@@ -63,6 +63,7 @@ public class UserDetailActivity extends BaseActivity implements View.OnClickList
     private TextView tvcare;
     private String usercode,hot;
     private TextView tvhot;
+    private int flag;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -72,6 +73,7 @@ public class UserDetailActivity extends BaseActivity implements View.OnClickList
         Intent intent = getIntent();
         usercode = intent.getStringExtra("usercode");
         hot = intent.getStringExtra("hot");
+        flag = intent.getIntExtra("flag",-1);
 
         list.add(new FragmentStatus());
         list.add(new FragmentWorks());
@@ -97,6 +99,15 @@ public class UserDetailActivity extends BaseActivity implements View.OnClickList
 
         tvhot = findViewById(R.id.tv_hot_userdetail);
         tvhot.setText(hot);
+        if (flag==0){
+            tvcare.setText("关注");
+            tvcare.setTextColor(Color.parseColor("#F56250"));
+            rb.setChecked(true);
+        }else{
+            rb.setChecked(false);
+            tvcare.setText("已关注");
+            tvcare.setTextColor(Color.parseColor("#999999"));
+        }
         findViewById(R.id.iv_share_userdetail).setOnClickListener(this);
         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
