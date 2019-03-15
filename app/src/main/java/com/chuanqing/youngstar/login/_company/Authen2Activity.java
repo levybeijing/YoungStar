@@ -308,7 +308,10 @@ public class Authen2Activity extends BaseActivity implements View.OnClickListene
                             SharedPFUtils.setParam(Authen2Activity.this,"status",commenBean.getState());
                             SharedPFUtils.setParam(Authen2Activity.this,"identity",4);
                             startActivity(new Intent(Authen2Activity.this, MainActivity.class));
+                            finish();
                             Toast.makeText(Authen2Activity.this, "提交审核成功！", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(Authen2Activity.this, commenBean.getMessage(), Toast.LENGTH_SHORT).show();
                         }
 
                     }

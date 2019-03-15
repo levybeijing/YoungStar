@@ -14,7 +14,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -27,7 +26,6 @@ import com.chuanqing.youngstar._add.TapeActivity;
 import com.chuanqing.youngstar._add.company.RecuitActivity;
 import com.chuanqing.youngstar._add.student.WorksActivity;
 import com.chuanqing.youngstar._home.HomeFragment;
-import com.chuanqing.youngstar._mine.EditUserDataActivity;
 import com.chuanqing.youngstar._mine.MineFragment;
 import com.chuanqing.youngstar._square.SquareFragment;
 import com.chuanqing.youngstar.base.BaseActivity;
@@ -36,6 +34,7 @@ import com.chuanqing.youngstar.login.login.LoginActivity;
 import com.chuanqing.youngstar.mybean.IdentityBean;
 import com.chuanqing.youngstar.tools.SharedPFUtils;
 import com.chuanqing.youngstar.tools.ToastUtils;
+import com.chuanqing.youngstar.widget.CustomClickListener;
 import com.google.gson.Gson;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
@@ -108,8 +107,28 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         main_first.setOnClickListener(this);
         main_second.setOnClickListener(this);
         main_third.setOnClickListener(this);
-        main_four.setOnClickListener(this);
-        img_center.setOnClickListener(this);
+        main_four.setOnClickListener(new CustomClickListener() {
+            @Override
+            protected void onSingleClick() {
+                setChioceItem(3);
+            }
+
+            @Override
+            protected void onFastClick() {
+
+            }
+        });
+        img_center.setOnClickListener(new CustomClickListener() {
+            @Override
+            protected void onSingleClick() {
+                requestIdentity();
+            }
+
+            @Override
+            protected void onFastClick() {
+
+            }
+        });
 //        RadioGroup rg = findViewById(R.id.rg_main);
 //        rg.setOnCheckedChangeListener(this);
     }
@@ -127,24 +146,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             case R.id.main_third:
                 setChioceItem(2);
                 break;
-            case R.id.main_four:
-                setChioceItem(3);
-                break;
-            case R.id.main_img_center:
-//                int status = (int)SharedPFUtils.getParam(this, "status", -1);
-//                if (status==2){
-//                    if (identity==1){
-//                        showPopwindow();  //展示中间按钮点击事件
-//                    }else if (identity==2){
-//                        showPopwindowgongsi();
-//                    }else if (identity==3){
-//                        showPopwindowtouziren();
-//                    }else if (identity==4){
-//                        showPopwindowfensi();
-//                    }
-//                }else{
-//                }
-                requestIdentity();
         }
     }
 

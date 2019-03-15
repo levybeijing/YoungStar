@@ -7,7 +7,7 @@
     tools:context="._active.zhichang.ZhichangMoreActivity">
     <include android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        layout="@layout/common_top"></include>
+        layout="@layout/common_top"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -85,7 +85,7 @@
                     android:layout_height="2dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
-                    android:background="@drawable/xuxiangray"></View>
+                    android:background="@drawable/xuxiangray"/>
                 <TextView
                     android:id="@+id/zhaopin_more_info"
                     android:layout_width="match_parent"
@@ -126,7 +126,7 @@
                     android:layout_height="2dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
-                    android:background="@drawable/xuxiangray"></View>
+                    android:background="@drawable/xuxiangray"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -274,12 +274,12 @@
                     android:layout_height="2dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
-                    android:background="@drawable/xuxiangray"></View>
+                    android:background="@drawable/xuxiangray"/>
                <com.chuanqing.youngstar.tools.BamAutoLineList
                    android:id="@+id/fulilinear"
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
-                   android:orientation="vertical"></com.chuanqing.youngstar.tools.BamAutoLineList>
+                   android:orientation="vertical"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -289,6 +289,7 @@
                 android:layout_marginBottom="15dp"
                 android:gravity="center">
                 <Button
+                    android:id="@+id/btn_signup_recruit"
                     android:layout_width="270dp"
                     android:layout_height="44dp"
                     android:background="@mipmap/zhichangbaoming"

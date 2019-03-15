@@ -26,6 +26,7 @@ import com.chuanqing.youngstar.mybean.HomeYanyiBean;
 import com.chuanqing.youngstar.mybean.SearchStudentBean;
 import com.chuanqing.youngstar.tools.Api;
 import com.chuanqing.youngstar.tools.CircleImageView;
+import com.chuanqing.youngstar.tools.SharedPFUtils;
 import com.chuanqing.youngstar.tools.ToastUtils;
 import com.chuanqing.youngstar.view.XListView;
 import com.google.gson.Gson;
@@ -225,7 +226,7 @@ public class StudentShowActivity extends AppCompatActivity  implements XListView
                 .params("page",page)
                 .params("pageSize",pageSize)
                 .params("keyWord",edt_info.getText().toString())
-                .params("code",usercodes)//先写死
+                .params("code",(int) SharedPFUtils.getParam(this,"usercode",-1))//先写死
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Response response, Exception e) {
@@ -251,6 +252,9 @@ public class StudentShowActivity extends AppCompatActivity  implements XListView
                                 for (int i = 0; i <searchStudentBean.getData().getPageInfo().getList().size() ; i++) {
                                     arrayList_student.add(searchStudentBean);
                                 }
+                                adapter = new SearchStudentAdapter(StudentShowActivity.this,arrayList_student);
+                                mListView.setAdapter(adapter);
+                                adapter.notifyDataSetChanged();
 
                             }else {
 //                                ToastUtils.shortToast("暂无搜索信息");
@@ -396,7 +400,7 @@ public class StudentShowActivity extends AppCompatActivity  implements XListView
                 .params("page",page2)
                 .params("pageSize",pageSize2)
                 .params("keyWord",edt_info.getText().toString())
-                .params("code",usercodes)//先写死
+                .params("code",(int) SharedPFUtils.getParam(this,"usercode",-1))//先写死
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Response response, Exception e) {

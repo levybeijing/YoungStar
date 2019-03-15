@@ -1,6 +1,7 @@
 package com.chuanqing.youngstar.myadapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.chuanqing.youngstar.R;
+import com.chuanqing.youngstar._home.UserDetailActivity;
 import com.chuanqing.youngstar.mybean.SearchStudentBean;
 import com.chuanqing.youngstar.tools.Api;
 
@@ -48,16 +50,17 @@ public class SearchStudentAdapter extends BaseAdapter {
         }
         viewHolder = (ViewHolder) view.getTag();
         SearchStudentBean searchStudentBean = arrayList.get(position);
-        String headimg= Api.ossurl+searchStudentBean.getData().getPageInfo().getList().get(position).getUser_img();
+        SearchStudentBean.DataBean.PageInfoBean.ListBean listBean = searchStudentBean.getData().getPageInfo().getList().get(position);
+        String headimg= Api.ossurl+ listBean.getUser_img();
         Glide.with(context)
                 .load(headimg)
                 .error(R.mipmap.my11)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .into(viewHolder.img_head);
-        viewHolder.tv_id.setText("SID:"+searchStudentBean.getData().getPageInfo().getList().get(position).getUser_code());
-        viewHolder.tv_type.setText(searchStudentBean.getData().getPageInfo().getList().get(position).getLabel());
-        viewHolder.tv_redu.setText(searchStudentBean.getData().getPageInfo().getList().get(position).getRecommendTotal()+"");
-        if (searchStudentBean.getData().getPageInfo().getList().get(position).getFlag()==1){
+        viewHolder.tv_id.setText("SID:"+ listBean.getUser_code());
+        viewHolder.tv_type.setText(listBean.getLabel());
+        viewHolder.tv_redu.setText(listBean.getRecommendTotal()+"");
+        if (listBean.getFlag()==1){
             viewHolder.btn_guanzhu.setBackground(context.getResources().getDrawable(R.mipmap.yiguanzhu));
             viewHolder.btn_guanzhu.setText("已关注");
             viewHolder.btn_guanzhu.setTextColor(context.getResources().getColor(R.color.home_gray));
@@ -66,6 +69,15 @@ public class SearchStudentAdapter extends BaseAdapter {
             viewHolder.btn_guanzhu.setText("关注");
             viewHolder.btn_guanzhu.setTextColor(context.getResources().getColor(R.color.mainColor));
         }
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(context, UserDetailActivity.class);
+                intent.putExtra("hot",listBean.getRecommendTotal()+"");
+                intent.putExtra("usercode",listBean.getCode());
+                context.startActivity(intent);
+            }
+        });
         return view;
     }
     static class ViewHolder{

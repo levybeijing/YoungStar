@@ -43,6 +43,9 @@ public class ZhichangMoreActivity extends BaseActivity {
     private LinearLayout ll_layout;
     String[] imglist;
     String[] fulilist;
+    @BindView(R.id.btn_signup_recruit)
+    ImageView btn_ok;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +54,12 @@ public class ZhichangMoreActivity extends BaseActivity {
         showinfo();
         setTtitle();
         Log.e("信息值",getIntent().getStringExtra("employCode").toString());
+        btn_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
     /**
      * 写入title名字
@@ -61,6 +70,7 @@ public class ZhichangMoreActivity extends BaseActivity {
     TextView tv_title;
     @BindView(R.id.common_rigth_img)
     ImageView right_img;
+
     private void setTtitle(){
         left_img.setVisibility(View.VISIBLE);
         right_img.setVisibility(View.VISIBLE);

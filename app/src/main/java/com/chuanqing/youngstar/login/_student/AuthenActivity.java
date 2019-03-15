@@ -32,11 +32,13 @@ import com.chuanqing.youngstar.MyApp;
 import com.chuanqing.youngstar.R;
 import com.chuanqing.youngstar.Urls;
 import com.chuanqing.youngstar.base.BaseActivity;
+import com.chuanqing.youngstar.tools.IDCard;
 import com.chuanqing.youngstar.tools.SharedPFUtils;
 import com.chuanqing.youngstar.tools.StringUtil;
 import com.chuanqing.youngstar.widget.CirImageView;
 
 import java.io.File;
+import java.text.ParseException;
 
 public class AuthenActivity extends BaseActivity implements View.OnClickListener {
 
@@ -133,6 +135,10 @@ public class AuthenActivity extends BaseActivity implements View.OnClickListener
                     Toast.makeText(this, "手机号不能为空", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                if (StringUtil.isPhoneNumber(trim2)){
+                    Toast.makeText(this, "手机号格式不正确", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 String trim3 = school.getText().toString().trim();
                 if (trim3==null||trim3.length()==0){
                     Toast.makeText(this, "学校不能为空", Toast.LENGTH_SHORT).show();
@@ -153,12 +159,23 @@ public class AuthenActivity extends BaseActivity implements View.OnClickListener
                     Toast.makeText(this, "身份证号不能为空", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                try {
+                    if (IDCard.IDCardValidate(trim6)){
+                        Toast.makeText(this, "身份证号格式不正确", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 String trim7 = email.getText().toString().trim();
                 if (trim7==null||trim7.length()==0) {
                     Toast.makeText(this, "邮箱不能为空", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
+                if (StringUtil.isEmail(trim7)) {
+                    Toast.makeText(this, "邮箱格式不正确", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 Student student=new Student();
                 student.setName(trim1);
                 student.setPhone(trim2);

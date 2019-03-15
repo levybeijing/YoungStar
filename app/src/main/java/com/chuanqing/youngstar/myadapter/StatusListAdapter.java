@@ -62,11 +62,13 @@ public class StatusListAdapter extends BaseAdapter {
                 .into(viewHolder.img_head);
         viewHolder.tv_id.setText("SID:"+searchStudentBean.getData().getPageInfo().getList().get(position).getUser_code());
         viewHolder.tv_type.setText(searchStudentBean.getData().getPageInfo().getList().get(position).getLabel());
-        viewHolder.tv_redu.setText(searchStudentBean.getData().getPageInfo().getList().get(position).getRecommendTotal()+"");
+        int hot = searchStudentBean.getData().getPageInfo().getList().get(position).getRecommendTotal();
+        viewHolder.tv_redu.setText(hot +"");
         viewHolder.ll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent =new Intent(context, UserDetailActivity.class);
+                intent.putExtra("hot",hot+"");
                 intent.putExtra("usercode",searchStudentBean.getData().getPageInfo().getList().get(position).getUser_code());
                 context.startActivity(intent);
             }

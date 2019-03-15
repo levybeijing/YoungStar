@@ -142,12 +142,20 @@ public class Authen1Activity extends BaseActivity implements View.OnClickListene
                 }
                 String phone = et_phone.getText().toString().trim();
                 if (phone==null||phone.length()==0){
-                    Toast.makeText(this, "电话不能为空", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "手机号不能为空", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (StringUtil.isPhoneNumber(phone)){
+                    Toast.makeText(this, "手机号格式不正确", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 String email = et_email.getText().toString().trim();
                 if (email==null||email.length()==0){
                     Toast.makeText(this, "邮箱不能为空", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (StringUtil.isEmail(email)){
+                    Toast.makeText(this, "邮箱格式不正确", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 String intro = et_intro.getText().toString().trim();

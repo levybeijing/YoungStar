@@ -1,6 +1,7 @@
 package com.chuanqing.youngstar._home;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -60,7 +61,7 @@ public class UserDetailActivity extends BaseActivity implements View.OnClickList
     private RadioGroup rg;
     private RadioButton rb;
     private TextView tvcare;
-    private String usercode;
+    private String usercode,hot;
     private TextView tvhot;
 
     @Override
@@ -68,7 +69,9 @@ public class UserDetailActivity extends BaseActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_userdetail);
 
-        usercode = getIntent().getStringExtra("usercode");
+        Intent intent = getIntent();
+        usercode = intent.getStringExtra("usercode");
+        hot = intent.getStringExtra("hot");
 
         list.add(new FragmentStatus());
         list.add(new FragmentWorks());
@@ -93,7 +96,7 @@ public class UserDetailActivity extends BaseActivity implements View.OnClickList
         tvcare = findViewById(R.id.tv_care_userdetail);
 
         tvhot = findViewById(R.id.tv_hot_userdetail);
-
+        tvhot.setText(hot);
         findViewById(R.id.iv_share_userdetail).setOnClickListener(this);
         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -296,7 +299,7 @@ public class UserDetailActivity extends BaseActivity implements View.OnClickList
                         CommenBean bean = new Gson().fromJson(s, CommenBean.class);
                         switch (bean.getMessage()){
                             case "请求成功":
-                                tvhot.setText("");
+
                                 break;
                             case "免费次数不足，即将消耗星币":
                             //弹窗，提示信息
