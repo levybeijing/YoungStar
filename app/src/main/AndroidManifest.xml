@@ -13,8 +13,10 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS" tools:ignore="ProtectedPermissions"/>
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" tools:ignore="ProtectedPermissions" /> <!-- 录音权限 -->
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"
+        tools:ignore="ProtectedPermissions"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
+        tools:ignore="ProtectedPermissions" /> <!-- 录音权限 -->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.RECORD_VIDEO" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
@@ -79,6 +81,7 @@
         <activity android:name="._mine.EditUserDataActivity"></activity>
         <activity android:name="._mine.WalletActivity"></activity>
         <activity android:name="._mine.EditPhoneActivity"></activity>
+        <activity android:name="._mine.EditPhone2Activity"></activity>
         <activity android:name="._mine.EditPWDActivity"></activity>
         <activity android:name="._mine.EditEmailActivity"></activity>
         <activity android:name="._mine.SettinsActivity"></activity>
