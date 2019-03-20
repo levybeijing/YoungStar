@@ -2,6 +2,7 @@ package com.chuanqing.youngstar._active.zhichang;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -82,6 +83,7 @@ public class ZhichangMoreActivity extends BaseActivity {
                                 if (bean.getMessage().equals("请求成功")){
                                     Toast.makeText(ZhichangMoreActivity.this, "报名成功", Toast.LENGTH_SHORT).show();
                                     showPop();
+
                                 }else{
                                     Toast.makeText(ZhichangMoreActivity.this, bean.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
@@ -113,6 +115,14 @@ public class ZhichangMoreActivity extends BaseActivity {
         window.setAnimationStyle(R.style.mypopwindow_anim_style);
 //        //底部弹出
         window.showAtLocation(ZhichangMoreActivity.this.findViewById(R.id.ll_root_zhichang), Gravity.BOTTOM,0,0);
+        view.findViewById(R.id.iv_close_dialogsignok).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                window.dismiss();
+                btn_ok.setText("已报名");
+                btn_ok.setBackgroundColor(Color.parseColor("#CCCCCC"));
+            }
+        });
     }
 
     /**

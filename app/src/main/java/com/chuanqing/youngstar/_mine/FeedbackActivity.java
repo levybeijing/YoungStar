@@ -30,9 +30,14 @@ public class FeedbackActivity extends BaseActivity {
     private void initView() {
         EditText et_content = findViewById(R.id.et_content_feedback);
         String content = et_content.getText().toString().trim();
+
         findViewById(R.id.tv_ok_feedback).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (content==null||content.length()==0){
+                    Toast.makeText(FeedbackActivity.this, "信息为空", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 feedback(content);
             }
         });
