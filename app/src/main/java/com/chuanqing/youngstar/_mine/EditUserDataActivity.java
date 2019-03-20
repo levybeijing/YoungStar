@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -30,6 +31,7 @@ public class EditUserDataActivity extends BaseActivity implements View.OnClickLi
     private Switch sw_wb;
     private Switch sw_wx;
     private TextView tv_email;
+    private LinearLayout ll_email;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,9 +57,17 @@ public class EditUserDataActivity extends BaseActivity implements View.OnClickLi
         findViewById(R.id.tv_exit_editdata).setOnClickListener(this);
         findViewById(R.id.ll_set_editdata).setOnClickListener(this);
         findViewById(R.id.ll_changepwd_editdata).setOnClickListener(this);
-        findViewById(R.id.ll_changeveri_editdata).setOnClickListener(this);
+
+        LinearLayout ll_veri = findViewById(R.id.ll_changeveri_editdata);
+        ll_veri.setOnClickListener(this);
+        int identity = (int) SharedPFUtils.getParam(this, "identity", -1);
+        if (identity==4) {
+            ll_veri.setVisibility(View.GONE);
+        }
+
         findViewById(R.id.ll_phone_editdata).setOnClickListener(this);
-        findViewById(R.id.ll_email_editdata).setOnClickListener(this);
+        ll_email = findViewById(R.id.ll_email_editdata);
+        ll_email.setOnClickListener(this);
 
         findViewById(R.id.iv_back_editdata).setOnClickListener(this);
     }
@@ -79,7 +89,12 @@ public class EditUserDataActivity extends BaseActivity implements View.OnClickLi
                         UserDataBean bean = new Gson().fromJson(s, UserDataBean.class);
                         UserDataBean.DataBean data = bean.getData();
                         mail = data.getMail();
-                        tv_email.setText(mail);
+                        if (mail==null){
+                            ll_email.setClickable(false);
+                        }else{
+                            ll_email.setClickable(true);
+                            tv_email.setText(mail);
+                        }
                         if (data.getQq()!=null){
                             sw_qq.setChecked(true);
                         }
@@ -117,6 +132,7 @@ public class EditUserDataActivity extends BaseActivity implements View.OnClickLi
                 startActivity(new Intent(this,EditPhoneActivity.class));
                 break;
             case R.id.ll_email_editdata:
+
                 Intent intent1 = new Intent(this, EditEmailActivity.class);
                 intent1.putExtra("email",mail);
                 startActivity(intent1);

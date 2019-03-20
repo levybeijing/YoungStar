@@ -36,6 +36,7 @@ import com.lzy.okgo.callback.StringCallback;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -219,7 +220,7 @@ public class StudentShowActivity extends AppCompatActivity  implements XListView
     private Handler mHandler;
     int page = 1, pageSize = 10;
     SearchStudentAdapter adapter;
-    ArrayList<SearchStudentBean> arrayList_student = new ArrayList<>();
+    List<SearchStudentBean.DataBean.PageInfoBean.ListBean> arrayList_student = new ArrayList<>();
     private void searchstudent() {
 
         OkGo.post(Api.home_search_student)
@@ -247,12 +248,10 @@ public class StudentShowActivity extends AppCompatActivity  implements XListView
                             mListView.zhanshi(true);
                         }
                         if (searchStudentBean.getState()==1){
-                            if (searchStudentBean.getData().getPageInfo().getList().size()>0){
+                            arrayList_student = searchStudentBean.getData().getPageInfo().getList();
+                            if (arrayList_student !=null){
                                 tv_noinfo.setVisibility(View.GONE);
                                 mListView.setVisibility(View.VISIBLE);
-                                for (int i = 0; i <searchStudentBean.getData().getPageInfo().getList().size() ; i++) {
-                                    arrayList_student.add(searchStudentBean);
-                                }
                                 adapter = new SearchStudentAdapter(StudentShowActivity.this,arrayList_student);
                                 mListView.setAdapter(adapter);
                                 adapter.notifyDataSetChanged();
@@ -395,6 +394,7 @@ public class StudentShowActivity extends AppCompatActivity  implements XListView
                     }
                 });
     }
+
     private void searchstudent(int page2,int pageSize2) {
         OkGo.post(Api.home_search_student)
                 .tag(this)
@@ -415,20 +415,17 @@ public class StudentShowActivity extends AppCompatActivity  implements XListView
                         arrayList_student.clear();
                         Gson gson = new Gson();
                         SearchStudentBean searchStudentBean = gson.fromJson(s,SearchStudentBean.class);
-                        if (pageSize>=searchStudentBean.getData().getPageInfo().getList().size()){
+                        List<SearchStudentBean.DataBean.PageInfoBean.ListBean> list = searchStudentBean.getData().getPageInfo().getList();
+                        if (pageSize>= list.size()){
                             mListView.zhanshi(false);
                         }else{
                             mListView.zhanshi(true);
                         }
                         if (searchStudentBean.getState()==1){
-                            if (searchStudentBean.getData().getPageInfo().getList().size()>0){
-                                for (int i = 0; i <searchStudentBean.getData().getPageInfo().getList().size() ; i++) {
-                                    arrayList_student.add(searchStudentBean);
-                                }
-                                adapter = new SearchStudentAdapter(StudentShowActivity.this,arrayList_student);
+                            if (list!=null){
+                                adapter = new SearchStudentAdapter(StudentShowActivity.this,list);
                                 mListView.setAdapter(adapter);
                                 adapter.notifyDataSetChanged();
-
                             }else {
                                 ToastUtils.shortToast("暂无搜索信息");
                             }

@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/main_page"
     >
     <RelativeLayout
         android:layout_width="match_parent"
@@ -14,16 +13,16 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="意见反馈"
             android:textColor="#FFF"
             android:gravity="center"
+            android:text="我的关注"
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="13dp"
             android:textSize="18dp"
             />
         <ImageView
-            android:id="@+id/iv_back_feedback"
+            android:id="@+id/iv_back_caref"
             android:layout_width="12dp"
             android:layout_height="21dp"
             android:layout_marginLeft="15dp"
@@ -32,29 +31,8 @@
             android:layout_alignParentBottom="true"
             />
     </RelativeLayout>
-    <EditText
-        android:id="@+id/et_content_feedback"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_caref"
         android:layout_width="match_parent"
-        android:layout_height="165dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:background="#FFF"
-        android:hint="写点建议，帮助我们变的更好"
-        android:gravity="left"
-        android:padding="10dp"
-        android:textSize="12dp"
-        />
-
-    <TextView
-        android:id="@+id/tv_ok_feedback"
-        android:layout_width="263dp"
-        android:layout_height="44dp"
-        android:background="@drawable/bg2_tv_changephone"
-        android:text="确认"
-        android:gravity="center"
-        android:textColor="#FFF"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="40dp"
-        />
+        android:layout_height="match_parent"/>
 </LinearLayout>

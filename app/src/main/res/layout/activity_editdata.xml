@@ -96,7 +96,6 @@
                 android:layout_marginLeft="30dp"
                 android:layout_weight="1"
                 />
-
             <ImageView
                 android:layout_width="7dp"
                 android:layout_height="14dp"
@@ -129,7 +128,6 @@
                 android:id="@+id/tv_email_editdata"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="****"
                 android:textColor="#999999"
                 android:textSize="12dp"
                 android:layout_marginLeft="30dp"
@@ -230,7 +228,7 @@
     <!--safe-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="138dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="10dp"
         android:background="#FFF"
@@ -246,7 +244,7 @@
         <LinearLayout
             android:id="@+id/ll_changepwd_editdata"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:orientation="horizontal"
             android:layout_weight="1"
             android:gravity="center_vertical"
@@ -269,7 +267,7 @@
         <LinearLayout
             android:id="@+id/ll_changeveri_editdata"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:orientation="horizontal"
             android:layout_weight="1"
             android:gravity="center_vertical"
@@ -318,7 +316,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="登录密码"
+                android:text="设置"
                 android:layout_weight="1"
                 android:textSize="15dp"
                 />

@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 
 import com.chuanqing.youngstar.R;
 import com.chuanqing.youngstar.myadapter.SquareFollowAdapter;
-import com.chuanqing.youngstar.myadapter.SquareStarShowAdaper;
 import com.chuanqing.youngstar.mybean.SquareFollowBean;
 import com.chuanqing.youngstar.tools.Api;
 import com.chuanqing.youngstar.tools.ToastUtils;
@@ -48,8 +47,7 @@ public class FollowFragment extends Fragment implements XListView.IXListViewList
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_follow, container, false);
         ButterKnife.bind(this,view);
         return view;
@@ -105,7 +103,6 @@ public class FollowFragment extends Fragment implements XListView.IXListViewList
                                 }
                                 adapter.notifyDataSetChanged();
                             }
-
                         }else {
                             ToastUtils.shortToast(squareFollowBean.getMessage());
                         }
@@ -130,7 +127,6 @@ public class FollowFragment extends Fragment implements XListView.IXListViewList
 
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
-
 //                        Log.e("关注",s);
                         arrayList.clear();
                         Gson gson = new Gson();

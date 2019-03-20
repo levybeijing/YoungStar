@@ -18,11 +18,12 @@ import com.chuanqing.youngstar.mybean.SearchStudentBean;
 import com.chuanqing.youngstar.tools.Api;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SearchStudentAdapter extends BaseAdapter {
     Context context;
-    ArrayList<SearchStudentBean> arrayList;
-    public SearchStudentAdapter(Context context,ArrayList<SearchStudentBean> arrayList){
+    List<SearchStudentBean.DataBean.PageInfoBean.ListBean> arrayList;
+    public SearchStudentAdapter(Context context, List<SearchStudentBean.DataBean.PageInfoBean.ListBean> arrayList){
         this.context = context;
         this.arrayList = arrayList;
     }
@@ -50,8 +51,7 @@ public class SearchStudentAdapter extends BaseAdapter {
             view.setTag(new ViewHolder(view));
         }
         viewHolder = (ViewHolder) view.getTag();
-        SearchStudentBean searchStudentBean = arrayList.get(position);
-        SearchStudentBean.DataBean.PageInfoBean.ListBean listBean = searchStudentBean.getData().getPageInfo().getList().get(position);
+        SearchStudentBean.DataBean.PageInfoBean.ListBean listBean = arrayList.get(position);
         String headimg= Api.ossurl+ listBean.getUser_img();
         Glide.with(context)
                 .load(headimg)

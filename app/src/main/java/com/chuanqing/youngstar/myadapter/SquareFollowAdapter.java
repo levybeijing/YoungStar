@@ -93,7 +93,7 @@ public class SquareFollowAdapter extends BaseAdapter
                 .error(R.mipmap.my11)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .into(viewHolder.circleImageView);
-        viewHolder.tv_id.setText("SID："+squareFollowBean.getData().getPageInfo().getList().get(position).getId());
+        viewHolder.tv_id.setText("SID："+squareFollowBean.getData().getPageInfo().getList().get(position).getUserCode());
         viewHolder.tv_type.setText(squareFollowBean.getData().getPageInfo().getList().get(position).getLabel()+"");
         viewHolder.tv_dianzan.setText(squareFollowBean.getData().getPageInfo().getList().get(position).getRecommend()+"");
         viewHolder.linearLayout_body.setOnClickListener(new View.OnClickListener() {

@@ -1,7 +1,10 @@
 package com.chuanqing.youngstar._mine;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -39,7 +42,31 @@ public class EditPhone2Activity extends BaseActivity implements View.OnClickList
         et_phone = findViewById(R.id.et_phone_changephone2);
         et_code = findViewById(R.id.et_code_changephone2);
 //
-        findViewById(R.id.tv_getcode_changephone2).setOnClickListener(this);
+        TextView tv_ok = findViewById(R.id.tv_getcode_changephone2);
+        tv_ok.setOnClickListener(this);
+        et_code.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.length()==6){
+                    tv_ok.setClickable(true);
+                    tv_ok.setBackgroundColor(Color.parseColor("#F5575F"));
+                }else{
+                    tv_ok.setClickable(false);
+                    tv_ok.setBackgroundColor(Color.parseColor("#CCCCCC"));
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
 //
         TextView tochange = findViewById(R.id.tv_tochange_changephone2);
         tochange.setOnClickListener(this);
@@ -48,7 +75,7 @@ public class EditPhone2Activity extends BaseActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.tv_getcode_changephone:
+            case R.id.tv_getcode_changephone2:
                 String phone = et_phone.getText().toString().trim();
                 if (!StringUtil.isPhoneNumber(phone)){
                     Toast.makeText(this, "请输入正确手机号", Toast.LENGTH_SHORT).show();
@@ -64,11 +91,11 @@ public class EditPhone2Activity extends BaseActivity implements View.OnClickList
                             }
                         });
                 break;
-            case R.id.tv_tochange_changephone:
+            case R.id.tv_tochange_changephone2:
                 String pho = et_phone.getText().toString().trim();
                 String code = et_code.getText().toString().trim();
                 if (!StringUtil.isPhoneNumber(pho)){
-                    Toast.makeText(this, "手机号错误", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "手机号格式不正确", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 OkGo.post(Urls.checkSms)//

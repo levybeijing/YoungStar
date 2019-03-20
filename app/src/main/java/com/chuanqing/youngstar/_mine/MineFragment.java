@@ -308,6 +308,8 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                 tv4_id = view.findViewById(R.id.tv_id_minef);
                 view.findViewById(R.id.tv_change_minef).setOnClickListener(this);
                 tv4_wallet = view.findViewById(R.id.tv_wallet_minef);
+                view.findViewById(R.id.ll_wallet_minef).setOnClickListener(this);
+                view.findViewById(R.id.ll_care_minef).setOnClickListener(this);
                 tv4_care = view.findViewById(R.id.tv_care_minef);
                 view.findViewById(R.id.iv_msg_minef).setOnClickListener(this);
                 view.findViewById(R.id.iv_tocall_minef).setOnClickListener(this);
@@ -500,6 +502,12 @@ public class MineFragment extends Fragment implements View.OnClickListener {
             case R.id.iv_share_mines:
 // startActivity(new Intent(getContext(), SubAccountActivity.class));
 
+                break;
+            case R.id.ll_wallet_minef:
+                startActivity(new Intent(getContext(), WalletActivity.class));
+                break;
+            case R.id.ll_care_minef:
+//                startActivity(new Intent(getContext(), follow.class));
                 break;
 
         }

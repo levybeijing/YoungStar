@@ -34,7 +34,7 @@ public class TapeActivity extends BaseActivity {
 
     @BindView(R.id.rb_tape_star)
     CheckBox rb_toggle;
-
+    
     Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {

@@ -135,7 +135,7 @@ public class AuthenActivity extends BaseActivity implements View.OnClickListener
                     Toast.makeText(this, "手机号不能为空", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (StringUtil.isPhoneNumber(trim2)){
+                if (!StringUtil.isPhoneNumber(trim2)){
                     Toast.makeText(this, "手机号格式不正确", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -154,13 +154,18 @@ public class AuthenActivity extends BaseActivity implements View.OnClickListener
                     Toast.makeText(this, "学号不能为空", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                String reg="^\\d+$";
+                if (!trim5.matches(reg)){
+                    Toast.makeText(this, "学号格式不正确", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 String trim6 = inumber.getText().toString().trim();
                 if (trim6==null||trim6.length()==0){
                     Toast.makeText(this, "身份证号不能为空", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 try {
-                    if (IDCard.IDCardValidate(trim6)){
+                    if (!IDCard.IDCardValidate(trim6)){
                         Toast.makeText(this, "身份证号格式不正确", Toast.LENGTH_SHORT).show();
                         return;
                     }
@@ -172,7 +177,7 @@ public class AuthenActivity extends BaseActivity implements View.OnClickListener
                     Toast.makeText(this, "邮箱不能为空", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (StringUtil.isEmail(trim7)) {
+                if (!StringUtil.isEmail(trim7)) {
                     Toast.makeText(this, "邮箱格式不正确", Toast.LENGTH_SHORT).show();
                     return;
                 }

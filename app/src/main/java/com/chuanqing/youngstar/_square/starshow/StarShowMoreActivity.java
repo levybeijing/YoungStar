@@ -62,6 +62,7 @@ public class StarShowMoreActivity extends BaseActivity {
     @BindView(R.id.ll_author_starshowmore)
     LinearLayout ll_author;
     private String id,hot;
+    private String user_code;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +79,7 @@ public class StarShowMoreActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(StarShowMoreActivity.this, UserDetailActivity.class);
-                intent.putExtra("usercode",id);
+                intent.putExtra("usercode",user_code);
                 intent.putExtra("hot",hot);
                 startActivity(intent);
             }
@@ -206,7 +207,8 @@ public class StarShowMoreActivity extends BaseActivity {
                                     .error(R.mipmap.myheadimg)
                                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                                     .into(img_head);
-                            tv_id.setText("SID:"+starShowMoreBean.getData().getUser_code());
+                            user_code = starShowMoreBean.getData().getUser_code();
+                            tv_id.setText("SID:"+ user_code);
                             if (TextUtils.isEmpty(starShowMoreBean.getData().getLabel())){
                                 tv_type.setText("");
                             }else {

@@ -1,8 +1,11 @@
 package com.chuanqing.youngstar._mine;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -48,7 +51,28 @@ public class EditPhoneActivity extends BaseActivity implements View.OnClickListe
         findViewById(R.id.tv_getcode_changephone).setOnClickListener(this);
         TextView tochange = findViewById(R.id.tv_tochange_changephone);
         tochange.setOnClickListener(this);
+        et_code.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.length()==6){
+                    tochange.setClickable(true);
+                    tochange.setBackgroundColor(Color.parseColor("#F5575F"));
+                }else{
+                    tochange.setClickable(false);
+                    tochange.setBackgroundColor(Color.parseColor("#CCCCCC"));
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     @Override
@@ -67,7 +91,6 @@ public class EditPhoneActivity extends BaseActivity implements View.OnClickListe
                 break;
             case R.id.tv_tochange_changephone:
                 String code = et_code.getText().toString().trim();
-
                 OkGo.post(Urls.checkSms)//
                     .tag(this)//
                     .params("mobile", phone)//墙的ID

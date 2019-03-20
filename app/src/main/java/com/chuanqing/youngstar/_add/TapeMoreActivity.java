@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.alibaba.sdk.android.oss.ClientException;
 import com.alibaba.sdk.android.oss.OSS;
 import com.alibaba.sdk.android.oss.OSSClient;
@@ -32,9 +31,7 @@ import com.chuanqing.youngstar.tools.ToastUtils;
 import com.google.gson.Gson;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
-
 import java.io.File;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cafe.adriel.androidaudioconverter.AndroidAudioConverter;
