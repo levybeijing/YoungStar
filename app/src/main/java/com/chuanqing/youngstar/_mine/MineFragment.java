@@ -99,9 +99,18 @@ public class MineFragment extends Fragment implements View.OnClickListener {
     public MineFragment() {
     }
 
+    private int audit;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         identity = (int) SharedPFUtils.getParam(getContext(), "identity", 4);
+        audit = (int) SharedPFUtils.getParam(getContext(), "audit", -1);
+        switch (audit){
+            case 1:
+                return inflater.inflate(R.layout.activity_auditing, container, false);
+            case 2:
+                return inflater.inflate(R.layout.activity_auditfailed, container, false);
+        }
         switch (identity){
             case 1:
                 return inflater.inflate(R.layout.fragment_mines, container, false);
@@ -111,8 +120,6 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                 return inflater.inflate(R.layout.fragment_minei, container, false);
             case 4:
                 return inflater.inflate(R.layout.fragment_minef, container, false);
-            case 5:
-                return inflater.inflate(R.layout.activity_auditing, container, false);
         }
         list.clear();
         return inflater.inflate(R.layout.fragment_minef, container, false);
@@ -120,6 +127,31 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        switch (audit){
+            case 1:
+                view.findViewById(R.id.tv_back_auditing).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent=new Intent();
+                        intent.setAction(Urls.TOHOMECAST);
+                        getContext().sendBroadcast(intent);
+                    }
+                });
+                return;
+            case 2:
+                TextView info = view.findViewById(R.id.tv2_auditfailed);
+//                设置返回失败原因信息
+                info.setText("失败原因×××××××××");
+                view.findViewById(R.id.iv_back_auditfailed).setVisibility(View.GONE);
+                view.findViewById(R.id.tv_again_auditfailed).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent=new Intent(getContext(),ChooseActivity.class);
+                        startActivity(intent);
+                    }
+                });
+                return;
+        }
         switch (identity){
             case 1:
                 rl_top1 = view.findViewById(R.id.rl_mines);
@@ -332,16 +364,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                 });
                 requestWorks();
                 break;
-            case 5:
-                view.findViewById(R.id.tv_back_auditing).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent=new Intent();
-                        intent.setAction(Urls.TOHOMECAST);
-                        getContext().sendBroadcast(intent);
-                    }
-                });
-                break;
+
         }
         request();
     }

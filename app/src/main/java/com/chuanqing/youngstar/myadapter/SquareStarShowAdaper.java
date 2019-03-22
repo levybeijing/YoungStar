@@ -18,14 +18,14 @@ import com.chuanqing.youngstar.R;
 import com.chuanqing.youngstar._square.starshow.StarShowMoreActivity;
 import com.chuanqing.youngstar.mybean.SquareStarShowBean;
 import com.chuanqing.youngstar.tools.Api;
-import com.chuanqing.youngstar.tools.ToastUtils;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SquareStarShowAdaper extends RecyclerView.Adapter<SquareStarShowAdaper.ViewHolder> {
     Context context;
-    ArrayList<SquareStarShowBean> arrayList;
-    public SquareStarShowAdaper(Context context,ArrayList<SquareStarShowBean> arrayList){
+    List<SquareStarShowBean.DataBean.PageInfoBean.ListBean> arrayList;
+    public SquareStarShowAdaper(Context context, List<SquareStarShowBean.DataBean.PageInfoBean.ListBean> arrayList){
         this.context = context;
         this.arrayList = arrayList;
     }
@@ -45,31 +45,31 @@ public class SquareStarShowAdaper extends RecyclerView.Adapter<SquareStarShowAda
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int position) {
-        final SquareStarShowBean squareStarShowBean = arrayList.get(position);
-        String tuUrl = Api.ossurl+squareStarShowBean.getData().getPageInfo().getList().get(position).getBlog_img();
+//        final SquareStarShowBean squareStarShowBean = arrayList.get(position);
+        String tuUrl = Api.ossurl+arrayList.get(position).getBlog_img();
 //        Log.e("图片显示地址",tuUrl);
-        viewHolder.tv_number.setText(squareStarShowBean.getData().getPageInfo().getList().get(position).getNum()+"");
+        viewHolder.tv_number.setText(arrayList.get(position).getNum()+"");
         //类型1（图片）2（视频）3（音频）
-        if (squareStarShowBean.getData().getPageInfo().getList().get(position).getMedia_type()==1){
+        if (arrayList.get(position).getMedia_type()==1){
             viewHolder.img_video.setVisibility(View.GONE);
             viewHolder.linearLayout_img.setVisibility(View.VISIBLE);
-            if (squareStarShowBean.getData().getPageInfo().getList().get(position).getBlog_img().contains(",")){
+            if (arrayList.get(position).getBlog_img().contains(",")){
                 Glide.with(context)
-                        .load(Api.ossurl+squareStarShowBean.getData().getPageInfo().getList().get(position).getBlog_img().split(",")[0])
+                        .load(Api.ossurl+arrayList.get(position).getBlog_img().split(",")[0])
                         .placeholder(R.mipmap.my11)
                         .error(R.mipmap.my11)
                         .diskCacheStrategy(DiskCacheStrategy.NONE)
                         .into(viewHolder.img);
             }else {
                 Glide.with(context)
-                        .load(Api.ossurl+squareStarShowBean.getData().getPageInfo().getList().get(position).getBlog_img())
+                        .load(Api.ossurl+arrayList.get(position).getBlog_img())
                         .placeholder(R.mipmap.my11)
                         .error(R.mipmap.my11)
                         .diskCacheStrategy(DiskCacheStrategy.NONE)
                         .into(viewHolder.img);
             }
 
-        }else if (squareStarShowBean.getData().getPageInfo().getList().get(position).getMedia_type()==2){
+        }else if (arrayList.get(position).getMedia_type()==2){
             viewHolder.img_video.setVisibility(View.VISIBLE);
             viewHolder.linearLayout_img.setVisibility(View.GONE);
             Glide.with(context)
@@ -78,7 +78,7 @@ public class SquareStarShowAdaper extends RecyclerView.Adapter<SquareStarShowAda
                     .error(R.mipmap.my11)
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .into(viewHolder.img);
-        }else if (squareStarShowBean.getData().getPageInfo().getList().get(position).getMedia_type()==3){
+        }else if (arrayList.get(position).getMedia_type()==3){
             viewHolder.img_video.setVisibility(View.GONE);
             viewHolder.linearLayout_img.setVisibility(View.GONE);
             viewHolder.img.setImageDrawable(context.getResources().getDrawable(R.mipmap.square_yinpin));
@@ -89,9 +89,9 @@ public class SquareStarShowAdaper extends RecyclerView.Adapter<SquareStarShowAda
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context,StarShowMoreActivity.class);
-                intent.putExtra("userBlogId",squareStarShowBean.getData().getPageInfo().getList().get(position).getId()+"");
-                intent.putExtra("type",squareStarShowBean.getData().getPageInfo().getList().get(position).getMedia_type()+"");
-                intent.putExtra("hot",squareStarShowBean.getData().getPageInfo().getList().get(position).getNum()+"");
+                intent.putExtra("userBlogId",arrayList.get(position).getId()+"");
+                intent.putExtra("type",arrayList.get(position).getMedia_type()+"");
+                intent.putExtra("hot",arrayList.get(position).getNum()+"");
                 context.startActivity(intent);
             }
         });

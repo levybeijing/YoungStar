@@ -267,7 +267,7 @@
                 android:id="@+id/et_username_investauthen1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="请填写公司联系人姓名"
+                android:hint="请填写您的姓名"
                 android:textSize="14dp"
                 />
         </LinearLayout>
@@ -323,7 +323,7 @@
                 android:id="@+id/et_intro_investauthen1"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:hint=" 请填写您的公司简介"
+                android:hint=" 请填写您的投资经历"
                 android:textSize="14dp"
                 android:background="@drawable/bg_gray"
                 android:gravity="left"

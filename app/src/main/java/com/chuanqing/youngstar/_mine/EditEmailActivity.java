@@ -6,11 +6,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.chuanqing.youngstar.R;
 import com.chuanqing.youngstar.Urls;
 import com.chuanqing.youngstar.base.BaseActivity;
 import com.chuanqing.youngstar.tools.SharedPFUtils;
+import com.chuanqing.youngstar.tools.StringUtil;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 
@@ -43,7 +45,11 @@ public class EditEmailActivity extends BaseActivity implements View.OnClickListe
         switch (v.getId()){
             case R.id.tv_ok_editemail:
                 String trim = et_new.getText().toString().trim();
-                request(trim);
+                if (StringUtil.isEmail(trim)){
+                    request(trim);
+                }else{
+                    Toast.makeText(this, "邮箱格式不正确", Toast.LENGTH_SHORT).show();
+                }
                 break;
         }
     }

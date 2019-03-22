@@ -23,6 +23,7 @@ import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -67,7 +68,7 @@ public class SquareZhichangFragment extends Fragment {
     @BindView(R.id.starshow_listview)
     RecyclerView listView;
     SquareStarShowAdaper adaper;
-    ArrayList<SquareStarShowBean> arrayList = new ArrayList<>();
+    List<SquareStarShowBean.DataBean.PageInfoBean.ListBean> arrayList = new ArrayList<>();
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -96,13 +97,9 @@ public class SquareZhichangFragment extends Fragment {
                         Gson gson = new Gson();
                         SquareStarShowBean squareStarShowBean = gson.fromJson(s, SquareStarShowBean.class);
                         if (squareStarShowBean.getState() == 1) {
-                            if (squareStarShowBean.getData() != null) {
-                                for (int i = 0; i < squareStarShowBean.getData().getPageInfo().getSize(); i++) {
-                                    arrayList.add(squareStarShowBean);
-                                }
-                                //这是个网络请求  异步线程  想要更新数据必须在ui线程里边
+                            arrayList = squareStarShowBean.getData().getPageInfo().getList();
+                            if (arrayList!= null&&arrayList.size()>0) {
                                 handler.obtainMessage(1).sendToTarget();
-
                             }
                         }
                     }

@@ -46,6 +46,9 @@ public class AdapterOfficeMsgRV extends RecyclerView.Adapter<AdapterOfficeMsgRV.
         holder.tv_title.setText(list.get(i).getTitle());
         holder.tv_time.setText(list.get(i).getTime());
         holder.tv_sub.setText(list.get(i).getContent());
+        if (list.get(i).getStatus()==2){
+            holder.iv.setVisibility(View.GONE);
+        }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,12 +71,14 @@ public class AdapterOfficeMsgRV extends RecyclerView.Adapter<AdapterOfficeMsgRV.
     class MyViewHolder extends RecyclerView.ViewHolder
     {
         TextView tv_title,tv_sub,tv_time;
+        ImageView iv;
         public MyViewHolder(View view)
         {
             super(view);
             tv_title = view.findViewById(R.id.tv_title_rv_officemsg);
             tv_time = view.findViewById(R.id.tv_time_rv_officemsg);
             tv_sub = view.findViewById(R.id.tv_sub_rv_officemsg);
+            iv=view.findViewById(R.id.iv_dot_officemsg);
         }
     }
 }

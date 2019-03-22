@@ -23,9 +23,9 @@ public class SharedPFUtils {
      * 视频播放 videoplay 0 关闭 1 wifi 2 wifi+4G
      * 铃声 voice true false
      * 震动 shake true false
-     * 是否在审核 checkdata true false
      * 用户头像 photo ""
      * 手机号 phone ""
+     * 审核状态 audit  int  0未申请  1申请中 2 申请失败
      */
     //     * 用户审核状态 status
     public static void init(Context context) {

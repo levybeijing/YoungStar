@@ -33,6 +33,7 @@ import com.chuanqing.youngstar.mybean.CommonBean;
 import com.chuanqing.youngstar.mybean.StarShowMoreBean;
 import com.chuanqing.youngstar.tools.Api;
 import com.chuanqing.youngstar.tools.MyDialog;
+import com.chuanqing.youngstar.tools.SharedPFUtils;
 import com.chuanqing.youngstar.tools.ToastUtils;
 import com.google.gson.Gson;
 import com.lzy.okgo.OkGo;
@@ -122,7 +123,7 @@ public class StarShowMoreActivity extends BaseActivity {
         OkGo.post(Api.square_starshow_more)
                 .tag(this)
                 .params("userBlogId", getIntent().getStringExtra("userBlogId"))
-                .params("userCode", usercodes) //先写死
+                .params("userCode", (String)SharedPFUtils.getParam(this,"usercode",""))
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Response response, Exception e) {

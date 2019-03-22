@@ -226,8 +226,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
 //                        成功则提示 考虑自动登录
-                        Log.e("===============", "积分哈开始缴费单: "+SharedPFUtils.getParam(MainActivity.this,"usercode",""));
-                        Log.e("===============", "积分哈开始缴费单: "+s);
                         IdentityBean bean = new Gson().fromJson(s, IdentityBean.class);
                         if (bean.getData()==null){
                             SharedPFUtils.clearData();
@@ -240,19 +238,19 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                         int status = bean.getData().getStatus();
 
                         SharedPFUtils.setParam(MainActivity.this,"identity", type);
-                        SharedPFUtils.setParam(MainActivity.this,"status", status);
                         switch (status){
                             case 1:
-                                startActivity(new Intent(MainActivity.this,AuditingActivity.class));
-                                return;
+                                SharedPFUtils.setParam(MainActivity.this,"audit",1);
+                                break;
                             case 3:
                             case 4:
-                                Intent intent = new Intent(MainActivity.this, AuditFailedActivity.class);
-                                intent.putExtra("info",bean.getData().getReason());
-                                startActivity(intent);
-                                return;
+                                SharedPFUtils.setParam(MainActivity.this,"audit",2);
+                                String reason = bean.getData().getReason();
+
+                                break;
                         }
                         if (mineFragment!=null){
+
                             fragmentManager.beginTransaction().remove(mineFragment).commit();
                         }
                         mineFragment = new MineFragment();
@@ -578,9 +576,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         });
 
         dialog.show();
-
     }
-
     /**
      * 显示公司popupWindow
      */
@@ -717,6 +713,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             @Override
             public void onClick(View v) {
                 if (window.isShowing()){
+                    showdialog();
                     window.dismiss();
                 }
             }

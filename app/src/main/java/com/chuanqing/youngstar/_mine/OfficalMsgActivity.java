@@ -47,7 +47,6 @@ public class OfficalMsgActivity extends BaseActivity {
                 finish();
             }
         });
-        request();
     }
 
     private void request() {
@@ -65,5 +64,11 @@ public class OfficalMsgActivity extends BaseActivity {
                         adapter.setData(list);
                     }
                 });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        request();
     }
 }

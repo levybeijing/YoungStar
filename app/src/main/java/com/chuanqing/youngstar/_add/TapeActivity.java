@@ -3,6 +3,7 @@ package com.chuanqing.youngstar._add;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.os.Bundle;
 import android.view.View;
@@ -88,6 +89,8 @@ public class TapeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tape);
         ButterKnife.bind(this);
+
+        Looper mainLooper = Looper.getMainLooper();
 
         recorder = new AudioRecorder();
 

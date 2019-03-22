@@ -20,6 +20,9 @@ import okhttp3.Response;
 
 public class SystemSetActivity extends BaseActivity implements View.OnClickListener {
 
+    private Switch audio;
+    private Switch shake;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,14 +36,16 @@ public class SystemSetActivity extends BaseActivity implements View.OnClickListe
 
         findViewById(R.id.iv_back_system).setOnClickListener(this);
 
-        Switch audio = findViewById(R.id.sw_audio_system);
-        Switch shake = findViewById(R.id.sw_shake_system);
+
+        audio = findViewById(R.id.sw_audio_system);
+        shake = findViewById(R.id.sw_shake_system);
         audio.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 SharedPFUtils.setParam(SystemSetActivity.this,"voice",isChecked);
                 int a=isChecked?1:0;
                 setvoice(a);
+                SharedPFUtils.setParam(SystemSetActivity.this,"voice",isChecked);
             }
         });
         shake.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -48,7 +53,8 @@ public class SystemSetActivity extends BaseActivity implements View.OnClickListe
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 SharedPFUtils.setParam(SystemSetActivity.this,"shake",isChecked);
                 int b=isChecked?1:0;
-                setvoice(b);
+                setshake(b);
+                SharedPFUtils.setParam(SystemSetActivity.this,"shake",isChecked);
             }
         });
     }
@@ -69,7 +75,7 @@ public class SystemSetActivity extends BaseActivity implements View.OnClickListe
         OkGo.post(Urls.updateUserMusicSwitch)//
                 .tag(this)//
                 .params("userCode", (String) SharedPFUtils.getParam(this,"usercode",""))//文件名
-                .params("musicSwitch", a)//墙的ID
+                .params("musicSwitch", a)
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
@@ -81,12 +87,19 @@ public class SystemSetActivity extends BaseActivity implements View.OnClickListe
         OkGo.post(Urls.updateUserShockSwitch)//
                 .tag(this)//
                 .params("userCode", (String) SharedPFUtils.getParam(this,"usercode",""))//文件名
-                .params("musicSwitch", a)//墙的ID
+                .params("shockSwitch", a)
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
                         Log.e("=============", "updateUserShockSwitch"+s);
                     }
                 });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        shake.setChecked((Boolean) SharedPFUtils.getParam(this,"shake",false));
+        audio.setChecked((Boolean) SharedPFUtils.getParam(this,"voice",false));
     }
 }

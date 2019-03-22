@@ -145,7 +145,7 @@ public class Authen1Activity extends BaseActivity implements View.OnClickListene
                     Toast.makeText(this, "手机号不能为空", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (StringUtil.isPhoneNumber(phone)){
+                if (!StringUtil.isPhoneNumber(phone)){
                     Toast.makeText(this, "手机号格式不正确", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -154,7 +154,7 @@ public class Authen1Activity extends BaseActivity implements View.OnClickListene
                     Toast.makeText(this, "邮箱不能为空", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (StringUtil.isEmail(email)){
+                if (!StringUtil.isEmail(email)){
                     Toast.makeText(this, "邮箱格式不正确", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -176,7 +176,7 @@ public class Authen1Activity extends BaseActivity implements View.OnClickListene
     }
     Bitmap bitmap;
     private void uploadPhoto() {
-        Log.e("==============", "chooseindex: "+chooseindex );
+//        Log.e("==============", "chooseindex: "+chooseindex );
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         switch (chooseindex){
             case 1:
