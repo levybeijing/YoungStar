@@ -62,9 +62,11 @@ public class EditPhoneActivity extends BaseActivity implements View.OnClickListe
                 if (s.length()==6){
                     tochange.setClickable(true);
                     tochange.setBackgroundColor(Color.parseColor("#F5575F"));
+                    tochange.setTextColor(Color.parseColor("#FFFFFF"));
                 }else{
                     tochange.setClickable(false);
                     tochange.setBackgroundColor(Color.parseColor("#CCCCCC"));
+                    tochange.setTextColor(Color.parseColor("#000000"));
                 }
             }
 

@@ -29,11 +29,11 @@ public class FeedbackActivity extends BaseActivity {
 
     private void initView() {
         EditText et_content = findViewById(R.id.et_content_feedback);
-        String content = et_content.getText().toString().trim();
 
         findViewById(R.id.tv_ok_feedback).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String content = et_content.getText().toString().trim();
                 if (content==null||content.length()==0){
                     Toast.makeText(FeedbackActivity.this, "信息为空", Toast.LENGTH_SHORT).show();
                     return;
@@ -47,13 +47,13 @@ public class FeedbackActivity extends BaseActivity {
         OkGo.post(Urls.addFeedback)//
                 .tag(this)//
                 .params("userCode", (String) SharedPFUtils.getParam(this,"usercode",""))//文件名
-                .params("reason", content)//墙的ID
+                .params("reason", content)
                 .params("mobile", (String) SharedPFUtils.getParam(this,"phone",""))//墙的ID
                 .params("name", (String) SharedPFUtils.getParam(this,"name",""))//墙的ID
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
-                        Log.e("=============", "addFeedback"+s);
+//                        Log.e("=============", "addFeedback"+s);
                         Toast.makeText(FeedbackActivity.this, "反馈成功", Toast.LENGTH_SHORT).show();
                     }
                 });

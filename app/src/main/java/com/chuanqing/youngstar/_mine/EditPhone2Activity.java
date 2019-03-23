@@ -42,7 +42,7 @@ public class EditPhone2Activity extends BaseActivity implements View.OnClickList
         et_phone = findViewById(R.id.et_phone_changephone2);
         et_code = findViewById(R.id.et_code_changephone2);
 //
-        TextView tv_ok = findViewById(R.id.tv_getcode_changephone2);
+        TextView tv_ok = findViewById(R.id.tv_tochange_changephone2);
         tv_ok.setOnClickListener(this);
         et_code.addTextChangedListener(new TextWatcher() {
             @Override
@@ -54,10 +54,12 @@ public class EditPhone2Activity extends BaseActivity implements View.OnClickList
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.length()==6){
                     tv_ok.setClickable(true);
-                    tv_ok.setBackgroundColor(Color.parseColor("#F5575F"));
+                    tv_ok.setBackgroundResource(R.drawable.bg2_tv_changephone);
+                    tv_ok.setTextColor(Color.parseColor("#FFFFFF"));
                 }else{
                     tv_ok.setClickable(false);
-                    tv_ok.setBackgroundColor(Color.parseColor("#CCCCCC"));
+                    tv_ok.setBackgroundResource(R.drawable.bg1_tv_changephone);
+                    tv_ok.setTextColor(Color.parseColor("#000000"));
                 }
             }
 

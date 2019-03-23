@@ -15,8 +15,11 @@ import android.widget.Toast;
 import com.chuanqing.youngstar.R;
 import com.chuanqing.youngstar.Urls;
 import com.chuanqing.youngstar.base.BaseActivity;
+import com.chuanqing.youngstar.login.bean.CommenBean;
 import com.chuanqing.youngstar.login.login.LoginActivity;
 import com.chuanqing.youngstar.tools.SharedPFUtils;
+import com.chuanqing.youngstar.tools.StringUtil;
+import com.google.gson.Gson;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 
@@ -57,9 +60,11 @@ public class EditPWDActivity extends BaseActivity implements View.OnClickListene
                 if (s.length()==6){
                     tv_ok.setClickable(true);
                     tv_ok.setBackgroundColor(Color.parseColor("#F5575F"));
+                    tv_ok.setTextColor(Color.parseColor("#FFFFFF"));
                 }else{
                     tv_ok.setClickable(false);
                     tv_ok.setBackgroundColor(Color.parseColor("#CCCCCC"));
+                    tv_ok.setTextColor(Color.parseColor("#000000"));
                 }
             }
 
@@ -74,7 +79,6 @@ public class EditPWDActivity extends BaseActivity implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.tv_getcode_editpwd:
-//                String phone = (String) SharedPFUtils.getParam(EditPWDActivity.this,"phone","");
                 OkGo.post(Urls.getSms)//
                         .tag(this)//
                         .params("mobile", phone)//墙的ID
@@ -87,20 +91,34 @@ public class EditPWDActivity extends BaseActivity implements View.OnClickListene
                 break;
             case R.id.tv_tochange_editpwd:
                 String trim = et_code.getText().toString().trim();
-                OkGo.post(Urls.checkSms)//
-                        .tag(this)//
-                        .params("mobile", phone)//墙的ID
-                        .params("smsCode", trim)//墙的ID
-                        .execute(new StringCallback() {
-                            @Override
-                            public void onSuccess(String s, Call call, Response response) {
-                                Log.e("=============", "getSms"+s);
-                                startActivity(new Intent(EditPWDActivity.this,EditPWD2Activity.class));
-                                finish();
-                            }
-                        });
+                if (StringUtil.isCode(trim)){
+                    vericode(trim);
+                }else{
+                    Toast.makeText(this, "验证码格式不正确", Toast.LENGTH_SHORT).show();
+                }
                 break;
 
         }
+    }
+
+    private void vericode(String trim) {
+        OkGo.post(Urls.checkSms)//
+                .tag(this)//
+                .params("mobile", phone)//墙的ID
+                .params("smsCode", trim)//墙的ID
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(String s, Call call, Response response) {
+//                                Log.e("=============", "getSms"+s);
+                        CommenBean commenBean = new Gson().fromJson(s, CommenBean.class);
+                        if (commenBean.getMessage().equals("请求成功")){
+                            startActivity(new Intent(EditPWDActivity.this, EditPWD2Activity.class));
+                            finish();
+                        }else{
+                            Toast.makeText(EditPWDActivity.this, ""+commenBean.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                });
     }
 }

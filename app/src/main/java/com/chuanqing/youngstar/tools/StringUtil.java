@@ -140,6 +140,11 @@ public class StringUtil {
         Matcher m = p.matcher(email);
         return m.matches();
     }
-
-
+//是否是验证码
+    public static boolean isCode(String str)
+    {
+        Pattern pattern=java.util.regex.Pattern.compile("[0-9]*");
+        Matcher match=pattern.matcher(str);
+        return match.matches()&&str.length()==6;
+    }
 }
