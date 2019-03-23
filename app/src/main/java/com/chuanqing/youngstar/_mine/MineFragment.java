@@ -314,6 +314,9 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                 tv3_id = view.findViewById(R.id.tv_id_minei);
                 iv3_photo.setOnClickListener(this);
 
+                view.findViewById(R.id.iv_msg_minei).setOnClickListener(this);
+                view.findViewById(R.id.iv_tocall_minei).setOnClickListener(this);
+
                 RecyclerView rv3 = view.findViewById(R.id.rv_minei);
                 GridLayoutManager manager=new GridLayoutManager(getContext(),3);
                 rv3.setLayoutManager(manager);
@@ -516,6 +519,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.iv_tocall_minec:
             case R.id.iv_tocall_minef:
+            case R.id.iv_tocall_minei:
             case R.id.iv_call_mines:
                 Intent intent = new Intent(Intent.ACTION_DIAL);
                 Uri data = Uri.parse("tel:" +Urls.SERVICE);
