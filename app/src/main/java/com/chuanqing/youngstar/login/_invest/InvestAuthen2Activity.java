@@ -458,7 +458,7 @@ public class InvestAuthen2Activity extends BaseActivity implements View.OnClickL
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
-                        Log.e("===========", "onSuccess: "+s);
+//                        Log.e("===========", "onSuccess: "+s);
 //                        然后进入 粉丝状态的界面
                         CommenBean commenBean = new Gson().fromJson(s, CommenBean.class);
                         if ("请求成功".equals(commenBean.getMessage())){
@@ -467,6 +467,8 @@ public class InvestAuthen2Activity extends BaseActivity implements View.OnClickL
                             SharedPFUtils.setParam(InvestAuthen2Activity.this,"identity",4);
                             finish();
                             Toast.makeText(InvestAuthen2Activity.this, "提交审核成功！", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(InvestAuthen2Activity.this, ""+commenBean.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

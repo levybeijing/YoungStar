@@ -80,6 +80,7 @@
             android:layout_height="wrap_content"
             android:background="@mipmap/check_lable"
             android:layout_marginRight="15dp"
+            android:visibility="invisible"
             />
     </LinearLayout>
     <!--3-->

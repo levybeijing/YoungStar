@@ -6,23 +6,19 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.chuanqing.youngstar.R;
 import com.chuanqing.youngstar.Urls;
 import com.chuanqing.youngstar.base.BaseActivity;
 import com.chuanqing.youngstar.login.bean.CommenBean;
-import com.chuanqing.youngstar.login.login.LoginActivity;
 import com.chuanqing.youngstar.tools.SharedPFUtils;
 import com.chuanqing.youngstar.tools.StringUtil;
 import com.google.gson.Gson;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
-
 import okhttp3.Call;
 import okhttp3.Response;
 
@@ -104,8 +100,8 @@ public class EditPWDActivity extends BaseActivity implements View.OnClickListene
     private void vericode(String trim) {
         OkGo.post(Urls.checkSms)//
                 .tag(this)//
-                .params("mobile", phone)//墙的ID
-                .params("smsCode", trim)//墙的ID
+                .params("mobile", phone)
+                .params("smsCode", trim)
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {

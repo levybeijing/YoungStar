@@ -192,14 +192,20 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                         int type = bean.getData().getType();
                         SharedPFUtils.setParam(MainActivity.this,"identity", type);
                         SharedPFUtils.setParam(MainActivity.this,"status", status);
-                        if (status==1){
-                            startActivity(new Intent(MainActivity.this,AuditingActivity.class));
+                        Intent intent = new Intent(MainActivity.this, AuditFailedActivity.class);
+                        intent.putExtra("info",bean.getMessage());
+                        if (status!=2){
+                            startActivity(intent);
                             return;
                         }
-                        if (status==3||status==4){
-                            startActivity(new Intent(MainActivity.this,AuditFailedActivity.class));
-                            return;
-                        }
+//                        if (status==1){
+//                            startActivity(intent);
+//                            return;
+//                        }
+//                        if (status==3||status==4){
+//                            startActivity(intent);
+//                            return;
+//                        }
                         switch (type){
                             case 1:
                                 showPopwindow();  //展示中间按钮点击事件
@@ -301,16 +307,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             case 3:
                 main_four_tv.setTextColor(dark);
                 main_four_img.setImageDrawable(MainActivity.this.getResources().getDrawable(R.mipmap.mine1));
-//                int status = (int)SharedPFUtils.getParam(this, "status", -1);
-//                if (status==1){
-                    requestIdenMine();
-//                }else{
-//                    if (mineFragment!=null){
-//                        fragmentManager.beginTransaction().remove(mineFragment).commit();
-//                    }
-//                    mineFragment = new MineFragment();
-//                    fragmentManager.beginTransaction().add(R.id.content,mineFragment).commit();
-//                }
+                requestIdenMine();
                 break;
         }
         fragmentTransaction.commit(); // 提交
@@ -467,15 +464,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
         // popWindow消失监听方法
         window.setOnDismissListener(new PopupWindow.OnDismissListener() {
-
             @Override
             public void onDismiss() {
                 System.out.println("popWindow消失");
             }
         });
-
     }
-
     /**
      * 显示粉丝popupWindow
      */
@@ -675,9 +669,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         View view = inflater.inflate(R.layout.add_invest, null);
 
         // 下面是两种方法得到宽度和高度 getWindow().getDecorView().getWidth()
-
-        PopupWindow window = new PopupWindow(view, WindowManager.LayoutParams.MATCH_PARENT,
-                WindowManager.LayoutParams.MATCH_PARENT);
+        PopupWindow window = new PopupWindow(view, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
 
         // 设置popWindow弹出窗体可点击，这句话必须添加，并且是true
         window.setFocusable(false);

@@ -2,19 +2,15 @@ package com.chuanqing.youngstar.myadapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.design.widget.TabLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.chuanqing.youngstar.R;
 import com.chuanqing.youngstar.Urls;
-import com.chuanqing.youngstar.login.privacy.P;
 import com.chuanqing.youngstar.mybean.FragJobBean;
 import com.chuanqing.youngstar.tools.SharedPFUtils;
 import com.lzy.okgo.OkGo;

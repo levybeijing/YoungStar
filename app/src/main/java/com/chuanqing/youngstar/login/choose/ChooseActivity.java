@@ -11,8 +11,6 @@ import com.chuanqing.youngstar.base.BaseActivity;
 import com.chuanqing.youngstar.login._company.ChoseActivity;
 import com.chuanqing.youngstar.login._invest.InvestAuthenActivity;
 import com.chuanqing.youngstar.login._student.AuthenActivity;
-import com.chuanqing.youngstar.login._student.ImageAuthenActivity;
-import com.chuanqing.youngstar.login.login.LoginActivity;
 import com.chuanqing.youngstar.tools.SharedPFUtils;
 
 public class ChooseActivity  extends BaseActivity implements View.OnClickListener {
@@ -50,8 +48,18 @@ public class ChooseActivity  extends BaseActivity implements View.OnClickListene
                 finish();
                 break;
             case R.id.iv_back_choose:
+                if (getIntent().getBooleanExtra("regi",false)){
+                    startActivity(new Intent(this,MainActivity.class));
+                }
                 finish();
                 break;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(this,MainActivity.class));
+        finish();
     }
 }

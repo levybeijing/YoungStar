@@ -32,6 +32,7 @@ import com.chuanqing.youngstar.Urls;
 import com.chuanqing.youngstar._mine.company.FragmentJob;
 import com.chuanqing.youngstar._mine.company.FragmentPublish;
 import com.chuanqing.youngstar._mine.company.SubAccountActivity;
+import com.chuanqing.youngstar._mine.fans.CareActivity;
 import com.chuanqing.youngstar._mine.student.FragmentStatus;
 import com.chuanqing.youngstar._mine.student.FragmentWorks;
 import com.chuanqing.youngstar.login.choose.ChooseActivity;
@@ -283,10 +284,10 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                     public void onOffsetChanged(AppBarLayout appBarLayout, int i) {
                         toolbarc.setBackgroundColor(changeAlpha(getResources().getColor(R.color.mainColor),Math.abs(i*1.0f)/appbarc.getTotalScrollRange()));
 //                        tab.setBackgroundColor(changeAlpha(getResources().getColor(R.color.mainColor),1-Math.abs(i*1.0f)/appbars.getTotalScrollRange()));
-                        if (i==100){
+//                        if (i==100){
 //                            tab.setVisibility(View.VISIBLE);
 //                            rg.setVisibility(View.INVISIBLE);
-                        }
+//                        }
                     }
                 });
                 list.add(new FragmentPublish());
@@ -534,7 +535,8 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                 startActivity(new Intent(getContext(), WalletActivity.class));
                 break;
             case R.id.ll_care_minef:
-//                startActivity(new Intent(getContext(), follow.class));
+                Intent care = new Intent(getContext(), CareActivity.class);
+                startActivity(care);
                 break;
 
         }

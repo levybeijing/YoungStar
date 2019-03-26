@@ -72,15 +72,15 @@ public class FileUtil {
      */
     public static String getFormatSize(double size) {
         double kiloByte = size/1024;
-        if(kiloByte < 1) {
-            return size + "Byte(s)";
-        }
+//        if(kiloByte < 1) {
+//            return size + "Byte(s)";
+//        }
 
         double megaByte = kiloByte/1024;
-        if(megaByte < 1) {
-            BigDecimal result1 = new BigDecimal(Double.toString(kiloByte));
-            return result1.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "KB";
-        }
+//        if(megaByte < 1) {
+//            BigDecimal result1 = new BigDecimal(Double.toString(kiloByte));
+//            return result1.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "KB";
+//        }
 
         double gigaByte = megaByte/1024;
         if(gigaByte < 1) {

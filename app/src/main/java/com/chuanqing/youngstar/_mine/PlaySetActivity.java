@@ -20,12 +20,13 @@ public class PlaySetActivity extends BaseActivity implements View.OnClickListene
     private ImageView all;
     private ImageView wifi;
     private ImageView close;
+    private int videoswitch;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_playset);
-
+        videoswitch = (int) SharedPFUtils.getParam(this, "videoswitch", 0);
         initView();
     }
 
@@ -39,6 +40,27 @@ public class PlaySetActivity extends BaseActivity implements View.OnClickListene
         findViewById(R.id.ll_close_play).setOnClickListener(this);
 
         findViewById(R.id.iv_back_play).setOnClickListener(this);
+
+        switch (videoswitch){
+            case 1:
+                all.setVisibility(View.VISIBLE);
+                wifi.setVisibility(View.INVISIBLE);
+                close.setVisibility(View.INVISIBLE);
+                break;
+            case 2:
+                wifi.setVisibility(View.VISIBLE);
+                all.setVisibility(View.INVISIBLE);
+                close.setVisibility(View.INVISIBLE);
+                break;
+            case 3:
+                close.setVisibility(View.VISIBLE);
+                wifi.setVisibility(View.INVISIBLE);
+                all.setVisibility(View.INVISIBLE);
+                break;
+            default:
+
+                break;
+        }
     }
 
     @Override
@@ -78,7 +100,8 @@ public class PlaySetActivity extends BaseActivity implements View.OnClickListene
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
-                        Log.e("=============", "updateUserVideoSwitch"+s);
+//                        Log.e("=============", "updateUserVideoSwitch"+s);
+                        SharedPFUtils.setParam(PlaySetActivity.this, "videoswitch", a);
                     }
                 });
     }

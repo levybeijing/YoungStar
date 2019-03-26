@@ -221,6 +221,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                             SharedPFUtils.setParam(LoginActivity.this,"phone",bean.getData().getMobile());
                             SharedPFUtils.setParam(LoginActivity.this,"name","");
                             SharedPFUtils.setParam(LoginActivity.this, "identity", bean.getData().getType());
+                            SharedPFUtils.setParam(LoginActivity.this, "videoswitch", bean.getData().getVideo_switch());
                             //状态0（删除）1（待审核）2（通过）3（拒绝）4（禁用）
                             SharedPFUtils.setParam(LoginActivity.this, "status", bean.getData().getStatus());
                             int status = bean.getData().getStatus();
@@ -283,7 +284,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         RegisterBean registerBean = new Gson().fromJson(s, RegisterBean.class);
                         if ("请求成功".equals(registerBean.getMessage())){
                             Toast.makeText(LoginActivity.this, registerBean.getMessage(), Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(LoginActivity.this,ChooseActivity.class));
+                            SharedPFUtils.setParam(LoginActivity.this, "videoswitch", registerBean.getData().getVideo_switch());
+                            Intent intent = new Intent(LoginActivity.this, ChooseActivity.class);
+                            intent.putExtra("regi",true);
+                            startActivity(intent);
                             finish();
                         }else{
                             Toast.makeText(LoginActivity.this, registerBean.getMessage(), Toast.LENGTH_SHORT).show();
