@@ -3,6 +3,7 @@ package com.chuanqing.youngstar.login.login;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
@@ -31,6 +32,10 @@ import com.google.gson.Gson;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.HttpHeaders;
+import com.sina.weibo.sdk.auth.Oauth2AccessToken;
+import com.sina.weibo.sdk.auth.WbAuthListener;
+import com.sina.weibo.sdk.auth.WbConnectErrorMessage;
+import com.sina.weibo.sdk.auth.sso.SsoHandler;
 
 import okhttp3.Call;
 import okhttp3.Response;
@@ -51,6 +56,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private RadioButton login;
     private RadioButton register;
     private CheckBox check;
+    private SsoHandler mSsoHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,7 +152,23 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
                 break;
             case R.id.wb_login:
+                mSsoHandler = new SsoHandler(LoginActivity.this);
+                mSsoHandler.authorize(new WbAuthListener() {
+                    @Override
+                    public void onSuccess(Oauth2AccessToken oauth2AccessToken) {
+                        Toast.makeText(LoginActivity.this, "onSuccess"+oauth2AccessToken.getUid(), Toast.LENGTH_SHORT).show();
+                    }
 
+                    @Override
+                    public void cancel() {
+                        Toast.makeText(LoginActivity.this, "cancel", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(WbConnectErrorMessage wbConnectErrorMessage) {
+                        Toast.makeText(LoginActivity.this, "cancel"+wbConnectErrorMessage.getErrorMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
                 break;
 //                注册
             case R.id.iv_toregister_register:
@@ -313,6 +335,15 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         public void onFinish() {
             getcode.setText("重新获取验证码");
             getcode.setClickable(true);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (mSsoHandler!=null){
+            mSsoHandler.authorizeCallBack(requestCode,resultCode,data);
         }
     }
 }

@@ -135,6 +135,7 @@ public class StarbangMoreActivity extends BaseActivity {
                                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                                     .into(img_bg);
                             tv_name.setText(starBangMoreBean.getData().getActivity_name()+"");
+                            tv_title.setText(starBangMoreBean.getData().getActivity_name()+"");
                             tv_time.setText(starBangMoreBean.getData().getStart_time()+"-"+starBangMoreBean.getData().getEnd_time());
                             tv_info.setText(starBangMoreBean.getData().getActivity_introduce()+"");
                             if (starBangMoreBean.getData().getStudent().size()>0){
@@ -172,7 +173,7 @@ public class StarbangMoreActivity extends BaseActivity {
     @BindView(R.id.common_rigth_img)
     ImageView right_img;
     private void setTtitle(){
-        tv_title.setText("星榜详情");
+//        tv_title.setText("星榜详情");
         left_img.setVisibility(View.VISIBLE);
         right_img.setVisibility(View.VISIBLE);
         //返回

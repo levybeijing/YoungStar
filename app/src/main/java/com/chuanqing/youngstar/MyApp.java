@@ -15,6 +15,8 @@ import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
 import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.cookie.store.PersistentCookieStore;
+import com.sina.weibo.sdk.WbSdk;
+import com.sina.weibo.sdk.auth.AuthInfo;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -60,6 +62,8 @@ public class MyApp extends Application {
         super.onCreate();
         mContext = this;
         SharedPFUtils.init(this);
+        WbSdk.install(this,new AuthInfo(this, Constants.APP_KEY, Constants.REDIRECT_URL, Constants.SCOPE));
+
         AndroidAudioConverter.load(this, new ILoadCallback() {
 
             @Override
@@ -72,11 +76,11 @@ public class MyApp extends Application {
                 // FFmpeg is not supported by device
             }
         });
-// 在移动端建议使用STS方式初始化OSSClient。
-// 更多信息可查看sample 中 sts 使用方式(https://github.com/aliyun/aliyun-oss-android-sdk/tree/master/app/src/main/java/com/alibaba/sdk/android/oss/app)
+        // 在移动端建议使用STS方式初始化OSSClient。
+        // 更多信息可查看sample 中 sts 使用方式(https://github.com/aliyun/aliyun-oss-android-sdk/tree/master/app/src/main/java/com/alibaba/sdk/android/oss/app)
         final OSSCredentialProvider credentialProvider = new OSSStsTokenCredentialProvider("LTAI8ygujYgDvLJ9", "nLrO1bpn9IOpEu0tt0zyAaChc22j0c", "");
 
-//该配置类如果不设置，会有默认配置，具体可看该类
+        //该配置类如果不设置，会有默认配置，具体可看该类
         ClientConfiguration conf = new ClientConfiguration();
         conf.setConnectionTimeout(15 * 1000); // 连接超时，默认15秒
         conf.setSocketTimeout(15 * 1000); // socket超时，默认15秒

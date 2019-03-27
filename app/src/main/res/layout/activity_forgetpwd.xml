@@ -104,6 +104,7 @@
                 android:layout_height="wrap_content"
                 android:hint="请输入密码"
                 android:textSize="14dp"
+                android:inputType="numberPassword"
                 />
         </LinearLayout>
 
@@ -123,6 +124,7 @@
                 android:layout_height="wrap_content"
                 android:hint="请确认密码"
                 android:textSize="14dp"
+                android:inputType="numberPassword"
                 />
         </LinearLayout>
 

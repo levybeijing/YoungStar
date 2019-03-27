@@ -70,7 +70,7 @@ public class ForgetPWDActivity extends BaseActivity implements View.OnClickListe
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
                         Log.e("=============", "checkSms"+s);
-//                        TODO:验证验证码！！
+//                      验证验证码！！
                         changepwd();
                     }
                 });
