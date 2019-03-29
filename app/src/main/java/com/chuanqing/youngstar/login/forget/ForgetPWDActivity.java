@@ -55,7 +55,7 @@ public class ForgetPWDActivity extends BaseActivity implements View.OnClickListe
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
-                        Log.e("=============", "getSms"+s);
+//                        Log.e("=============", "getSms"+s);
                     }
                 });
     }
@@ -69,7 +69,7 @@ public class ForgetPWDActivity extends BaseActivity implements View.OnClickListe
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
-                        Log.e("=============", "checkSms"+s);
+//                        Log.e("=============", "checkSms"+s);
 //                      验证验证码！！
                         changepwd();
                     }
@@ -90,7 +90,7 @@ public class ForgetPWDActivity extends BaseActivity implements View.OnClickListe
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
-                        Log.e("=============", "forgetUserPassword"+s);
+//                        Log.e("=============", "forgetUserPassword"+s);
                     }
                 });
     }

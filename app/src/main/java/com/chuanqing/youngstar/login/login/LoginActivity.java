@@ -228,7 +228,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     public void onSuccess(String s, Call call, Response response) {
 //                        成功则提示 考虑自动登录
                         Log.e("===============", "tologin: "+s);
-
                         LoginBean bean = new Gson().fromJson(s, LoginBean.class);
                         if ("请求成功".equals(bean.getMessage())){
 //                          设置全局请求头

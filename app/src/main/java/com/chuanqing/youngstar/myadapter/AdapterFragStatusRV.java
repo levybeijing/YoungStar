@@ -44,18 +44,13 @@ public class AdapterFragStatusRV extends RecyclerView.Adapter<AdapterFragStatusR
         holder.tv_praise.setText(list.get(i).getId()+"");
 
         Glide.with(context).load(Urls.IMAGEURL+list.get(i).getBlog_img()).into(holder.iv_cover);
-//        Glide.with(context).load("http://www.pptbz.com/pptpic/UploadFiles_6909/201203/2012031220134655.jpg").into(holder.iv_cover);
 
         holder.iv_delete.setOnClickListener(this);
         holder.iv_share.setOnClickListener(this);
         holder.rb_praise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if (holder.rb_praise.isChecked()){
-//
-//                }else{
-//
-//                }
+
             }
         });
     }

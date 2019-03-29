@@ -226,8 +226,8 @@ public class PublishActivity extends BaseActivity{
                     .setCancelOutside(false).create();
             loadBuilder.show();
         }
-
     }
+
     private void dissDialog(){
         if (loadBuilder!=null){
             loadBuilder.dismiss();
@@ -384,8 +384,7 @@ public class PublishActivity extends BaseActivity{
 
         // 下面是两种方法得到宽度和高度 getWindow().getDecorView().getWidth()
 
-        PopupWindow window = new PopupWindow(view, WindowManager.LayoutParams.MATCH_PARENT,
-                WindowManager.LayoutParams.MATCH_PARENT);
+        PopupWindow window = new PopupWindow(view, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
 
         // 设置popWindow弹出窗体可点击，这句话必须添加，并且是true
         window.setFocusable(false);
@@ -393,7 +392,7 @@ public class PublishActivity extends BaseActivity{
         DisplayMetrics dm = new DisplayMetrics();
         wm.getDefaultDisplay().getMetrics(dm);
 
-
+        window.setOutsideTouchable(true);
         // 实例化一个ColorDrawable颜色为半透明
         ColorDrawable dw = new ColorDrawable(0xb0000000);
         window.setBackgroundDrawable(dw);

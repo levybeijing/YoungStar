@@ -41,8 +41,8 @@ public class AdapterFragCareSRV extends RecyclerView.Adapter<AdapterFragCareSRV.
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int i) {
         holder.tv_id.setText(list.get(i).getConcern_code());
-        holder.tv_type.setText(list.get(i).getStatus()+"");
-        holder.tv_hot.setText(list.get(i).getStatus()+"");
+        holder.tv_type.setText(list.get(i).getLabel());
+        holder.tv_hot.setText(list.get(i).getRecommend()+"");
         Glide.with(context).load(Urls.IMAGEURL+list.get(i).getUser_img()).into(holder.iv_photo);
 //        holder.btn.setOnClickListener(new View.OnClickListener() {
 //            @Override

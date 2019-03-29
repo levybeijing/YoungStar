@@ -53,8 +53,16 @@ public class EditPWD2Activity extends BaseActivity implements View.OnClickListen
                     Toast.makeText(this, "原始密码不能为空", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                if (mew==null||mew.length()==0){
+                    Toast.makeText(this, "新密码不能为空", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if (mew.length()<8){
                     Toast.makeText(this, "密码长度不能小于8位", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (again==null||again.length()==0){
+                    Toast.makeText(this, "请重新输入新密码", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (!mew.equals(again)){

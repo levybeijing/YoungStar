@@ -1,6 +1,5 @@
 package com.chuanqing.youngstar._mine;
 
-import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -19,7 +18,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -333,7 +331,6 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                         toolbari.setBackgroundColor(changeAlpha(getResources().getColor(R.color.mainColor),Math.abs(i*1.0f)/appbari.getTotalScrollRange()));
                     }
                 });
-
                 requestWorks();
                 break;
             case 4:
@@ -357,7 +354,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 
                 adapter3 = new AdapterMineiRV(getContext());
                 rv4.setAdapter(adapter3);
-//工具栏透明渐变
+                //工具栏透明渐变
                 AppBarLayout appbar = view.findViewById(R.id.appbar_minef);
                 Toolbar toolbar = view.findViewById(R.id.toolbar_minef);
                 appbar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
@@ -390,7 +387,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
-//                        Log.e("=============", "getBlogsINMy"+s);
+                        Log.e("=============", "getBlogsINMy"+s);
                         MineWorksBean bean = new Gson().fromJson(s, MineWorksBean.class);
                         List<MineWorksBean.DataBean.PageInfoBean.ListBean> list = bean.getData().getPageInfo().getList();
                         adapter3.setData(list);
@@ -403,16 +400,16 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                 .tag(this)//
                 .params("userCode", (String) SharedPFUtils.getParam(getContext(),"usercode",""))//文件名
                 .params("type",identity)
-//将来写成 identity
+                //将来写成 identity
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
-                        Log.e("=============", "MineFragment"+s);
+                        Log.e("=============", "getUserByCode"+s);
                         switch (identity)
                         {
                             case 1:
                                 FragMinesBean.DataBean data = new Gson().fromJson(s, FragMinesBean.class).getData();
-//保存属性值 将来写到拦截器里面
+                                //保存属性值 将来写到拦截器里面
                                 SharedPFUtils.setParam(getActivity(),"identity",data.getType());
 
                                 tv_id.setText(data.getUser_code()+"");

@@ -19,13 +19,12 @@ import com.chuanqing.youngstar.tools.SharedPFUtils;
 import com.google.gson.Gson;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
-
 import java.util.List;
-
 import okhttp3.Call;
 import okhttp3.Response;
 
 public class FragmentPublish extends BaseFragment {
+
     private int page=1;
     private AdapterFragStatusRV adapter;
 
@@ -50,13 +49,13 @@ public class FragmentPublish extends BaseFragment {
     private void request() {
         OkGo.post(Urls.getCompanyBlog)//
                 .tag(this)//
-                .params("userCode", (String)SharedPFUtils.getParam(getContext(),"usercode",""))//文件名
-                .params("page", page)//墙的ID
+                .params("userCode", (String)SharedPFUtils.getParam(getContext(),"usercode",""))
+                .params("page", page)
                 .params("pageSize", 15)//缩略图 省略>?
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
-//                        Log.e("=============", "FragmentStatus"+s);
+                        Log.e("=============", "××××××××××getCompanyBlog"+s);
                         FragStatusBean bean = new Gson().fromJson(s, FragStatusBean.class);
                         List<FragStatusBean.DataBean.PageInfoBean.ListBean> list = bean.getData().getPageInfo().getList();
                         adapter.setData(list);

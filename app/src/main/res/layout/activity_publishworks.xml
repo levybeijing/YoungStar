@@ -8,7 +8,7 @@
     >
     <include android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        layout="@layout/common_top_fabu"></include>
+        layout="@layout/common_top_fabu"/>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -28,6 +28,7 @@
                     android:id="@+id/iv_cover_works"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
                     />
                 <TextView
                     android:id="@+id/tv_addcover_works"
@@ -76,7 +77,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="15dp"
-                android:orientation="vertical"></LinearLayout>
+                android:orientation="vertical"/>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
