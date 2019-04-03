@@ -50,15 +50,14 @@ public class CareActivity extends BaseActivity {
     }
 
     private void request() {
-        OkGo.post(Urls.getUserConcernStudent)//
-                .tag(this)//
+        OkGo.post(Urls.getUserConcernStudent)
                 .params("userCode", (String) SharedPFUtils.getParam(this,"usercode",""))
                 .params("page", page)
                 .params("pageSize", 15)
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
-//                        Log.e("=============", "Caref"+s);
+                        Log.e("=============", "Caref"+s);
                         FragCareSBean bean = new Gson().fromJson(s, FragCareSBean.class);
                         List<FragCareSBean.DataBean.PageInfoBean.ListBean> list = bean.getData().getPageInfo().getList();
                         adapter.setData(list);

@@ -45,15 +45,19 @@ public class FragmentStatus extends BaseFragment {
         adapter = new AdapterFragStatusRV(getContext());
         rv.setAdapter(adapter);
 
-
-
-        request();
+        String user = null;
+        if (savedInstanceState==null){
+            user=(String) SharedPFUtils.getParam(getContext(),"usercode","");
+        }else{
+            user=savedInstanceState.getString("currentuser");
+        }
+        request(user);
     }
 
-    private void request() {
+    private void request(String user) {
         OkGo.post(Urls.getUserBlog)//
                 .tag(this)//
-                .params("userCode", (String)SharedPFUtils.getParam(getContext(),"usercode",""))//文件名
+                .params("userCode", user)//文件名
                 .params("page", page)//墙的ID
                 .params("pageSize", 15)//缩略图 省略>?
                 .execute(new StringCallback() {

@@ -69,15 +69,27 @@ public class UserDetailActivity extends BaseActivity implements View.OnClickList
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_userdetail);
-
+//获取当前用户
         Intent intent = getIntent();
         usercode = intent.getStringExtra("usercode");
         hot = intent.getStringExtra("hot");
         flag = intent.getIntExtra("flag",-1);
+//创建数据包
+        Bundle bundle=new Bundle();
+        bundle.putCharSequence("currentuser",usercode);
 
-        list.add(new FragmentStatus());
-        list.add(new FragmentWorks());
-        list.add(new FragmentActS());
+        FragmentStatus sta = new FragmentStatus();
+        sta.setArguments(bundle);
+        list.add(sta);
+
+        FragmentWorks works = new FragmentWorks();
+        works.setArguments(bundle);
+        list.add(works);
+
+        FragmentActS act = new FragmentActS();
+        act.setArguments(bundle);
+        list.add(act);
+
         initView();
     }
 
@@ -92,7 +104,7 @@ public class UserDetailActivity extends BaseActivity implements View.OnClickList
         vp = findViewById(R.id.vp_userdetail);
         AdapterMineVP adapter=new AdapterMineVP(getSupportFragmentManager(),list);
         vp.setAdapter(adapter);
-//关注
+        //关注
         rb = findViewById(R.id.rb_care_userdetail);
         rb.setOnClickListener(this);
         tvcare = findViewById(R.id.tv_care_userdetail);
@@ -154,7 +166,7 @@ public class UserDetailActivity extends BaseActivity implements View.OnClickList
 
             }
         });
-//顶部渐变
+        //顶部渐变
         AppBarLayout appbars = findViewById(R.id.appbar_userdetail);
         Toolbar toolbars = findViewById(R.id.toolbar_userdetail);
         appbars.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {

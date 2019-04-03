@@ -45,16 +45,22 @@ public class FragmentWorks extends BaseFragment {
         adapter = new AdapterFragWorksRV(getContext());
         rv.setAdapter(adapter);
 
-        request();
+        String user = null;
+        if (savedInstanceState==null){
+            user=(String) SharedPFUtils.getParam(getContext(),"usercode","");
+        }else{
+            user=savedInstanceState.getString("currentuser");
+        }
+        request(user);
     }
 
 
-    private void request() {
+    private void request(String user) {
         OkGo.post(Urls.getUserCollection)//
                 .tag(this)//
-                .params("userCode", (String) SharedPFUtils.getParam(getContext(),"usercode",""))//文件名
-                .params("page", page)//墙的ID
-                .params("pageSize", 15)//缩略图 省略>?
+                .params("userCode", user)
+                .params("page", page)
+                .params("pageSize", 15)
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {

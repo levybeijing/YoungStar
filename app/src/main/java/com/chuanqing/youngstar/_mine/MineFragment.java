@@ -379,11 +379,11 @@ public class MineFragment extends Fragment implements View.OnClickListener {
     }
 
     private void requestWorks() {
-        OkGo.post(Urls.getBlogsINMy)//
+        OkGo.post(Urls.getBlogsINMy)
                 .tag(this)//
                 .params("userCode", (String)SharedPFUtils.getParam(getContext(),"usercode",""))//文件名
-                .params("page", pagei)//墙的ID
-                .params("pageSize", 15)//缩略图 省略>?
+                .params("page", pagei)
+                .params("pageSize", 15)
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
