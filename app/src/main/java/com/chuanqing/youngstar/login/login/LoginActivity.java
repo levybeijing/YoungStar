@@ -306,6 +306,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         if ("请求成功".equals(registerBean.getMessage())){
                             Toast.makeText(LoginActivity.this, registerBean.getMessage(), Toast.LENGTH_SHORT).show();
                             SharedPFUtils.setParam(LoginActivity.this, "videoswitch", registerBean.getData().getVideo_switch());
+                            SharedPFUtils.setParam(LoginActivity.this, "type", registerBean.getData().getType());
+                            SharedPFUtils.setParam(LoginActivity.this, "photo", registerBean.getData().getUser_img());
                             Intent intent = new Intent(LoginActivity.this, ChooseActivity.class);
                             intent.putExtra("regi",true);
                             startActivity(intent);

@@ -1,5 +1,6 @@
 package com.chuanqing.youngstar._mine;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -93,6 +94,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
     private RelativeLayout rl_top4;
     private RelativeLayout rl_top2;
     private RelativeLayout rl_top1;
+    private ProgressDialog pd;
 
     //
     public MineFragment() {
@@ -104,6 +106,13 @@ public class MineFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         identity = (int) SharedPFUtils.getParam(getContext(), "identity", 4);
         audit = (int) SharedPFUtils.getParam(getContext(), "audit", -1);
+        pd = new ProgressDialog(getContext());
+        pd.setTitle("加载中");
+//        pd2.setIcon(R.mipmap.ic_launcher_round);
+        pd.setMessage("software is downloading...");
+        pd.setCancelable(true);
+        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+
         switch (audit){
             case 1:
                 return inflater.inflate(R.layout.activity_auditing, container, false);
@@ -368,6 +377,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 
         }
         request();
+        pd.show();
     }
 
     public int changeAlpha(int color, float fraction) {
@@ -405,6 +415,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
                         Log.e("=============", "getUserByCode"+s);
+                        pd.dismiss();
                         switch (identity)
                         {
                             case 1:

@@ -44,7 +44,13 @@ public class EditPWDActivity extends BaseActivity implements View.OnClickListene
 
         et_code = findViewById(R.id.et_code_editpwd);
         tv_phone = findViewById(R.id.tv_current_editpwd);
-        tv_phone.setText(phone);
+        String sub1 = null,sub2=null;
+        if (phone!=null&&phone.length()==13){
+            sub1 = phone.substring(0,2);
+            sub2 = phone.substring(7,10);
+        }
+        tv_phone.setText(sub1+"****"+sub2);
+
         et_code.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
